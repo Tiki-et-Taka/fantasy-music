@@ -1,0 +1,23 @@
+# Données brutes et dérivées (dumps, caches d'API, datasets générés)
+data/
+*.sqlite
+*.db
+
+# Visuels pré-rendus
+build/
+out/
+
+# Dépendances
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+
+# Environnement
+.env
+.env.*
+!.env.example
+
+# OS / éditeur
+.DS_Store
+Thumbs.db

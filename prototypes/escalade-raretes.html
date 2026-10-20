@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Escalade de style par rareté</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin:0; padding:26px 30px; background:#0a0a0b; color:#e8e8ea;
+         font-family: Inter, "Segoe UI", system-ui, sans-serif; width: 1180px; }
+  h1 { font-size:20px; margin:0 0 6px; }
+  p.intro { margin:0 0 20px; color:#9aa0a8; font-size:13px; max-width:900px; line-height:1.55; }
+  h2 { font-size:12px; letter-spacing:1.6px; text-transform:uppercase; color:#9aa0a8; margin:26px 0 10px; }
+  .strip { display:grid; grid-template-columns:repeat(6,1fr); gap:16px; }
+  .strip svg { width:100%; height:auto; display:block; }
+  .t { font-size:12px; font-weight:600; margin-top:8px; }
+  .s { font-size:11px; color:#9aa0a8; margin-top:1px; }
+  .e { font-size:10.5px; color:#6e747c; margin-top:3px; line-height:1.35; }
+  .seals { display:flex; gap:36px; align-items:center; }
+  .seal { text-align:center; width:160px; }
+  .seal svg { width:62px; height:62px; }
+  .seal div { font-size:11px; color:#8a9099; margin-top:5px; }
+</style>
+</head>
+<body>
+<h1>Escalade de style par rareté</h1>
+<p class="intro">Trois styles, deux paliers chacun. La fenêtre d'illustration gagne du terrain sur le bandeau typographique à chaque cran&nbsp;: en Mythique, l'illustration occupe toute la carte et le texte se pose dessus. Les aplats ci-dessous schématisent le traitement de chaque style, ce ne sont pas les illustrations finales.</p>
+<h2>Les six paliers</h2>
+<div class="strip" id="strip"></div>
+<h2>Sceau de groupe — rosace déterministe dérivée du nom du groupe</h2>
+<div class="seals" id="seals"></div>
+
+<script>
+const CW=120, CH=168;
+const INK={paper:"#0F1012",sA:"#1E3A6E",sB:"#D9962B",sC:"#EFE6D2",cBg:"#0E1A1F",cL:"#D8B471",cF:"#05080A",eBg:"#141012",eR:"#9E2A2B",eA:"#C9C2B6"};
+const STEPS=[
+ {tier:"Commune",style:"Sérigraphie",exec:"2 encres, trame grossière, plan large",bleed:112,frame:"#5E6670",rank:0},
+ {tier:"Peu commune",style:"Sérigraphie",exec:"3 encres, trame fine, plan resserré",bleed:122,frame:"#8A949B",rank:1},
+ {tier:"Rare",style:"Contre-jour",exec:"halo unique, arrière-plan sobre",bleed:132,frame:"#B08D57",rank:2},
+ {tier:"Épique",style:"Contre-jour",exec:"fumée, second plan, reflets de scène",bleed:142,frame:"#C3CAD1",rank:3},
+ {tier:"Légendaire",style:"Encre & lavis",exec:"lavis assemblé, palette restreinte",bleed:154,frame:"#D8B35C",rank:4},
+ {tier:"Mythique",style:"Encre & lavis",exec:"pièce unique, rehauts, pleine carte",bleed:168,frame:"#F0ECE2",rank:5}
+];
+function hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
+function rng(seed){let a=seed;return()=>{a=(a+0x6d2b79f5)|0;let t=Math.imul(a^(a>>>15),1|a);t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296;};}
+
+function fill(style,h,uid){
+  const r=rng(hash(uid)); let o="";
+  if(style==="Sérigraphie"){
+    o+=`<rect width="${CW}" height="${h}" fill="${INK.sA}"/>`;
+    o+=`<path d="M0 ${h*0.55} L${CW} ${h*0.12} L${CW} ${h*0.46} L0 ${h*0.86} Z" fill="${INK.sB}"/>`;
+    o+=`<path d="M${CW*0.18} ${h} L${CW*0.52} ${h*0.22} L${CW*0.66} ${h*0.3} L${CW*0.36} ${h} Z" fill="${INK.sC}" opacity="0.9"/>`;
+    for(let i=0;i<48;i++) o+=`<circle cx="${(r()*CW).toFixed(1)}" cy="${(r()*h).toFixed(1)}" r="0.9" fill="${INK.sC}" opacity="0.35"/>`;
+  } else if(style==="Contre-jour"){
+    o+=`<rect width="${CW}" height="${h}" fill="${INK.cBg}"/>`;
+    for(let i=0;i<7;i++) o+=`<circle cx="${CW*0.56}" cy="${h*0.4}" r="${10+i*7}" fill="${INK.cL}" opacity="0.085"/>`;
+    o+=`<circle cx="${CW*0.56}" cy="${h*0.4}" r="9" fill="${INK.cL}" opacity="0.5"/>`;
+    o+=`<path d="M${CW*0.34} ${h} L${CW*0.36} ${h*0.46} Q${CW*0.4} ${h*0.26} ${CW*0.48} ${h*0.26} Q${CW*0.57} ${h*0.28} ${CW*0.56} ${h*0.5} L${CW*0.6} ${h} Z" fill="${INK.cF}"/>`;
+  } else {
+    o+=`<rect width="${CW}" height="${h}" fill="${INK.eBg}"/>`;
+    for(let i=0;i<26;i++) o+=`<circle cx="${(r()*CW).toFixed(1)}" cy="${(r()*h).toFixed(1)}" r="${(2+r()*11).toFixed(1)}" fill="${INK.eR}" opacity="${(0.1+r()*0.22).toFixed(2)}"/>`;
+    for(let i=0;i<30;i++) o+=`<circle cx="${(r()*CW).toFixed(1)}" cy="${(r()*h).toFixed(1)}" r="${(0.7+r()*3).toFixed(1)}" fill="${INK.eA}" opacity="${(0.14+r()*0.3).toFixed(2)}"/>`;
+    o+=`<path d="M${CW*0.42} ${h} Q${CW*0.38} ${h*0.4} ${CW*0.52} ${h*0.24} Q${CW*0.66} ${h*0.42} ${CW*0.6} ${h} Z" fill="#070506" opacity="0.86"/>`;
+  }
+  return o;
+}
+
+function tierCard(s){
+  const cid="w"+s.rank;
+  let o=`<svg viewBox="0 0 ${CW} ${CH}">
+    <defs><clipPath id="${cid}"><rect x="4" y="4" width="${CW-8}" height="${s.bleed-8}" rx="3"/></clipPath></defs>
+    <rect width="${CW}" height="${CH}" rx="4" fill="${INK.paper}"/>
+    <g clip-path="url(#${cid})"><g transform="translate(4 4)">${fill(s.style,s.bleed,s.tier)}</g></g>`;
+  if(s.bleed<CH){
+    o+=`<g opacity="0.5"><rect x="12" y="${s.bleed+8}" width="${CW*0.56}" height="4" fill="#E8E8EA"/><rect x="12" y="${s.bleed+17}" width="${CW*0.34}" height="2.5" fill="#E8E8EA" opacity="0.6"/></g>`;
+  } else {
+    o+=`<g opacity="0.85"><rect x="12" y="${CH-26}" width="${CW*0.56}" height="4" fill="#F4F2EC"/><rect x="12" y="${CH-17}" width="${CW*0.34}" height="2.5" fill="#F4F2EC" opacity="0.7"/></g>`;
+  }
+  o+=`<rect x="3" y="3" width="${CW-6}" height="${CH-6}" rx="3" fill="none" stroke="${s.frame}" stroke-width="${s.rank>=3?1.8:1}"/>`;
+  if(s.rank>=1) o+=`<rect x="6" y="6" width="${CW-12}" height="${CH-12}" rx="2" fill="none" stroke="${s.frame}" stroke-width="0.5" opacity="0.55"/>`;
+  if(s.rank>=2) [[3,3,1,1],[CW-3,3,-1,1],[3,CH-3,1,-1],[CW-3,CH-3,-1,-1]].forEach(([px,py,dx,dy])=>{
+    o+=`<path d="M${px+dx*11} ${py} L${px} ${py} L${px} ${py+dy*11}" fill="none" stroke="${s.frame}" stroke-width="1.9"/>`; });
+  if(s.rank>=4){ o+=`<rect x="3" y="3" width="${CW-6}" height="2" fill="${s.frame}" opacity="0.85"/><rect x="3" y="${CH-5}" width="${CW-6}" height="2" fill="${s.frame}" opacity="0.85"/>`; }
+  o+=`</svg><div class="t" style="color:${s.frame}">${s.tier}</div><div class="s">${s.style}</div><div class="e">${s.exec}</div>`;
+  return `<div>${o}</div>`;
+}
+
+function gcd(a,b){ return b ? gcd(b,a%b) : a; }
+/** Pas de polygone étoilé dégénéré : il faut gcd(n,k)=1 et 2 <= k < n/2. */
+function starSteps(n){ const out=[]; for(let k=2;k<n/2;k++) if(gcd(n,k)===1) out.push(k); return out; }
+function starPoints(n,k,c,rad){
+  const pts=[];
+  for(let i=0;i<=n;i++){ const t=((i*k)/n)*Math.PI*2-Math.PI/2;
+    pts.push(`${(c+Math.cos(t)*rad).toFixed(1)},${(c+Math.sin(t)*rad).toFixed(1)}`); }
+  return pts.join(" ");
+}
+function seal(band){
+  const r=rng(hash(band)), size=62, c=size/2, rad=size/2-5;
+  let n=7+Math.floor(r()*7), ks=starSteps(n);
+  while(!ks.length){ n++; ks=starSteps(n); }
+  const k=ks[Math.floor(r()*ks.length)];
+  const inner=ks[Math.floor(r()*ks.length)];
+  return `<div class="seal"><svg viewBox="0 0 ${size} ${size}">
+    <circle cx="${c}" cy="${c}" r="${rad+3.5}" fill="none" stroke="#B08D57" stroke-width="0.8" opacity="0.5"/>
+    <polyline points="${starPoints(n,k,c,rad)}" fill="none" stroke="#D8B35C" stroke-width="1.1"/>
+    <polyline points="${starPoints(n,inner,c,rad*0.58)}" fill="none" stroke="#B08D57" stroke-width="0.7" opacity="0.8"/>
+    <circle cx="${c}" cy="${c}" r="1.6" fill="#D8B35C"/></svg><div>${band}</div></div>`;
+}
+
+document.getElementById("strip").innerHTML = STEPS.map(tierCard).join("");
+document.getElementById("seals").innerHTML =
+  ["Dream Theater","Slipknot","Marilyn Manson","The Velvet Underground"].map(seal).join("");
+</script>
+</body>
+</html>
