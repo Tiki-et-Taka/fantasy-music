@@ -7,29 +7,100 @@
    brutale : sans `log10`, on n'obtient que deux classes.
 2. **Multi-signaux.** Les pageviews seuls sont biaisés vers l'actualité immédiate et le
    monde anglophone. Il faut mélanger du « buzz » et du « patrimoine ».
-3. **Rareté ≠ puissance.** La rareté doit rester de la *rareté*. Si les cartes rares sont
+3. **Mesurer une position, pas un volume.** Les vues se comparent à l'intérieur d'une
+   communauté linguistique, jamais en valeur absolue d'une édition à l'autre.
+4. **Rareté ≠ puissance.** La rareté doit rester de la *rareté*. Si les cartes rares sont
    mécaniquement supérieures, le jeu devient pay-to-grind et le marché se déséquilibre.
-4. **Paliers par rang centile, jamais par seuil absolu.** Sinon l'héritage de groupe
+5. **Paliers par rang centile, jamais par seuil absolu.** Sinon l'héritage de groupe
    gonfle les hauts paliers de façon incontrôlable.
 
 ## Score personnel
 
 ```
-score_perso = 0,45 · z(log pageviews)
-            + 0,25 · z(log sitelinks)
-            + 0,15 · z(log richesse Wikidata)
+score_perso = 0,40 · z(log part_pageviews)
+            + 0,20 · z(log sitelinks)
+            + 0,15 · max(0, z(entropie linguistique))     ← bonus seul, jamais un malus
+            + 0,10 · z(log richesse Wikidata)
             + 0,15 · z(log volume discographique)
 ```
 
 | Composante | Détail |
 |---|---|
-| **Pageviews** (45 %) | Somme de **toutes** les langues, **médiane** mensuelle sur 24 mois. La médiane écrase les pics (décès, sortie d'album), contrairement à la moyenne. |
-| **Sitelinks** (25 %) | Nombre de versions linguistiques de la page. Excellent proxy de notoriété *durable* et interculturelle. |
-| **Richesse Wikidata** (15 %) | Nombre de déclarations, identifiants externes, récompenses `P166`. |
+| **Part de pageviews** (40 %) | Position de l'artiste **au sein de chaque communauté linguistique**, et non somme brute des vues. Médiane mensuelle sur 24 mois : elle écrase les pics (décès, sortie d'album) que la moyenne laisserait passer. Voir la formule ci-dessous. |
+| **Sitelinks** (20 %) | Nombre de versions linguistiques de la page. Proxy de notoriété *durable* et interculturelle. |
+| **Entropie linguistique** (15 %) | Dispersion des vues entre éditions. Un artiste lu dans quarante langues est plus universel qu'un artiste lu dans une seule, à total égal. |
+| **Richesse Wikidata** (10 %) | Nombre de déclarations, identifiants externes, récompenses `P166`. |
 | **Discographie** (15 %) | Volume de releases et recordings MusicBrainz. |
 
 > Les pondérations sont des **hypothèses de design**, pas des mesures. Elles doivent
 > être validées sur données réelles avant d'être figées.
+
+### Pourquoi une part et non une somme
+
+La validation a mesuré le problème : en sommant les vues brutes, l'édition anglophone
+pèse un ordre de grandeur de plus que toutes les autres, donc **la somme *est* le score
+anglophone**. Aya Nakamura, écrasante sur `fr.wikipedia`, ressortait 31ᵉ sur 38.
+
+On mesure donc la position de l'artiste dans chaque communauté linguistique, pondérée
+par la taille de cette communauté :
+
+```
+part_pageviews = Σ_w  √(V_w) · ( vues_artiste,w / médiane_musiciens_w )
+```
+
+- `V_w` est le trafic musical total de l'édition `w`. Sa **racine carrée** amortit la
+  domination de l'anglais sans nier qu'il couvre un public bien plus large — sans ce
+  facteur, un artiste connu uniquement en catalan dépasserait une star mondiale.
+- `médiane_musiciens_w` se calcule sur la population de musiciens de chaque édition,
+  obtenue par la même jointure Wikidata × dumps que le reste du pipeline.
+
+### Les deux garde-fous contre la pénalisation des marchés uniques
+
+L'entropie récompense l'universalité, mais elle ne doit **pas** punir la domination
+locale. Johnny Hallyday est colossal en France et quasi inconnu ailleurs ; il doit rester
+Mythique. Même raisonnement pour les grands noms de l'enka japonaise ou du playback
+de Bollywood.
+
+**1. L'entropie est un bonus, jamais un malus.** On la clampe à `max(0, z)` :
+l'étendue linguistique fait monter, la concentration ne fait pas descendre. Gojira,
+diffusé dans huit communautés, touche son bonus ; Johnny Hallyday n'en touche pas mais
+ne perd rien.
+
+**2. Plancher de domination de marché.** Un artiste classé dans le top 1 % des musiciens
+sur **n'importe quelle** édition se voit garantir un palier minimum, indépendamment de sa
+diffusion mondiale. Même mécanique que le plancher de prestige des membres de groupes
+cultes : qui écrase son marché est rare, point.
+
+> Le cas inverse ne pose pas de problème. Un artiste plus connu à l'étranger que chez lui
+> — Gojira en est l'exemple type — n'est jamais pénalisé, parce que la normalisation est
+> **par édition et non par nationalité** : la formule ne demande jamais d'où vient
+> l'artiste. Sa position modeste sur `fr` contribue simplement moins, elle ne retranche
+> rien.
+
+### Test de recette
+
+Après implémentation, rejouer la validation et vérifier **les deux sens à la fois** :
+Aya Nakamura doit remonter nettement, **sans que** Miles Davis ni Nina Simone ne
+dégringolent. Si un seul des deux bouge, la pondération `√(V_w)` est mal calibrée.
+
+### Sur les compteurs d'écoutes
+
+**Écartés, après examen.** L'idée d'ajouter un volume d'écoutes pour contrer le biais
+anglophone est séduisante mais contre-productive :
+
+- **ListenBrainz**, notre seule source d'écoutes en CC0, repose sur une base
+  d'utilisateurs réduite et très typée — public occidental, technophile, massivement
+  rock, metal et électronique. Elle amplifierait le biais au lieu de le corriger.
+- Les sources qui corrigeraient réellement (Spotify, YouTube, Deezer) sont précisément
+  celles écartées pour raisons de conditions d'utilisation — voir
+  [`02-donnees.md`](02-donnees.md).
+- Un compteur d'écoutes introduit un **biais de récence** massif : le streaming favorise
+  les artistes actifs après 2010, et effondrerait Miles Davis ou Nina Simone face à des
+  contemporains. Notre score mélange délibérément buzz et patrimoine ; les écoutes sont
+  du buzz pur.
+
+La normalisation par édition corrige le biais à la source, sans source nouvelle, sans
+risque juridique et à coût nul puisqu'elle se calcule sur les dumps déjà nécessaires.
 
 ## Héritage de notoriété du groupe
 

@@ -67,13 +67,17 @@ Conséquence immédiate et parlante : **Aya Nakamura ressort au rang 31 sur 38**
 qu'elle est l'une des artistes les plus écoutées de France.
 
 C'est la démonstration concrète du risque déjà identifié dans `04-distribution.md` :
-prendre le top N par score produit un set massivement anglo-saxon. Deux conséquences
-pour la suite :
+prendre le top N par score produit un set massivement anglo-saxon.
 
-- la somme des pageviews doit impérativement couvrir **toutes** les langues, pas les
-  plus grosses éditions ;
-- les quotas de curation par pays et par genre ne sont pas un confort éditorial, c'est
-  un correctif nécessaire.
+**Correctif décidé à la suite de cette mesure :** le problème ne vient pas de la source
+mais de l'agrégation. Sommer les vues brutes revient à ne mesurer que l'édition
+anglophone, qui pèse un ordre de grandeur de plus que les autres. On passe donc à une
+**part par communauté linguistique** pondérée par `√(V_w)`, complétée d'un bonus
+d'entropie et d'un plancher de domination de marché — formule complète dans
+[`03-rarete-scoring.md`](03-rarete-scoring.md).
+
+Les quotas de curation par pays et par genre restent nécessaires par ailleurs : aucune
+formule ne produira spontanément un set équilibré.
 
 ---
 
