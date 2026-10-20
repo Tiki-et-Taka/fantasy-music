@@ -1,0 +1,79 @@
+{
+  "_comment": "Échantillon de validation du scoring. 'wiki' est le titre exact de l'article Wikipédia anglophone, utilisé pour résoudre le QID sans ambiguïté (les redirections sont suivies). 'band' référence une clé de la section bands.",
+
+  "bands": {
+    "Dream Theater": "Dream Theater",
+    "Slipknot": "Slipknot (band)",
+    "Marilyn Manson (groupe)": "Marilyn Manson (band)",
+    "Metallica": "Metallica",
+    "Megadeth": "Megadeth",
+    "Nirvana": "Nirvana (band)",
+    "The Beatles": "The Beatles"
+  },
+
+  "artists": [
+    { "wiki": "Mike Portnoy",       "band": "Dream Theater" },
+    { "wiki": "James LaBrie",       "band": "Dream Theater" },
+    { "wiki": "John Petrucci",      "band": "Dream Theater" },
+    { "wiki": "John Myung",         "band": "Dream Theater" },
+    { "wiki": "Jordan Rudess",      "band": "Dream Theater" },
+
+    { "wiki": "Corey Taylor",       "band": "Slipknot" },
+    { "wiki": "Shawn Crahan",       "band": "Slipknot" },
+    { "wiki": "Mick Thomson",       "band": "Slipknot" },
+    { "wiki": "Jim Root",           "band": "Slipknot" },
+    { "wiki": "Sid Wilson",         "band": "Slipknot" },
+    { "wiki": "Craig Jones (musician)", "band": "Slipknot" },
+    { "wiki": "Chris Fehn",         "band": "Slipknot" },
+    { "wiki": "Joey Jordison",      "band": "Slipknot" },
+    { "wiki": "Paul Gray (American musician)", "band": "Slipknot" },
+
+    { "wiki": "Marilyn Manson",     "band": "Marilyn Manson (groupe)" },
+    { "wiki": "John 5 (guitarist)", "band": "Marilyn Manson (groupe)" },
+    { "wiki": "Twiggy Ramirez",     "band": "Marilyn Manson (groupe)" },
+
+    { "wiki": "James Hetfield",     "band": "Metallica" },
+    { "wiki": "Lars Ulrich",        "band": "Metallica" },
+    { "wiki": "Kirk Hammett",       "band": "Metallica" },
+    { "wiki": "Robert Trujillo",    "band": "Metallica" },
+    { "wiki": "Cliff Burton",       "band": "Metallica" },
+    { "wiki": "Jason Newsted",      "band": "Metallica" },
+    { "wiki": "Ron McGovney",       "band": "Metallica" },
+    { "wiki": "Dave Mustaine",      "band": "Megadeth" },
+
+    { "wiki": "Kurt Cobain",        "band": "Nirvana" },
+    { "wiki": "Dave Grohl",         "band": "Nirvana" },
+    { "wiki": "Krist Novoselic",    "band": "Nirvana" },
+
+    { "wiki": "John Lennon",        "band": "The Beatles" },
+    { "wiki": "Paul McCartney",     "band": "The Beatles" },
+    { "wiki": "Ringo Starr",        "band": "The Beatles" },
+    { "wiki": "Pete Best",          "band": "The Beatles" },
+
+    { "wiki": "Miles Davis",        "band": null },
+    { "wiki": "Nina Simone",        "band": null },
+    { "wiki": "Fela Kuti",          "band": null },
+    { "wiki": "Björk",              "band": null },
+    { "wiki": "Jacob Collier",      "band": null },
+    { "wiki": "Aya Nakamura",       "band": null }
+  ],
+
+  "assertions": [
+    { "id": "portnoy_labrie",  "type": "ge", "a": "Mike Portnoy", "b": "James LaBrie",
+      "why": "Aucun bonus de rôle ne doit s'être glissé : le batteur icône reste au-dessus du chanteur" },
+    { "id": "manson_john5",    "type": "gt", "a": "Marilyn Manson", "b": "John 5 (guitarist)",
+      "why": "L'héritage remonte John 5 sans jamais inverser l'ordre interne au groupe" },
+    { "id": "john5_lifted",    "type": "lifted", "a": "John 5 (guitarist)",
+      "why": "L'héritage doit effectivement remonter un membre discret d'un groupe très connu" },
+    { "id": "taylor_slipknot", "type": "top_of_band", "a": "Corey Taylor", "band": "Slipknot",
+      "why": "Le frontman ressort en tête de son groupe par ses seules données" },
+    { "id": "mustaine_high",   "type": "rank_top_pct", "a": "Dave Mustaine", "pct": 45,
+      "why": "Haut palier malgré 14 mois chez Metallica : sans filtre d'ancienneté, son score Megadeth fait le travail" },
+    { "id": "mcgovney_low",    "type": "rank_bottom_pct", "a": "Ron McGovney", "pct": 25,
+      "why": "Notable juste assez pour exister, l'héritage ne doit pas le hisser" },
+    { "id": "lennon_starr",    "type": "gt", "a": "John Lennon", "b": "Ringo Starr",
+      "why": "Contrôle sur un groupe où tous les membres sont massivement connus" },
+    { "id": "best_below_starr","type": "lt", "a": "Pete Best", "b": "Ringo Starr",
+      "why": "Le batteur viré reste sous son remplaçant malgré sa notoriété d'anecdote" }
+  ]
+}

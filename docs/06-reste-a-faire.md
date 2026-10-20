@@ -18,19 +18,27 @@
 
 ## Chemin critique — validation sur données réelles
 
-**C'est la seule chose qui peut encore invalider les décisions prises.** Les pondérations
-45/25/15/15 et λ = 0,40 sont des hypothèses de design, pas des mesures.
+- [x] Extraire Wikidata + pageviews sur un échantillon ciblé de 38 artistes et
+      7 groupes — `tools/validate_scoring.py`.
+- [x] Vérifier le classement contre les cas de référence : **8/8 validés**.
+- [x] Mesurer la couverture des champs.
+- [ ] Corriger les trois points remontés par la validation (ci-dessous).
+- [ ] Rejouer, puis passer à l'extraction large pour caler les centiles et figer les
+      pondérations 45/25/15/15 et λ = 0,40, qui restent des hypothèses.
 
-- [ ] Extraire Wikidata + pageviews sur un échantillon ciblé, puis sur quelques milliers
-      d'artistes.
-- [ ] Calculer les scores et vérifier le classement contre les cas de référence listés
-      dans [`03-rarete-scoring.md`](03-rarete-scoring.md) : Portnoy ≥ LaBrie,
-      Manson > John 5 tous deux en haut palier, les 9 de Slipknot bien répartis,
-      Dave Mustaine en haut palier, aucun artiste absurde en Mythique.
-- [ ] **Mesurer la couverture réelle des champs** — quelle proportion d'artistes a
-      effectivement un `P1303`, un `P136`, des dates d'appartenance. C'est ça qui dira
-      si les sept couches de composition sont réellement alimentables.
-- [ ] Ajuster les pondérations et λ, puis les figer.
+Résultats détaillés dans [`07-validation-resultats.md`](07-validation-resultats.md).
+
+### Corrections issues de la validation
+
+- [ ] **Monotonie intra-groupe.** L'héritage peut inverser l'ordre interne quand la
+      contribution varie d'un membre à l'autre. Contraindre `score_final` à être non
+      croissant dans l'ordre de `score_perso` au sein de chaque groupe.
+- [ ] **Dates d'appartenance.** Couverture Wikidata mesurée à 47 % seulement, sur un
+      échantillon pourtant très célèbre. Brancher MusicBrainz en source primaire, puis
+      remesurer.
+- [ ] **Pageviews par dumps.** L'API REST est limitée à ~100 requêtes consécutives pour
+      un client anonyme ; les 100 000 requêtes d'une Série 1 sont hors de portée.
+      Passer aux dumps mensuels.
 
 ## Décisions ouvertes
 

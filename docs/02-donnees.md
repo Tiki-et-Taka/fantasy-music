@@ -52,8 +52,17 @@ https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/
 
 - Toujours utiliser le filtre `user` (exclut les bots).
 - User-Agent identifiable obligatoire.
-- Pour du volume, les dumps mensuels de pageviews sont plus efficaces que l'appel
-  article par article.
+
+> ⚠ **Mesuré en conditions réelles : cette API est inutilisable à l'échelle.** Pour un
+> client anonyme elle renvoie des HTTP 429 après une centaine de requêtes consécutives,
+> même espacées de 1,2 s, avec des blocages de l'ordre de la minute qui s'allongent si
+> l'on insiste. Une Série 1 de 2 000 artistes × 50 langues représente 100 000 requêtes :
+> hors de portée.
+>
+> **Décision : passer par les dumps mensuels** (`dumps.wikimedia.org`,
+> `pageviews-YYYYMM-user.bz2`), filtrés en local. L'API ne reste bonne que pour des
+> vérifications ponctuelles. Détails dans
+> [`07-validation-resultats.md`](07-validation-resultats.md).
 
 ### Wikimedia Commons
 

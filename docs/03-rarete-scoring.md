@@ -47,12 +47,20 @@ score_final = score_perso + λ · contribution · max(0, score_groupe − score_
 avec λ = 0,40
 ```
 
-Le terme `max(0, écart)` fait tout le travail :
+Le terme `max(0, écart)` fait l'essentiel du travail :
 
 - un membre dont le score égale déjà celui du groupe ne gagne **rien** ;
-- les autres sont remontés proportionnellement à leur retard ;
-- **l'ordre interne au groupe est donc toujours préservé**, et personne ne peut dépasser
-  le membre le plus connu.
+- les autres sont remontés proportionnellement à leur retard.
+
+> ⚠ **Correction apportée après validation sur données réelles.** Cette formule ne
+> préserve l'ordre interne au groupe que si la contribution est **identique** pour tous
+> les membres. Dès qu'elle varie, un membre moins connu mais mieux doté en contribution
+> peut dépasser un membre plus connu — observé chez Slipknot, voir
+> [`07-validation-resultats.md`](07-validation-resultats.md).
+>
+> **Parade obligatoire :** après calcul, trier les membres d'un groupe par `score_perso`
+> décroissant et contraindre `score_final` à être non croissant dans cet ordre. La
+> préservation devient alors structurelle au lieu d'être espérée.
 
 ### Poids de contribution
 
