@@ -37,8 +37,17 @@ bien mieux renseignées : elles doivent devenir la source primaire, Wikidata le 
 
 **Parade de sûreté — forcer la monotonie.** Après calcul, au sein de chaque groupe,
 trier les membres par `score_perso` décroissant et contraindre `score_final` à être
-non croissant dans cet ordre. Deux lignes de code, et la garantie devient structurelle
-au lieu d'être une propriété espérée.
+non croissant dans cet ordre. La garantie devient structurelle au lieu d'être espérée.
+
+> ✅ **Implémentée** dans `enforce_band_monotonicity()`. Sur l'échantillon de référence
+> elle rattrape **4 inversions réelles**, et les 8 cas de référence passent toujours :
+>
+> | Artiste | Groupe | Avant | Après |
+> |---|---|---:|---:|
+> | Craig Jones | Slipknot | −0,46 | −0,74 |
+> | Jason Newsted | Metallica | +0,31 | +0,22 |
+> | Cliff Burton | Metallica | +0,28 | +0,22 |
+> | Jordan Rudess | Dream Theater | −0,50 | −0,52 |
 
 ---
 
@@ -94,8 +103,17 @@ Or une Série 1 de 2 000 artistes × 50 langues représente **100 000 requêtes*
 C'est hors de portée.
 
 **Décision : passer par les dumps mensuels de pageviews** (`dumps.wikimedia.org`,
-`pageviews-YYYYMM-user.bz2`). Un fichier par mois, tous projets et tous articles
+`/other/pageview_complete/monthly/`). Un fichier par mois, tous projets et tous articles
 confondus, filtré en local. Zéro requête API, zéro limitation.
+
+**Volumétrie mesurée :** `pageviews-202401-user.bz2` pèse **3,38 Go**. Une fenêtre de
+24 mois représente donc environ **81 Go** à télécharger — sans nécessité de les stocker,
+puisqu'on peut filtrer au fil de la décompression.
+
+Les dumps sont par ailleurs la seule option viable pour le dénominateur de la
+normalisation : calculer la **médiane des musiciens par édition** demande les vues de
+*tous* les musiciens, pas seulement de nos candidats. Par API cela représenterait des
+centaines de milliers de requêtes ; en local, c'est gratuit.
 
 Piège à anticiper dans le script définitif : un échec réseau ne doit **jamais** être
 converti en zéro. Une première version le faisait et attribuait silencieusement zéro vue

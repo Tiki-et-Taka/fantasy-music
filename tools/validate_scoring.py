@@ -354,6 +354,33 @@ def mb_release_group_count(mbid: str | None, pacer: list[float]) -> int:
 # Scoring
 # --------------------------------------------------------------------------- #
 
+def enforce_band_monotonicity(artists: list[dict]) -> list[tuple]:
+    """Garantit que l'héritage n'inverse jamais l'ordre interne à un groupe.
+
+    Le terme max(0, écart) ne préserve l'ordre que si la contribution est identique
+    pour tous les membres. Dès qu'elle varie — et elle varie, ne serait-ce qu'à cause
+    des dates d'appartenance manquantes — un membre moins connu peut dépasser un membre
+    plus connu. On contraint donc score_final à être non croissant dans l'ordre de
+    score_perso, groupe par groupe.
+    """
+    bands: dict[str, list[dict]] = {}
+    for a in artists:
+        if a["band_label"]:
+            bands.setdefault(a["band_label"], []).append(a)
+
+    corrected = []
+    for label, members in bands.items():
+        members.sort(key=lambda m: m["score_perso"], reverse=True)
+        ceiling = None
+        for m in members:
+            if ceiling is not None and m["score_final"] > ceiling:
+                corrected.append((m["name"], label, m["score_final"], ceiling))
+                m["score_final"] = ceiling
+                m["monotonicity_clamped"] = True
+            ceiling = m["score_final"]
+    return corrected
+
+
 def zscores(values: list[float]) -> list[float]:
     logs = [math.log10(1 + max(0.0, v)) for v in values]
     mean = statistics.fmean(logs)
@@ -455,6 +482,14 @@ def main() -> int:
 
     print(f"\nContribution : {fallbacks} artistes sur {len(artists)} sans dates "
           f"d'appartenance, valeur par defaut {CONTRIB_DEFAUT} appliquee.")
+
+    inversions = enforce_band_monotonicity(artists)
+    if inversions:
+        print(f"Monotonie intra-groupe : {len(inversions)} inversion(s) corrigee(s)")
+        for name, band, before, after in inversions:
+            print(f"  {name} ({band}) {before:+.2f} -> {after:+.2f}")
+    else:
+        print("Monotonie intra-groupe : aucune inversion a corriger")
 
     artists.sort(key=lambda a: a["score_final"], reverse=True)
     for i, a in enumerate(artists, 1):

@@ -36,7 +36,9 @@ Résultats détaillés dans `[07-validation-resultats.md](07-validation-resultat
 
 ### Corrections issues de la validation
 
-- [ ] **Monotonie intra-groupe.** L'héritage peut inverser l'ordre interne quand la
+- [x] **Monotonie intra-groupe.** Implémentée dans `enforce_band_monotonicity()` ;
+  4 inversions rattrapées sur l'échantillon de référence. L'héritage pouvait inverser
+  l'ordre interne quand la
   ```
   contribution varie d'un membre à l'autre. Contraindre `score_final` à être non
   croissant dans l'ordre de `score_perso` au sein de chaque groupe.
