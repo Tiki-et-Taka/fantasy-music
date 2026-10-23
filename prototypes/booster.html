@@ -1,0 +1,3970 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Charts — Série 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Inter:wght@400;500;600&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: #050506;
+    color: #e8e8ea;
+    font-family: Inter, "Segoe UI", system-ui, sans-serif;
+    overflow: hidden;
+    overscroll-behavior: none;
+    user-select: none;
+  }
+  header {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 6;
+    padding: 22px 28px 0; pointer-events: none;
+    transition: opacity .25s ease;
+  }
+  body.cutaway header,
+  body.cutaway footer { opacity: 0; pointer-events: none; }
+  header .nav { pointer-events: auto; display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; align-items: center; }
+  header .nav button {
+    appearance: none; border: 1px solid #2a2c32; background: #141518;
+    color: #d8d8dc; font: inherit; font-size: 12px; padding: 5px 12px;
+    border-radius: 999px; cursor: pointer;
+    position: relative;
+  }
+  header .nav button.on { background: #e8e8ea; color: #111; border-color: #e8e8ea; }
+  header .nav button b { font-weight: 600; }
+  header .nav button:disabled { opacity: .35; cursor: default; }
+  .nav-badge {
+    position: absolute;
+    top: -6px; right: -6px;
+    min-width: 16px; height: 16px; padding: 0 5px;
+    border-radius: 999px;
+    background: #e11d48; color: #fff;
+    font-size: 10px; font-weight: 700; line-height: 16px;
+    text-align: center;
+    box-shadow: 0 0 0 2px #050506;
+    pointer-events: none;
+  }
+  .nav-badge[hidden] { display: none; }
+  .wallet {
+    pointer-events: auto; margin-left: auto;
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+    font-size: 12px; color: #c4c8ce;
+  }
+  .user-switch {
+    display: inline-flex; gap: 0; border: 1px solid #2a2c32;
+    border-radius: 999px; overflow: hidden; background: #141518;
+  }
+  .user-switch button {
+    appearance: none; border: 0; background: transparent;
+    color: #9aa0a8; font: inherit; font-size: 11px; font-weight: 600;
+    padding: 6px 10px; cursor: pointer;
+  }
+  .user-switch button.on { background: #e8e8ea; color: #111; }
+  .user-switch button:hover:not(.on) { color: #e8e8ea; }
+  .wallet .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    border: 1px solid #2a2c32; background: #141518;
+    padding: 5px 10px; border-radius: 999px;
+  }
+  .wallet .pill b { font-weight: 600; color: #e8e8ea; }
+  .wallet .cheat {
+    appearance: none; border: 1px solid #3a3c42; background: #1c1e22;
+    color: #e8e8ea; font: inherit; font-size: 12px; padding: 5px 12px;
+    border-radius: 8px; cursor: pointer;
+  }
+  .wallet .cheat:hover { background: #26282e; }
+  h1 { font-size: 18px; margin: 0 0 4px; font-weight: 600; }
+  p.intro { margin: 0; color: #9aa0a8; font-size: 13px; }
+  .zoom-actions {
+    display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+    margin-top: 14px; max-width: 360px;
+  }
+  .zoom-actions button {
+    appearance: none; border: 1px solid #2a2c32; background: #141518;
+    color: #d8d8dc; font: inherit; font-size: 12px; padding: 7px 14px;
+    border-radius: 8px; cursor: pointer;
+  }
+  .zoom-actions button:hover { background: #1c1e22; }
+  .zoom-actions button:disabled { opacity: .35; cursor: default; }
+  .zoom-actions button.primary { background: #e8e8ea; color: #111; border-color: #e8e8ea; }
+  .zoom-actions .hint {
+    width: 100%; text-align: center; font-size: 11px; color: #8a9099;
+    position: static; opacity: 1; letter-spacing: 0; text-transform: none;
+  }
+  .zoom-actions .ask {
+    width: 100%; text-align: center; font-size: 13px; color: #d8d8dc;
+    line-height: 1.45; margin: 0 0 4px; white-space: pre-line;
+  }
+  .zoom-actions .qty {
+    appearance: none; border: 1px solid #2a2c32; background: #141518;
+    color: #e8e8ea; font: inherit; font-size: 12px; padding: 7px 10px;
+    border-radius: 8px; width: 56px;
+  }
+  .empty-pack {
+    display: none; flex-direction: column; align-items: center; gap: 14px;
+    text-align: center; max-width: 320px; padding: 24px; z-index: 3;
+  }
+  .empty-pack.show { display: flex; }
+  .empty-pack p { margin: 0; color: #9aa0a8; font-size: 14px; line-height: 1.45; }
+  .empty-pack button {
+    appearance: none; border: 1px solid #3a3c42; background: #1c1e22;
+    color: #e8e8ea; font: inherit; font-size: 13px; padding: 10px 16px;
+    border-radius: 8px; cursor: pointer;
+  }
+  .empty-pack button:disabled { opacity: .35; cursor: default; }
+  .stage {
+    height: 100dvh;
+    position: relative;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
+
+  /* —— sachet —— */
+  .pack-col {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: min(340px, 68vw);
+  }
+  .pack-col[hidden] { display: none; }
+  .pack-buy {
+    appearance: none;
+    width: 100%;
+    border: 1px solid #3a3c42;
+    background: #1c1e22;
+    color: #e8e8ea;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    padding: 12px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .pack-buy:hover { background: #26282e; }
+  .pack-buy:disabled { opacity: .35; cursor: default; }
+  .pack-wrap {
+    position: relative;
+    width: 100%;
+    touch-action: none;
+  }
+  .pack-wrap.gone, .pack-wrap.locked, .pack-wrap.spent { pointer-events: none; }
+  .pack-wrap.gone { opacity: 0; }
+  .pack-wrap.spent {
+    filter: grayscale(1) brightness(.55);
+    opacity: .62;
+  }
+  .pack-wrap.spent .hint,
+  .pack-wrap.spent .shine { display: none; }
+  .pack-wrap.spent .pack { animation: none; filter: none; }
+  .pack {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    filter: drop-shadow(0 22px 36px rgba(0,0,0,.62));
+    will-change: transform, filter;
+  }
+  .pack-art { display: block; width: 100%; height: auto; }
+  .pack-wrap.idle .pack { animation: idleFloat 3.4s ease-in-out infinite; }
+  @keyframes idleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-7px); }
+  }
+  .pack img {
+    display: block; width: 100%; height: auto;
+    pointer-events: none; -webkit-user-drag: none;
+  }
+  .tear-layer {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    opacity: 0;
+  }
+  .pack-wrap.dragging .tear-layer,
+  .pack-wrap.locked .tear-layer { opacity: 1; }
+  .pack-wrap.dragging .pack-art,
+  .pack-wrap.locked .pack-art { visibility: hidden; }
+  .seal-hit {
+    position: absolute; top: 5%; left: 14%; right: 14%;
+    height: 16%;
+    z-index: 4;
+    cursor: ew-resize;
+  }
+  .shine {
+    position: absolute; inset: 8% 10% 10%;
+    background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.14) 48%, transparent 62%);
+    mix-blend-mode: screen; pointer-events: none;
+    transform: translateX(-120%);
+  }
+  .pack-wrap.idle .shine { animation: shineSweep 3.8s ease-in-out 1.1s infinite; }
+  @keyframes shineSweep {
+    0% { transform: translateX(-120%); }
+    35%, 100% { transform: translateX(120%); }
+  }
+  .hint {
+    position: absolute; left: 18%; right: 18%; top: 7.4%;
+    z-index: 3; pointer-events: none;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: .16em; text-transform: uppercase; color: #f0f0f2;
+    text-shadow: 0 1px 8px #000;
+    transition: opacity .2s;
+  }
+  .hint .arr {
+    width: 7px; height: 7px;
+    border-right: 2px solid #ff4a4a;
+    border-bottom: 2px solid #ff4a4a;
+    opacity: .55;
+  }
+  .hint .arr.left { transform: rotate(135deg); animation: nudgeL 1.2s ease-in-out infinite; }
+  .hint .arr.right { transform: rotate(-45deg); animation: nudgeR 1.2s ease-in-out infinite; }
+  @keyframes nudgeL {
+    0%, 100% { transform: rotate(135deg) translate(0, 0); opacity: .35; }
+    50% { transform: rotate(135deg) translate(3px, -3px); opacity: 1; }
+  }
+  @keyframes nudgeR {
+    0%, 100% { transform: rotate(-45deg) translate(0, 0); opacity: .35; }
+    50% { transform: rotate(-45deg) translate(3px, 3px); opacity: 1; }
+  }
+  .pack-wrap.dragging .hint,
+  .pack-wrap.gone .hint,
+  .pack-wrap.dragging .shine,
+  .pack-wrap.locked .shine { opacity: 0; }
+
+  .cut-veil {
+    position: absolute; inset: 0; z-index: 3;
+    background: #000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .28s ease;
+  }
+  .stage.cutaway .cut-veil { opacity: 1; }
+  .stage.cutaway #fx { z-index: 4; }
+  .stage.cutaway .hand {
+    opacity: 0;
+    transition: opacity .22s ease;
+  }
+  .stage.cutaway.show-hit .hand { opacity: 1; z-index: 6; }
+  .stage.cutaway.show-hit .slot-card:not(.hit) { display: none; }
+
+  /* —— fx de scène —— */
+  #fx { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
+  #fx.settled .wash { opacity: .18; }
+  #fx.settled.myth .wash { opacity: .28; }
+  #fx.settled .halo,
+  #fx.settled .beam,
+  #fx.settled .mote,
+  #fx.settled .flash { opacity: 0 !important; animation: none; }
+  #fx.settled .crowd { opacity: .4; }
+  .wash {
+    position: absolute; inset: 0; opacity: 0;
+    transition: opacity .5s ease;
+  }
+  #fx.epic .wash {
+    opacity: 1;
+    background:
+      radial-gradient(ellipse 50% 40% at 50% 42%, rgba(210,230,255,.42), transparent 70%),
+      radial-gradient(ellipse 80% 70% at 50% 100%, rgba(40,70,120,.35), transparent 60%);
+    animation: strobe 1.1s ease-out;
+  }
+  @keyframes strobe {
+    0%, 18%, 32% { opacity: 1; }
+    8%, 26% { opacity: .15; }
+    100% { opacity: .55; }
+  }
+  .halo {
+    position: absolute; left: 50%; top: 46%;
+    width: 40px; height: 40px; margin: -20px 0 0 -20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff, rgba(160,200,255,.5) 40%, transparent 70%);
+    opacity: 0;
+  }
+  #fx.epic .halo { animation: haloBurst .9s cubic-bezier(.1,.8,.2,1) forwards; }
+  @keyframes haloBurst {
+    0% { transform: scale(.2); opacity: 1; }
+    100% { transform: scale(28); opacity: 0; }
+  }
+  .beam {
+    position: absolute; left: 50%; top: -10%;
+    width: 2px; height: 140%;
+    background: linear-gradient(to bottom, transparent, rgba(230,240,255,.55), transparent);
+    transform-origin: 50% 0;
+    opacity: 0;
+  }
+  #fx.epic .beam,
+  #fx.myth .beam { opacity: 1; animation: beamSpin 1.4s ease-out both; }
+  #fx.epic .beam.b2, #fx.myth .beam.b2 { animation-delay: .04s; }
+  #fx.epic .beam.b3, #fx.myth .beam.b3 { animation-delay: .08s; }
+  #fx.myth .beam.b4 { animation-delay: .12s; }
+  @keyframes beamSpin {
+    0% { transform: rotate(var(--a, -18deg)) scaleY(0); opacity: 0; }
+    35% { opacity: .9; }
+    100% { transform: rotate(calc(var(--a, -18deg) + 12deg)) scaleY(1); opacity: 0; }
+  }
+  .dust { position: absolute; inset: 0; }
+  .mote {
+    position: absolute; width: 3px; height: 3px; border-radius: 50%;
+    background: #e8f0ff; opacity: 0;
+  }
+  #fx.epic .mote { animation: moteUp 1.3s ease-out forwards; }
+  @keyframes moteUp {
+    0% { transform: translateY(40px) scale(.4); opacity: 0; }
+    20% { opacity: .9; }
+    100% { transform: translateY(-160px) scale(1); opacity: 0; }
+  }
+
+  #fx.myth .wash {
+    opacity: 1;
+    background:
+      radial-gradient(ellipse 55% 38% at 50% 22%, rgba(255,210,140,.38), transparent 70%),
+      radial-gradient(ellipse 90% 55% at 50% 110%, #000, transparent 60%),
+      #050508;
+    animation: mythStrobe 1.8s ease-out;
+  }
+  @keyframes mythStrobe {
+    0%, 10%, 22%, 38% { filter: brightness(2.4); }
+    5%, 16%, 30% { filter: brightness(.45); }
+    100% { filter: brightness(1); }
+  }
+  #fx.myth .beam {
+    width: 22px;
+    background: linear-gradient(to bottom, transparent, rgba(255,220,150,.6), transparent);
+    filter: blur(3px);
+  }
+  .crowd { position: absolute; inset: 0; overflow: hidden; }
+  .crowd::before {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 46%;
+    background: linear-gradient(to top, #0c0c12 10%, transparent);
+  }
+  .fan {
+    position: absolute; width: 14px; height: 26px;
+    margin-left: -7px; background: #1c1c24;
+    border-radius: 5px 5px 1px 1px;
+  }
+  .fan::before {
+    content: ""; position: absolute; left: 2px; top: -8px;
+    width: 10px; height: 10px; border-radius: 50%; background: #1c1c24;
+  }
+  .fan::after {
+    content: ""; position: absolute; left: -6px; top: 2px;
+    width: 26px; height: 12px; background: #1c1c24;
+    clip-path: polygon(0 100%, 6px 0, 13px 8px, 20px 0, 100% 100%);
+  }
+  #fx.myth .fan { animation: crowdBounce 1.1s ease-in-out infinite; }
+  @keyframes crowdBounce {
+    0%, 100% { transform: translateY(0) scale(var(--s, 1)); }
+    50% { transform: translateY(-7px) scale(var(--s, 1)); }
+  }
+  .phone {
+    position: absolute; width: 3px; height: 5px; border-radius: 1px;
+    background: #dcecff; box-shadow: 0 0 7px #fff;
+    animation: phoneTwinkle 1.3s ease-in-out infinite;
+  }
+  @keyframes phoneTwinkle {
+    0%, 100% { opacity: .25; }
+    50% { opacity: 1; }
+  }
+  .flash {
+    position: absolute; width: 90px; height: 90px; margin: -45px 0 0 -45px;
+    border-radius: 50%; pointer-events: none;
+    background: radial-gradient(circle, #fff 0%, rgba(255,255,255,.7) 28%, transparent 70%);
+    mix-blend-mode: screen;
+    opacity: 0;
+  }
+  #fx.myth .flash { animation: popFlash .4s ease-out forwards; }
+  @keyframes popFlash {
+    0% { transform: scale(.15); opacity: 0; }
+    28% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.7); opacity: 0; }
+  }
+
+  /* —— main —— */
+  .hand {
+    position: absolute; left: 0; right: 0; top: 18vh; bottom: 12vh;
+    display: flex; justify-content: center; align-items: center;
+    gap: 14px; padding: 0 20px; z-index: 4;
+    pointer-events: none;
+  }
+  .hand.live { pointer-events: auto; }
+  .hand.stashable { cursor: pointer; }
+  .hand.stashing .slot-card {
+    opacity: 0 !important;
+    transform: translateY(48px) scale(.82) !important;
+    transition: opacity .28s ease, transform .28s ease;
+  }
+  .slot-card {
+    width: calc(260px * var(--s, .7));
+    height: calc(364px * var(--s, .7));
+    position: relative;
+    flex: 0 0 auto;
+    opacity: 0;
+    transform: translateY(90px) scale(.42);
+    filter: drop-shadow(0 16px 22px rgba(0,0,0,.5));
+    perspective: 900px;
+    border-radius: 10px;
+  }
+  .slot-card { cursor: pointer; }
+  .slot-card.hit { z-index: 7; }
+  .flipper {
+    width: 100%; height: 100%;
+    position: relative;
+    z-index: 1;
+    transform-style: preserve-3d;
+    transition: transform .36s cubic-bezier(.18,.9,.22,1);
+  }
+  .slot-card.revealed .flipper { transform: rotateY(180deg); }
+  .face {
+    position: absolute; inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  .face.front { transform: rotateY(180deg); }
+  .face .card {
+    transform: scale(var(--s, .7));
+    transform-origin: top left;
+  }
+  .card.card-back {
+    background: #EDE4D4;
+  }
+  .bk-field {
+    position: absolute; top: 12px; left: 12px; right: 12px; bottom: 78px;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 50% 40%, rgba(92, 28, 24, .08), transparent 62%),
+      #E6D9C4;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 14px;
+  }
+  .bk-field::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(92, 32, 28, .28) 0.7px, transparent 0.9px);
+    background-size: 5px 5px;
+    pointer-events: none;
+  }
+  .bk-plate {
+    position: absolute; inset: 14px;
+    border: 1px solid rgba(90, 38, 34, .28);
+    pointer-events: none;
+  }
+  .bk-mark {
+    position: relative; z-index: 1;
+  }
+  .wave { display: flex; align-items: flex-end; gap: 5px; height: 34px; }
+  .wave i { display: block; width: 6px; border-radius: 0; background: #8F2A28; }
+  .wave i:nth-child(1){ height: 11px; }
+  .wave i:nth-child(2){ height: 19px; }
+  .wave i:nth-child(3){ height: 28px; }
+  .wave i:nth-child(4){ height: 34px; }
+  .wave i:nth-child(5){ height: 23px; }
+  .wave i:nth-child(6){ height: 14px; }
+  .bk-name {
+    position: relative; z-index: 1;
+    font-family: Oswald, sans-serif; font-weight: 600;
+    letter-spacing: .12em; font-size: 22px; color: #1A1412;
+  }
+  .bk-band {
+    position: absolute; left: 12px; right: 12px; bottom: 12px; height: 66px;
+    display: flex; align-items: center; justify-content: center;
+    background: #EDE4D4;
+  }
+  .bk-foot {
+    font-size: 9px; font-weight: 600;
+    letter-spacing: .14em; text-transform: uppercase; color: #6A5650;
+  }
+  .slot-card.in,
+  .slot-card.revealed {
+    opacity: 1;
+  }
+  .slot-card.revealed {
+    transform: none;
+  }
+  .slot-card.in {
+    animation: cardIn .55s cubic-bezier(.16,1.12,.28,1) forwards;
+  }
+  @keyframes cardIn {
+    to { opacity: 1; transform: none; }
+  }
+  .slot-card.fx-rare {
+    z-index: 5;
+    animation: rareGlow .95s ease-out forwards;
+  }
+  .slot-card.fx-rare::before {
+    content: "";
+    position: absolute;
+    inset: -18px;
+    border-radius: 18px;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(232,196,120,.5), transparent 70%);
+    box-shadow:
+      0 0 22px 6px rgba(232,196,120,.7),
+      0 0 48px 14px rgba(176,141,87,.42);
+    animation: rareHalo 1.05s ease-out forwards;
+  }
+  @keyframes rareGlow {
+    0%   { opacity: 1; transform: none; filter: brightness(1.12); }
+    28%  { transform: none; filter: brightness(1.28) drop-shadow(0 0 22px rgba(232,196,120,.95)) drop-shadow(0 0 40px rgba(176,141,87,.55)); }
+    100% { opacity: 1; transform: none; filter: drop-shadow(0 16px 22px rgba(0,0,0,.5)); }
+  }
+  @keyframes rareHalo {
+    0%   { opacity: 0; transform: scale(.92); }
+    20%  { opacity: 1; transform: scale(1); }
+    58%  { opacity: .8; }
+    100% { opacity: 0; transform: scale(1.06); }
+  }
+  .slot-card.fx-epic {
+    animation: epicReveal 1.15s cubic-bezier(.14,1.2,.22,1) forwards;
+    z-index: 5;
+  }
+  @keyframes epicReveal {
+    0%   { opacity: 1; filter: brightness(3); transform: scale(1); }
+    45%  { transform: scale(1.12); filter: brightness(1.35) drop-shadow(0 0 28px rgba(190,220,255,.75)); }
+    100% { opacity: 1; transform: none; filter: drop-shadow(0 16px 22px rgba(0,0,0,.5)); }
+  }
+  .slot-card.fx-epic::after {
+    content: "";
+    position: absolute; left: 50%; top: 50%;
+    width: 120%; height: 80%;
+    margin: -40% 0 0 -60%;
+    border: 1.5px solid rgba(220,235,255,.85);
+    border-radius: 50%;
+    animation: ringOut 1s ease-out forwards;
+    pointer-events: none;
+  }
+  @keyframes ringOut {
+    from { transform: scale(.35); opacity: 1; }
+    to { transform: scale(1.55); opacity: 0; }
+  }
+  .slot-card.fx-myth {
+    z-index: 6;
+    animation: mythReveal 1.85s cubic-bezier(.14,1.18,.22,1) forwards;
+  }
+  @keyframes mythReveal {
+    0%   { opacity: 1; filter: brightness(8); transform: scale(1); }
+    12%  { filter: brightness(.4); }
+    24%  { transform: scale(1.16); filter: brightness(6) drop-shadow(0 0 48px #fff); }
+    40%  { filter: brightness(.85); }
+    55%  { transform: scale(1.08); filter: brightness(1.7) drop-shadow(0 0 36px rgba(255,210,130,.95)); }
+    100% { opacity: 1; transform: none; filter: drop-shadow(0 20px 34px rgba(0,0,0,.65)); }
+  }
+  .slot-card.dim { filter: brightness(.38) saturate(.7); }
+
+  @media (max-width: 980px) {
+    .hand { justify-content: flex-start; overflow-x: auto; top: 22vh; }
+    .slot-card { --s: .62; width: calc(260px * .62); height: calc(364px * .62); }
+  }
+
+  /* —— carte (compositeur) —— */
+  .card {
+    position: relative; width: 260px; height: 364px;
+    border-radius: 10px; overflow: hidden;
+    background: #0F1012;
+  }
+  .card.paper { background: #EDE4D4; }
+  .card.zoomable { cursor: pointer; }
+  .art {
+    position: absolute; top: 12px; left: 12px; right: 12px; bottom: 120px;
+    overflow: hidden; background: #111;
+  }
+  .art img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center 18%;
+    display: block;
+  }
+  .card.paper .art { background: #E6D9C4; }
+  .card.paper .art img { object-position: center top; }
+  .band {
+    position: absolute; left: 12px; right: 12px; bottom: 12px; height: 108px;
+    display: flex; flex-direction: column; justify-content: center;
+    gap: 3px; padding: 12px 12px 22px;
+  }
+  .card.paper .band { background: #EDE4D4; }
+  .accent { height: 3px; width: 36px; border-radius: 1px; margin-bottom: 4px; flex-shrink: 0; }
+  .card.mythique .art { inset: 0; }
+  .card.mythique .title {
+    position: absolute; left: 0; right: 0; top: 0;
+    padding: 18px 12px 40px; text-align: center;
+    background: linear-gradient(to bottom, rgba(8,7,6,.78) 32%, rgba(8,7,6,0));
+    pointer-events: none;
+  }
+  .card.mythique .title .myth-name {
+    font-family: "Big Shoulders Display", Oswald, sans-serif;
+    font-weight: 800; line-height: 1; letter-spacing: .06em;
+    color: #F4F2EC; text-shadow: 0 1px 10px rgba(0,0,0,.55);
+    text-transform: uppercase; white-space: nowrap;
+  }
+  .card.mythique .band {
+    left: 0; right: 0; bottom: 0; height: auto;
+    padding: 24px 12px 28px; text-align: center;
+    background: linear-gradient(to top, rgba(8,7,6,.88) 48%, rgba(8,7,6,0));
+  }
+  .card.mythique .accent,
+  .card.mythique .band .name,
+  .card.mythique .rarete,
+  .card.mythique .meta,
+  .card.mythique .group { display: none; }
+  .card.mythique .line-rare {
+    font-size: 10px; font-weight: 600;
+    letter-spacing: .22em; text-transform: uppercase; color: #E8D5A3;
+  }
+  .card.mythique .line-info {
+    margin-top: 6px; font-size: 11px; letter-spacing: .03em; color: #c8c2b6;
+  }
+  .name {
+    font-family: Oswald, Impact, sans-serif;
+    font-weight: 600; letter-spacing: .04em;
+    text-transform: uppercase; line-height: 1.05; color: #F4F2EC;
+  }
+  .card.paper .name { color: #161410; }
+  .rarete { font-size: 10px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+  .meta { font-size: 10.5px; color: #c8c2b6; letter-spacing: .02em; }
+  .card.paper .meta { color: #5c564c; }
+  .group { font-size: 10.5px; color: #d8b35c; letter-spacing: .03em; }
+  .card.paper .group { color: #8a6a4f; }
+  .marks {
+    position: absolute; left: 16px; right: 16px; bottom: 10px; z-index: 2;
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 8px; font-weight: 600;
+    color: rgba(200,194,186,.55); pointer-events: none;
+  }
+  .marks .serie { letter-spacing: .12em; }
+  .marks .no { letter-spacing: .04em; font-variant-numeric: tabular-nums; }
+  .card.paper .marks { color: rgba(90,70,64,.45); }
+  .card.mythique .marks { color: rgba(232,213,163,.55); }
+  .frame { position: absolute; inset: 0; pointer-events: none; }
+
+  .again {
+    position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+    z-index: 7; appearance: none;
+    border: 1px solid #2a2c32; background: #141518; color: #d8d8dc;
+    font: inherit; font-size: 12px; padding: 8px 16px; border-radius: 999px;
+    cursor: pointer; letter-spacing: .04em;
+  }
+  .again:hover { background: #1c1e22; }
+
+  footer.site-foot {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    z-index: 40;
+    display: flex; flex-wrap: wrap; align-items: center;
+    justify-content: space-between; gap: 10px 18px;
+    padding: 12px 20px 14px;
+    background: linear-gradient(180deg, transparent, #050506f2 35%);
+    font-size: 12px; color: #5c6168;
+    pointer-events: none;
+  }
+  footer.site-foot a,
+  footer.site-foot button {
+    pointer-events: auto;
+    appearance: none; background: none; border: 0; padding: 0;
+    font: inherit; color: #8a9099; cursor: pointer; text-decoration: none;
+  }
+  footer.site-foot a:hover,
+  footer.site-foot button:hover { color: #e8e8ea; }
+  footer.site-foot .legal-links {
+    display: flex; flex-wrap: wrap; gap: 6px 14px;
+    pointer-events: auto;
+  }
+  footer.site-foot .proto-cheats {
+    display: flex; flex-wrap: wrap; gap: 6px 8px;
+    justify-content: flex-end; pointer-events: auto;
+  }
+  .status {
+    position: absolute; inset: 0; display: grid; place-items: center;
+    color: #9aa0a8; font-size: 13px; z-index: 8;
+  }
+  #snackbar {
+    position: fixed; left: 50%; bottom: 56px; z-index: 80;
+    transform: translateX(-50%) translateY(12px);
+    max-width: min(420px, calc(100vw - 32px));
+    padding: 12px 16px; border-radius: 10px;
+    background: #1c1e22; color: #e8e8ea; border: 1px solid #3a3c44;
+    font-size: 13px; line-height: 1.35; text-align: center;
+    box-shadow: 0 10px 28px rgba(0,0,0,.45);
+    opacity: 0; pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease;
+  }
+  #snackbar.show {
+    opacity: 1; pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  dialog {
+    border: 0; padding: 16px 22px 22px; background: #121316;
+    border-radius: 12px; overflow: visible;
+    color: #e8e8ea;
+  }
+  dialog::backdrop { background: rgba(0,0,0,.78); }
+  #shop, #sell {
+    border: 1px solid #2a2c32; padding: 0;
+    max-width: min(360px, 92vw); width: 360px;
+  }
+  .shop-field {
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .shop-field label {
+    font-size: 12px; color: #9aa0a8;
+  }
+  .shop-field input {
+    appearance: none; border: 1px solid #2a2c32; background: #141518;
+    color: #e8e8ea; font: inherit; font-size: 15px; font-weight: 600;
+    padding: 10px 12px; border-radius: 8px; width: 100%;
+  }
+  .shop-wrap {
+    padding: 16px 18px 18px;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .shop-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 14px; font-weight: 600; color: #e8e8ea;
+  }
+  .shop-bar button {
+    appearance: none; border: 1px solid #2a2c32; background: #141518;
+    color: #d8d8dc; font: inherit; font-size: 12px; padding: 4px 10px;
+    border-radius: 8px; cursor: pointer;
+  }
+  .shop-price { margin: 0; color: #9aa0a8; font-size: 13px; }
+  .shop-price b { color: #e8e8ea; font-weight: 600; }
+  .shop-qty {
+    display: flex; gap: 8px;
+  }
+  .shop-qty button {
+    flex: 1; appearance: none; border: 1px solid #2a2c32; background: #141518;
+    color: #d8d8dc; font: inherit; font-size: 13px; padding: 10px 12px;
+    border-radius: 8px; cursor: pointer;
+  }
+  .shop-qty button.on { background: #e8e8ea; color: #111; border-color: #e8e8ea; }
+  .shop-total {
+    margin: 0; font-size: 15px; font-weight: 600; color: #e8e8ea;
+  }
+  .shop-bal { margin: 0; font-size: 12px; color: #8a9099; }
+  .shop-ask {
+    margin: 0; font-size: 13px; color: #d8d8dc; line-height: 1.45;
+    white-space: pre-line;
+  }
+  .shop-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+  .shop-actions button {
+    flex: 1; appearance: none; border: 1px solid #2a2c32; background: #141518;
+    color: #d8d8dc; font: inherit; font-size: 13px; padding: 10px 12px;
+    border-radius: 8px; cursor: pointer;
+  }
+  .shop-actions button.primary {
+    background: #e8e8ea; color: #111; border-color: #e8e8ea; font-weight: 600;
+  }
+  .shop-actions button:disabled { opacity: .35; cursor: default; }
+  .zoom-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .zoom-stage {
+    position: relative;
+    width: calc(260px * 1.55); height: calc(364px * 1.55);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .zoom-stage .card { cursor: default; transform: scale(1.55); }
+  .zoom-owned {
+    position: absolute; top: 10px; left: 10px; z-index: 3;
+    background: #111; color: #e8e8ea; border: 1px solid #3a3c44;
+    font-size: 11px; font-weight: 600; letter-spacing: .04em;
+    padding: 4px 9px; border-radius: 999px; pointer-events: none;
+  }
+  .zoom-bar {
+    width: 100%;
+    display: flex; justify-content: flex-end; align-items: center;
+  }
+  .zoom-bar #zoomcap { display: none; }
+  .zoom-bar button {
+    appearance: none; border: 0; background: transparent;
+    color: #9aa0a8; font: inherit; font-size: 22px; line-height: 1;
+    width: 36px; height: 36px; padding: 0;
+    border-radius: 8px; cursor: pointer;
+  }
+  .zoom-bar button:hover { color: #e8e8ea; background: #1c1e22; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pack-wrap.idle .pack, .pack-wrap.idle .shine, .hint .arr { animation: none; }
+  }
+
+  /* —— classeur —— */
+  body.album,
+  body.market { overflow: auto; overflow-x: hidden; }
+  body.album .stage,
+  body.market .stage { display: none; }
+  body.album footer.site-foot,
+  body.market footer.site-foot {
+    background: #050506;
+    border-top: 1px solid #1c1d21;
+  }
+  body.album header,
+  body.market header {
+    position: sticky; top: 0; background: #050506ee;
+    backdrop-filter: blur(10px);
+    padding: 18px 28px 14px;
+    pointer-events: auto;
+    border-bottom: 1px solid #1c1d21;
+  }
+  #album, #market { display: none; padding: 22px 28px 72px; }
+  body.album #album,
+  body.market #market { display: block; }
+  .market-toolbar {
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+    margin: 0 0 18px;
+  }
+  .market-toolbar .hint {
+    font-size: 12px; color: #8a9099; margin: 0;
+    flex: 1 1 100%;
+  }
+  .market-toolbar input,
+  .market-toolbar select {
+    appearance: none; border: 1px solid #2a2c32; background: #141518;
+    color: #d8d8dc; font: inherit; font-size: 12px; padding: 6px 10px;
+    border-radius: 8px;
+  }
+  .market-toolbar input { min-width: 200px; }
+  .market-toolbar select {
+    padding-right: 26px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%238a9099' d='M0 0l5 6 5-6z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    cursor: pointer;
+  }
+  .market-list {
+    display: flex; flex-direction: column; gap: 10px;
+    max-width: 720px;
+  }
+  .market-row {
+    display: grid;
+    grid-template-columns: 72px 1fr auto;
+    gap: 14px; align-items: center;
+    border: 1px solid #2a2c32; background: #121418;
+    border-radius: 12px; padding: 10px 12px;
+    cursor: pointer;
+  }
+  .market-row:hover { border-color: #3a3c44; background: #16181c; }
+  .market-row .mini {
+    width: 56px; height: 78px; position: relative;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,.4));
+  }
+  .market-row .mini .card {
+    position: absolute; top: 0; left: 0;
+    transform: scale(0.215); transform-origin: top left;
+    pointer-events: none;
+  }
+  .market-row .meta { min-width: 0; }
+  .market-row .meta .name {
+    font-size: 14px; font-weight: 600; color: #e8e8ea;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .market-row .meta .sub { font-size: 12px; color: #8a9099; margin-top: 2px; }
+  .market-row .side {
+    display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
+  }
+  .market-row .price {
+    font-size: 15px; font-weight: 700; color: #d8b35c;
+  }
+  .market-row .tap { font-size: 11px; color: #6a7078; }
+  .market-row .offers-side {
+    display: flex; flex-direction: column; align-items: flex-end; gap: 3px;
+    max-width: 140px;
+  }
+  .market-row .offer-chip {
+    font-size: 11px; font-weight: 600; color: #111; background: #d8b35c;
+    border-radius: 999px; padding: 2px 8px; white-space: nowrap;
+  }
+  .market-row .offer-chip.dim { background: #2a2c32; color: #9aa0a8; font-weight: 500; }
+  .market-row .dismiss {
+    appearance: none; border: 0; background: transparent;
+    color: #6a7078; font: inherit; font-size: 18px; line-height: 1;
+    width: 28px; height: 28px; padding: 0; margin: -4px -4px 0 0;
+    border-radius: 6px; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .market-row .dismiss:hover { color: #e8e8ea; background: #1c1e22; }
+  .zoom-offers {
+    width: 100%; max-width: 360px;
+    display: flex; flex-direction: column; gap: 8px; margin-top: 4px;
+  }
+  .zoom-offers .offer-row {
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+    justify-content: space-between;
+    border: 1px solid #2a2c32; background: #141518;
+    border-radius: 8px; padding: 8px 10px;
+  }
+  .zoom-offers .offer-row .lbl { font-size: 12px; color: #d8d8dc; }
+  .zoom-offers .offer-row .lbl b { color: #d8b35c; }
+  .zoom-offers .offer-row .btns { display: flex; gap: 6px; }
+  .zoom-offers .offer-row button {
+    appearance: none; border: 1px solid #2a2c32; background: #1c1e22;
+    color: #e8e8ea; font: inherit; font-size: 11px; padding: 5px 10px;
+    border-radius: 8px; cursor: pointer;
+  }
+  .zoom-offers .offer-row button.ok { background: #e8e8ea; color: #111; border-color: #e8e8ea; }
+  .market-empty { color: #8a9099; font-size: 14px; padding: 32px 8px; }
+  .nav-badge.offer-badge {
+    background: #d8b35c; color: #111;
+    min-width: auto; padding: 0 6px; font-size: 9px;
+    letter-spacing: .02em; text-transform: none;
+  }
+  .notif-wrap { position: relative; }
+  .notif-btn {
+    appearance: none; position: relative;
+    width: 36px; height: 36px; padding: 0; margin: 0;
+    border: 1px solid #2a2c32; background: #141518;
+    border-radius: 50%; cursor: pointer; color: #9aa0a8;
+    display: inline-flex; align-items: center; justify-content: center;
+    line-height: 0;
+  }
+  .notif-btn:hover,
+  .notif-wrap.open .notif-btn { background: #1c1e22; color: #e8e8ea; }
+  .notif-btn svg {
+    width: 16px; height: 16px; display: block;
+    flex-shrink: 0; transform: translateY(-0.5px);
+  }
+  .notif-btn .notif-dot {
+    position: absolute; top: 4px; right: 4px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #d8b35c; box-shadow: 0 0 0 2px #141518;
+    pointer-events: none;
+  }
+  .notif-btn .notif-dot[hidden] { display: none; }
+  .notif-btn.has-unread { color: #e8e8ea; border-color: #3a3c44; }
+  .notif-menu {
+    display: none; position: absolute; top: calc(100% + 8px); right: 0; z-index: 50;
+    width: min(320px, calc(100vw - 24px));
+    background: #121418; border: 1px solid #2a2c32; border-radius: 12px;
+    box-shadow: 0 16px 40px rgba(0,0,0,.55);
+    overflow: hidden;
+  }
+  .notif-wrap.open .notif-menu { display: block; }
+  .notif-menu .head {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    padding: 10px 12px; font-size: 12px; font-weight: 600; color: #e8e8ea;
+    border-bottom: 1px solid #1c1d21;
+  }
+  .notif-menu .head .mark-all {
+    appearance: none; border: 0; background: transparent;
+    color: #9aa0a8; font: inherit; font-size: 11px; font-weight: 500;
+    padding: 0; cursor: pointer; white-space: nowrap;
+  }
+  .notif-menu .head .mark-all:hover { color: #e8e8ea; }
+  .notif-menu .empty {
+    padding: 18px 12px; font-size: 12px; color: #8a9099; text-align: center;
+  }
+  .notif-menu .item {
+    appearance: none; width: 100%; display: block; text-align: left;
+    border: 0; border-bottom: 1px solid #1c1d21; background: transparent;
+    color: #d8d8dc; font: inherit; font-size: 12px; line-height: 1.4;
+    padding: 10px 12px; cursor: pointer;
+  }
+  .notif-menu .item:last-child { border-bottom: 0; }
+  .notif-menu .item:hover { background: #1a1c20; }
+  .notif-menu .item.unread { background: #16181c; }
+  .notif-menu .item .title { color: #b8bcc4; font-weight: 400; }
+  .notif-menu .item.unread .title { color: #e8e8ea; font-weight: 600; }
+  .notif-menu .item .meta { color: #8a9099; margin-top: 2px; font-size: 11px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 18px; }
+  .filters input[type="search"], .filters select {
+    appearance: none; border: 1px solid #2a2c32; background: #141518;
+    color: #d8d8dc; font: inherit; font-size: 12px; padding: 6px 10px;
+    border-radius: 8px;
+  }
+  .filters input[type="search"] { min-width: 200px; }
+  .filters select {
+    padding-right: 26px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%238a9099' d='M0 0l5 6 5-6z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    cursor: pointer;
+  }
+  .filters .sorts {
+    display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+    margin-left: 4px; padding-left: 12px; border-left: 1px solid #2a2c32;
+  }
+  .filters .sorts .lbl {
+    font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+    color: #8a9099; margin-right: 2px;
+  }
+  .filters .chip {
+    appearance: none; border: 1px solid #2a2c32; background: #141518;
+    color: #d8d8dc; font: inherit; font-size: 11px; padding: 5px 10px;
+    border-radius: 999px; cursor: pointer;
+  }
+  .filters .chip.on { background: #e8e8ea; color: #111; border-color: #e8e8ea; }
+  .switch {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 11px; color: #d8d8dc; cursor: pointer; user-select: none;
+    position: relative;
+  }
+  .filters .switch input,
+  .switch input {
+    position: absolute; opacity: 0;
+    width: 32px; height: 18px; min-width: 0; margin: 0; padding: 0;
+    border: 0; cursor: pointer; z-index: 1;
+  }
+  .switch .knob {
+    width: 32px; height: 18px; border-radius: 999px;
+    background: #2a2c32; border: 1px solid #3a3c42;
+    position: relative; flex-shrink: 0;
+    transition: background .15s ease;
+  }
+  .switch .knob::after {
+    content: "";
+    position: absolute; top: 2px; left: 2px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: #8a9099;
+    transition: transform .15s ease, background .15s ease;
+  }
+  .switch input:checked + .knob { background: #e8e8ea; border-color: #e8e8ea; }
+  .switch input:checked + .knob::after { transform: translateX(14px); background: #111; }
+  .switch input:focus-visible + .knob { outline: 1px solid #d8d8dc; outline-offset: 2px; }
+  .album-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+    gap: 20px 16px;
+  }
+  .album-cell {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    content-visibility: auto;
+    contain-intrinsic-size: auto 254px;
+  }
+  .thumb {
+    position: relative;
+    width: 161px; height: 226px;
+    filter: drop-shadow(0 10px 16px rgba(0,0,0,.45));
+  }
+  .thumb .card {
+    position: absolute; top: 0; left: 0;
+    transform: scale(0.619); transform-origin: top left;
+    cursor: pointer;
+  }
+  .album-cell.hole .thumb { filter: none; opacity: .78; }
+  .album-cell.hole .card { cursor: default; }
+  .album-cell.is-new .thumb {
+    border-radius: 12px;
+    box-shadow:
+      0 0 0 2px #f59e0b,
+      0 0 22px rgba(245, 158, 11, .55),
+      0 10px 16px rgba(0,0,0,.45);
+  }
+  .album-cell.is-new .thumb::after {
+    content: "Nouveau";
+    position: absolute; top: 6px; left: 6px; z-index: 3;
+    background: #f59e0b; color: #111;
+    font-size: 9px; font-weight: 700; letter-spacing: .04em;
+    text-transform: uppercase;
+    padding: 2px 6px; border-radius: 999px;
+  }
+  .hole-cap {
+    font-size: 10px; color: #6a7078; text-align: center;
+    max-width: 161px; white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis;
+  }
+  .dup {
+    position: absolute; top: 6px; right: 6px; z-index: 3;
+    background: #111; color: #e8e8ea; border: 1px solid #2a2c32;
+    font-size: 10px; font-weight: 600; letter-spacing: .04em;
+    padding: 2px 6px; border-radius: 999px;
+  }
+  .album-cell .sale-badge {
+    position: absolute; bottom: 8px; left: 50%; z-index: 3;
+    transform: translateX(-50%);
+    background: #1c1e22; color: #d8b35c; border: 1px solid #3a3c44;
+    font-size: 9px; font-weight: 700; letter-spacing: .04em;
+    text-transform: uppercase; white-space: nowrap;
+    padding: 3px 8px; border-radius: 999px; pointer-events: none;
+  }
+  .market-toolbar .tabs {
+    display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+    width: 100%;
+  }
+  .market-toolbar .tabs .chip {
+    appearance: none; border: 1px solid #2a2c32; background: #141518;
+    color: #d8d8dc; font: inherit; font-size: 11px; padding: 5px 10px;
+    border-radius: 999px; cursor: pointer; position: relative;
+  }
+  .market-toolbar .tabs .chip.on { background: #e8e8ea; color: #111; border-color: #e8e8ea; }
+  .market-toolbar .tabs .chip .nav-badge { top: -7px; right: -7px; }
+  .album-empty { color: #8a9099; font-size: 14px; padding: 48px 8px; grid-column: 1 / -1; }
+  .pager {
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    justify-content: center; margin: 22px 0 0;
+  }
+  .pager[hidden] { display: none; }
+  .pager button {
+    appearance: none; border: 1px solid #2a2c32; background: #141518;
+    color: #d8d8dc; font: inherit; font-size: 12px; padding: 6px 12px;
+    border-radius: 8px; cursor: pointer;
+  }
+  .pager button:hover { background: #1c1e22; }
+  .pager button:disabled { opacity: .35; cursor: default; }
+  .pager .lbl { font-size: 12px; color: #8a9099; min-width: 7em; text-align: center; }
+  .album-foot {
+    margin-top: 28px; color: #5c6168; font-size: 11px;
+    display: flex; gap: 14px; align-items: center; flex-wrap: wrap;
+  }
+  .album-foot button {
+    appearance: none; background: none; border: 0; padding: 0;
+    font: inherit; color: #8a9099; cursor: pointer;
+  }
+  .album-foot button:hover { color: #d8d8dc; }
+  .again-row { display: flex; gap: 8px; position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); z-index: 7; }
+  .again-row[hidden] { display: none; }
+  .again-row .again { position: static; transform: none; }
+</style>
+</head>
+<body>
+<header>
+  <div class="nav" role="tablist">
+    <button type="button" data-view="booster" id="navBooster" class="on" role="tab">Booster<span class="nav-badge" id="packsBadge" hidden>0</span></button>
+    <button type="button" data-view="album" id="navAlbum" role="tab">Classeur<span class="nav-badge" id="albumNewBadge" hidden>0</span></button>
+    <button type="button" data-view="market" id="navMarket" role="tab">Marché</button>
+    <div class="wallet" aria-label="Monnaie">
+      <div class="notif-wrap" id="notifWrap">
+        <button type="button" class="notif-btn" id="notifBtn" aria-label="Notifications" title="Notifications" aria-expanded="false" aria-haspopup="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2a2 2 0 0 1-.6 1.4L4 17h5"/>
+            <path d="M9.5 17a2.5 2.5 0 0 0 5 0"/>
+          </svg>
+          <span class="notif-dot" id="notifDot" hidden></span>
+        </button>
+        <div class="notif-menu" id="notifMenu" role="menu" hidden>
+          <div class="head">
+            <span>Notifications</span>
+            <button type="button" class="mark-all" id="notifMarkAll" hidden>Tout marquer lu</button>
+          </div>
+          <div id="notifList"><p class="empty">Aucune notification.</p></div>
+        </div>
+      </div>
+      <div class="user-switch" role="group" aria-label="Compte de test">
+        <button type="button" data-user="u1" id="userBtnA" class="on">Joueur A</button>
+        <button type="button" data-user="u2" id="userBtnB">Joueur B</button>
+      </div>
+      <span class="pill">Crédits <b id="creditsBal">0</b></span>
+      <button type="button" class="cheat" id="cheatCredits" title="Prototype">+ crédits</button>
+    </div>
+  </div>
+  <h1 id="pageTitle">Booster — Charts</h1>
+  <p class="intro" id="intro">Glisse le scellé du haut pour ouvrir le sachet.</p>
+</header>
+
+<div class="stage" id="stage">
+  <div class="cut-veil" id="cutVeil" aria-hidden="true"></div>
+  <div id="fx" aria-hidden="true">
+    <div class="wash"></div>
+    <div class="halo"></div>
+    <div class="beam b1" style="--a:-32deg"></div>
+    <div class="beam b2" style="--a:-12deg"></div>
+    <div class="beam b3" style="--a:8deg"></div>
+    <div class="beam b4" style="--a:26deg"></div>
+    <div class="dust" id="dust"></div>
+    <div class="crowd" id="crowd"></div>
+    <div class="flashes" id="flashes"></div>
+  </div>
+
+  <div class="pack-col" id="packCol" hidden>
+    <div class="pack-wrap idle" id="packWrap">
+      <div class="pack" id="pack">
+        <img class="pack-art" id="packArt" src="img/booster-charts.jpg?v=3" alt="Sachet Charts — Série 1">
+        <canvas class="tear-layer" id="tearLayer" aria-hidden="true"></canvas>
+        <div class="shine"></div>
+        <div class="hint"><span class="arr left"></span>Glisse le scellé<span class="arr right"></span></div>
+        <div class="seal-hit" id="sealHit" role="button" aria-label="Sachet Charts — glisser le scellé du haut"></div>
+      </div>
+    </div>
+    <button type="button" class="pack-buy" id="buyPack">Acheter</button>
+  </div>
+
+  <div class="hand" id="hand"></div>
+  <div class="empty-pack" id="emptyPack" aria-live="polite">
+    <p id="emptyPackMsg">Plus de booster pour l’instant.</p>
+    <button type="button" id="emptyAlbum">Voir le classeur</button>
+  </div>
+  <div class="again-row" id="againRow" hidden>
+    <button type="button" class="again" id="again">Ouvrir un autre</button>
+    <button type="button" class="again" id="toAlbum">Voir le classeur</button>
+  </div>
+  <div class="status" id="status">Chargement du set…</div>
+</div>
+
+<section id="album" aria-label="Classeur Série 1">
+  <div class="filters">
+    <input type="search" id="albumQ" placeholder="Nom ou groupe" autocomplete="off">
+    <select id="albumRare" aria-label="Rareté">
+      <option value="">Toutes les raretés</option>
+      <option value="commune">Commune</option>
+      <option value="peu commune">Peu commune</option>
+      <option value="rare">Rare</option>
+      <option value="épique">Épique</option>
+      <option value="mythique">Mythique</option>
+    </select>
+    <select id="albumFam" aria-label="Genre">
+      <option value="">Genre</option>
+    </select>
+    <select id="albumInstr" aria-label="Instrument">
+      <option value="">Instrument</option>
+    </select>
+    <label class="switch">
+      <input type="checkbox" id="albumOwned">
+      <span class="knob"></span>
+      Masquer les manquantes
+    </label>
+    <label class="switch">
+      <input type="checkbox" id="albumNewOnly">
+      <span class="knob"></span>
+      Nouvelles
+    </label>
+    <button type="button" class="chip" id="albumSeeAllNew" hidden>Tout voir</button>
+    <div class="sorts" role="group" aria-label="Tri">
+      <span class="lbl">Tri</span>
+      <button type="button" class="chip on" data-sort="num">Numéro</button>
+      <button type="button" class="chip" data-sort="name">Nom</button>
+    </div>
+    <select id="albumPageSize" aria-label="Cartes par page">
+      <option value="8">8 / page</option>
+      <option value="12" selected>12 / page</option>
+      <option value="18">18 / page</option>
+      <option value="24">24 / page</option>
+      <option value="36">36 / page</option>
+    </select>
+  </div>
+  <div class="album-grid" id="albumGrid"></div>
+  <div class="pager" id="albumPager" hidden>
+    <button type="button" id="albumPrev">Précédent</button>
+    <span class="lbl" id="albumPageLbl">Page 1 / 1</span>
+    <button type="button" id="albumNext">Suivant</button>
+  </div>
+  <div class="album-foot">
+    <span id="albumMeta"></span>
+    <button type="button" id="albumClear">Vider le classeur</button>
+  </div>
+</section>
+
+<section id="market" aria-label="Marché">
+  <div class="market-toolbar">
+    <p class="hint">Prix libre · taxe 10&nbsp;% arrondie (&lt;5 cr = 0) · annuler est gratuit</p>
+    <div class="tabs" role="tablist" aria-label="Annonces">
+      <button type="button" class="chip on" data-market-tab="all" role="tab" aria-selected="true">Toutes</button>
+      <button type="button" class="chip" data-market-tab="mine" role="tab" aria-selected="false">Mes ventes<span class="nav-badge offer-badge" id="mineOffersBadge" hidden>Offre !</span></button>
+      <button type="button" class="chip" data-market-tab="offers" role="tab" aria-selected="false">Mes offres</button>
+    </div>
+    <input type="search" id="marketQ" placeholder="Nom ou groupe" autocomplete="off">
+    <select id="marketRare" aria-label="Rareté">
+      <option value="">Toutes les raretés</option>
+      <option value="commune">Commune</option>
+      <option value="peu commune">Peu commune</option>
+      <option value="rare">Rare</option>
+      <option value="épique">Épique</option>
+      <option value="mythique">Mythique</option>
+    </select>
+    <select id="marketInstr" aria-label="Instrument">
+      <option value="">Instrument</option>
+    </select>
+    <select id="marketFam" aria-label="Genre">
+      <option value="">Genre</option>
+    </select>
+    <button type="button" class="chip" id="marketRefreshNpc">Réapprovisionner PNJ</button>
+  </div>
+  <div class="market-list" id="marketList"></div>
+</section>
+
+<div id="snackbar" role="status" aria-live="polite"></div>
+
+<footer class="site-foot">
+  <nav class="legal-links" aria-label="Informations légales">
+    <a href="legal/index.html">Mentions légales</a>
+  </nav>
+  <div class="proto-cheats">
+    <span>Prototype</span>
+    <button type="button" data-force="rare">forcer une rare</button>
+    <button type="button" data-force="épique">forcer une épique</button>
+    <button type="button" data-force="mythique">forcer une mythique</button>
+  </div>
+</footer>
+
+<dialog id="zoom">
+  <div class="zoom-wrap">
+    <div class="zoom-bar"><span id="zoomcap"></span>
+      <button type="button" id="zoomclose" aria-label="Fermer">×</button></div>
+    <div class="zoom-stage" id="zoomcard"></div>
+    <div class="zoom-actions" id="zoomActions" hidden></div>
+  </div>
+</dialog>
+
+<dialog id="shop">
+  <div class="shop-wrap" id="shopBody"></div>
+</dialog>
+
+<dialog id="sell">
+  <div class="shop-wrap" id="sellBody"></div>
+</dialog>
+
+<dialog id="offer">
+  <div class="shop-wrap" id="offerBody"></div>
+</dialog>
+
+<script>
+const CW = 260, CH = 364;
+const EXEC = {
+  commune:"A", "peu commune":"B", rare:"A", épique:"B",
+  mythique:"B"
+};
+const INSTR = {
+  voix:"Voix", guitare:"Guitare", basse:"Basse", batterie:"Batterie",
+  claviers:"Claviers", vents:"Vents", cordes:"Cordes", machines:"Machines"
+};
+const FAMILIES = {
+  metal:     {label:"Métal",              fond:"#121214", a1:"#B8352F"},
+  punk:      {label:"Punk & hardcore",    fond:"#141416", a1:"#E04A2F"},
+  "hip-hop": {label:"Hip-hop",            fond:"#121410", a1:"#C8D44E"},
+  électro:   {label:"Électronique",       fond:"#0B1220", a1:"#3FC1C9"},
+  reggae:    {label:"Reggae & dub",       fond:"#0F1610", a1:"#D9B52B"},
+  afro:      {label:"Afro",               fond:"#16120C", a1:"#E09A2B"},
+  latin:     {label:"Latin",              fond:"#1C1210", a1:"#D4552F"},
+  jazz:      {label:"Jazz",               fond:"#0E1A1C", a1:"#D8B35C"},
+  blues:     {label:"Blues",              fond:"#0C1420", a1:"#4A7FB5"},
+  funk:      {label:"Funk & disco",       fond:"#1A1222", a1:"#E0A32B"},
+  "R&B":     {label:"R&B & soul",         fond:"#1A1012", a1:"#C47A5A"},
+  country:   {label:"Country",            fond:"#171310", a1:"#C89A4A"},
+  folk:      {label:"Folk",               fond:"#121710", a1:"#9CB06A"},
+  world:     {label:"Musiques du monde",  fond:"#101614", a1:"#B58A4E"},
+  chanson:   {label:"Chanson & variété",  fond:"#16131A", a1:"#C9869B"},
+  pop:       {label:"Pop",                fond:"#1C1020", a1:"#D45E8A"},
+  rock:      {label:"Rock",               fond:"#15110E", a1:"#D98A2B"}
+};
+/** Clés catalogue (serie1) → clés FAMILIES UI */
+const FAMILY_FROM_CATALOG = {
+  hiphop: "hip-hop",
+  electro: "électro",
+  rnb: "R&B"
+};
+function familyKey(f){
+  return FAMILY_FROM_CATALOG[f] || f;
+}
+const TIERS = {
+  commune:      {rank:0, label:"Commune",     frame:"#5E6670", kind:"simple"},
+  "peu commune":{rank:1, label:"Peu commune", frame:"#8A949B", kind:"double"},
+  rare:         {rank:2, label:"Rare",        frame:"#B08D57", kind:"filets"},
+  épique:       {rank:3, label:"Épique",      frame:"#C3CAD1", kind:"filets"},
+  mythique:     {rank:4, label:"Mythique",    frame:"#D8B35C", kind:"none"}
+};
+const USERS = {
+  u1: { id: "u1", name: "Joueur A", short: "A" },
+  u2: { id: "u2", name: "Joueur B", short: "B" }
+};
+const ACTIVE_USER_KEY = "charts.s1.activeUser";
+const MARKET_KEY = "charts.s1.market"; // partagé entre les deux joueurs
+const PACK_COST = 300;
+let activeUserId = "u1";
+function uid(){ return activeUserId; }
+function isMe(id){ return id === activeUserId; }
+function userName(id){
+  if(id === "npc") return "PNJ";
+  return (USERS[id] && USERS[id].name) || id;
+}
+function ownedKey(userId){ return `charts.s1.${userId || uid()}.owned`; }
+function walletKey(userId){ return `charts.s1.${userId || uid()}.wallet`; }
+function pityKey(userId){ return `charts.s1.${userId || uid()}.pity`; }
+function migrateLegacyUserStorage(){
+  // Ancien stockage mono-joueur → Joueur A
+  const legacyOwned = localStorage.getItem("charts.s1.owned");
+  if(legacyOwned && !localStorage.getItem(ownedKey("u1"))){
+    localStorage.setItem(ownedKey("u1"), legacyOwned);
+  }
+  const legacyWallet = localStorage.getItem("charts.s1.wallet");
+  if(legacyWallet && !localStorage.getItem(walletKey("u1"))){
+    localStorage.setItem(walletKey("u1"), legacyWallet);
+  }
+  const legacyPity = localStorage.getItem("charts.s1.pity");
+  if(legacyPity && !localStorage.getItem(pityKey("u1"))){
+    localStorage.setItem(pityKey("u1"), legacyPity);
+  }
+  try {
+    const raw = localStorage.getItem(MARKET_KEY);
+    if(!raw) return;
+    const m = JSON.parse(raw);
+    let dirty = false;
+    for(const l of m.listings || []){
+      if(l.seller === "me"){ l.seller = "u1"; dirty = true; }
+    }
+    for(const o of m.offers || []){
+      if(o.buyer === "me"){ o.buyer = "u1"; dirty = true; }
+      if(o.seller === "me"){ o.seller = "u1"; dirty = true; }
+    }
+    for(const n of m.notifications || []){
+      if(n.toUser === "me"){ n.toUser = "u1"; dirty = true; }
+    }
+    if(dirty) localStorage.setItem(MARKET_KEY, JSON.stringify(m));
+  } catch {}
+}
+function loadActiveUser(){
+  migrateLegacyUserStorage();
+  const saved = localStorage.getItem(ACTIVE_USER_KEY);
+  activeUserId = saved === "u2" ? "u2" : "u1";
+  syncUserSwitchUI();
+}
+function syncUserSwitchUI(){
+  document.querySelectorAll(".user-switch [data-user]").forEach(btn => {
+    btn.classList.toggle("on", btn.dataset.user === activeUserId);
+  });
+}
+function refreshAfterUserSwitch(){
+  ensureWallet();
+  refreshWallet();
+  refreshCount();
+  refreshNewBadge();
+  refreshOffersBadge();
+  setNotifMenuOpen(false);
+  if($("zoom")?.open) $("zoom").close();
+  if($("sell")?.open) $("sell").close();
+  if($("offer")?.open) $("offer").close();
+  if($("shop")?.open) $("shop").close();
+  if(document.body.classList.contains("album")) renderAlbum();
+  else if(document.body.classList.contains("market")) renderMarket();
+  else if(phase !== "opening" && phase !== "loading") armNextPack();
+}
+function switchUser(nextId){
+  if(nextId !== "u1" && nextId !== "u2") return;
+  if(nextId === activeUserId) return;
+  if(phase === "opening") return;
+  activeUserId = nextId;
+  localStorage.setItem(ACTIVE_USER_KEY, activeUserId);
+  syncUserSwitchUI();
+  refreshAfterUserSwitch();
+}
+const STARTER_PACKS = 5;
+const MARKET_TAX = 0.10;
+const MARKET_PRICE_MIN = 1;
+const DESTROY_CREDITS = {
+  commune: 2, "peu commune": 6, rare: 20, épique: 60, mythique: 150
+};
+const SEAL = { x0: 0.160, x1: 0.848, y0: 0.066, y1: 0.188 };
+const params = new URLSearchParams(location.search);
+
+const $ = id => document.getElementById(id);
+const packCol = $("packCol");
+const packWrap = $("packWrap");
+const pack = $("pack");
+const packArt = $("packArt");
+const tearLayer = $("tearLayer");
+const sealHit = $("sealHit");
+const hand = $("hand");
+const stage = $("stage");
+const fx = $("fx");
+const again = $("again");
+const againRow = $("againRow");
+const statusEl = $("status");
+const intro = $("intro");
+const tearCtx = tearLayer.getContext("2d");
+let shopQty = 1;
+
+let catalog = [];
+let byId = new Map();
+let pool = null;
+let pulled = [];
+let albumSort = "num";
+let albumHideMissing = false;
+let albumNewOnly = false;
+let albumPage = 1;
+let albumPageSize = 12;
+let marketTab = "all";
+let phase = "loading";
+let drag = null;
+let tearDir = 1;
+let revealing = false;
+let force = foldRare(params.get("force"));
+let canvasW = 0, canvasH = 0;
+const flapCanvas = document.createElement("canvas");
+const flapCtx = flapCanvas.getContext("2d");
+
+function foldRare(s){
+  const t = String(s || "").normalize("NFD").replace(/\p{M}/gu, "").toLowerCase().trim();
+  if(t === "legendaire") return "épique";
+  if(t === "mythique") return "mythique";
+  if(t === "epique") return "épique";
+  return t;
+}
+
+const wait = ms => new Promise(r => setTimeout(r, ms));
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function esc(s){
+  return String(s ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+}
+
+function ring(x,y,w,h,rx,color,sw,op){
+  return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="none" stroke="${color}" stroke-width="${sw}" opacity="${op??1}"/>`;
+}
+function frameSvg(kind, rank, color){
+  if(kind==="none") return "";
+  let o = "";
+  if(kind==="simple"){
+    o += ring(4,4,CW-8,CH-8,8,color,1.5);
+  } else if(kind==="double"){
+    o += ring(4,4,CW-8,CH-8,8,color,1.5);
+    o += ring(8,8,CW-16,CH-16,6,color,0.7,0.55);
+  } else {
+    o += ring(4,4,CW-8,CH-8,8,color,1.5);
+    o += ring(8,8,CW-16,CH-16,6,color,0.7,0.55);
+    if(rank>=3) o += ring(12,12,CW-24,CH-24,5,color,0.7,0.4);
+  }
+  return `<svg class="frame" viewBox="0 0 ${CW} ${CH}" aria-hidden="true">${o}</svg>`;
+}
+
+function renderCard(card, opts={}){
+  const tier = TIERS[card.rarete];
+  const fam = FAMILIES[familyKey(card.famille)] || FAMILIES.rock;
+  const paper = tier.rank <= 1;
+  const mythique = tier.rank >= 4;
+  const nameSize = card.name.length > 16 ? 16 : card.name.length > 13 ? 18 : 21;
+  const n = card.name.length;
+  const mythName = n > 16 ? 22 : n > 13 ? 26 : n > 10 ? 30 : 34;
+  const bandStyle = paper || mythique ? "" : `background:${fam.fond};`;
+  const group = card.group || "Artiste solo";
+  const cls = `card r${tier.rank}${paper?" paper":""}${mythique?" mythique":""}${opts.zoomable===false?"":" zoomable"}`;
+  const info = `${fam.label} · ${INSTR[card.instrument] || card.instrument} · ${group}`;
+  return `<div class="${cls}" tabindex="${opts.zoomable===false?"-1":"0"}" data-idx="${opts.idx ?? ""}">
+    <div class="art"><img src="../out/illustrations/${esc(card.job)}.png" alt="" loading="lazy" onerror="this.onerror=function(){this.onerror=null;var m=this.src.replace('_x.png','_m.png');if(m!==this.src)this.src=m;};var s=this.src,n=s.indexOf('_B_')>=0?s.replace('_B_','_A_'):s.replace('_A_','_B_');if(n!==s)this.src=n;else{this.onerror=null;var m=s.replace('_x.png','_m.png');if(m!==s)this.src=m;}"></div>
+    ${mythique ? `<div class="title"><div class="myth-name" style="font-size:${mythName}px">${esc(card.name)}</div></div>` : ""}
+    <div class="band" style="${bandStyle}">
+      <div class="accent" style="background:${fam.a1}"></div>
+      <div class="name" style="font-size:${nameSize}px">${esc(card.name)}</div>
+      <div class="rarete" style="color:${tier.frame}">${tier.label}</div>
+      <div class="meta">${esc(fam.label)} · ${esc(INSTR[card.instrument] || card.instrument)}</div>
+      <div class="group">${esc(group)}</div>
+      ${mythique ? `<div class="line-rare">${tier.label}</div><div class="line-info">${esc(info)}</div>` : ""}
+    </div>
+    <div class="marks" aria-hidden="true"><span class="serie">S1</span><span class="no">${card.rank || 0}/${catalog.length || 2000}</span></div>
+    ${frameSvg(tier.kind, tier.rank, tier.frame)}
+  </div>`;
+}
+
+function plateJob(plate, rarete){
+  const exec = EXEC[rarete] || "A";
+  return `${plate.style}_${exec}_${plate.instrument}_${plate.pose}_${plate.costume}_${plate.venue}_${plate.sil}`;
+}
+
+function cardsFromCatalog(doc){
+  const artists = Object.fromEntries((doc.artists || []).map(a => [a.qid, a]));
+  const plates = Object.fromEntries((doc.plates || []).map(p => [p.id, p]));
+  const groups = Object.fromEntries((doc.groups || []).map(g => [g.mbid, g]));
+  const out = [];
+  for(const row of doc.cards || []){
+    if(row.in_booster_pool === false) continue;
+    const artist = artists[row.artist_qid];
+    const plate = plates[row.plate_id];
+    if(!artist || !plate) continue;
+    const rarete = foldRare(row.rarity_current || row.rarity_initial);
+    if(!TIERS[rarete]) continue;
+    const g = row.group_mbid ? groups[row.group_mbid] : null;
+    out.push({
+      id: row.id,
+      qid: row.artist_qid,
+      name: artist.name,
+      rarete,
+      famille: familyKey(row.family),
+      instrument: artist.instrument || plate.instrument,
+      group: g ? g.name : null,
+      bande: row.band || "",
+      job: plateJob(plate, rarete),
+      plateId: plate.id,
+      rank: Number(row.rank_in_series) || 0
+    });
+  }
+  return out;
+}
+
+function loadOwned(userId){
+  try {
+    const data = JSON.parse(localStorage.getItem(ownedKey(userId)) || "");
+    if(data && data.got && typeof data.got === "object"){
+      if(!data.fresh || typeof data.fresh !== "object") data.fresh = {};
+      return data;
+    }
+  } catch {}
+  return { v: 2, got: {}, fresh: {} };
+}
+function saveOwned(data, userId){
+  data.v = 2;
+  if(!data.fresh || typeof data.fresh !== "object") data.fresh = {};
+  localStorage.setItem(ownedKey(userId), JSON.stringify(data));
+}
+/** Migre l’ancien stock indexé par nom → card_id (après chargement du catalogue). */
+function migrateOwnedToIds(){
+  const data = loadOwned();
+  if(data.v === 2) return;
+  const byName = new Map(catalog.map(c => [c.name, c]));
+  const got = {}, fresh = {};
+  for(const [key, ent] of Object.entries(data.got || {})){
+    const card = byId.get(key) || byName.get(key);
+    if(!card) continue;
+    got[card.id] = ent;
+  }
+  for(const key of Object.keys(data.fresh || {})){
+    const card = byId.get(key) || byName.get(key);
+    if(card && got[card.id]) fresh[card.id] = true;
+  }
+  saveOwned({ v: 2, got, fresh });
+}
+function uniqueCount(){
+  return Object.keys(loadOwned().got).length;
+}
+function freshCount(){
+  const data = loadOwned();
+  const fresh = data.fresh || {};
+  return Object.keys(fresh).filter(name => data.got[name]).length;
+}
+function isFresh(name){
+  return !!(loadOwned().fresh || {})[name];
+}
+function markFresh(names){
+  const data = loadOwned();
+  for(const name of names){
+    if(!name) continue;
+    data.fresh[name] = true;
+  }
+  saveOwned(data);
+  refreshNewBadge();
+}
+function clearFresh(name){
+  const data = loadOwned();
+  if(!data.fresh || !data.fresh[name]) return false;
+  delete data.fresh[name];
+  saveOwned(data);
+  refreshNewBadge();
+  return true;
+}
+function clearAllFresh(){
+  const data = loadOwned();
+  if(!data.fresh || !Object.keys(data.fresh).length) return false;
+  data.fresh = {};
+  saveOwned(data);
+  refreshNewBadge();
+  return true;
+}
+function syncSeeAllNewBtn(){
+  const btn = $("albumSeeAllNew");
+  if(!btn) return;
+  const hide = !albumNewOnly || freshCount() < 1;
+  if(hide === !!btn.hidden) return;
+  if(hide){
+    // Masquer après le clic : sinon l’événement traverse et toggle « Nouvelles ».
+    btn.style.pointerEvents = "none";
+    setTimeout(() => {
+      btn.hidden = true;
+      btn.style.pointerEvents = "";
+    }, 0);
+  } else {
+    btn.hidden = false;
+  }
+}
+function refreshNewBadge(){
+  const badge = $("albumNewBadge");
+  if(!badge) return;
+  const n = freshCount();
+  badge.textContent = String(n);
+  badge.hidden = n < 1;
+  syncSeeAllNewBtn();
+}
+function todayKey(){
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+function loadWallet(userId){
+  try {
+    const data = JSON.parse(localStorage.getItem(walletKey(userId)) || "");
+    if(data && data.v === 1){
+      return {
+        v: 1,
+        credits: Math.max(0, Number(data.credits ?? data.notes) || 0),
+        packs: Math.max(0, Number(data.packs) || 0),
+        lastDaily: data.lastDaily || "",
+        starter: !!data.starter
+      };
+    }
+  } catch {}
+  return { v: 1, credits: 0, packs: 0, lastDaily: "", starter: false };
+}
+function saveWallet(data, userId){
+  localStorage.setItem(walletKey(userId), JSON.stringify(data));
+}
+function ensureWallet(){
+  const w = loadWallet();
+  let dirty = false;
+  const today = todayKey();
+  if(!w.starter){
+    w.packs += STARTER_PACKS;
+    w.starter = true;
+    w.lastDaily = today;
+    dirty = true;
+  } else if(w.lastDaily !== today){
+    w.packs += 1;
+    w.lastDaily = today;
+    dirty = true;
+  }
+  if(dirty) saveWallet(w);
+  return w;
+}
+function refreshPacksBadge(){
+  const badge = $("packsBadge");
+  if(!badge) return;
+  const n = loadWallet().packs;
+  badge.textContent = String(n);
+  badge.hidden = n < 1;
+}
+function refreshWallet(){
+  const w = loadWallet();
+  $("creditsBal").textContent = String(w.credits);
+  refreshPacksBadge();
+  const canBuy = w.credits >= PACK_COST;
+  if($("buyPack")){
+    $("buyPack").disabled = !canBuy;
+    $("buyPack").title = canBuy
+      ? `Acheter un booster (${PACK_COST} crédits)`
+      : `Il faut ${PACK_COST} crédits`;
+  }
+  if($("again") && !$("againRow").hidden){
+    $("again").disabled = w.packs < 1;
+    $("again").textContent = w.packs > 0
+      ? `Ouvrir un autre (${w.packs})`
+      : "Plus de booster";
+  }
+}
+function buyPacks(n){
+  const qty = Math.max(1, Math.min(99, n | 0));
+  const cost = PACK_COST * qty;
+  const w = ensureWallet();
+  if(w.credits < cost) return false;
+  w.credits -= cost;
+  w.packs += qty;
+  saveWallet(w);
+  refreshWallet();
+  return true;
+}
+function buyPack(){
+  return buyPacks(1);
+}
+function spendPack(){
+  const w = ensureWallet();
+  if(w.packs < 1) return false;
+  w.packs -= 1;
+  saveWallet(w);
+  refreshWallet();
+  return true;
+}
+function myListingsFor(cardId){
+  return loadMarket().listings.filter(l => isMe(l.seller) && l.cardId === cardId);
+}
+function freeCopies(cardId){
+  const got = loadOwned().got[cardId];
+  const n = got ? (got.n || 0) : 0;
+  return Math.max(0, n - myListingsFor(cardId).length);
+}
+function destroyCopy(id){
+  const card = byId.get(id);
+  if(!card) return { ok: false, why: "Carte inconnue." };
+  const data = loadOwned();
+  const got = data.got[id];
+  if(!got || freeCopies(id) < 2){
+    return { ok: false, why: myListingsFor(id).length
+      ? "Exemplaire réservé par une annonce — retire-la d’abord ou garde un doublon libre."
+      : "Pas de doublon à détruire." };
+  }
+  got.n -= 1;
+  data.got[id] = got;
+  saveOwned(data);
+  const gain = DESTROY_CREDITS[card.rarete] || 1;
+  const w = ensureWallet();
+  w.credits += gain;
+  saveWallet(w);
+  refreshCount();
+  refreshWallet();
+  return { ok: true, gain, left: got.n };
+}
+function collect(cards){
+  const data = loadOwned();
+  const now = Date.now();
+  for(const c of cards){
+    if(!c || !c.id) continue;
+    const prev = data.got[c.id] || { n: 0 };
+    data.got[c.id] = { n: prev.n + 1, t: now };
+    data.fresh[c.id] = true;
+  }
+  saveOwned(data);
+  refreshCount();
+  refreshNewBadge();
+}
+function creditsLabel(n){
+  return `${n} crédit${n === 1 ? "" : "s"}`;
+}
+let snackTimer = 0;
+function showSnackbar(message){
+  const el = $("snackbar");
+  if(!el) return;
+  el.textContent = message;
+  el.classList.add("show");
+  clearTimeout(snackTimer);
+  snackTimer = setTimeout(() => el.classList.remove("show"), 2800);
+}
+function marketTax(price){
+  const p = Math.floor(Number(price) || 0);
+  if(p < MARKET_PRICE_MIN) return 0;
+  // 10 % arrondi : <5 → 0, 5–14 → 1, 15–24 → 2, etc.
+  return Math.round(p * MARKET_TAX);
+}
+function isValidMarketPrice(price){
+  return Math.floor(Number(price) || 0) >= MARKET_PRICE_MIN;
+}
+function suggestPrice(card){
+  const d = DESTROY_CREDITS[card.rarete] || 2;
+  return Math.max(MARKET_PRICE_MIN, d * 4);
+}
+function sellerPayout(price){
+  const p = Math.floor(Number(price) || 0);
+  return Math.max(0, p - marketTax(p));
+}
+function loadMarket(){
+  try {
+    const data = JSON.parse(localStorage.getItem(MARKET_KEY) || "");
+    if(data && data.v === 1 && Array.isArray(data.listings)){
+      if(!Array.isArray(data.offers)) data.offers = [];
+      if(!Array.isArray(data.notifications)) data.notifications = [];
+      return data;
+    }
+  } catch {}
+  return { v: 1, listings: [], offers: [], notifications: [], seeded: false };
+}
+function saveMarket(data){
+  if(!Array.isArray(data.offers)) data.offers = [];
+  if(!Array.isArray(data.notifications)) data.notifications = [];
+  localStorage.setItem(MARKET_KEY, JSON.stringify(data));
+}
+function pushNotification(note){
+  if(!note || !note.toUser || note.toUser === "npc") return;
+  const m = loadMarket();
+  m.notifications.unshift({
+    id: note.id || `ntf-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+    type: note.type || "info",
+    offerId: note.offerId || null,
+    listingId: note.listingId || null,
+    cardId: note.cardId || null,
+    toUser: note.toUser,
+    title: note.title || "",
+    meta: note.meta || "",
+    t: note.t || Date.now(),
+    read: false
+  });
+  m.notifications = m.notifications.slice(0, 40);
+  saveMarket(m);
+}
+function pushOfferNotification(offer){
+  const card = byId.get(offer.cardId);
+  pushNotification({
+    id: `ntf-${offer.id}`,
+    type: "offer",
+    offerId: offer.id,
+    listingId: offer.listingId,
+    cardId: offer.cardId,
+    toUser: offer.seller,
+    title: `Offre reçue de ${userName(offer.buyer)} pour ${card ? card.name : "une carte"}`,
+    meta: `${offer.price} cr`,
+    t: offer.t || Date.now()
+  });
+}
+function pushOfferResolvedNotification(offer, accepted){
+  if(!offer || offer.buyer === "npc") return;
+  const card = byId.get(offer.cardId);
+  const name = card ? card.name : "une carte";
+  pushNotification({
+    id: `ntf-${accepted ? "ok" : "no"}-${offer.id}`,
+    type: accepted ? "offer_accepted" : "offer_rejected",
+    offerId: offer.id,
+    listingId: offer.listingId,
+    cardId: offer.cardId,
+    toUser: offer.buyer,
+    title: accepted
+      ? `Contre-offre acceptée · ${name}`
+      : `Contre-offre refusée · ${name}`,
+    meta: accepted
+      ? `${offer.price} cr · ${userName(offer.seller)}`
+      : `${offer.price} cr · ${userName(offer.seller)}`,
+    t: Date.now()
+  });
+}
+function pushSoldNotification(listing, buyerId, price){
+  if(!listing || listing.seller === "npc") return;
+  const card = byId.get(listing.cardId);
+  const name = card ? card.name : "une carte";
+  const pay = sellerPayout(price);
+  pushNotification({
+    id: `ntf-sold-${listing.id}-${Date.now()}`,
+    type: "sold",
+    listingId: listing.id,
+    cardId: listing.cardId,
+    toUser: listing.seller,
+    title: `Carte vendue · ${name}`,
+    meta: `${price} cr · +${pay} cr · ${userName(buyerId || "npc")}`,
+    t: Date.now()
+  });
+}
+function myNotifications(){
+  return loadMarket().notifications.filter(n => !n.toUser || n.toUser === uid());
+}
+function unreadNotifications(){
+  return myNotifications().filter(n => !n.read);
+}
+function renderNotifMenu(){
+  const list = $("notifList");
+  if(!list) return;
+  const notes = myNotifications().slice(0, 12);
+  const markAll = $("notifMarkAll");
+  if(markAll) markAll.hidden = notes.length < 1;
+  if(!notes.length){
+    list.innerHTML = `<p class="empty">Aucune notification.</p>`;
+    return;
+  }
+  list.innerHTML = notes.map(n =>
+    `<button type="button" class="item${n.read ? "" : " unread"}" role="menuitem" data-nid="${esc(n.id)}" data-ntype="${esc(n.type)}">
+      <div class="title">${esc(n.title)}</div>
+      <div class="meta">${esc(n.meta || "")}</div>
+    </button>`
+  ).join("");
+}
+function markAllNotificationsRead(){
+  const m = loadMarket();
+  const me = uid();
+  let dirty = false;
+  for(const n of m.notifications || []){
+    if(n.toUser && n.toUser !== me) continue;
+    if(!n.read){
+      n.read = true;
+      dirty = true;
+    }
+  }
+  if(dirty) saveMarket(m);
+  refreshOffersBadge();
+  renderNotifMenu();
+}
+function pendingOffersForListing(listingId){
+  return loadMarket().offers.filter(o => o.listingId === listingId && o.status === "pending");
+}
+function myOutgoingOffers(){
+  return loadMarket().offers
+    .filter(o => isMe(o.buyer) && !o.dismissed)
+    .sort((a, b) => b.t - a.t);
+}
+function dismissRejectedOffer(offerId){
+  const m = loadMarket();
+  const o = m.offers.find(x => x.id === offerId);
+  if(!o) return { ok: false, why: "Offre introuvable." };
+  if(!isMe(o.buyer)) return { ok: false, why: "Ce n’est pas ton offre." };
+  if(o.status !== "rejected") return { ok: false, why: "Seules les offres refusées peuvent être retirées." };
+  o.dismissed = true;
+  saveMarket(m);
+  return { ok: true };
+}
+function myIncomingPendingOffers(){
+  return loadMarket().offers.filter(o => isMe(o.seller) && o.status === "pending");
+}
+function unseenIncomingOffers(){
+  return myIncomingPendingOffers().filter(o => !o.seenBySeller);
+}
+function refreshOffersBadge(){
+  const pending = myIncomingPendingOffers().length;
+  const unread = unreadNotifications().length;
+  const badge = $("mineOffersBadge");
+  if(badge){
+    badge.textContent = "Offre !";
+    badge.hidden = pending < 1;
+  }
+  const btn = $("notifBtn");
+  const dot = $("notifDot");
+  if(btn){
+    btn.classList.toggle("has-unread", unread > 0);
+    btn.setAttribute("aria-label",
+      unread < 1 ? "Notifications" :
+      unread === 1 ? "1 notification non lue" : `${unread} notifications non lues`
+    );
+  }
+  if(dot) dot.hidden = unread < 1;
+  const wrap = $("notifWrap");
+  if(!(wrap && wrap.classList.contains("open"))) renderNotifMenu();
+}
+function setNotifMenuOpen(open){
+  const wrap = $("notifWrap");
+  const btn = $("notifBtn");
+  const menu = $("notifMenu");
+  if(!wrap || !btn || !menu) return;
+  wrap.classList.toggle("open", open);
+  btn.setAttribute("aria-expanded", open ? "true" : "false");
+  menu.hidden = !open;
+  if(open) renderNotifMenu();
+}
+function toggleNotifMenu(){
+  const wrap = $("notifWrap");
+  setNotifMenuOpen(!(wrap && wrap.classList.contains("open")));
+}
+function goToMarketTab(tab){
+  setNotifMenuOpen(false);
+  marketTab = tab;
+  document.querySelectorAll("#market [data-market-tab]").forEach(b => {
+    const on = b.dataset.marketTab === tab;
+    b.classList.toggle("on", on);
+    b.setAttribute("aria-selected", on ? "true" : "false");
+  });
+  showView("market");
+}
+function goToMySales(){ goToMarketTab("mine"); }
+function goToMyOffers(){ goToMarketTab("offers"); }
+function openNotification(nid){
+  const m = loadMarket();
+  const note = m.notifications.find(n => n.id === nid);
+  if(!note) return;
+  if(!note.read){
+    note.read = true;
+    saveMarket(m);
+  }
+  // L’offre liée est considérée vue via la notif.
+  if(note.type === "offer" && note.offerId){
+    const offer = m.offers.find(o => o.id === note.offerId);
+    if(offer && !offer.seenBySeller){
+      offer.seenBySeller = true;
+      saveMarket(m);
+    }
+  }
+  refreshOffersBadge();
+  if(note.type === "offer" || note.type === "sold") goToMySales();
+  else if(note.type === "offer_accepted" || note.type === "offer_rejected") goToMyOffers();
+  else setNotifMenuOpen(false);
+}
+function markOffersSeen(listingId){
+  const m = loadMarket();
+  let dirty = false;
+  for(const o of m.offers){
+    if(isMe(o.seller) && o.status === "pending" && (!listingId || o.listingId === listingId) && !o.seenBySeller){
+      o.seenBySeller = true;
+      dirty = true;
+    }
+  }
+  if(dirty) saveMarket(m);
+  refreshOffersBadge();
+}
+function takeOwnedCopy(cardId, userId){
+  const data = loadOwned(userId);
+  const got = data.got[cardId];
+  if(!got || (got.n || 0) < 1) return false;
+  got.n -= 1;
+  if(got.n < 1){
+    delete data.got[cardId];
+    if(data.fresh) delete data.fresh[cardId];
+  } else {
+    data.got[cardId] = got;
+  }
+  saveOwned(data, userId);
+  if(!userId || userId === uid()) refreshCount();
+  return true;
+}
+function giveOwnedCopy(cardId, { fresh = false, userId } = {}){
+  const data = loadOwned(userId);
+  const prev = data.got[cardId] || { n: 0 };
+  data.got[cardId] = { n: prev.n + 1, t: Date.now() };
+  if(fresh) data.fresh[cardId] = true;
+  saveOwned(data, userId);
+  if(!userId || userId === uid()){
+    refreshCount();
+    refreshNewBadge();
+  }
+}
+function reconcileMyListings(){
+  // Ancien modèle : la carte quittait le classeur. On restaure les exemplaires réservés.
+  const m = loadMarket();
+  const data = loadOwned();
+  const need = {};
+  for(const l of m.listings){
+    if(!isMe(l.seller)) continue;
+    need[l.cardId] = (need[l.cardId] || 0) + 1;
+  }
+  let dirty = false;
+  for(const [id, nNeed] of Object.entries(need)){
+    const got = data.got[id];
+    const n = got ? (got.n || 0) : 0;
+    if(n < nNeed){
+      data.got[id] = { n: nNeed, t: (got && got.t) || Date.now() };
+      dirty = true;
+    }
+  }
+  if(dirty){
+    saveOwned(data);
+    refreshCount();
+  }
+}
+function seedNpcListings(force){
+  reconcileMyListings();
+  const m = loadMarket();
+  if(m.seeded && !force) return m;
+  if(force) m.listings = m.listings.filter(l => l.seller !== "npc");
+  const picks = [];
+  const used = new Set(m.listings.map(l => l.cardId));
+  const poolCards = catalog.filter(c => !used.has(c.id));
+  for(let i = 0; i < 14 && poolCards.length; i++){
+    const idx = Math.floor(Math.random() * poolCards.length);
+    const card = poolCards.splice(idx, 1)[0];
+    if(!card) break;
+    const jitter = 0.75 + Math.random() * 0.5;
+    const price = Math.max(MARKET_PRICE_MIN, Math.round(suggestPrice(card) * jitter));
+    picks.push({
+      id: `npc-${card.id}-${Date.now()}-${i}`,
+      cardId: card.id,
+      price,
+      seller: "npc",
+      t: Date.now()
+    });
+  }
+  m.listings = m.listings.concat(picks);
+  m.seeded = true;
+  saveMarket(m);
+  return m;
+}
+function listCardForSale(cardId, price){
+  const card = byId.get(cardId);
+  const p = Math.floor(Number(price) || 0);
+  if(!card) return { ok: false, why: "Carte inconnue." };
+  if(!isValidMarketPrice(p)){
+    return { ok: false, why: `Prix minimum : ${MARKET_PRICE_MIN} crédit.` };
+  }
+  if(freeCopies(cardId) < 1){
+    return { ok: false, why: myListingsFor(cardId).length
+      ? "Tous tes exemplaires sont déjà en vente."
+      : "Tu n’as pas cette carte." };
+  }
+  const m = loadMarket();
+  m.listings.unshift({
+    id: `${uid()}-${cardId}-${Date.now()}`,
+    cardId,
+    price: p,
+    seller: uid(),
+    t: Date.now()
+  });
+  saveMarket(m);
+  return { ok: true, payout: sellerPayout(p) };
+}
+function cancelOffersForListing(m, listingId, status){
+  for(const o of m.offers){
+    if(o.listingId === listingId && o.status === "pending") o.status = status;
+  }
+}
+function cancelListing(listingId){
+  const m = loadMarket();
+  const i = m.listings.findIndex(l => l.id === listingId);
+  if(i < 0) return { ok: false, why: "Annonce introuvable." };
+  const listing = m.listings[i];
+  if(!isMe(listing.seller)) return { ok: false, why: "Ce n’est pas ton annonce." };
+  m.listings.splice(i, 1);
+  cancelOffersForListing(m, listingId, "cancelled");
+  saveMarket(m);
+  refreshOffersBadge();
+  return { ok: true };
+}
+function buyListing(listingId){
+  const m = loadMarket();
+  const i = m.listings.findIndex(l => l.id === listingId);
+  if(i < 0) return { ok: false, why: "Annonce introuvable." };
+  const listing = m.listings[i];
+  if(isMe(listing.seller)) return { ok: false, why: "Tu ne peux pas acheter ta propre annonce." };
+  const w = ensureWallet();
+  if(w.credits < listing.price) return { ok: false, why: "Pas assez de crédits." };
+  w.credits -= listing.price;
+  saveWallet(w);
+  if(listing.seller !== "npc"){
+    if(!takeOwnedCopy(listing.cardId, listing.seller)){
+      // rollback buyer payment
+      w.credits += listing.price;
+      saveWallet(w);
+      return { ok: false, why: "Le vendeur n’a plus cette carte." };
+    }
+    const sw = loadWallet(listing.seller);
+    sw.credits += sellerPayout(listing.price);
+    saveWallet(sw, listing.seller);
+  }
+  const soldListing = { ...listing };
+  const soldPrice = listing.price;
+  const buyerId = uid();
+  m.listings.splice(i, 1);
+  cancelOffersForListing(m, listingId, "cancelled");
+  saveMarket(m);
+  giveOwnedCopy(listing.cardId, { fresh: true });
+  if(soldListing.seller !== "npc") pushSoldNotification(soldListing, buyerId, soldPrice);
+  refreshWallet();
+  refreshOffersBadge();
+  return { ok: true, price: listing.price, burned: listing.price };
+}
+function makeOffer(listingId, price){
+  const m = loadMarket();
+  const listing = m.listings.find(l => l.id === listingId);
+  if(!listing) return { ok: false, why: "Annonce introuvable." };
+  if(isMe(listing.seller)) return { ok: false, why: "Tu ne peux pas offrir sur ta propre annonce." };
+  const p = Math.floor(Number(price) || 0);
+  if(!isValidMarketPrice(p)) return { ok: false, why: `Prix minimum : ${MARKET_PRICE_MIN} crédit.` };
+  if(p >= listing.price) return { ok: false, why: "La contre-offre doit être inférieure au prix affiché." };
+  const w = ensureWallet();
+  if(w.credits < p) return { ok: false, why: "Pas assez de crédits pour cette offre." };
+  const existing = m.offers.find(o => o.listingId === listingId && isMe(o.buyer) && o.status === "pending");
+  if(existing){
+    existing.price = p;
+    existing.t = Date.now();
+    saveMarket(m);
+    return { ok: true, id: existing.id, updated: true };
+  }
+  const offer = {
+    id: `off-${listingId}-${Date.now()}`,
+    listingId,
+    cardId: listing.cardId,
+    price: p,
+    buyer: uid(),
+    seller: listing.seller,
+    status: "pending",
+    seenBySeller: false,
+    t: Date.now()
+  };
+  m.offers.unshift(offer);
+  saveMarket(m);
+  if(listing.seller !== "npc") pushOfferNotification(offer);
+  refreshOffersBadge();
+  return { ok: true, id: offer.id };
+}
+function withdrawOffer(offerId){
+  const m = loadMarket();
+  const o = m.offers.find(x => x.id === offerId);
+  if(!o) return { ok: false, why: "Offre introuvable." };
+  if(!isMe(o.buyer)) return { ok: false, why: "Ce n’est pas ton offre." };
+  if(o.status !== "pending") return { ok: false, why: "Cette offre n’est plus active." };
+  o.status = "withdrawn";
+  saveMarket(m);
+  return { ok: true };
+}
+function rejectOffer(offerId){
+  const m = loadMarket();
+  const o = m.offers.find(x => x.id === offerId);
+  if(!o) return { ok: false, why: "Offre introuvable." };
+  if(!isMe(o.seller)) return { ok: false, why: "Ce n’est pas ton annonce." };
+  if(o.status !== "pending") return { ok: false, why: "Cette offre n’est plus active." };
+  o.status = "rejected";
+  o.seenBySeller = true;
+  saveMarket(m);
+  pushOfferResolvedNotification(o, false);
+  refreshOffersBadge();
+  return { ok: true };
+}
+function acceptOffer(offerId){
+  const m = loadMarket();
+  const o = m.offers.find(x => x.id === offerId);
+  if(!o) return { ok: false, why: "Offre introuvable." };
+  if(!isMe(o.seller)) return { ok: false, why: "Ce n’est pas ton annonce." };
+  if(o.status !== "pending") return { ok: false, why: "Cette offre n’est plus active." };
+  const li = m.listings.findIndex(l => l.id === o.listingId);
+  if(li < 0) return { ok: false, why: "Annonce introuvable." };
+  if(o.buyer !== "npc"){
+    const bw = loadWallet(o.buyer);
+    if(bw.credits < o.price) return { ok: false, why: "L’acheteur n’a plus assez de crédits." };
+    bw.credits -= o.price;
+    saveWallet(bw, o.buyer);
+  }
+  if(!takeOwnedCopy(o.cardId)){
+    if(o.buyer !== "npc"){
+      const bw = loadWallet(o.buyer);
+      bw.credits += o.price;
+      saveWallet(bw, o.buyer);
+    }
+    return { ok: false, why: "Tu n’as plus cette carte." };
+  }
+  const pay = sellerPayout(o.price);
+  const w = ensureWallet();
+  w.credits += pay;
+  saveWallet(w);
+  if(o.buyer !== "npc") giveOwnedCopy(o.cardId, { fresh: true, userId: o.buyer });
+  m.listings.splice(li, 1);
+  o.status = "accepted";
+  o.seenBySeller = true;
+  cancelOffersForListing(m, o.listingId, "cancelled");
+  o.status = "accepted";
+  saveMarket(m);
+  pushOfferResolvedNotification(o, true);
+  refreshWallet();
+  refreshOffersBadge();
+  return { ok: true, pay, price: o.price };
+}
+function seedNpcOffersOnMyListings(){
+  const m = loadMarket();
+  const mine = m.listings.filter(l => isMe(l.seller));
+  let added = [];
+  for(const listing of mine){
+    const pending = m.offers.filter(o => o.listingId === listing.id && o.status === "pending");
+    if(pending.length >= 2) continue;
+    if(pending.some(o => o.buyer === "npc")) continue;
+    if(Math.random() > 0.55) continue;
+    const low = Math.max(MARKET_PRICE_MIN, Math.floor(listing.price * 0.55));
+    const high = Math.max(low, Math.floor(listing.price * 0.9) - 1);
+    const price = low >= high ? low : low + Math.floor(Math.random() * (high - low + 1));
+    if(price >= listing.price) continue;
+    const offer = {
+      id: `off-npc-${listing.id}-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+      listingId: listing.id,
+      cardId: listing.cardId,
+      price,
+      buyer: "npc",
+      seller: uid(),
+      status: "pending",
+      seenBySeller: false,
+      t: Date.now()
+    };
+    m.offers.unshift(offer);
+    added.push(offer);
+  }
+  if(added.length){
+    saveMarket(m);
+    for(const offer of added) pushOfferNotification(offer);
+    refreshOffersBadge();
+  }
+  return added;
+}
+function offerStatusLabel(status){
+  return ({
+    pending: "En attente",
+    accepted: "Acceptée",
+    rejected: "Refusée",
+    cancelled: "Annulée",
+    withdrawn: "Retirée"
+  })[status] || status;
+}
+function renderMarketOffersTab(){
+  const list = $("marketList");
+  const offers = myOutgoingOffers();
+  if(!offers.length){
+    list.innerHTML = `<p class="market-empty">Aucune contre-offre. Ouvre une annonce PNJ et propose un prix.</p>`;
+    return;
+  }
+  const m = loadMarket();
+  list.innerHTML = offers.map(o => {
+    const card = byId.get(o.cardId);
+    if(!card) return "";
+    const listing = m.listings.find(l => l.id === o.listingId);
+    const ask = listing ? listing.price : null;
+    const pending = o.status === "pending";
+    const rejected = o.status === "rejected";
+    return `<div class="market-row" data-lid="${esc(o.listingId || "")}" data-oid="${esc(o.id)}" role="button" tabindex="0">
+      <div class="mini">${renderCard(card, { zoomable: false })}</div>
+      <div class="meta">
+        <div class="name">${esc(card.name)}</div>
+        <div class="sub">${esc(offerStatusLabel(o.status))}${ask != null ? ` · prix affiché ${ask} cr` : " · annonce retirée"}</div>
+      </div>
+      <div class="side">
+        ${rejected
+          ? `<button type="button" class="dismiss" data-dismiss-offer="${esc(o.id)}" aria-label="Supprimer" title="Supprimer">×</button>`
+          : ""}
+        <div class="price">${o.price} cr</div>
+        ${rejected ? "" : `<div class="tap">${pending ? "Voir / retirer" : "Voir"}</div>`}
+      </div>
+    </div>`;
+  }).join("");
+}
+function renderMarket(){
+  seedNpcListings(false);
+  refreshOffersBadge();
+  const m = loadMarket();
+  const list = $("marketList");
+  if(!list) return;
+  if(marketTab === "offers"){
+    renderMarketOffersTab();
+    return;
+  }
+  const q = ($("marketQ").value || "").trim().toLowerCase();
+  const rare = $("marketRare").value;
+  const instr = $("marketInstr").value;
+  const fam = $("marketFam") ? $("marketFam").value : "";
+  const mineOnly = marketTab === "mine";
+  let rows = m.listings.slice().filter(l => {
+    if(mineOnly && !isMe(l.seller)) return false;
+    const card = byId.get(l.cardId);
+    if(!card) return false;
+    if(rare && card.rarete !== rare) return false;
+    if(instr && card.instrument !== instr) return false;
+    if(fam && card.famille !== fam) return false;
+    if(q){
+      const hay = `${card.name} ${card.group || ""}`.toLowerCase();
+      if(!hay.includes(q)) return false;
+    }
+    return true;
+  });
+  rows.sort((a, b) => {
+    if(!mineOnly){
+      if(isMe(a.seller) && !isMe(b.seller)) return -1;
+      if(isMe(b.seller) && !isMe(a.seller)) return 1;
+    }
+    return b.t - a.t;
+  });
+  if(mineOnly && !m.listings.some(l => isMe(l.seller))){
+    list.innerHTML = `<p class="market-empty">Aucune vente en cours. Mets une carte en vente depuis le classeur.</p>`;
+    return;
+  }
+  if(!m.listings.length){
+    list.innerHTML = `<p class="market-empty">Aucune annonce. Mets une carte en vente depuis le classeur, ou réapprovisionne les PNJ.</p>`;
+    return;
+  }
+  if(!rows.length){
+    list.innerHTML = `<p class="market-empty">Aucune annonce pour ce filtre.</p>`;
+    return;
+  }
+  list.innerHTML = rows.map(l => {
+    const card = byId.get(l.cardId);
+    if(!card) return "";
+    const mine = isMe(l.seller);
+    const payout = sellerPayout(l.price);
+    const offers = mine ? pendingOffersForListing(l.id).sort((a, b) => b.price - a.price) : [];
+    const offersHtml = offers.length
+      ? `<div class="offers-side">${offers.map(o =>
+          `<span class="offer-chip">Offre ${o.price} cr</span>`
+        ).join("")}</div>`
+      : `<div class="tap">Voir</div>`;
+    const sellerLabel = mine
+      ? `Ton annonce · tu recevras ${payout}`
+      : userName(l.seller);
+    return `<div class="market-row" data-lid="${esc(l.id)}" role="button" tabindex="0">
+      <div class="mini">${renderCard(card, { zoomable: false })}</div>
+      <div class="meta">
+        <div class="name">${esc(card.name)}</div>
+        <div class="sub">${esc(TIERS[card.rarete].label)} · ${esc(INSTR[card.instrument] || card.instrument)} · ${esc(sellerLabel)}</div>
+      </div>
+      <div class="side">
+        <div class="price">${l.price} cr</div>
+        ${offersHtml}
+      </div>
+    </div>`;
+  }).join("");
+}
+function refreshCount(){
+  const n = uniqueCount();
+  if($("albumMeta")){
+    const copies = Object.values(loadOwned().got).reduce((s, x) => s + (x.n || 0), 0);
+    const neuves = freshCount();
+    $("albumMeta").textContent = copies
+      ? `${n} uniques · ${copies} cartes` + (neuves ? ` · ${neuves} nouvelle${neuves > 1 ? "s" : ""}` : "")
+      : "";
+  }
+  refreshNewBadge();
+}
+function showSpentPack(){
+  hideEmptyPack();
+  hand.className = "hand";
+  hand.innerHTML = "";
+  againRow.hidden = true;
+  packCol.hidden = false;
+  packWrap.hidden = false;
+  packWrap.className = "pack-wrap spent";
+  resetPackPose();
+  phase = "empty";
+  intro.textContent = "Plus de booster. Reviens demain (+1) ou achète-en un.";
+  refreshWallet();
+}
+function hideEmptyPack(){
+  $("emptyPack").classList.remove("show");
+}
+async function armNextPack(){
+  const w = ensureWallet();
+  refreshWallet();
+  if(w.packs < 1){
+    showSpentPack();
+    return false;
+  }
+  hideEmptyPack();
+  pulled = pullPack();
+  await preload(pulled);
+  armPack();
+  return true;
+}
+async function stashHand(){
+  if(phase !== "open") return;
+  phase = "stashing";
+  if($("zoom").open) $("zoom").close();
+  againRow.hidden = true;
+  hand.classList.remove("stashable");
+  hand.classList.add("stashing");
+  collect(pulled);
+  intro.textContent = "Cartes rangées dans le classeur.";
+  await wait(reduced ? 60 : 300);
+  hand.className = "hand";
+  hand.innerHTML = "";
+  await armNextPack();
+}
+
+function pick(list, used){
+  const src = (list || []).filter(c => !used.has(c.id));
+  const poolList = src.length ? src : (list || []);
+  const card = poolList[Math.floor(Math.random() * poolList.length)];
+  if(card) used.add(card.id);
+  return card;
+}
+
+function weighted(pairs){
+  const r = Math.random();
+  let acc = 0;
+  for(const [k, p] of pairs){
+    acc += p;
+    if(r < acc) return k;
+  }
+  return pairs[pairs.length - 1][0];
+}
+
+function loadPity(userId){
+  try {
+    const data = JSON.parse(localStorage.getItem(pityKey(userId)) || "");
+    if(data && typeof data.n === "number") return data;
+  } catch {}
+  return { n: 0, sinceMyth: 0, sinceEpic: 0, starterMyth: false };
+}
+function savePity(data, userId){
+  localStorage.setItem(pityKey(userId), JSON.stringify(data));
+}
+function rollChase(pity){
+  if(!pity.starterMyth && pity.n >= 9) return "mythique";
+  if(pity.sinceMyth >= 39) return "mythique";
+  if(pity.sinceEpic >= 19) return "épique";
+  const r = Math.random();
+  if(r < 0.05) return "mythique";
+  if(r < 0.25) return "épique";
+  return "rare";
+}
+function pullPack(){
+  const pity = loadPity();
+  const chase = force === "mythique" ? "mythique"
+    : force === "épique" ? "épique"
+    : force === "rare" ? "rare"
+    : rollChase(pity);
+  const pc = Math.random() < 0.5 ? 2 : 1;
+  const slots = [];
+  for(let i = 0; i < pc; i++) slots.push("peu commune");
+  while(slots.length < 4) slots.push("commune");
+  slots.push(chase);
+  const used = new Set();
+  const cards = slots.map(r => pick(pool[r], used));
+  pity.n += 1;
+  pity.sinceMyth = chase === "mythique" ? 0 : pity.sinceMyth + 1;
+  pity.sinceEpic = (chase === "épique" || chase === "mythique") ? 0 : pity.sinceEpic + 1;
+  if(chase === "mythique") pity.starterMyth = true;
+  savePity(pity);
+  return cards;
+}
+
+function preload(cards){
+  return Promise.all(cards.map(c => new Promise(res => {
+    const img = new Image();
+    img.onload = img.onerror = res;
+    img.src = `../out/illustrations/${c.job}.png`;
+    if(img.complete) res();
+  })));
+}
+
+function highest(cards){
+  if(cards.some(c => c.rarete === "mythique")) return "mythique";
+  if(cards.some(c => c.rarete === "épique")) return "épique";
+  return "normal";
+}
+
+function spawnDust(){
+  const box = $("dust");
+  box.innerHTML = "";
+  for(let i = 0; i < 22; i++){
+    const m = document.createElement("span");
+    m.className = "mote";
+    m.style.left = (18 + Math.random() * 64) + "%";
+    m.style.top = (48 + Math.random() * 30) + "%";
+    m.style.animationDelay = (Math.random() * 0.35).toFixed(2) + "s";
+    box.appendChild(m);
+  }
+}
+
+function spawnCrowd(){
+  const box = $("crowd");
+  box.innerHTML = "";
+  for(let i = 0; i < 70; i++){
+    const p = document.createElement("span");
+    p.className = "fan";
+    const s = 0.55 + Math.random() * 1.15;
+    p.style.cssText = [
+      `left:${Math.random() * 100}%`,
+      `top:${58 + Math.random() * 40}%`,
+      `--s:${s.toFixed(2)}`,
+      `animation-delay:${(-Math.random() * 1.1).toFixed(2)}s`
+    ].join(";");
+    box.appendChild(p);
+  }
+  for(let i = 0; i < 36; i++){
+    const d = document.createElement("span");
+    d.className = "phone";
+    d.style.cssText = [
+      `left:${4 + Math.random() * 92}%`,
+      `top:${62 + Math.random() * 34}%`,
+      `animation-delay:${(-Math.random() * 1.3).toFixed(2)}s`
+    ].join(";");
+    box.appendChild(d);
+  }
+}
+
+function spawnFlashes(){
+  const box = $("flashes");
+  box.innerHTML = "";
+  for(let i = 0; i < 26; i++){
+    const f = document.createElement("span");
+    f.className = "flash";
+    f.style.cssText = [
+      `left:${6 + Math.random() * 88}%`,
+      `top:${8 + Math.random() * 72}%`,
+      `animation-delay:${(0.04 + Math.random() * 1.9).toFixed(2)}s`
+    ].join(";");
+    box.appendChild(f);
+  }
+}
+
+function jag(x, seed, amp){
+  return Math.sin(x * 0.19 + seed) * amp
+    + Math.sin(x * 0.47 + seed * 1.7) * amp * 0.55
+    + Math.sin(x * 1.05 + seed * 0.4) * amp * 0.28;
+}
+
+function sizeTearCanvas(){
+  const r = packArt.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+  canvasW = r.width;
+  canvasH = r.height;
+  const bw = Math.max(1, Math.round(r.width * dpr));
+  const bh = Math.max(1, Math.round(r.height * dpr));
+  tearLayer.width = bw;
+  tearLayer.height = bh;
+  tearLayer.style.width = r.width + "px";
+  tearLayer.style.height = r.height + "px";
+  tearCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  flapCanvas.width = bw;
+  flapCanvas.height = bh;
+  flapCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+function sealHole(ctx, xA, xB, y0, y1, seed){
+  ctx.beginPath();
+  ctx.moveTo(xA, y0 + jag(xA, seed, 2.2));
+  for(let x = xA; x <= xB; x += 2) ctx.lineTo(x, y0 + jag(x, seed, 2.8));
+  ctx.lineTo(xB, y1 + jag(xB, seed + 8, 2.1));
+  for(let x = xB; x >= xA; x -= 2) ctx.lineTo(x, y1 + jag(x, seed + 8, 2.4));
+  ctx.closePath();
+}
+
+function drawTear(progress, dir, seed){
+  const w = canvasW, h = canvasH;
+  const ctx = tearCtx;
+  ctx.clearRect(0, 0, w, h);
+  if(!packArt.complete || w < 2) return;
+  ctx.drawImage(packArt, 0, 0, w, h);
+  if(progress <= 0.012) return;
+
+  const xL = w * SEAL.x0, xR = w * SEAL.x1;
+  const y0 = h * SEAL.y0, y1 = h * SEAL.y1;
+  const torn = Math.min(1, progress) * (xR - xL);
+  const xA = dir > 0 ? xL : xR - torn;
+  const xB = dir > 0 ? xL + torn : xR;
+  const yMid = (y0 + y1) / 2;
+  const mouth = progress * h * 0.02;
+
+  flapCtx.clearRect(0, 0, w, h);
+  flapCtx.drawImage(packArt, 0, 0, w, h);
+  flapCtx.save();
+  flapCtx.globalCompositeOperation = "destination-in";
+  sealHole(flapCtx, xA, xB, y0, y1, seed);
+  flapCtx.fill();
+  flapCtx.restore();
+
+  ctx.save();
+  ctx.globalCompositeOperation = "destination-out";
+  sealHole(ctx, xA - 4, xB + 4, y0 - 6, y1 + 10 + mouth, seed);
+  ctx.fill();
+  ctx.restore();
+
+  ctx.save();
+  sealHole(ctx, xA - 3, xB + 3, y0 - 5, y1 + 8 + mouth, seed);
+  ctx.clip();
+  ctx.fillStyle = "#0b0a0c";
+  ctx.fillRect(xA - 10, y0 - 14, xB - xA + 20, y1 - y0 + 32);
+  ctx.restore();
+
+  const lift = 7 + progress * 20;
+  const shift = dir * (7 + progress * 14);
+  const ang = -dir * progress * 0.3;
+  const pivot = dir > 0 ? xB : xA;
+  ctx.save();
+  ctx.translate(pivot + shift, yMid - lift);
+  ctx.rotate(ang);
+  ctx.translate(-pivot, -yMid);
+  ctx.drawImage(flapCanvas, 0, 0, w, h);
+  ctx.restore();
+
+  ctx.save();
+  ctx.strokeStyle = "rgba(255,255,255,.5)";
+  ctx.lineWidth = 1.15;
+  ctx.beginPath();
+  const edgeX = dir > 0 ? xB : xA;
+  ctx.moveTo(edgeX, y0 - 2);
+  ctx.lineTo(edgeX + dir * 6, yMid);
+  ctx.lineTo(edgeX, y1 + 2);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function resetPackPose(){
+  pack.style.transform = "";
+  pack.style.opacity = "";
+  pack.style.filter = "";
+  pack.style.transition = "";
+  if(canvasW){
+    tearCtx.clearRect(0, 0, canvasW, canvasH);
+    tearCtx.drawImage(packArt, 0, 0, canvasW, canvasH);
+  }
+}
+
+function forceCopy(){
+  if(force === "mythique") return "Ce sachet contient une mythique. Glisse le scellé du haut.";
+  if(force === "épique") return "Ce sachet contient une épique. Glisse le scellé du haut.";
+  if(force === "rare") return "Ce sachet contient une rare. Glisse le scellé du haut.";
+  return "Glisse le scellé du haut pour ouvrir le sachet.";
+}
+
+function cardBack(){
+  return `<div class="card card-back">
+    <div class="bk-field">
+      <div class="bk-plate"></div>
+      <div class="bk-mark"><div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+      <div class="bk-name">CHARTS</div>
+    </div>
+    <div class="bk-band"><div class="bk-foot">Music collectibles</div></div>
+    ${frameSvg("double", 1, "#7A4A46")}
+  </div>`;
+}
+
+function armPack(){
+  phase = "idle";
+  revealing = false;
+  document.body.classList.remove("cutaway");
+  stage.classList.remove("cutaway", "show-hit");
+  fx.className = "";
+  $("dust").innerHTML = "";
+  $("crowd").innerHTML = "";
+  $("flashes").innerHTML = "";
+  hand.className = "hand";
+  hand.innerHTML = "";
+  againRow.hidden = true;
+  hideEmptyPack();
+  packCol.hidden = false;
+  packWrap.hidden = false;
+  packWrap.className = "pack-wrap idle";
+  resetPackPose();
+  const w = loadWallet();
+  intro.textContent = `${forceCopy()} · ${w.packs} booster${w.packs > 1 ? "s" : ""}`;
+  refreshWallet();
+}
+
+async function openPack(){
+  if(!spendPack()){
+    showSpentPack();
+    return;
+  }
+  phase = "opening";
+  packWrap.classList.remove("idle", "dragging");
+  packWrap.classList.add("locked");
+
+  const start = drag && drag.progress != null ? drag.progress : 0.7;
+  const seed = (drag && drag.seed) || 2.2;
+  const t0 = performance.now();
+  await new Promise(resolve => {
+    const tick = now => {
+      const k = Math.min(1, (now - t0) / 280);
+      drawTear(start + (1.05 - start) * k, tearDir, seed);
+      if(k < 1) requestAnimationFrame(tick);
+      else resolve();
+    };
+    requestAnimationFrame(tick);
+  });
+
+  pack.style.transition = "opacity .35s ease, transform .35s ease";
+  pack.style.opacity = "0";
+  pack.style.transform = "scale(1.03)";
+  await wait(reduced ? 60 : 280);
+  packWrap.classList.add("gone");
+  packCol.hidden = true;
+  packWrap.hidden = true;
+  resetPackPose();
+
+  pulled.forEach((card, i) => {
+    const el = document.createElement("div");
+    el.className = "slot-card";
+    el.dataset.idx = String(i);
+    el.innerHTML = `<div class="flipper">
+      <div class="face back">${cardBack()}</div>
+      <div class="face front">${renderCard(card, { idx: i, zoomable: false })}</div>
+    </div>`;
+    hand.appendChild(el);
+  });
+
+  for(let i = 0; i < pulled.length; i++){
+    hand.children[i].classList.add("in");
+    if(!reduced) await wait(90);
+  }
+  if(reduced){
+    [...hand.children].forEach(el => { el.style.opacity = "1"; el.style.transform = "none"; });
+  }
+
+  hand.classList.add("live");
+  intro.textContent = "Clique une carte pour la découvrir.";
+  phase = "deal";
+}
+
+async function revealCard(i){
+  const el = hand.children[i];
+  const card = pulled[i];
+  if(!el || !card || el.classList.contains("revealed") || revealing) return;
+  revealing = true;
+  const myth = card.rarete === "mythique";
+  const epic = card.rarete === "épique";
+  const flipMs = reduced ? 40 : 360;
+
+  if((myth || epic) && !reduced){
+    el.classList.add("hit");
+    document.body.classList.add("cutaway");
+    stage.classList.add("cutaway");
+    await wait(280);
+
+    fx.className = "";
+    $("dust").innerHTML = "";
+    $("crowd").innerHTML = "";
+    $("flashes").innerHTML = "";
+    if(myth){
+      spawnCrowd();
+      spawnFlashes();
+      fx.className = "myth";
+      await wait(1450);
+    } else {
+      spawnDust();
+      fx.className = "epic";
+      await wait(950);
+    }
+
+    stage.classList.add("show-hit");
+    await wait(160);
+    el.classList.add("revealed", myth ? "fx-myth" : "fx-epic");
+    await wait(flipMs + (myth ? 520 : 380));
+
+    [...hand.children].forEach((n, j) => { if(j !== i) n.classList.add("dim"); });
+    document.body.classList.remove("cutaway");
+    stage.classList.remove("cutaway", "show-hit");
+    fx.classList.add("settled");
+    await wait(240);
+    el.classList.remove("hit");
+  } else if(card.rarete === "rare" && !reduced){
+    el.classList.add("revealed", "fx-rare");
+    await wait(flipMs + 420);
+  } else {
+    el.classList.add("revealed");
+    await wait(flipMs);
+  }
+
+  const face = el.querySelector(".face.front .card");
+  if(face){ face.classList.add("zoomable"); face.tabIndex = 0; }
+
+  revealing = false;
+  if([...hand.children].every(n => n.classList.contains("revealed"))){
+    intro.textContent = "Clique une carte pour agrandir, ou ailleurs pour ranger.";
+    againRow.hidden = true;
+    hand.classList.add("stashable");
+    phase = "open";
+    refreshWallet();
+  }
+}
+
+function bindDrag(){
+  window.addEventListener("pointermove", onMove);
+  window.addEventListener("pointerup", onUp);
+  window.addEventListener("pointercancel", onUp);
+  window.addEventListener("mousemove", onMove);
+  window.addEventListener("mouseup", onUp);
+}
+function unbindDrag(){
+  window.removeEventListener("pointermove", onMove);
+  window.removeEventListener("pointerup", onUp);
+  window.removeEventListener("pointercancel", onUp);
+  window.removeEventListener("mousemove", onMove);
+  window.removeEventListener("mouseup", onUp);
+}
+
+function sealProgress(dx, width){
+  const sealPx = width * (SEAL.x1 - SEAL.x0);
+  return Math.max(0, Math.min(1, Math.abs(dx) / Math.max(64, sealPx * 0.72)));
+}
+
+function onDown(ev){
+  if(phase !== "idle" || drag) return;
+  if(ev.button != null && ev.button !== 0) return;
+  ev.preventDefault();
+  const rect = pack.getBoundingClientRect();
+  sizeTearCanvas();
+  packWrap.classList.remove("idle");
+  packWrap.classList.add("dragging");
+  drag = {
+    x: ev.clientX,
+    t: performance.now(),
+    lastX: ev.clientX,
+    width: rect.width,
+    seed: 1.4 + Math.random() * 4,
+    dir: 0,
+    progress: 0
+  };
+  drawTear(0, 1, drag.seed);
+  bindDrag();
+}
+
+function onMove(ev){
+  if(!drag || phase !== "idle") return;
+  drag.lastX = ev.clientX;
+  const dx = ev.clientX - drag.x;
+  if(!drag.dir && Math.abs(dx) > 8) drag.dir = dx > 0 ? 1 : -1;
+  const dir = drag.dir || (dx >= 0 ? 1 : -1);
+  tearDir = dir;
+  drag.progress = sealProgress(dx, drag.width);
+  drawTear(drag.progress, dir, drag.seed);
+}
+
+function onUp(ev){
+  if(!drag || phase !== "idle") return;
+  const x = ev.clientX ?? drag.lastX;
+  const dx = x - drag.x;
+  const dt = Math.max(1, performance.now() - drag.t);
+  const v = Math.abs(dx) / dt;
+  const snapshot = drag;
+  drag = null;
+  unbindDrag();
+  const enough = snapshot.progress > 0.55 || (snapshot.progress > 0.28 && v > 0.55);
+  if(enough){
+    tearDir = snapshot.dir || (dx >= 0 ? 1 : -1);
+    drag = snapshot;
+    openPack().then(() => { drag = null; });
+  } else {
+    const from = snapshot.progress;
+    const seed = snapshot.seed;
+    const dir = snapshot.dir || 1;
+    const t0 = performance.now();
+    const tick = now => {
+      const k = Math.min(1, (now - t0) / 280);
+      drawTear(from * (1 - k), dir, seed);
+      if(k < 1) requestAnimationFrame(tick);
+      else {
+        packWrap.classList.remove("dragging");
+        packWrap.classList.add("idle");
+        resetPackPose();
+      }
+    };
+    requestAnimationFrame(tick);
+  }
+}
+
+sealHit.addEventListener("pointerdown", onDown);
+sealHit.addEventListener("mousedown", onDown);
+pack.addEventListener("dragstart", ev => ev.preventDefault());
+
+hand.addEventListener("click", ev => {
+  const slot = ev.target.closest(".slot-card");
+  if(phase === "open"){
+    if(slot){
+      const card = pulled[+slot.dataset.idx];
+      if(card) openCardZoom(card, { fromPack: true });
+      return;
+    }
+    stashHand();
+    return;
+  }
+  if(!slot || phase !== "deal") return;
+  const i = +slot.dataset.idx;
+  if(!slot.classList.contains("revealed")){
+    revealCard(i);
+    return;
+  }
+  const card = pulled[i];
+  if(!card) return;
+  openCardZoom(card, { fromPack: true });
+});
+stage.addEventListener("click", ev => {
+  if(phase !== "open") return;
+  if(ev.target.closest(".slot-card, header, footer, dialog, .wallet, .pack-col, .nav")) return;
+  stashHand();
+});
+$("zoomclose").onclick = () => $("zoom").close();
+$("zoom").addEventListener("click", ev => { if(ev.target === $("zoom")) $("zoom").close(); });
+
+again.addEventListener("click", async () => {
+  if(phase !== "open") return;
+  await stashHand();
+});
+$("toAlbum").addEventListener("click", () => showView("album"));
+$("emptyAlbum").addEventListener("click", () => showView("album"));
+function shopTotal(){
+  return PACK_COST * shopQty;
+}
+function renderShopSelect(){
+  const w = loadWallet();
+  const total = shopTotal();
+  const can = w.credits >= total;
+  $("shopBody").innerHTML =
+    `<div class="shop-bar"><span>Acheter des boosters</span>` +
+    `<button type="button" id="shopClose">Fermer</button></div>` +
+    `<p class="shop-price">1 booster = <b>${PACK_COST} crédits</b></p>` +
+    `<div class="shop-qty" role="group" aria-label="Quantité">` +
+    `<button type="button" data-qty="1" class="${shopQty === 1 ? "on" : ""}">1</button>` +
+    `<button type="button" data-qty="10" class="${shopQty === 10 ? "on" : ""}">10</button>` +
+    `</div>` +
+    `<p class="shop-total">Total : ${total} crédits</p>` +
+    `<p class="shop-bal">Solde : ${w.credits} crédits` +
+    (can ? "" : ` · il en manque ${total - w.credits}`) + `</p>` +
+    `<div class="shop-actions">` +
+    `<button type="button" class="primary" id="shopNext" ${can ? "" : "disabled"}>Continuer</button>` +
+    `</div>`;
+}
+function renderShopConfirm(){
+  const total = shopTotal();
+  const label = shopQty === 1 ? "1 booster" : `${shopQty} boosters`;
+  $("shopBody").innerHTML =
+    `<div class="shop-bar"><span>Confirmation</span>` +
+    `<button type="button" id="shopClose">Fermer</button></div>` +
+    `<p class="shop-ask">Êtes-vous sûr de vouloir acheter ${label} ?\n` +
+    `${total} crédits vous seront retirés de votre solde.</p>` +
+    `<div class="shop-actions">` +
+    `<button type="button" class="primary" id="shopConfirm">Confirmer</button>` +
+    `<button type="button" id="shopBack">Retour</button>` +
+    `</div>`;
+}
+function openShop(){
+  shopQty = 1;
+  renderShopSelect();
+  $("shop").showModal();
+}
+function finishBuy(qty){
+  if(!buyPacks(qty)){
+    intro.textContent = `Pas assez de crédits (il en faut ${PACK_COST * qty}).`;
+    return;
+  }
+  $("shop").close();
+  if(phase === "empty"){
+    armNextPack();
+  } else {
+    refreshWallet();
+    if(phase === "idle"){
+      const w = loadWallet();
+      intro.textContent = `${forceCopy()} · ${w.packs} booster${w.packs > 1 ? "s" : ""}`;
+    }
+  }
+}
+$("buyPack").addEventListener("click", openShop);
+$("shop").addEventListener("click", ev => {
+  if(ev.target === $("shop")) $("shop").close();
+  const close = ev.target.closest("#shopClose");
+  if(close){ $("shop").close(); return; }
+  const qtyBtn = ev.target.closest(".shop-qty [data-qty]");
+  if(qtyBtn){
+    shopQty = Number(qtyBtn.dataset.qty) === 10 ? 10 : 1;
+    renderShopSelect();
+    return;
+  }
+  if(ev.target.closest("#shopNext")){
+    renderShopConfirm();
+    return;
+  }
+  if(ev.target.closest("#shopBack")){
+    renderShopSelect();
+    return;
+  }
+  if(ev.target.closest("#shopConfirm")){
+    finishBuy(shopQty);
+  }
+});
+
+let sellCard = null;
+let sellPrice = 0;
+function readSellPrice(){
+  return Math.max(0, Math.floor(Number(($("sellPriceInput") || {}).value) || 0));
+}
+function updateSellPayoutHint(){
+  const hint = $("sellPayoutHint");
+  if(!hint) return;
+  const raw = readSellPrice();
+  if(!isValidMarketPrice(raw)){
+    hint.textContent = `Prix minimum : ${MARKET_PRICE_MIN} crédit. Taxe = 10 % arrondie (<5 = 0).`;
+    return;
+  }
+  const tax = marketTax(raw);
+  const pay = sellerPayout(raw);
+  hint.textContent = tax
+    ? `Tu recevras ${creditsLabel(pay)} (taxe ${tax} cr, ~10 % arrondie).`
+    : `Tu recevras ${creditsLabel(pay)}.`;
+}
+function renderSellForm(){
+  if(!sellCard) return;
+  if(sellPrice < MARKET_PRICE_MIN) sellPrice = suggestPrice(sellCard);
+  $("sellBody").innerHTML =
+    `<div class="shop-bar"><span>Vendre « ${esc(sellCard.name)} »</span>` +
+    `<button type="button" id="sellClose">Fermer</button></div>` +
+    `<div class="shop-field">` +
+    `<label for="sellPriceInput">Prix de vente (crédits)</label>` +
+    `<input type="number" id="sellPriceInput" min="${MARKET_PRICE_MIN}" max="999999" step="1" value="${sellPrice}">` +
+    `</div>` +
+    `<p class="shop-bal" id="sellPayoutHint"></p>` +
+    `<div class="shop-actions">` +
+    `<button type="button" class="primary" id="sellNext">Continuer</button>` +
+    `</div>`;
+  updateSellPayoutHint();
+  const input = $("sellPriceInput");
+  if(input){
+    input.focus();
+    input.select();
+  }
+}
+function renderSellConfirm(){
+  if(!sellCard) return;
+  const tax = marketTax(sellPrice);
+  const pay = sellerPayout(sellPrice);
+  const taxLine = tax
+    ? `À la vente tu recevras ${creditsLabel(pay)} (taxe ${tax} cr détruite).`
+    : `À la vente tu recevras ${creditsLabel(pay)}.`;
+  $("sellBody").innerHTML =
+    `<div class="shop-bar"><span>Confirmation</span>` +
+    `<button type="button" id="sellClose">Fermer</button></div>` +
+    `<p class="shop-ask">Mettre « ${esc(sellCard.name)} » en vente à ${creditsLabel(sellPrice)} ?\n` +
+    `${taxLine}\n` +
+    `<div class="shop-actions">` +
+    `<button type="button" class="primary" id="sellConfirm">Confirmer</button>` +
+    `<button type="button" id="sellBack">Retour</button>` +
+    `</div>`;
+}
+function openSellDialog(card){
+  sellCard = card;
+  sellPrice = suggestPrice(card);
+  renderSellForm();
+  if(!$("sell").open) $("sell").showModal();
+}
+function finishSell(){
+  if(!sellCard || !isValidMarketPrice(sellPrice)) return;
+  const id = sellCard.id;
+  const name = sellCard.name;
+  const price = sellPrice;
+  const res = listCardForSale(id, sellPrice);
+  if(!res.ok){
+    alert(res.why);
+    renderSellForm();
+    return;
+  }
+  $("sell").close();
+  if($("zoom").open) $("zoom").close();
+  sellCard = null;
+  marketTab = "mine";
+  document.querySelectorAll("#market [data-market-tab]").forEach(b => {
+    const on = b.dataset.marketTab === "mine";
+    b.classList.toggle("on", on);
+    b.setAttribute("aria-selected", on ? "true" : "false");
+  });
+  showView("market");
+  showSnackbar(`Annonce publiée · ${name} à ${creditsLabel(price)}`);
+}
+$("sell").addEventListener("click", ev => {
+  if(ev.target === $("sell")){ $("sell").close(); return; }
+  if(ev.target.closest("#sellClose")){ $("sell").close(); return; }
+  if(ev.target.closest("#sellNext")){
+    const raw = readSellPrice();
+    if(!isValidMarketPrice(raw)){
+      updateSellPayoutHint();
+      const input = $("sellPriceInput");
+      if(input) input.focus();
+      return;
+    }
+    sellPrice = raw;
+    renderSellConfirm();
+    return;
+  }
+  if(ev.target.closest("#sellBack")){
+    renderSellForm();
+    return;
+  }
+  if(ev.target.closest("#sellConfirm")) finishSell();
+});
+$("sell").addEventListener("input", ev => {
+  if(ev.target && ev.target.id === "sellPriceInput") updateSellPayoutHint();
+});
+$("sell").addEventListener("keydown", ev => {
+  if(ev.key !== "Enter") return;
+  if(ev.target && ev.target.id === "sellPriceInput"){
+    ev.preventDefault();
+    const next = $("sellNext");
+    if(next) next.click();
+  }
+});
+
+let offerListing = null;
+let offerCard = null;
+let offerPrice = 0;
+function readOfferPrice(){
+  return Math.max(0, Math.floor(Number(($("offerPriceInput") || {}).value) || 0));
+}
+function updateOfferHint(){
+  const hint = $("offerHint");
+  if(!hint || !offerListing) return;
+  const raw = readOfferPrice();
+  if(!isValidMarketPrice(raw)){
+    hint.textContent = `Prix minimum : ${MARKET_PRICE_MIN} crédit.`;
+    return;
+  }
+  if(raw >= offerListing.price){
+    hint.textContent = `Doit être inférieur à ${offerListing.price} cr (prix affiché).`;
+    return;
+  }
+  const bal = loadWallet().credits;
+  hint.textContent = bal < raw
+    ? `Il te manque ${raw - bal} crédits.`
+    : `Prix affiché ${offerListing.price} cr · tu proposes ${raw} cr.`;
+}
+function renderOfferForm(){
+  if(!offerCard || !offerListing) return;
+  if(offerPrice < MARKET_PRICE_MIN){
+    offerPrice = Math.max(MARKET_PRICE_MIN, Math.floor(offerListing.price * 0.8));
+    if(offerPrice >= offerListing.price) offerPrice = Math.max(MARKET_PRICE_MIN, offerListing.price - 1);
+  }
+  $("offerBody").innerHTML =
+    `<div class="shop-bar"><span>Contre-offre · ${esc(offerCard.name)}</span>` +
+    `<button type="button" id="offerClose">Fermer</button></div>` +
+    `<p class="shop-bal">Prix affiché : <b>${offerListing.price} cr</b></p>` +
+    `<div class="shop-field">` +
+    `<label for="offerPriceInput">Ton offre (crédits)</label>` +
+    `<input type="number" id="offerPriceInput" min="${MARKET_PRICE_MIN}" max="${Math.max(MARKET_PRICE_MIN, offerListing.price - 1)}" step="1" value="${offerPrice}">` +
+    `</div>` +
+    `<p class="shop-bal" id="offerHint"></p>` +
+    `<div class="shop-actions">` +
+    `<button type="button" class="primary" id="offerNext">Continuer</button>` +
+    `</div>`;
+  updateOfferHint();
+  const input = $("offerPriceInput");
+  if(input){ input.focus(); input.select(); }
+}
+function renderOfferConfirm(){
+  if(!offerCard || !offerListing) return;
+  $("offerBody").innerHTML =
+    `<div class="shop-bar"><span>Confirmation</span>` +
+    `<button type="button" id="offerClose">Fermer</button></div>` +
+    `<p class="shop-ask">Proposer ${creditsLabel(offerPrice)} pour « ${esc(offerCard.name)} » ?\n` +
+    `Prix affiché : ${offerListing.price} cr. Le vendeur sera notifié.</p>` +
+    `<div class="shop-actions">` +
+    `<button type="button" class="primary" id="offerConfirm">Envoyer</button>` +
+    `<button type="button" id="offerBack">Retour</button>` +
+    `</div>`;
+}
+function openOfferDialog(card, listing){
+  offerCard = card;
+  offerListing = listing;
+  const existing = pendingOffersForListing(listing.id).find(o => isMe(o.buyer));
+  offerPrice = existing ? existing.price : Math.max(MARKET_PRICE_MIN, Math.floor(listing.price * 0.8));
+  if(offerPrice >= listing.price) offerPrice = Math.max(MARKET_PRICE_MIN, listing.price - 1);
+  renderOfferForm();
+  if(!$("offer").open) $("offer").showModal();
+}
+function finishOffer(){
+  if(!offerCard || !offerListing || !isValidMarketPrice(offerPrice)) return;
+  if(offerPrice >= offerListing.price) return;
+  const name = offerCard.name;
+  const price = offerPrice;
+  const res = makeOffer(offerListing.id, offerPrice);
+  if(!res.ok){
+    alert(res.why);
+    renderOfferForm();
+    return;
+  }
+  $("offer").close();
+  if($("zoom").open) $("zoom").close();
+  offerCard = null;
+  offerListing = null;
+  marketTab = "offers";
+  document.querySelectorAll("#market [data-market-tab]").forEach(b => {
+    const on = b.dataset.marketTab === "offers";
+    b.classList.toggle("on", on);
+    b.setAttribute("aria-selected", on ? "true" : "false");
+  });
+  showView("market");
+  showSnackbar(res.updated
+    ? `Offre mise à jour · ${name} à ${creditsLabel(price)}`
+    : `Contre-offre envoyée · ${name} à ${creditsLabel(price)}`);
+}
+$("offer").addEventListener("click", ev => {
+  if(ev.target === $("offer")){ $("offer").close(); return; }
+  if(ev.target.closest("#offerClose")){ $("offer").close(); return; }
+  if(ev.target.closest("#offerNext")){
+    const raw = readOfferPrice();
+    if(!offerListing || !isValidMarketPrice(raw) || raw >= offerListing.price){
+      updateOfferHint();
+      const input = $("offerPriceInput");
+      if(input) input.focus();
+      return;
+    }
+    if(loadWallet().credits < raw){
+      updateOfferHint();
+      return;
+    }
+    offerPrice = raw;
+    renderOfferConfirm();
+    return;
+  }
+  if(ev.target.closest("#offerBack")){
+    renderOfferForm();
+    return;
+  }
+  if(ev.target.closest("#offerConfirm")) finishOffer();
+});
+$("offer").addEventListener("input", ev => {
+  if(ev.target && ev.target.id === "offerPriceInput") updateOfferHint();
+});
+$("offer").addEventListener("keydown", ev => {
+  if(ev.key !== "Enter") return;
+  if(ev.target && ev.target.id === "offerPriceInput"){
+    ev.preventDefault();
+    const next = $("offerNext");
+    if(next) next.click();
+  }
+});
+$("cheatCredits").addEventListener("click", () => {
+  const raw = window.prompt("Combien de crédits ajouter ?", "500");
+  if(raw == null) return;
+  const n = Math.max(0, Math.floor(Number(String(raw).replace(",", ".")) || 0));
+  if(!n) return;
+  const w = ensureWallet();
+  w.credits += n;
+  saveWallet(w);
+  refreshWallet();
+});
+
+let zoomCtx = { card: null, fromAlbum: false, fromMarket: false, fromPack: false, listingId: null, offerId: null };
+
+function zoomOptsFromCtx(){
+  return {
+    fromAlbum: zoomCtx.fromAlbum,
+    fromMarket: zoomCtx.fromMarket,
+    fromPack: zoomCtx.fromPack,
+    listingId: zoomCtx.listingId || null,
+    offerId: zoomCtx.offerId || null,
+  };
+}
+
+function showZoomAsk(message, onYes){
+  const actions = $("zoomActions");
+  actions.hidden = false;
+  actions.innerHTML =
+    `<p class="ask">${esc(message)}</p>` +
+    `<button type="button" class="primary" data-ask="yes">Confirmer</button>` +
+    `<button type="button" data-ask="no">Annuler</button>`;
+  const onClick = ev => {
+    const btn = ev.target.closest("button[data-ask]");
+    if(!btn) return;
+    actions.removeEventListener("click", onClick);
+    if(btn.dataset.ask === "yes") onYes();
+    else if(zoomCtx.card) openCardZoom(zoomCtx.card, zoomOptsFromCtx());
+  };
+  actions.addEventListener("click", onClick);
+}
+
+function openCardZoom(card, opts={}){
+  zoomCtx = {
+    card,
+    fromAlbum: !!opts.fromAlbum,
+    fromMarket: !!opts.fromMarket,
+    fromPack: !!opts.fromPack,
+    listingId: opts.listingId || null,
+    offerId: opts.offerId || null,
+  };
+  const owned = loadOwned().got[card.id];
+  const n = owned ? (owned.n || 0) : 0;
+  const missing = !owned;
+  const listing = opts.fromMarket && opts.listingId
+    ? (loadMarket().listings.find(l => l.id === opts.listingId) || null)
+    : null;
+  $("zoomcap").textContent = "";
+  // Paquet / marché : toujours le recto. Classeur manquant : verso.
+  const face = (missing && !opts.fromMarket && !opts.fromPack)
+    ? cardBack()
+    : renderCard(card, { zoomable: false });
+  const ownedBadge = (opts.fromMarket && !missing)
+    ? `<span class="zoom-owned">Possédée${n > 1 ? ` · ×${n}` : ""}</span>`
+    : "";
+  $("zoomcard").innerHTML = ownedBadge + face;
+  const actions = $("zoomActions");
+  const bits = [];
+  if(opts.fromPack){
+    // Aperçu uniquement — la carte n’est pas encore rangée.
+  } else if(opts.fromMarket && listing){
+    const mine = isMe(listing.seller);
+    if(mine){
+      markOffersSeen(listing.id);
+      const offers = pendingOffersForListing(listing.id).sort((a, b) => b.price - a.price);
+      if(offers.length){
+        bits.push(`<div class="zoom-offers">${offers.map(o =>
+          `<div class="offer-row">
+            <span class="lbl">Offre <b>${o.price} cr</b> · ${esc(userName(o.buyer))}</span>
+            <span class="btns">
+              <button type="button" class="ok" data-act="oaccept" data-oid="${esc(o.id)}" data-id="${esc(card.id)}">Accepter</button>
+              <button type="button" data-act="oreject" data-oid="${esc(o.id)}" data-id="${esc(card.id)}">Refuser</button>
+            </span>
+          </div>`
+        ).join("")}</div>`);
+      } else {
+        bits.push(`<div class="hint">Aucune contre-offre pour l’instant.</div>`);
+      }
+      bits.push(`<button type="button" data-act="mcancel" data-id="${esc(card.id)}" data-lid="${esc(listing.id)}">Retirer l’annonce</button>`);
+    } else {
+      const can = loadWallet().credits >= listing.price;
+      bits.push(
+        `<button type="button" class="primary" data-act="mbuy" data-id="${esc(card.id)}" data-lid="${esc(listing.id)}" ${can ? "" : "disabled"}>Acheter · ${listing.price} cr</button>`
+      );
+      bits.push(
+        `<button type="button" data-act="moffer" data-id="${esc(card.id)}" data-lid="${esc(listing.id)}">Contre-offre</button>`
+      );
+      const mineOff = pendingOffersForListing(listing.id).find(o => isMe(o.buyer));
+      if(mineOff){
+        bits.push(`<div class="hint">Ton offre en cours : ${mineOff.price} cr</div>`);
+        bits.push(`<button type="button" data-act="owithdraw" data-oid="${esc(mineOff.id)}" data-id="${esc(card.id)}">Retirer mon offre</button>`);
+      }
+      if(!can) bits.push(`<div class="hint">Il te manque ${listing.price - loadWallet().credits} crédits pour le prix affiché.</div>`);
+    }
+  } else if(opts.fromMarket && !listing){
+    bits.push(`<div class="hint">Annonce plus disponible.</div>`);
+    if(opts.offerId){
+      const off = loadMarket().offers.find(o => o.id === opts.offerId);
+      if(off && off.status === "pending" && isMe(off.buyer)){
+        bits.push(`<button type="button" data-act="owithdraw" data-oid="${esc(off.id)}" data-id="${esc(card.id)}">Retirer mon offre</button>`);
+      }
+    }
+  } else {
+    if(opts.fromAlbum){
+      bits.push(
+        `<input type="number" class="qty" id="zoomQty" min="1" max="99" value="1" title="Exemplaires" aria-label="Exemplaires">` +
+        `<button type="button" data-act="grant" data-id="${esc(card.id)}">Ajouter (test)</button>`
+      );
+    }
+    const listed = myListingsFor(card.id);
+    const free = freeCopies(card.id);
+    if(free >= 2){
+      const gain = DESTROY_CREDITS[card.rarete] || 1;
+      bits.push(`<button type="button" data-act="destroy" data-id="${esc(card.id)}">Détruire 1 doublon (+${gain} crédits)</button>`);
+    }
+    if(opts.fromAlbum && free >= 1){
+      bits.push(`<button type="button" data-act="sell" data-id="${esc(card.id)}">Vendre</button>`);
+    }
+    if(opts.fromAlbum && listed.length){
+      bits.push(`<button type="button" data-act="mcancel" data-id="${esc(card.id)}" data-lid="${esc(listed[0].id)}">Retirer l’annonce</button>`);
+      bits.push(`<div class="hint">En cours de vente${listed.length > 1 ? ` · ${listed.length} annonces` : ""} · ${listed[0].price} cr</div>`);
+    }
+    if(missing){
+      bits.push(`<div class="hint">Carte manquante — cherche-la en booster ou sur le marché.</div>`);
+    }
+  }
+  actions.innerHTML = bits.join("");
+  actions.hidden = !bits.length;
+  if(!$("zoom").open) $("zoom").showModal();
+}
+$("zoomActions").addEventListener("click", ev => {
+  const btn = ev.target.closest("button[data-act]");
+  if(!btn) return;
+  const id = btn.dataset.id;
+  const card = byId.get(id);
+  if(!card) return;
+  const reopen = () => {
+    openCardZoom(card, zoomOptsFromCtx());
+    if(document.body.classList.contains("album")) renderAlbum();
+    if(document.body.classList.contains("market")) renderMarket();
+  };
+  if(btn.dataset.act === "grant"){
+    const qty = Math.max(1, Math.min(99, parseInt(($("zoomQty") || {}).value, 10) || 1));
+    const batch = [];
+    for(let i = 0; i < qty; i++) batch.push(card);
+    collect(batch);
+    reopen();
+    return;
+  }
+  if(btn.dataset.act === "destroy"){
+    const gain = DESTROY_CREDITS[card.rarete] || 1;
+    showZoomAsk(
+      `Êtes-vous sûr de vouloir détruire un doublon de « ${card.name} » ?\n` +
+      `${gain} crédit${gain > 1 ? "s" : ""} vous seront crédités.`,
+      () => {
+        const res = destroyCopy(id);
+        if(!res.ok){ alert(res.why); reopen(); return; }
+        reopen();
+      }
+    );
+    return;
+  }
+  if(btn.dataset.act === "sell"){
+    openSellDialog(card);
+    return;
+  }
+  if(btn.dataset.act === "mbuy"){
+    const lid = btn.dataset.lid;
+    const listing = loadMarket().listings.find(l => l.id === lid);
+    if(!listing){ alert("Annonce introuvable."); $("zoom").close(); renderMarket(); return; }
+    showZoomAsk(
+      `Acheter « ${card.name} » pour ${creditsLabel(listing.price)} ?`,
+      () => {
+        const res = buyListing(lid);
+        if(!res.ok){ alert(res.why); reopen(); return; }
+        $("zoom").close();
+        renderMarket();
+        refreshWallet();
+        showSnackbar(`Achat réussi · ${card.name} (−${creditsLabel(res.price)})`);
+      }
+    );
+    return;
+  }
+  if(btn.dataset.act === "moffer"){
+    const lid = btn.dataset.lid;
+    const listing = loadMarket().listings.find(l => l.id === lid);
+    if(!listing){ alert("Annonce introuvable."); $("zoom").close(); renderMarket(); return; }
+    openOfferDialog(card, listing);
+    return;
+  }
+  if(btn.dataset.act === "oaccept"){
+    const oid = btn.dataset.oid;
+    const offer = loadMarket().offers.find(o => o.id === oid);
+    if(!offer){ alert("Offre introuvable."); reopen(); return; }
+    showZoomAsk(
+      `Accepter l’offre à ${creditsLabel(offer.price)} pour « ${card.name} » ?\n` +
+      `Tu recevras ${creditsLabel(sellerPayout(offer.price))} (taxe déduite).`,
+      () => {
+        const res = acceptOffer(oid);
+        if(!res.ok){ alert(res.why); reopen(); return; }
+        $("zoom").close();
+        renderMarket();
+        renderAlbum();
+        showSnackbar(`Offre acceptée · +${creditsLabel(res.pay)}`);
+      }
+    );
+    return;
+  }
+  if(btn.dataset.act === "oreject"){
+    const oid = btn.dataset.oid;
+    showZoomAsk(
+      `Refuser cette offre sur « ${card.name} » ?`,
+      () => {
+        const res = rejectOffer(oid);
+        if(!res.ok){ alert(res.why); reopen(); return; }
+        reopen();
+        showSnackbar("Offre refusée");
+      }
+    );
+    return;
+  }
+  if(btn.dataset.act === "owithdraw"){
+    const oid = btn.dataset.oid;
+    showZoomAsk(
+      `Retirer ton offre sur « ${card.name} » ?`,
+      () => {
+        const res = withdrawOffer(oid);
+        if(!res.ok){ alert(res.why); reopen(); return; }
+        $("zoom").close();
+        renderMarket();
+        showSnackbar("Offre retirée");
+      }
+    );
+    return;
+  }
+  if(btn.dataset.act === "mcancel"){
+    const lid = btn.dataset.lid;
+    showZoomAsk(
+      `Retirer l’annonce pour « ${card.name} » ?`,
+      () => {
+        const res = cancelListing(lid);
+        if(!res.ok){ alert(res.why); reopen(); return; }
+        if(document.body.classList.contains("album")){
+          reopen();
+        } else {
+          $("zoom").close();
+          renderMarket();
+        }
+      }
+    );
+  }
+});
+function openMarketListing(lid, offerId){
+  const m = loadMarket();
+  const listing = m.listings.find(l => l.id === lid);
+  if(listing){
+    const card = byId.get(listing.cardId);
+    if(!card) return;
+    openCardZoom(card, { fromMarket: true, listingId: listing.id, offerId: offerId || null });
+    return;
+  }
+  if(offerId){
+    const offer = m.offers.find(o => o.id === offerId);
+    const card = offer && byId.get(offer.cardId);
+    if(!card) return;
+    openCardZoom(card, { fromMarket: true, listingId: null, offerId });
+  }
+}
+function openMarketRow(row){
+  if(!row) return;
+  openMarketListing(row.dataset.lid || "", row.dataset.oid || null);
+}
+$("marketList").addEventListener("click", ev => {
+  const dismiss = ev.target.closest("[data-dismiss-offer]");
+  if(dismiss){
+    ev.preventDefault();
+    ev.stopPropagation();
+    const res = dismissRejectedOffer(dismiss.dataset.dismissOffer);
+    if(!res.ok){ alert(res.why); return; }
+    renderMarket();
+    return;
+  }
+  openMarketRow(ev.target.closest(".market-row"));
+});
+$("marketList").addEventListener("keydown", ev => {
+  if(ev.key !== "Enter" && ev.key !== " ") return;
+  const row = ev.target.closest(".market-row");
+  if(!row) return;
+  ev.preventDefault();
+  openMarketRow(row);
+});
+$("marketRefreshNpc").addEventListener("click", () => {
+  seedNpcListings(true);
+  seedNpcOffersOnMyListings();
+  renderMarket();
+});
+document.querySelectorAll("#market [data-market-tab]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const tab = btn.dataset.marketTab;
+    marketTab = tab === "mine" || tab === "offers" ? tab : "all";
+    document.querySelectorAll("#market [data-market-tab]").forEach(b => {
+      const on = b.dataset.marketTab === marketTab;
+      b.classList.toggle("on", on);
+      b.setAttribute("aria-selected", on ? "true" : "false");
+    });
+    if(marketTab === "mine") seedNpcOffersOnMyListings();
+    renderMarket();
+  });
+});
+$("notifBtn").addEventListener("click", ev => {
+  ev.stopPropagation();
+  toggleNotifMenu();
+});
+$("notifMenu").addEventListener("click", ev => {
+  ev.stopPropagation();
+  if(ev.target.closest("#notifMarkAll")){
+    markAllNotificationsRead();
+    return;
+  }
+  const item = ev.target.closest("[data-nid]");
+  if(!item) return;
+  openNotification(item.dataset.nid);
+});
+document.addEventListener("click", ev => {
+  const wrap = $("notifWrap");
+  if(!wrap || !wrap.classList.contains("open")) return;
+  if(wrap.contains(ev.target)) return;
+  setNotifMenuOpen(false);
+});
+document.addEventListener("keydown", ev => {
+  if(ev.key === "Escape") setNotifMenuOpen(false);
+});
+let marketQTimer = 0;
+$("marketQ").addEventListener("input", () => {
+  clearTimeout(marketQTimer);
+  marketQTimer = setTimeout(() => renderMarket(), 120);
+});
+["marketRare", "marketInstr", "marketFam"].forEach(id => {
+  $(id).addEventListener("change", () => renderMarket());
+});
+
+function fillFamilyFilter(){
+  const seen = new Set(catalog.map(c => c.famille).filter(k => FAMILIES[k]));
+  const keys = Object.keys(FAMILIES).filter(k => seen.has(k));
+  const opts = `<option value="">Genre</option>` +
+    keys.map(k => `<option value="${esc(k)}">${esc(FAMILIES[k].label)}</option>`).join("");
+  if($("albumFam")) $("albumFam").innerHTML = opts;
+  if($("marketFam")) $("marketFam").innerHTML = opts;
+}
+
+function fillInstrumentFilter(){
+  const seen = new Set(catalog.map(c => c.instrument).filter(k => INSTR[k]));
+  const keys = Object.keys(INSTR).filter(k => seen.has(k));
+  const opts = `<option value="">Instrument</option>` +
+    keys.map(k => `<option value="${esc(k)}">${esc(INSTR[k])}</option>`).join("");
+  if($("albumInstr")) $("albumInstr").innerHTML = opts;
+  if($("marketInstr")) $("marketInstr").innerHTML = opts;
+}
+
+async function showView(view){
+  if((view === "album" || view === "market") && phase === "open") await stashHand();
+  document.body.classList.toggle("album", view === "album");
+  document.body.classList.toggle("market", view === "market");
+  document.querySelectorAll("header .nav [data-view]").forEach(b => {
+    b.classList.toggle("on", b.dataset.view === view);
+  });
+  if(view === "album"){
+    $("pageTitle").textContent = "Classeur — Série 1";
+    if(location.hash !== "#classeur") history.replaceState(null, "", "#classeur");
+    intro.textContent = `${uniqueCount()} / ${catalog.length || 2000} cartes uniques.`;
+    syncAlbumFilterSwitches();
+    renderAlbum(true);
+  } else if(view === "market"){
+    $("pageTitle").textContent = "Marché — prix fixe";
+    if(location.hash !== "#marche") history.replaceState(null, "", "#marche");
+    intro.textContent = "Achète, vends ou négocie des cartes contre des crédits.";
+    refreshOffersBadge();
+    renderMarket();
+  } else {
+    $("pageTitle").textContent = "Booster — Charts";
+    if(location.hash) history.replaceState(null, "", location.pathname + location.search);
+    if(phase === "idle") intro.textContent = forceCopy();
+    else if(phase === "deal") intro.textContent = "Clique une carte pour la découvrir.";
+    else if(phase === "open") intro.textContent = "Clique une carte pour agrandir, ou ailleurs pour ranger.";
+    else if(phase === "empty") intro.textContent = "Plus de booster. Reviens demain (+1) ou achète-en un.";
+  }
+}
+
+function syncAlbumFilterSwitches(){
+  // Source de vérité = DOM (évite le décalage après aller-retour marché / dialogs).
+  if($("albumOwned")) albumHideMissing = !!$("albumOwned").checked;
+  if($("albumNewOnly")) albumNewOnly = !!$("albumNewOnly").checked;
+}
+function renderAlbum(resetPage){
+  syncAlbumFilterSwitches();
+  const data = loadOwned();
+  const owned = data.got;
+  const fresh = data.fresh || {};
+  const q = ($("albumQ").value || "").trim().toLowerCase();
+  const rare = $("albumRare").value;
+  const fam = $("albumFam").value;
+  const instr = $("albumInstr").value;
+  let list = catalog.slice();
+  if(rare) list = list.filter(c => c.rarete === rare);
+  if(fam) list = list.filter(c => c.famille === fam);
+  if(instr) list = list.filter(c => c.instrument === instr);
+  if(q){
+    list = list.filter(c =>
+      c.name.toLowerCase().includes(q) ||
+      (c.group || "").toLowerCase().includes(q)
+    );
+  }
+  // Recherche : tout le set (possédées + manquantes). Sinon, respect des interrupteurs.
+  if(!q && albumHideMissing) list = list.filter(c => owned[c.id]);
+  if(!q && albumNewOnly) list = list.filter(c => owned[c.id] && fresh[c.id]);
+  list.sort((a, b) => {
+    if(albumSort === "name") return a.name.localeCompare(b.name, "fr");
+    return (a.rank || 0) - (b.rank || 0);
+  });
+  refreshCount();
+  const grid = $("albumGrid");
+  const pager = $("albumPager");
+  if(!list.length){
+    albumPage = 1;
+    pager.hidden = true;
+    grid.innerHTML = `<p class="album-empty">${
+      albumNewOnly
+        ? "Aucune nouvelle carte."
+        : albumHideMissing && !uniqueCount()
+          ? "Ouvre un booster pour commencer la collection."
+          : "Aucune carte pour ce filtre."
+    }</p>`;
+    return;
+  }
+  if(resetPage) albumPage = 1;
+  const pages = Math.max(1, Math.ceil(list.length / albumPageSize));
+  if(albumPage > pages) albumPage = pages;
+  if(albumPage < 1) albumPage = 1;
+  const start = (albumPage - 1) * albumPageSize;
+  const pageList = list.slice(start, start + albumPageSize);
+  pager.hidden = pages <= 1;
+  $("albumPageLbl").textContent = `Page ${albumPage} / ${pages}`;
+  $("albumPrev").disabled = albumPage <= 1;
+  $("albumNext").disabled = albumPage >= pages;
+  grid.innerHTML = pageList.map(c => {
+    const got = owned[c.id];
+    if(!got){
+      return `<div class="album-cell hole" data-id="${esc(c.id)}">
+        <div class="thumb">${cardBack()}</div>
+        <div class="hole-cap">${esc(c.name)}</div>
+      </div>`;
+    }
+    const n = got.n || 1;
+    const neuve = !!fresh[c.id];
+    const onSale = myListingsFor(c.id).length > 0;
+    return `<div class="album-cell${neuve ? " is-new" : ""}${onSale ? " on-sale" : ""}" data-id="${esc(c.id)}">
+      <div class="thumb">${n > 1 ? `<span class="dup">×${n}</span>` : ""}${
+        onSale ? `<span class="sale-badge">En cours de vente</span>` : ""
+      }${
+        renderCard(c, { zoomable: true })
+      }</div>
+    </div>`;
+  }).join("");
+}
+
+document.querySelectorAll("header .nav [data-view]").forEach(btn => {
+  btn.addEventListener("click", () => showView(btn.dataset.view));
+});
+document.querySelectorAll("#album .chip[data-sort]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    albumSort = btn.dataset.sort;
+    document.querySelectorAll("#album .chip[data-sort]").forEach(x => x.classList.toggle("on", x === btn));
+    renderAlbum(true);
+  });
+});
+let albumQTimer = 0;
+$("albumQ").addEventListener("input", () => {
+  clearTimeout(albumQTimer);
+  albumQTimer = setTimeout(() => renderAlbum(true), 120);
+});
+["albumRare", "albumFam", "albumInstr"].forEach(id => {
+  $(id).addEventListener("change", () => renderAlbum(true));
+});
+$("albumOwned").addEventListener("change", () => {
+  albumHideMissing = $("albumOwned").checked;
+  renderAlbum(true);
+});
+$("albumNewOnly").addEventListener("change", () => {
+  albumNewOnly = $("albumNewOnly").checked;
+  if(albumNewOnly){
+    albumHideMissing = true;
+    $("albumOwned").checked = true;
+  }
+  syncSeeAllNewBtn();
+  renderAlbum(true);
+});
+$("albumSeeAllNew").addEventListener("click", ev => {
+  ev.preventDefault();
+  ev.stopPropagation();
+  clearAllFresh();
+  albumNewOnly = false;
+  $("albumNewOnly").checked = false;
+  syncSeeAllNewBtn();
+  renderAlbum(true);
+});
+$("albumPageSize").addEventListener("change", () => {
+  albumPageSize = Math.max(1, parseInt($("albumPageSize").value, 10) || 12);
+  renderAlbum();
+});
+$("albumPrev").addEventListener("click", () => {
+  if(albumPage <= 1) return;
+  albumPage -= 1;
+  renderAlbum();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+$("albumNext").addEventListener("click", () => {
+  albumPage += 1;
+  renderAlbum();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+$("albumGrid").addEventListener("click", ev => {
+  const cell = ev.target.closest(".album-cell");
+  if(!cell) return;
+  const card = byId.get(cell.dataset.id);
+  if(!card) return;
+  if(cell.classList.contains("is-new") && clearFresh(card.id)){
+    cell.classList.remove("is-new");
+    if(albumNewOnly) renderAlbum();
+  }
+  openCardZoom(card, { fromAlbum: true });
+});
+$("albumClear").addEventListener("click", () => {
+  if(!uniqueCount() && !loadWallet().credits && loadWallet().packs <= STARTER_PACKS) return;
+  if(!window.confirm(`Vider le classeur de ${userName(uid())} et réinitialiser ses crédits / boosters ?\n(Le marché partagé et l’autre joueur sont conservés.)`)) return;
+  const me = uid();
+  const m = loadMarket();
+  m.listings = m.listings.filter(l => l.seller !== me);
+  for(const o of m.offers){
+    if(o.buyer === me || o.seller === me){
+      if(o.status === "pending") o.status = "cancelled";
+    }
+  }
+  m.notifications = (m.notifications || []).filter(n => n.toUser && n.toUser !== me);
+  saveMarket(m);
+  saveOwned({ v: 2, got: {}, fresh: {} });
+  saveWallet({ v: 1, credits: 0, packs: 0, lastDaily: "", starter: false });
+  savePity({ n: 0, sinceMyth: 0, sinceEpic: 0, starterMyth: false });
+  ensureWallet();
+  refreshCount();
+  refreshWallet();
+  refreshNewBadge();
+  refreshOffersBadge();
+  renderAlbum();
+  if(document.body.classList.contains("market")) renderMarket();
+  if(!document.body.classList.contains("album") && !document.body.classList.contains("market")) armNextPack();
+});
+document.querySelector(".user-switch")?.addEventListener("click", ev => {
+  const btn = ev.target.closest("[data-user]");
+  if(!btn) return;
+  switchUser(btn.dataset.user);
+});
+window.addEventListener("hashchange", () => {
+  if(location.hash === "#classeur") showView("album");
+  else if(location.hash === "#marche") showView("market");
+  else showView("booster");
+});
+
+document.querySelectorAll("[data-force]").forEach(btn => {
+  btn.addEventListener("click", async () => {
+    if(phase === "opening") return;
+    force = foldRare(btn.dataset.force);
+    const q = force === "épique" ? "epique" : force;
+    history.replaceState(null, "", "?force=" + q);
+    phase = "loading";
+    await armNextPack();
+  });
+});
+document.querySelector(".legal-links")?.addEventListener("click", ev => {
+  const a = ev.target.closest("a[href]");
+  if(!a) return;
+  ev.preventDefault();
+  location.assign(a.getAttribute("href"));
+});
+
+async function boot(){
+  try {
+    loadActiveUser();
+    const res = await fetch("../data/census/catalog_s1.json", { cache: "no-store" });
+    if(!res.ok) throw new Error(res.status);
+    const doc = await res.json();
+    const rows = cardsFromCatalog(doc);
+    if(!rows.length) throw new Error("catalogue vide");
+    catalog = rows;
+    byId = new Map(rows.map(c => [c.id, c]));
+    migrateOwnedToIds();
+    pool = { commune:[], "peu commune":[], rare:[], épique:[], mythique:[] };
+    for(const c of rows){
+      if(pool[c.rarete]) pool[c.rarete].push(c);
+    }
+    fillFamilyFilter();
+    fillInstrumentFilter();
+    ensureWallet();
+    refreshCount();
+    refreshWallet();
+    refreshOffersBadge();
+    statusEl.remove();
+    await armNextPack();
+    if(location.hash === "#classeur") showView("album");
+    else if(location.hash === "#marche") showView("market");
+  } catch (err) {
+    statusEl.textContent = "Impossible de charger le catalogue. Lance export_catalog.py puis ouvre via le serveur local.";
+  }
+}
+boot();
+</script>
+</body>
+</html>

@@ -1,9 +1,14 @@
 # Données brutes et dérivées (dumps, caches d'API, datasets générés)
-data/
+data/*
+!data/schema/
+!data/schema/**
+!data/census/
+data/census/*
+!data/census/catalog_s1.json
 *.sqlite
 *.db
 
-# Visuels pré-rendus
+# Visuels pré-rendus (trop lourds pour git ; le proto Pages tourne sans)
 build/
 out/
 
