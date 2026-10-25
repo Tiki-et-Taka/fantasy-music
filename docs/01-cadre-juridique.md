@@ -122,3 +122,16 @@ la loi SREN du 21 mai 2024, soit un univers réglementaire sans commune mesure.
 - Attribution Wikidata (CC0, attribution non requise mais recommandée) et MusicBrainz.
 - Disclaimer visible : jeu indépendant, non affilié aux artistes représentés et sans
   lien avec eux.
+
+## Pages publiques (minimum)
+
+[`prototypes/legal/`](../prototypes/legal/) — strict nécessaire :
+
+| Page | Pourquoi |
+|---|---|
+| Mentions | Identification éditeur (LCEN), nature du service, sources |
+| Taux de tirage | Transparence des probabilités de booster |
+| Données personnelles | Information RGPD + contact pour droits / opposition |
+
+Pas de page « retrait » séparée : le droit d’opposition / effacement est dans
+données personnelles. Avant lancement : éditeur, hébergeur, `privacy@example.com`.

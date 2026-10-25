@@ -1,0 +1,35 @@
+{
+  "green": [
+    {"qid": "Q93341", "name": "Miles Davis"},
+    {"qid": "Q174957", "name": "Nina Simone"},
+    {"qid": "Q212015", "name": "Johnny Hallyday"},
+    {"qid": "Q539171", "name": "Dalida"},
+    {"qid": "Q1698", "name": "Serge Gainsbourg"},
+    {"qid": "Q1631", "name": "Édith Piaf"},
+    {"qid": "Q313453", "name": "Stromae"},
+    {"qid": "Q37793136", "name": "Aya Nakamura"},
+    {"qid": "Q45192617", "name": "Angèle"},
+    {"qid": "Q313868", "name": "Fela Kuti"},
+    {"qid": "Q7542", "name": "Prince"},
+    {"qid": "Q15869", "name": "Freddie Mercury"},
+    {"qid": "Q128121", "name": "Mick Jagger"},
+    {"qid": "Q834621", "name": "Bono"},
+    {"qid": "Q483203", "name": "Sting"},
+    {"qid": "Q2632", "name": "Ringo Starr"},
+    {"qid": "Q2643", "name": "George Harrison"},
+    {"qid": "Q185343", "name": "Mark Knopfler"},
+    {"qid": "Q221908", "name": "Yannick Noah"},
+    {"qid": "Q40580", "name": "Lisa Gerrard"},
+    {"qid": "Q3247658", "name": "Faïrouz"}
+  ],
+  "red": [
+    {"qid": "Q12881", "name": "Paulo Coelho", "why": "écrivain, pas musicien"},
+    {"qid": "Q165219", "name": "Robert Downey Jr.", "why": "acteur"},
+    {"qid": "Q43874", "name": "Eddie Murphy", "why": "acteur"},
+    {"qid": "Q171530", "name": "Patrick Bruel", "why": "veto éditorial"},
+    {"qid": "Q117012", "name": "Yoko Ono", "why": "veto éditorial"},
+    {"qid": "Q193815", "name": "Ryan Gosling", "why": "acteur"},
+    {"qid": "Q454010", "name": "Amanda Lear", "why": "veto éditorial"},
+    {"qid": "Q191755", "name": "Jim Jarmusch", "why": "cinéaste"}
+  ]
+}

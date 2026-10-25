@@ -147,6 +147,9 @@ contribution = max( min(1, années_présence / 5),
   sur dix compte plus que du temps de calendrier. Elle capture le membre resté six mois
   mais présent sur l'album culte.
 - Deux semaines sans une seule session en studio donnent zéro sur les deux branches.
+- **Implémenté** : albums studio du *groupe* (release-group type album MusicBrainz)
+  dont la première année de sortie tombe dans l'intervalle d'appartenance. Pas de
+  crédits d'enregistrement — trop lourds à cette échelle.
 
 ### Multi-groupes
 
@@ -184,7 +187,11 @@ encore trente ans après a des pageviews et des sitelinks qui le disent.
 1. Membre **officiel** — les qualificatifs de rôle Wikidata et les attributs
    d'appartenance MusicBrainz permettent d'écarter les musiciens de tournée et de session.
 2. Page Wikipédia dans **au moins 2 langues**.
-3. **Plafond de sécurité à 15 membres** par groupe, classés par score, uniquement pour
+3. **Genre jouable** — après résolution, au moins une des 17 familles retenues
+   (voir [`05-direction-artistique.md`](05-direction-artistique.md)). Gospel, classique
+   et expérimental *purs* sont hors vivier : ils ne tiennent pas dans une compétition
+   de groupes fantasy. Les crossovers restent (soul+gospel → soul, rock+expérimental → rock).
+4. **Plafond de sécurité à 15 membres** par groupe, classés par score, uniquement pour
    les cas pathologiques (King Crimson compte une vingtaine de membres historiques,
    Menudo plusieurs dizaines). Ce plafond laisse passer sans effort Slipknot (9),
    le Wu-Tang Clan (10) et Arcade Fire.

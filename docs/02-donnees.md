@@ -14,6 +14,7 @@ Propriétés utilisées :
 | `P31 = Q5` | Filtre « être humain » |
 | `P106` | Occupation (chanteur, musicien, rappeur, compositeur…) |
 | `P1303` | Instrument → pilote la pose de l'illustration |
+| `P21` | Sexe / genre → silhouette f / m / x de la plaque |
 | `P463` / `P527` | Membre de / a pour partie, avec qualificatifs `P580` et `P582` pour les dates, parfois `P2868` pour le rôle |
 | `P569` / `P570` | Naissance / décès |
 | `P2031` | Début de période d'activité |
@@ -92,8 +93,22 @@ ListenBrainz               ─┘   résolution genre,
                                  génération visuels)
 ```
 
-Le job mensuel tourne sur GitHub Actions (gratuit sur dépôt public). Les visuels sont
-pré-rendus en WebP/AVIF et poussés sur un stockage objet.
+Le schéma du dataset figé (cartes, séries, appartenances, historique de rareté)
+est défini dans [`09-schema-donnees.md`](09-schema-donnees.md) et
+[`data/schema/`](../data/schema/). Runbook complet :
+[`10-pipeline.md`](10-pipeline.md).
+
+```
+python tools/run_pipeline.py --stage all-light
+python tools/export_catalog.py --sqlite --validate
+```
+
+→ `data/census/catalog_s1.json` (+ `.sqlite`).
+
+La **validation** du schéma tourne sur GitHub Actions (cron mensuel + PR).
+L’ingest des dumps pageviews (~6 Go/mois) reste **local ou self-hosted**.
+Les visuels sont pré-rendus en WebP (`tools/prerender_illustrations.py`) puis
+poussés sur un stockage objet.
 
 ## Infrastructure cible
 

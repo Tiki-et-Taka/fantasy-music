@@ -3,18 +3,21 @@
 ## Tranché
 
 - Sources de données retenues et écartées.
-- Score composite 45 / 25 / 15 / 15.
+- Score composite 40 / 20 / 15 / 10 / 15 (pageviews / sitelinks / entropie /
+  richesse Wikidata / discographie).
 - Héritage de groupe sans poids de rôle, λ = 0,40, contribution à double branche.
 - Critères d'éligibilité, sans filtre d'ancienneté, plafond de sécurité à 15 membres.
 - Cliquet de rareté et ses garde-fous.
 - Structure du booster à slots, taux de tirage, pity timer.
-- Volumétrie des six paliers.
+- Volumétrie des cinq paliers.
+- Série 1 : 2 000 artistes, mélange 80 / 400 / 900 / 600. Voir
+  [`08-serie-1.md`](08-serie-1.md).
 - Cadre juridique : aucune photo, aucun visage identifiable, portraits en opt-in
 uniquement, procédure de retrait, pas d'argent réel en entrée ni en sortie.
 - Trois styles d'illustration et leur escalade par rareté.
 - Sept couches de composition.
 - Sceau de groupe génératif.
-- Vingt familles de genres, palettes et ordre de priorité.
+- Dix-sept familles de genres (gospel, classique et expérimental exclus).
 
 
 
@@ -26,10 +29,17 @@ uniquement, procédure de retrait, pas d'argent réel en entrée ni en sortie.
   ```
 - [x] Vérifier le classement contre les cas de référence : **8/8 validés**.
 - [x] Mesurer la couverture des champs.
-- [ ] Corriger les quatre points listés ci-dessous.
-- [ ] Rejouer, puis passer à l'extraction large pour caler les centiles et figer les
+- [x] Corriger les quatre points listés ci-dessous.
+- [x] Recenser le vivier (Wikidata + sitelinks, sans dumps) :
   ```
-  pondérations 40/20/15/10/15 et λ = 0,40, qui restent des hypothèses.
+  `tools/census_vivier.py` → 22 481 éligibles. Tous les planchers Série 1 tiennent,
+  y compris les cases deep. Détail dans [`08-serie-1.md`](08-serie-1.md).
+  ```
+- [x] Rejouer le scoring sur le vivier (5 composantes + héritage).
+  ```
+  `tools/score_vivier.py` : pageviews 40 %, sitelinks 20 %, entropie 15 %,
+  richesse Wikidata 10 %, discographie 15 %, héritage λ=0,40 (années et albums).
+  Les pondérations restent des hypothèses à caler sur la draft.
   ```
 
 Résultats détaillés dans `[07-validation-resultats.md](07-validation-resultats.md)`.
@@ -43,33 +53,34 @@ Résultats détaillés dans `[07-validation-resultats.md](07-validation-resultat
   contribution varie d'un membre à l'autre. Contraindre `score_final` à être non
   croissant dans l'ordre de `score_perso` au sein de chaque groupe.
   ```
-- [ ] **Dates d'appartenance.** Couverture Wikidata mesurée à 47 % seulement, sur un
+- [x] **Dates d'appartenance et discographie MusicBrainz.** Dump 2026-10-17,
   ```
-  échantillon pourtant très célèbre. Brancher MusicBrainz en source primaire, puis
-  remesurer.
+  `tools/ingest_musicbrainz_dump.py` + `tools/attach_group_albums.py`.
+  18 489 fiches avec release-groups, 13 055 avec au moins un groupe,
+  6 219 avec une date d'appartenance. Branche albums : 12 255 appartenances
+  datées avec un catalogue de groupe, 10 931 avec au moins un album joué.
+  Richesse Wikidata : 22 481/22 481 (`tools/fetch_wikidata_richness.py`,
+  statements + identifiants + P166).
   ```
-- [ ] **Pageviews par dumps.** L'API REST est limitée à ~100 requêtes consécutives pour
+- [x] **Pageviews par dumps.** Pipeline validé sur septembre 2026 (6,33 Go, 30
+  éditions, 3 654 hits). L'API REST est inutilisable à l'échelle. Les autres mois
+  (6 puis 24) sont **reportés à la construction du catalogue** : un mois suffit à
+  valider la formule, plusieurs mois ne servent qu'à écraser les pics en production.
+- [x] **Normalisation des pageviews par édition.** Implémentée sur le vivier
   ```
-  un client anonyme ; les 100 000 requêtes d'une Série 1 sont hors de portée.
-  Passer aux dumps mensuels.
-- [ ] **Normalisation des pageviews par édition.** Remplacer la somme brute par la part
-  de l'artiste dans chaque communauté linguistique, pondérée par `√(V_w)`. Ajouter le
-  bonus d'entropie clampé à `max(0, z)` et le plancher de domination de marché. Nouvelle
-  pondération 40/20/15/10/15, détaillée dans
-  [`03-rarete-scoring.md`](03-rarete-scoring.md). Recette : Aya Nakamura doit remonter
-  nettement **sans que** Miles Davis ni Nina Simone ne dégringolent.
+  (`tools/score_vivier.py`, dump 2026-09). Part √(V_w) × vues/médiane_musiciens,
+  bonus d'entropie `max(0, z)`, plancher top 1 % (1 361 artistes). Après les
+  cinq composantes : Aya Nakamura 929ᵉ, Miles Davis 54ᵉ, Nina Simone 165ᵉ —
+  le patrimoine ne s'écroule pas.
   ```
 
 
 
 ## Décisions ouvertes
 
-- [ ] **Taille de la Série 1.** 2 000 est une hypothèse de travail.
-- [ ] **Quotas de curation** par genre, époque et pays. Prendre le top 2 000 par score
-  ```
-  produit mécaniquement un set à 80 % anglo-saxon : les pageviews y mènent tout
-  droit. Arbitrage éditorial, pas technique.
-  ```
+- [x] **Taille de la Série 1.** 2 000, mélange 80 / 400 / 900 / 600.
+- [x] **Planchers genre / région / époque.** Figés dans
+  [`08-serie-1.md`](08-serie-1.md) (1 385 / 1 480 / 1 550), tranchés comme le set.
 - [ ] Découpage en extensions et rythme de sortie.
 
 
@@ -78,38 +89,77 @@ Résultats détaillés dans `[07-validation-resultats.md](07-validation-resultat
 
 Par ordre d'urgence :
 
-- [ ] **Planche de validation sérigraphie** — six illustrations, instruments et époques
+- [x] **Sexe et instrument pour les plaques.** `P21` + `P1303` collectés
   ```
-  différents, pour vérifier que le style tient la variété *avant* de commander quoi
-  que ce soit.
+  sur tout le vivier (`tools/fetch_illustration_attrs.py`). Silhouette
+  f/m/x et famille d'instrument accrochées au ranking et à la Série 1
+  (`tools/attach_illustration.py`). Sans ça, pas de rattachement prompt ↔ carte.
   ```
-- [ ] **Brief illustrateur détaillé** — les 8 familles d'instruments et leurs poses, les
+- [x] **Batch d'illustrations.** `tools/illustration_prompts.py` déduplique
   ```
-  5 tranches de costume, les 5 décors. Aujourd'hui ce n'est qu'une intention.
-  Inclure la ligne rouge de `01-cadre-juridique.md`.
+  le draft en plaques (pas 2 000 prompts). `tools/generate_illustrations.py`
+  les envoie à Flux Schnell (Fal.ai). `--lookdev` pour les 6 de validation,
+  puis le reste sans clic.
   ```
-- [ ] **Table d'override des 200 genres les plus fréquents.** Quelques heures de travail
+- [~] **Planche de validation sérigraphie** — *caduc.* Les plaques sont générées
   ```
-  manuel qui portent l'essentiel de la qualité perçue.
+  en IA à l’échelle du set ; plus de commande illustrateur ni de planche de
+  six avant go.
   ```
-- [ ] **Schéma de données** — carte, série, appartenance aux groupes, et surtout
+- [~] **Brief illustrateur détaillé** — *caduc.* Même raison (pipeline IA /
   ```
-  l'historique de rareté qu'exige le cliquet.
+  Flux). La DA reste dans `05-direction-artistique.md`.
   ```
-- [ ] **Pipeline technique** — requêtes SPARQL, ingestion pageviews, job mensuel sur
+- [x] **Draft Série 1.** `tools/draft_serie1.py` → 2 000 cartes,
   ```
-  GitHub Actions, pré-rendu des visuels.
+  `docs/serie-1-draft.csv`. Planchers tenus, top 40 du vivier assis,
+  raretés calées dans la série. Listes verte/rouge dans
+  `tools/draft_lists.json`.
   ```
-- [ ] **Pages légales** — attribution Wikidata et MusicBrainz, disclaimer de
+- [x] **Graines de genres + filtre « musicien d'abord ».** IDs Wikidata
   ```
-  non-affiliation, procédure de retrait, politique RGPD, page publique de
-  transparence des taux de tirage.
+  corrigés, vote majoritaire, acteurs sans métier musical fort exclus
+  (~2 100 rejets). Jackson/Céline/Elvis/Nina/Miles sont cohérents ; Mozart,
+  Depp, Johansson, Zendaya hors vivier. Une table d'override fine reste
+  utile (Dylan encore country, quelques icônes mal taguées) mais n'est
+  plus bloquante.
+  ```
+- [x] **Schéma de données** — carte, série, appartenances, plaques, historique
+  ```
+  de rareté (cliquet). Spec `docs/09-schema-donnees.md` +
+  `data/schema/catalog.sql` + `data/schema/catalog.schema.json`.
+  ```
+- [x] **Pipeline technique** — runbook [`10-pipeline.md`](10-pipeline.md) :
+  ```
+  aggregate multi-mois (`aggregate_pageviews.py`), scoring branché sur
+  l’agrégat, export catalogue, pré-rendu WebP, orchestrateur
+  `run_pipeline.py`, workflow Actions (validate mensuel). Les dumps
+  pageviews additionnels se lancent en local / self-hosted (taille).
+  ```
+- [x] **Pages légales (minimum)** — `prototypes/legal/` : mentions, taux,
+  ```
+  données personnelles (RGPD).
+  ```
+- [ ] **Avant prod — compléter les pages légales**
+  ```
+  - éditeur + hébergeur (mentions) ;
+  - remplacer `privacy@example.com`.
   ```
 
 
 
 ## Hors brique 1
 
-- Brique 2 — économie : monnaie, poussière, marché, taxe de transaction, anti-bot.
-- Brique 3 — boucle de jeu : que fait-on des cartes au-delà de la collection.
+- Brique 2 — économie : monnaie + marché prix fixe amorcés dans le proto
+  (`docs/11-marche.md`) ; pas de craft — reste anti-bot comptes, historique.
+- Brique 3 — boucle de jeu : constituer des groupes fantasy ; le score de compétition
+  est la somme des écoutes hebdomadaires des membres. *Ébauche, pas encore spécifiée.*
+- [ ] **Version anglaise du site** (UI + pages légales), après stabilisation du français.
+
+
+
+## Marché (brique 2) — tranché
+
+- **Prix fixe** (annonce = carte + prix en crédits). Pas d’enchères au lancement.
+- Enchères éventuelles plus tard (diamants / événements), hors socle.
 

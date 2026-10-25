@@ -1,0 +1,276 @@
+{
+  "negative": "photograph, photorealistic, photo, 35mm, dslr, bokeh, raw photo, cinematic still, realistic skin, anime, manga, cartoon face, portrait, looking at viewer, detailed face, visible eyes, visible mouth, celebrity likeness, selfie, text, letters, words, typography, title, caption, numbers, concert flyer, poster mockup, hanging poster, paper clips, logo, watermark, nsfw, nude, extra limbs, extra fingers, sunburst, starburst, explosion rays, speed lines, radiating beams",
+  "style_lock": {
+    "serigraphie": "Screenprint gig-poster illustration: coarse halftone dots, flat ink shapes, two or three spot colors only, cream or bone paper grain, graphic illustration. Face hidden: back of the head, brim, or crop, no readable nose mouth or eyes. Quiet background: paper plus one or two flat color fields or a geometric stage block. Never a national flag: no blue band over a yellow band (Ukraine), no red-and-yellow horizontal stripes (Spain). Prefer one rectangle plus a circle, or blocks at right angles, not two parallel flag stripes. No sunburst, no starburst, no explosion rays, no speed lines, no radiating beams, no comic-book blast",
+    "contrejour": "Painted silhouette concert illustration: the whole figure is a solid dark cut-out against one dusty halo of stage light, atmospheric haze, profile, zero facial features, painterly grain, illustrated not photographed",
+    "encre": "Expressive ink-wash concert illustration on visible pale paper, not a black void: wet splatters, assembled brush strokes, restricted palette, a shaft of light from above. Face hidden by crop, back view, hat, or instrument — never by a curtain of long wet hair. Hair and headgear must vary. Never a bald or shaved scalp. No readable features. Do not default to crimson or to a crushed-black background"
+  },
+  "palettes": {
+    "metal": "ash-grey paper, dried-blood red #B8352F, cold steel #6E7276",
+    "punk": "newsprint off-white #F0E9D8, raw coral #E04A2F, charcoal ink",
+    "hip-hop": "bone paper, acid gold #C8D44E, olive #6E7A52",
+    "électro": "pale grey paper, acid cyan #3FC1C9, electric violet #7A86D6",
+    "reggae": "warm cream paper, gold #D9B52B, leaf green #4E9B5A",
+    "afro": "sand paper, ochre #E09A2B, jade #4F8C6E",
+    "latin": "bone paper, coral #D4552F, sun yellow #E0A83C",
+    "jazz": "cream paper, tobacco gold #D8B35C, muted aqua #6FA3A0",
+    "blues": "pale smoke paper, smoke blue #4A7FB5, brass #C4A062",
+    "funk": "cream paper, chrome orange #E0A32B, magenta #C04FA8",
+    "R&B": "warm cream paper, copper #C47A5A, dusk purple #8E6B8C",
+    "country": "dust-cream paper, denim tan #C89A4A, saddle #8C6E4E",
+    "folk": "wheat paper, olive #9CB06A, raw umber #C4A878",
+    "world": "sand paper, saffron #B58A4E, teal #5E8C86",
+    "chanson": "cream paper, wine pink #C9869B, antique gold #A08C5E",
+    "pop": "warm white paper, magenta #D45E8A, lemon #E0B36A",
+    "rock": "bone paper, rust amber #D98A2B, leather brown #8A6A4F"
+  },
+  "palette_labels": {
+    "metal": "sang et acier",
+    "punk": "corail et charbon",
+    "hip-hop": "or acide",
+    "électro": "cyan et violet",
+    "reggae": "or et vert",
+    "afro": "ocre et jade",
+    "latin": "corail et jaune",
+    "jazz": "tabac et aqua",
+    "blues": "bleu fumée",
+    "funk": "orange et magenta",
+    "R&B": "cuivre et prune",
+    "country": "denim et selle",
+    "folk": "olive et blé",
+    "world": "safran et teal",
+    "chanson": "rose vin et or",
+    "pop": "magenta et citron",
+    "rock": "ambre et cuir"
+  },
+  "instrument_lock": {
+    "voix": "Singer only: one microphone, handheld or on a stand. Empty hands except the mic. No guitar, no bass, no strap, no second instrument.",
+    "guitare": "ONE electric guitar. From behind: LEFT arm IN FRONT of the torso, left HAND on the fretboard, left elbow hidden. RIGHT (strumming) arm hangs along the ribs, elbow TUCKED close to the hip, never a sharp 90-degree elbow sticking out as a triangle. No elbows jutting off the back. If an amplifier is in frame: plain blank cabinet and grille cloth, no logo, no script, no brand name, no Fender, no Marshall, no letters, no numbers.",
+    "basse": "Electric four-string Precision bass: four thick strings on a long-scale neck. If the headstock is in frame it must be a 2+2 clover (two tuners left, two right). Prefer the headstock cropped or lost in the halo so tuners are not countable. Never a 4-in-line Jazz headstock with three visible pegs. Not a guitar. From behind: LEFT arm IN FRONT of the torso, left HAND on the neck, left elbow hidden. RIGHT arm hangs along the ribs, elbow TUCKED, never a sharp 90-degree elbow sticking out.",
+    "batterie": "Drummer seated on a round drum throne IN the kit, jacket with coarse halftone volume, not a flat pictogram. Two sticks only, one in each hand: right hand hitting, left hand on the snare with the stick held normally, never a third stick, never a stick growing out of the wrist. Full kit: snare, rack toms, floor tom standing on THREE LEGS on the floor (never floating in empty space), kick under the toms, crash on a stand, and a charleston / hi-hat ALWAYS visible (two stacked cymbals on a pedal stand by the left foot). Cymbals stay beside the head on stands. Never a cymbal covering the face or mouth. Never both arms raised in a V. Never a cymbal worn as a hat. Never sitting on the bass drum. Never standing. Never a lone snare. Never a kit without the charleston.",
+    "claviers": "Keyboard, piano or organ clearly in frame. BOTH hands on the keys, empty palms. Never holding a hat, cup, box or any object. No guitar.",
+    "vents": "Alto saxophone in realistic concert scale. LEFT hand on the UPPER keys near the neck. RIGHT hand in the MIDDLE of the sax body, fingers on the pearl keys, well ABOVE the bow. The flared bell is below both hands, empty, untouched. Never a hand on the bell, never a hand on the bow, never holding the sax like a bottle.",
+    "machines": "DJ at the mixer in three-quarter BACK: we see a real head, nape and ear, mixer in front of the torso, hands on the knobs. Never a blank erased face. Never hair poking out of a hood. Never a mask or balaclava. Mixer and decks ON a table with legs. Never a full rear view with the table as a barrier. Nothing floating. No guitar, no bass, no strap."
+  },
+  "flux_tail": "Trading-card illustration, graphic, emotional. Adult musician, adult body. Never a child. Hide the face by turning away or by a brim, do not erase it into a blank mask. No text, no letters, no logo, no brand name, not a photograph, not anime, not a portrait.",
+  "exec_of_rarete": {
+    "commune": "A",
+    "argent": "B",
+    "or": "A",
+    "platine": "B",
+    "diamant": "B"
+  },
+  "execs": {
+    "serigraphie": {
+      "A": "wide shot, two spot inks, coarse halftone",
+      "B": "tighter crop, three spot inks, finer halftone"
+    },
+    "contrejour": {
+      "A": "single halo, empty stage, sober",
+      "B": "stage smoke, second plane, light spill"
+    },
+    "encre": {
+      "A": "assembled wash, restricted palette",
+      "B": "heavy splatters, highlight rims, unique piece"
+    }
+  },
+  "silhouette": {
+    "f": "feminine adult body silhouette, adult proportions, adult height, never a child, never a preteen, no identifiable face",
+    "m": "masculine adult body silhouette, adult proportions, never a child, no identifiable face",
+    "x": "androgynous adult body silhouette, adult proportions, never a child, no identifiable face"
+  },
+  "heads": [
+    "tight buzz cut, nape and ears visible, no long hair",
+    "short cropped hair, clean nape, no long hair",
+    "close afro texture, rounded silhouette, no long straight hair",
+    "hair gathered in a bun or knot at the back, nape visible",
+    "short fade, temples clipped, no bald scalp, no long hair",
+    "baseball cap, brim hiding the eyes, short hair at the nape",
+    "hoodie up, no curtain of hair",
+    "fedora or stage hat, short hair at the nape",
+    "bandana or headwrap, no loose long hair",
+    "piled-up beehive or high bun, face hidden by angle not by hanging hair",
+    "undercut, shaved sides, short on top",
+    "short loc or twist texture, no long wet curtain of hair",
+    "short straight dark hair, clean nape, no long hair",
+    "short wavy hair, nape visible, no long curtain",
+    "auburn or copper short crop, nape visible, no long hair"
+  ],
+  "heads_for_silhouette": {
+    "m": [
+      "tight buzz cut, nape and ears visible, no long hair",
+      "short cropped hair, clean nape, no long hair",
+      "close afro texture, rounded silhouette, no long straight hair",
+      "short fade, temples clipped, no bald scalp, no long hair",
+      "baseball cap, brim hiding the eyes, short hair at the nape",
+      "hoodie up, no curtain of hair",
+      "fedora or stage hat, short hair at the nape",
+      "bandana or headwrap, no loose long hair",
+      "undercut, shaved sides, short on top",
+      "short loc or twist texture, no long wet curtain of hair",
+      "short straight dark hair, clean nape, no long hair",
+      "short wavy hair, nape visible, no long curtain",
+      "auburn or copper short crop, nape visible, no long hair"
+    ],
+    "f": [
+      "hair gathered in a bun or knot at the back, nape visible",
+      "piled-up beehive or high bun, face hidden by angle not by hanging hair",
+      "short cropped hair, clean nape, no long hair",
+      "short straight dark hair, clean nape, no long hair",
+      "short wavy hair, nape visible, no long curtain",
+      "auburn or copper short crop, nape visible, no long hair",
+      "fedora or stage hat, short hair at the nape",
+      "bandana or headwrap, no loose long hair",
+      "hoodie up, no curtain of hair"
+    ],
+    "x": [
+      "hoodie up, no curtain of hair",
+      "undercut, shaved sides, short on top",
+      "short cropped hair, clean nape, no long hair",
+      "baseball cap, brim hiding the eyes, short hair at the nape",
+      "short fade, temples clipped, no bald scalp, no long hair",
+      "short loc or twist texture, no long wet curtain of hair"
+    ]
+  },
+  "skins": [
+    "fair cool skin on nape, ear and hands, pale halftone, clothes stay navy",
+    "warm peach skin on nape, ear and hands, clothes stay navy",
+    "olive mediterranean skin on nape, ear and hands, clothes stay navy",
+    "golden tan skin on nape, ear and hands, clothes stay navy",
+    "light honey skin on nape, ear and hands, not a dark African complexion, clothes stay navy",
+    "pale ivory skin on nape, ear and hands, pale halftone, clothes stay navy"
+  ],
+  "costume": {
+    "pre1960": "1950s formal stage wear: dark heavy tailored suit, narrow lapels, dress shirt, no streetwear, no bandana, no baseball cap, no hoodie",
+    "1960s": "mid-1960s stage clothes: slim mod suit or sheath, narrow lapels, short clean cut or beehive, flat fabrics, vintage microphone. No baggy streetwear, no baseball cap, no hoodie, no undercut",
+    "1970s80s": "1970s–80s stage clothes, volume, leather, saturated dyes",
+    "1990s00s": "1990s–2000s streetwear on stage, nylon, baggy cut",
+    "2010s": "2010s stage clothes, sharp cut, technical fabric"
+  },
+  "heads_for_costume": {
+    "pre1960": [
+      "tight buzz cut, nape and ears visible, no long hair",
+      "short cropped hair, clean nape, no long hair",
+      "close afro texture, rounded silhouette, no long straight hair",
+      "hair gathered in a bun or knot at the back, nape visible",
+      "short fade, temples clipped, no bald scalp, no long hair",
+      "fedora or stage hat, short hair at the nape",
+      "piled-up beehive or high bun, face hidden by angle not by hanging hair",
+      "short straight dark hair, clean nape, no long hair",
+      "short wavy hair, nape visible, no long curtain",
+      "auburn or copper short crop, nape visible, no long hair"
+    ],
+    "1960s": [
+      "tight buzz cut, nape and ears visible, no long hair",
+      "short cropped hair, clean nape, no long hair",
+      "close afro texture, rounded silhouette, no long straight hair",
+      "hair gathered in a bun or knot at the back, nape visible",
+      "short fade, temples clipped, no bald scalp, no long hair",
+      "fedora or stage hat, short hair at the nape",
+      "piled-up beehive or high bun, face hidden by angle not by hanging hair",
+      "short straight dark hair, clean nape, no long hair",
+      "short wavy hair, nape visible, no long curtain",
+      "auburn or copper short crop, nape visible, no long hair"
+    ]
+  },
+  "venue": {
+    "cave": "tiny basement venue, low ceiling, one bare bulb",
+    "club": "small smoky club, close walls, cheap par cans",
+    "salle": "mid-size concert hall, proscenium, controlled wash",
+    "festival": "outdoor festival stage, daylight fading, towers of speakers",
+    "stade": "stadium night show, vast crowd as texture, towering lights"
+  },
+  "venue_for_costume": {
+    "pre1960": {
+      "festival": "early outdoor jazz or folk festival, wooden stage, period crowd, no LED, no modern line-array towers",
+      "stade": "large 1950s auditorium or ballpark night, period lights, no modern LED walls"
+    },
+    "1960s": {
+      "festival": "mid-1960s outdoor festival, wooden stage, period crowd, no LED, no modern speaker towers",
+      "stade": "1960s civic auditorium or ballpark night, period lights, no modern LED walls"
+    }
+  },
+  "venue_for_style": {
+    "serigraphie": {
+      "cave": "intimate graphic scale: cream paper and one small color block, no brick, no pipes, no bare bulb, no photographed interior",
+      "club": "small color field, close crop, walls as flat ink, no smoke photo, no par cans as objects",
+      "salle": "wide horizontal color band, proscenium as a rectangle, no photographed hall",
+      "festival": "open paper, low navy stage block, crowd as a flat texture, no speaker towers, no sunburst",
+      "stade": "large navy field, small figure, crowd as a flat band, no LED walls, no radiating lights"
+    }
+  },
+  "poses": {
+    "voix": [
+      "from behind, head tilted, handheld microphone",
+      "three-quarter back view, chin down into a mic stand",
+      "strict profile at the microphone, face lost in shadow",
+      "hands on the microphone in close crop, face out of frame",
+      "looking down toward the crowd, face lost under brim or shadow",
+      "arms raised, back to camera, voice thrown into the lights",
+      "leaning into the mic, body as a dark silhouette"
+    ],
+    "guitare": [
+      "from behind, guitar strap, headstock catching the light",
+      "three-quarter back view, riff stance, face hidden",
+      "profile, guitar neck crossing in front of the face",
+      "hands on the fretboard in close crop, no face",
+      "guitar body filling the frame, player cropped at the shoulders",
+      "windmill strum with the RIGHT arm only, LEFT hand stays on the fretboard, both arms attached to the shoulders, face turned away",
+      "sitting on a blank unmarked amp cabinet with empty grille cloth, no logo, no brand name, looking down at the strings"
+    ],
+    "basse": [
+      "from behind, playing a four-string bass, long strap, low stance, four tuners on the headstock",
+      "three-quarter back, left hand on the four-string neck, four tuners visible if the headstock is in frame",
+      "profile, four-string bass body covering the torso, four tuners on the headstock",
+      "fingers on four thick bass strings, headstock with four tuners if visible, HEAD and shoulders in frame",
+      "four-string bass filling the frame, four tuners on the headstock, player cropped at the shoulders",
+      "locked in with the kick, playing a four-string bass, body leaning forward, face down",
+      "side of stage, four-string bass silhouette against a side wash, four tuners on the headstock"
+    ],
+    "batterie": [
+      "from behind, off-center, seated, full figure, one crash cymbal on its stand beside the head (not a hat), torso overlapping the toms, one arm hitting, the other on the snare, never both arms in a V, never standing",
+      "over the shoulder, seated, snare and a tom filling the foreground, face unseen, one stick in motion, never a kit diagram, never standing",
+      "seated profile, hi-hat on a stand BESIDE the head not covering the mouth, face turned away, throne visible, off-center, never standing beside the kit",
+      "tight crop of seated drummer, head and shoulders plus one overlapping cymbal, hands and sticks in frame, never standing",
+      "drummer as a dark mass overlapping the kit, off-center, kick tucked under the toms from behind, never a full-moon bass head, never both arms in a V, never standing",
+      "seated crash on ONE side, the other hand on the snare, face turned away, throne under the body, never a symmetric V, never standing",
+      "high angle, seated IN the kit, snare large in the foreground, toms, crash and charleston/hi-hat still in frame, never a lone snare, never standing, never a kit without charleston"
+    ],
+    "claviers": [
+      "from behind a keyboard stack, head bowed",
+      "three-quarter back, both hands on the keys",
+      "profile, instrument blocking the face",
+      "hands on the keys in close crop",
+      "piano lid and arms only, face out of frame",
+      "both hands on the keys, body twisted away, empty palms, never holding a hat or object",
+      "silhouette at a backlit organ"
+    ],
+    "vents": [
+      "from behind, horn raised, bell catching light",
+      "three-quarter back, cheeks hidden by the instrument",
+      "profile, brass covering the mouth",
+      "hands and valves in close crop, no face",
+      "horn in profile, bell catching light but kept in realistic scale to the player, never oversized",
+      "horn pointed up into a spotlight, player a silhouette",
+      "sitting on a stool, looking down into the bell"
+    ],
+    "cordes": [
+      "from behind, bow arm in motion",
+      "three-quarter back, instrument under the chin, face hidden",
+      "profile, scroll of the violin crossing the face",
+      "bow and fingers in close crop",
+      "cello body filling the frame, player cropped",
+      "standing with the instrument, head bowed",
+      "silhouette against a side light, bow raised"
+    ],
+    "machines": [
+      "three-quarter facing the viewer, looking down at decks IN FRONT of the torso",
+      "three-quarter, one hand on a fader, mixer in front of the body",
+      "profile looking down, laptop lid and mixer sitting on a DJ table in front of the player, not floating",
+      "hands on a mixer in close crop, mixer in front, face looking down out of frame",
+      "decks and cables filling the frame, DJ in front of the table looking down",
+      "arm raised toward the crowd, DJ in front of the mixer, face turned away",
+      "silhouette at a stack of machines, mixer in front of the body, never a rear view behind the table"
+    ]
+  }
+}

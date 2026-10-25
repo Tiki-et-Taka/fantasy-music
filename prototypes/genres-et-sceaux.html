@@ -28,7 +28,7 @@
 </style>
 </head>
 <body>
-<h2>Table de mapping des genres — 20 familles racines</h2>
+<h2>Table de mapping des genres — 17 familles racines</h2>
 <table id="tbl">
   <thead><tr><th>Famille racine</th><th>Palette</th><th>Prio.</th><th>Genres Wikidata qui y retombent</th></tr></thead>
   <tbody></tbody>
@@ -48,17 +48,14 @@ const FAMILIES=[
  ["Latin","#1C1210","#D4552F","#E0A83C",7,"salsa, bossa nova, cumbia, tango, reggaeton, samba"],
  ["Jazz","#0E1A1C","#D8B35C","#6FA3A0",8,"bebop, cool jazz, free jazz, jazz modal, swing, hard bop"],
  ["Blues","#0C1420","#4A7FB5","#C4A062",9,"delta blues, chicago blues, blues rock, boogie-woogie"],
- ["Gospel & sacré","#120F16","#D8C06A","#8A7AB0",10,"gospel, negro spiritual, musique liturgique, qawwali"],
- ["Funk & disco","#1A1222","#E0A32B","#C04FA8",11,"funk, disco, p-funk, boogie, funk rock"],
- ["R&B & soul","#1A1012","#C47A5A","#8E6B8C",12,"soul, rhythm and blues, motown, neo soul, contemporary R&B"],
- ["Country","#171310","#C89A4A","#8C6E4E",13,"country, bluegrass, honky-tonk, americana, outlaw country"],
- ["Folk","#121710","#9CB06A","#C4A878",14,"folk, singer-songwriter, folk rock, néo-folk, protest song"],
- ["Classique","#14110C","#C9B07A","#7E8A7A",15,"musique baroque, romantisme, opéra, minimalisme, musique de film"],
- ["Musiques du monde","#101614","#B58A4E","#5E8C86",16,"musique traditionnelle, fado, flamenco, raï, musique celtique"],
- ["Chanson & variété","#16131A","#C9869B","#A08C5E",17,"chanson française, schlager, canzone, variété, yé-yé"],
- ["Expérimental","#111113","#A8AEB4","#D8D2C2",18,"musique concrète, noise, drone, avant-garde, musique sérielle"],
- ["Pop","#1C1020","#D45E8A","#E0B36A",19,"pop, synthpop, dream pop, J-pop, K-pop, teen pop"],
- ["Rock","#15110E","#D98A2B","#8A6A4F",20,"rock, rock alternatif, rock progressif, indie rock, grunge, garage"]
+ ["Funk & disco","#1A1222","#E0A32B","#C04FA8",10,"funk, disco, p-funk, boogie, funk rock"],
+ ["R&B & soul","#1A1012","#C47A5A","#8E6B8C",11,"soul, rhythm and blues, motown, neo soul, contemporary R&B"],
+ ["Country","#171310","#C89A4A","#8C6E4E",12,"country, bluegrass, honky-tonk, americana, outlaw country"],
+ ["Folk","#121710","#9CB06A","#C4A878",13,"folk, singer-songwriter, folk rock, néo-folk, protest song"],
+ ["Musiques du monde","#101614","#B58A4E","#5E8C86",14,"musique traditionnelle, fado, flamenco, raï, qawwali, musique celtique"],
+ ["Chanson & variété","#16131A","#C9869B","#A08C5E",15,"chanson française, schlager, canzone, variété, yé-yé"],
+ ["Pop","#1C1020","#D45E8A","#E0B36A",16,"pop, synthpop, dream pop, J-pop, K-pop, teen pop"],
+ ["Rock","#15110E","#D98A2B","#8A6A4F",17,"rock, rock alternatif, rock progressif, indie rock, grunge, garage"]
 ];
 document.querySelector("#tbl tbody").innerHTML = FAMILIES.map(f=>
  `<tr><td class="fam">${f[0]}</td>

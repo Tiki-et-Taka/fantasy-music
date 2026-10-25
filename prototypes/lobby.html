@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Charts — Lobby</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=Inter:wght@400;500;600&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050506;
+    --ink: #e8e8ea;
+    --muted: #9aa0a8;
+    --line: #2a2c32;
+    --panel: #121316;
+    --panel-hi: #1a1c20;
+    --accent: #e8e8ea;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Inter, "Segoe UI", system-ui, sans-serif;
+    overflow: hidden;
+    overscroll-behavior: none;
+    user-select: none;
+  }
+
+  .sky {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 18%, rgba(232,232,234,.07), transparent 55%),
+      radial-gradient(ellipse 55% 40% at 18% 88%, rgba(180,190,200,.04), transparent 50%),
+      radial-gradient(ellipse 50% 35% at 88% 78%, rgba(160,170,180,.035), transparent 50%),
+      var(--bg);
+  }
+  .sky::after {
+    content: "";
+    position: absolute; inset: 0;
+    opacity: .35;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+
+  .top {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 6;
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 16px;
+    padding: 18px 28px 0;
+  }
+  .brand {
+    animation: rise .7s ease both;
+  }
+  .brand .name {
+    font-family: "Big Shoulders Display", Oswald, sans-serif;
+    font-weight: 800;
+    font-size: clamp(42px, 8vw, 72px);
+    line-height: .9;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .top-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: rise .7s ease .05s both;
+  }
+  .top-credits {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    padding: 8px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    color: #c4c8ce;
+    white-space: nowrap;
+  }
+  .top-credits b { color: var(--ink); font-weight: 600; }
+
+  .menu-btn {
+    appearance: none;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--ink);
+    border-radius: 999px;
+    cursor: pointer;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 14px;
+    white-space: nowrap;
+  }
+  .menu-btn:hover { background: var(--panel-hi); }
+
+  .drawer-veil {
+    position: fixed; inset: 0; z-index: 20;
+    background: rgba(0,0,0,.55);
+    opacity: 0; pointer-events: none;
+    transition: opacity .25s ease;
+  }
+  .drawer-veil.open { opacity: 1; pointer-events: auto; }
+  .drawer {
+    position: fixed; top: 0; right: 0; bottom: 0; z-index: 21;
+    width: min(320px, 88vw);
+    background: #0c0d10;
+    border-left: 1px solid var(--line);
+    padding: 22px 20px;
+    transform: translateX(100%);
+    transition: transform .28s cubic-bezier(.2,.8,.2,1);
+    display: flex; flex-direction: column; gap: 22px;
+  }
+  .drawer.open { transform: translateX(0); }
+  .drawer .head {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .drawer .head h2 {
+    margin: 0;
+    font-family: Oswald, sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .drawer .close {
+    appearance: none; border: 0; background: none;
+    color: var(--muted); font-size: 22px; line-height: 1;
+    cursor: pointer; padding: 4px 8px;
+  }
+  .drawer .close:hover { color: var(--ink); }
+  .drawer .block label {
+    display: block;
+    font-size: 11px; color: var(--muted);
+    letter-spacing: .12em; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .user-switch {
+    display: inline-flex; gap: 0; border: 1px solid var(--line);
+    border-radius: 999px; overflow: hidden; background: var(--panel);
+  }
+  .user-switch button {
+    appearance: none; border: 0; background: transparent;
+    color: #9aa0a8; font: inherit; font-size: 12px; font-weight: 600;
+    padding: 8px 14px; cursor: pointer;
+  }
+  .user-switch button.on { background: var(--accent); color: #111; }
+  .user-switch button:hover:not(.on) { color: var(--ink); }
+  .drawer .links { margin-top: auto; display: flex; flex-direction: column; gap: 10px; }
+  .drawer .links a {
+    color: var(--muted); text-decoration: none; font-size: 13px;
+  }
+  .drawer .links a:hover { color: var(--ink); }
+
+  .stage {
+    position: relative; z-index: 1;
+    height: 100dvh;
+    display: grid;
+    place-items: center;
+    padding: 96px 24px 28px;
+  }
+
+  .hub {
+    width: min(1100px, 96vw);
+    height: min(720px, calc(100dvh - 130px));
+    display: grid;
+    grid-template-columns: 1.25fr .95fr 1.25fr;
+    grid-template-rows: 1.65fr 1fr;
+    gap: clamp(12px, 1.5vw, 18px);
+    animation: rise .75s ease .12s both;
+  }
+
+  .tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 18px 20px;
+    text-decoration: none;
+    color: inherit;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color .2s ease, transform .25s ease, box-shadow .25s ease;
+    text-align: left;
+    font: inherit;
+  }
+  .tile .art {
+    position: absolute; inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform .45s ease;
+  }
+  .tile .shade {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, transparent 35%, rgba(5,5,6,.88) 92%),
+      linear-gradient(90deg, rgba(5,5,6,.25), transparent 40%);
+    pointer-events: none;
+  }
+  .tile:hover {
+    border-color: #4a4e58;
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px rgba(0,0,0,.45);
+  }
+  .tile:hover .art { transform: scale(1.05); }
+  .tile:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  .tile .lbl,
+  .tile .sub {
+    position: relative;
+    z-index: 1;
+  }
+  .tile .lbl {
+    font-family: Oswald, sans-serif;
+    font-weight: 600;
+    font-size: clamp(22px, 2.8vw, 32px);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    text-shadow: 0 2px 12px rgba(0,0,0,.7);
+  }
+  .tile .sub {
+    font-size: 13px;
+    color: #c4c8ce;
+    max-width: 14em;
+    line-height: 1.35;
+    text-shadow: 0 1px 8px rgba(0,0,0,.7);
+  }
+  .tile.soon { opacity: .55; cursor: default; }
+  .tile.soon:hover {
+    transform: none;
+    box-shadow: none;
+    border-color: var(--line);
+  }
+  .tile.soon:hover .art { transform: none; }
+  .tile.soon .sub { font-style: italic; color: var(--muted); }
+
+  .tile-booster {
+    grid-column: 2;
+    grid-row: 1;
+    animation: softFloat 4.2s ease-in-out infinite;
+  }
+  .tile-booster:hover { animation-play-state: paused; }
+  .tile-booster .art {
+    background-image: url("img/lobby/booster.jpg");
+    background-position: center 28%;
+  }
+  .tile-classeur { grid-column: 1; grid-row: 2; }
+  .tile-classeur .art { background-image: url("img/lobby/classeur.svg"); }
+  .tile-marche { grid-column: 2; grid-row: 2; }
+  .tile-marche .art { background-image: url("img/lobby/marche.svg"); }
+  .tile-fantasy { grid-column: 3; grid-row: 2; }
+  .tile-fantasy .art { background-image: url("img/lobby/fantasy.svg"); }
+
+  @keyframes softFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 720px) {
+    .top { padding: 14px 14px 0; }
+    .brand .name { font-size: 36px; }
+    .stage { padding: 84px 12px 18px; }
+    .hub {
+      width: 100%;
+      height: auto;
+      max-height: calc(100dvh - 110px);
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: minmax(200px, 1.4fr) minmax(120px, 1fr) minmax(110px, .9fr);
+      gap: 10px;
+      overflow: auto;
+    }
+    .tile { padding: 14px 14px; }
+    .tile .lbl { font-size: 20px; }
+    .tile-booster {
+      grid-column: 1 / -1;
+      grid-row: 1;
+      animation: none;
+    }
+    .tile-classeur { grid-column: 1; grid-row: 2; }
+    .tile-marche { grid-column: 2; grid-row: 2; }
+    .tile-fantasy { grid-column: 1 / -1; grid-row: 3; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .brand, .menu-btn, .hub, .tile-booster { animation: none; }
+    .tile, .tile .art { transition: none; }
+  }
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true"></div>
+
+<header class="top">
+  <div class="brand">
+    <p class="name">Charts</p>
+  </div>
+  <div class="top-actions">
+    <span class="top-credits" aria-label="Crédits">Crédits <b id="creditsBal">0</b></span>
+    <button type="button" class="menu-btn" id="menuBtn" aria-label="Menu options et profil" aria-expanded="false" aria-controls="drawer" aria-haspopup="dialog">
+      <span id="playerName">Joueur A</span>
+    </button>
+  </div>
+</header>
+
+<main class="stage">
+  <nav class="hub" aria-label="Lobby">
+    <a class="tile tile-booster" href="booster.html">
+      <span class="art" aria-hidden="true"></span>
+      <span class="shade" aria-hidden="true"></span>
+      <span class="lbl">Boosters</span>
+    </a>
+    <a class="tile tile-classeur" href="booster.html#classeur">
+      <span class="art" aria-hidden="true"></span>
+      <span class="shade" aria-hidden="true"></span>
+      <span class="lbl">Classeur</span>
+    </a>
+    <a class="tile tile-marche" href="booster.html#marche">
+      <span class="art" aria-hidden="true"></span>
+      <span class="shade" aria-hidden="true"></span>
+      <span class="lbl">Marché</span>
+    </a>
+    <button type="button" class="tile tile-fantasy soon" disabled aria-disabled="true">
+      <span class="art" aria-hidden="true"></span>
+      <span class="shade" aria-hidden="true"></span>
+      <span class="lbl">Fantasy game</span>
+      <span class="sub">Bientôt</span>
+    </button>
+  </nav>
+</main>
+
+<div class="drawer-veil" id="drawerVeil" hidden></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" hidden>
+  <div class="head">
+    <h2 id="drawerTitle">Profil</h2>
+    <button type="button" class="close" id="drawerClose" aria-label="Fermer">×</button>
+  </div>
+  <div class="block">
+    <label>Compte de test</label>
+    <div class="user-switch" role="group" aria-label="Compte de test">
+      <button type="button" data-user="u1" id="userBtnA" class="on">Joueur A</button>
+      <button type="button" data-user="u2" id="userBtnB">Joueur B</button>
+    </div>
+  </div>
+  <div class="links">
+    <a href="legal/index.html">Mentions légales</a>
+  </div>
+</aside>
+
+<script>
+const ACTIVE_USER_KEY = "charts.s1.activeUser";
+const USERS = { u1: "Joueur A", u2: "Joueur B" };
+let activeUserId = "u1";
+
+function walletKey(userId){
+  return `charts.s1.${userId || activeUserId}.wallet`;
+}
+function loadActiveUser(){
+  const saved = localStorage.getItem(ACTIVE_USER_KEY);
+  activeUserId = saved === "u2" ? "u2" : "u1";
+  syncUserSwitchUI();
+  refreshCredits();
+}
+function syncUserSwitchUI(){
+  document.querySelectorAll(".user-switch [data-user]").forEach(btn => {
+    btn.classList.toggle("on", btn.dataset.user === activeUserId);
+  });
+  const nameEl = document.getElementById("playerName");
+  if(nameEl) nameEl.textContent = USERS[activeUserId] || activeUserId;
+}
+function refreshCredits(){
+  let credits = 0;
+  try {
+    const data = JSON.parse(localStorage.getItem(walletKey()) || "");
+    if(data && typeof data.credits === "number") credits = data.credits;
+  } catch {}
+  const el = document.getElementById("creditsBal");
+  if(el) el.textContent = String(credits);
+}
+function switchUser(nextId){
+  if(nextId !== "u1" && nextId !== "u2") return;
+  if(nextId === activeUserId) return;
+  activeUserId = nextId;
+  localStorage.setItem(ACTIVE_USER_KEY, activeUserId);
+  syncUserSwitchUI();
+  refreshCredits();
+}
+
+const menuBtn = document.getElementById("menuBtn");
+const drawer = document.getElementById("drawer");
+const veil = document.getElementById("drawerVeil");
+const drawerClose = document.getElementById("drawerClose");
+
+function setMenuOpen(open){
+  menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+  drawer.hidden = !open;
+  veil.hidden = !open;
+  drawer.classList.toggle("open", open);
+  veil.classList.toggle("open", open);
+  if(open) refreshCredits();
+}
+menuBtn.addEventListener("click", () => setMenuOpen(menuBtn.getAttribute("aria-expanded") !== "true"));
+drawerClose.addEventListener("click", () => setMenuOpen(false));
+veil.addEventListener("click", () => setMenuOpen(false));
+document.addEventListener("keydown", ev => {
+  if(ev.key === "Escape") setMenuOpen(false);
+});
+document.querySelector(".user-switch")?.addEventListener("click", ev => {
+  const btn = ev.target.closest("[data-user]");
+  if(!btn) return;
+  switchUser(btn.dataset.user);
+});
+
+loadActiveUser();
+</script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Revue des plaques</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #0a0a0b; color: #e8e8ea;
+         font-family: Inter, "Segoe UI", system-ui, sans-serif; }
+  header { position: sticky; top: 0; z-index: 5; background: #0a0a0b;
+           border-bottom: 1px solid #1c1d21; padding: 14px 20px 12px; }
+  h1 { font-size: 16px; margin: 0 0 8px; font-weight: 600; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .hint { color: #8a9099; font-size: 12.5px; margin: 0 0 10px; line-height: 1.45; }
+  button, .chip { appearance: none; border: 1px solid #2a2c32; background: #141518;
+                  color: #d8d8dc; font: inherit; font-size: 12px; padding: 5px 10px;
+                  border-radius: 999px; cursor: pointer; }
+  button.on, .chip.on { background: #e8e8ea; color: #111; border-color: #e8e8ea; }
+  button.warn { border-color: #8a3030; color: #f0b4b4; }
+  button.good { border-color: #3a7a4a; color: #b6e0c0; }
+  #stats { color: #9aa0a8; font-size: 12.5px; margin-left: auto; }
+  #stats b { color: #e8e8ea; font-weight: 600; }
+  #grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+          gap: 16px; padding: 16px 20px 40px; }
+  .card { position: relative; cursor: pointer; border-radius: 6px; overflow: hidden;
+          background: #121316; border: 2px solid transparent; }
+  .card img { display: block; width: 100%; aspect-ratio: 3/4; object-fit: cover;
+              background: #0e0f11; }
+  .card .ph { aspect-ratio: 3/4; display: flex; align-items: center; justify-content: center;
+              color: #4a4e56; font-size: 11px; }
+  .card figcaption { font-size: 12px; color: #8a9099; padding: 8px 9px 9px; line-height: 1.4; }
+  .card.reject { border-color: #c44; }
+  .card.reject::after { content: "RATÉ"; position: absolute; top: 8px; left: 8px;
+    background: #c44; color: #fff; font-size: 10px; font-weight: 700; letter-spacing: .6px;
+    padding: 2px 6px; border-radius: 3px; }
+  .card.ok { border-color: #3a7a4a; }
+  .card.missing { opacity: .45; cursor: default; }
+  .card:focus { outline: 2px solid #d8b35c; outline-offset: 1px; }
+  dialog { border: 0; padding: 0; background: #000; max-width: 90vw; max-height: 92vh; }
+  dialog::backdrop { background: rgba(0,0,0,.78); }
+  dialog img { max-width: 90vw; max-height: 86vh; display: block; }
+  dialog .bar { display: flex; gap: 8px; padding: 10px 12px; background: #111; color: #ccc;
+                font-size: 12px; align-items: center; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Revue des plaques</h1>
+  <p class="hint">Ici : seulement le lot à juger. <b>Clic</b> = raté. Quand le reste te va,
+    clique <b>Valider le lot</b> — sinon elles restent dans Nouvelles. R = raté, O = une carte, Entrée = zoom.</p>
+  <div class="row">
+    <button data-style="" class="on">Tous</button>
+    <button data-style="encre">Encre</button>
+    <button data-style="contrejour">Contre-jour</button>
+    <button data-style="serigraphie">Sérigraphie</button>
+    <span style="width:8px"></span>
+    <button data-view="nouvelles" class="on">Nouvelles</button>
+    <button data-view="rejetees" class="warn">Ratées</button>
+    <button data-view="validees">Validées</button>
+    <button data-view="manquantes">Manquantes</button>
+    <button type="button" id="validateLot" class="good">Valider le lot</button>
+    <span id="stats"></span>
+  </div>
+</header>
+<div id="grid"></div>
+<dialog id="zoom">
+  <div class="bar"><span id="zoomcap"></span>
+    <button type="button" id="zoomrej">Raté</button>
+    <button type="button" id="zoomok">Bon</button>
+    <button type="button" id="zoomclose">Fermer</button></div>
+  <img id="zoomimg" alt="">
+</dialog>
+<script>
+const STYLES = {encre:"Encre", contrejour:"Contre-jour", serigraphie:"Sérigraphie"};
+let jobs = [], rejects = {}, style = "", view = "nouvelles", focus = 0, zoomId = null;
+
+const grid = document.getElementById("grid");
+const stats = document.getElementById("stats");
+const dlg = document.getElementById("zoom");
+
+function fileOf(j){ return `/out/illustrations/${j.id}.png?t=${j.mtime||0}`; }
+function statusOf(j){
+  if (!j.done) return "missing";
+  const s = rejects[j.id];
+  return (s === "ok" || s === "reject") ? s : "unmarked";
+}
+function visible(){
+  return jobs.filter(j => {
+    if (style && j.style !== style) return false;
+    const s = statusOf(j);
+    if (view === "nouvelles") return j.done && s === "unmarked";
+    if (view === "rejetees") return s === "reject";
+    if (view === "validees") return s === "ok";
+    if (view === "manquantes") return !j.done;
+    return true;
+  });
+}
+function save(){
+  fetch("/api/rejects", {method:"POST", headers:{"Content-Type":"application/json"},
+    body: JSON.stringify(rejects)})
+    .then(r => { if (!r.ok) throw new Error(r.status); })
+    .catch(err => console.error("sauvegarde rejects", err));
+}
+function setStatus(id, st){
+  rejects[id] = st;
+  save();
+  render();
+}
+function toggleReject(id, done){
+  if (!done) return;
+  setStatus(id, (rejects[id] === "reject") ? "unmarked" : "reject");
+}
+
+function render(){
+  const vis = visible();
+  const nJobs = jobs.length;
+  const nDone = jobs.filter(j => j.done).length;
+  const nRej = Object.values(rejects).filter(s => s === "reject").length;
+  const nOk = Object.values(rejects).filter(s => s === "ok").length;
+  const nNew = jobs.filter(j => j.done && statusOf(j) === "unmarked").length;
+  const nMiss = nJobs - nDone;
+  stats.innerHTML = `<b>${nNew}</b> nouvelles · <b>${nRej}</b> ratées · ${nOk} validées · ${nMiss} manquantes`;
+  grid.innerHTML = vis.map((j,i) => {
+    const s = statusOf(j);
+    const pal = j.palette_label || j.palette || "—";
+    const cap = `${STYLES[j.style]||j.style} · ${j.instrument} · ${j.costume||""} · ${pal}`;
+    const img = j.done
+      ? `<img src="${fileOf(j)}" alt="" loading="lazy">`
+      : `<div class="ph">manquante</div>`;
+    return `<figure class="card ${s}" data-id="${j.id}" data-i="${i}" tabindex="0">
+      ${img}<figcaption>${cap}<br>${(j.head||"").split(",")[0]}</figcaption></figure>`;
+  }).join("") || `<p class="hint" style="padding:8px 4px">Rien dans ce filtre.</p>`;
+  const cards = [...grid.querySelectorAll(".card")];
+  if (cards[focus]) cards[focus].focus();
+}
+
+grid.addEventListener("click", e => {
+  const card = e.target.closest(".card");
+  if (!card || card.classList.contains("missing")) return;
+  focus = Number(card.dataset.i) || 0;
+  toggleReject(card.dataset.id, true);
+});
+
+function openZoom(id){
+  const j = jobs.find(x => x.id === id);
+  if (!j || !j.done) return;
+  zoomId = id;
+  document.getElementById("zoomimg").src = fileOf(j);
+  document.getElementById("zoomcap").textContent = id;
+  dlg.showModal();
+}
+document.getElementById("zoomclose").onclick = () => dlg.close();
+document.getElementById("zoomrej").onclick = () => { setStatus(zoomId, "reject"); dlg.close(); };
+document.getElementById("zoomok").onclick = () => { setStatus(zoomId, "ok"); dlg.close(); };
+document.getElementById("validateLot").onclick = () => {
+  const batch = jobs.filter(j => j.done && statusOf(j) === "unmarked");
+  if (!batch.length) return;
+  if (!confirm(`Valider ${batch.length} nouvelle(s) plaque(s) ?`)) return;
+  batch.forEach(j => { rejects[j.id] = "ok"; });
+  save();
+  focus = 0;
+  render();
+};
+
+document.querySelectorAll("button[data-style]").forEach(b => b.onclick = () => {
+  style = b.dataset.style;
+  document.querySelectorAll("button[data-style]").forEach(x => x.classList.toggle("on", x===b));
+  focus = 0; render();
+});
+document.querySelectorAll("button[data-view]").forEach(b => b.onclick = () => {
+  view = b.dataset.view;
+  document.querySelectorAll("button[data-view]").forEach(x => x.classList.toggle("on", x===b));
+  focus = 0; render();
+});
+
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "INPUT") return;
+  const vis = visible();
+  if (e.key === "Escape") { dlg.close(); return; }
+  if (e.key === "ArrowRight" || e.key === "l") { focus = Math.min(vis.length-1, focus+1); render(); e.preventDefault(); }
+  if (e.key === "ArrowLeft" || e.key === "h") { focus = Math.max(0, focus-1); render(); e.preventDefault(); }
+  const cur = vis[focus];
+  if (!cur) return;
+  if (e.key === "r" || e.key === "R") toggleReject(cur.id, cur.done);
+  if (e.key === "o" || e.key === "O") setStatus(cur.id, "ok");
+  if (e.key === "Enter" || e.key === " ") { if (cur.done) openZoom(cur.id); e.preventDefault(); }
+});
+
+Promise.all([
+  fetch("/data/census/illustration_jobs.json").then(r => r.json()),
+  fetch("/data/census/illustration_rejects.json?t=" + Date.now()).then(r => r.ok ? r.json() : {}),
+  fetch("/api/existing").then(r => r.json())
+]).then(([j, rej, existing]) => {
+  const have = (existing && !Array.isArray(existing)) ? existing
+    : Object.fromEntries((existing || []).map(id => [id, 0]));
+  jobs = j;
+  jobs.forEach(job => {
+    job.done = job.id in have;
+    job.mtime = have[job.id] || 0;
+  });
+  rejects = rej && typeof rej === "object" ? rej : {};
+  render();
+});
+</script>
+</body>
+</html>

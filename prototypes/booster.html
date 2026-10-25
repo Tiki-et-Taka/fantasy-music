@@ -27,12 +27,15 @@
   body.cutaway header,
   body.cutaway footer { opacity: 0; pointer-events: none; }
   header .nav { pointer-events: auto; display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; align-items: center; }
-  header .nav button {
+  header .nav button,
+  header .nav .nav-home {
     appearance: none; border: 1px solid #2a2c32; background: #141518;
     color: #d8d8dc; font: inherit; font-size: 12px; padding: 5px 12px;
     border-radius: 999px; cursor: pointer;
     position: relative;
+    text-decoration: none;
   }
+  header .nav .nav-home:hover { background: #1c1e22; color: #e8e8ea; }
   header .nav button.on { background: #e8e8ea; color: #111; border-color: #e8e8ea; }
   header .nav button b { font-weight: 600; }
   header .nav button:disabled { opacity: .35; cursor: default; }
@@ -343,25 +346,53 @@
   .crowd::before {
     content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 46%;
     background: linear-gradient(to top, #0c0c12 10%, transparent);
+    pointer-events: none; z-index: 1;
   }
+  /* Silhouettes de public (vue de dos) — pas des pions / meeples */
   .fan {
-    position: absolute; width: 14px; height: 26px;
-    margin-left: -7px; background: #1c1c24;
-    border-radius: 5px 5px 1px 1px;
+    position: absolute;
+    width: 28px; height: 56px;
+    margin-left: -14px;
+    background: #12121a;
+    transform-origin: 50% 100%;
+    filter: drop-shadow(0 0 1px rgba(0,0,0,.8));
   }
-  .fan::before {
-    content: ""; position: absolute; left: 2px; top: -8px;
-    width: 10px; height: 10px; border-radius: 50%; background: #1c1c24;
+  .fan.pose-cheer {
+    clip-path: polygon(
+      38% 14%, 44% 4%, 50% 0%, 56% 4%, 62% 14%,
+      64% 26%, 78% 8%, 92% 2%, 98% 16%, 86% 34%, 72% 42%,
+      68% 48%, 82% 100%, 18% 100%, 32% 48%,
+      28% 42%, 14% 34%, 2% 16%, 8% 2%, 22% 8%, 36% 26%
+    );
   }
-  .fan::after {
-    content: ""; position: absolute; left: -6px; top: 2px;
-    width: 26px; height: 12px; background: #1c1c24;
-    clip-path: polygon(0 100%, 6px 0, 13px 8px, 20px 0, 100% 100%);
+  .fan.pose-phone {
+    clip-path: polygon(
+      36% 16%, 42% 6%, 50% 1%, 58% 6%, 64% 16%,
+      66% 28%, 74% 18%, 80% 6%, 86% 0%, 92% 10%, 84% 28%, 72% 40%,
+      70% 48%, 86% 100%, 16% 100%, 30% 48%,
+      26% 40%, 14% 32%, 4% 18%, 10% 6%, 22% 14%, 34% 28%
+    );
   }
-  #fx.myth .fan { animation: crowdBounce 1.1s ease-in-out infinite; }
+  .fan.pose-lean {
+    clip-path: polygon(
+      44% 12%, 50% 2%, 58% 0%, 66% 8%, 68% 22%,
+      82% 12%, 94% 18%, 88% 36%, 74% 44%,
+      72% 52%, 90% 100%, 22% 100%, 34% 50%,
+      28% 40%, 12% 30%, 6% 14%, 18% 4%, 32% 10%, 42% 24%
+    );
+  }
+  .fan.pose-close {
+    clip-path: polygon(
+      40% 18%, 46% 8%, 52% 4%, 58% 8%, 64% 18%,
+      66% 32%, 76% 24%, 84% 28%, 78% 42%,
+      74% 50%, 88% 100%, 12% 100%, 26% 50%,
+      22% 42%, 16% 28%, 24% 22%, 34% 30%
+    );
+  }
+  #fx.myth .fan { animation: crowdBounce 1.15s ease-in-out infinite; }
   @keyframes crowdBounce {
-    0%, 100% { transform: translateY(0) scale(var(--s, 1)); }
-    50% { transform: translateY(-7px) scale(var(--s, 1)); }
+    0%, 100% { transform: translateY(0) scale(var(--s, 1)) rotate(var(--r, 0deg)); }
+    50% { transform: translateY(-6px) scale(var(--s, 1)) rotate(var(--r, 0deg)); }
   }
   .phone {
     position: absolute; width: 3px; height: 5px; border-radius: 1px;
@@ -590,34 +621,34 @@
   }
   .card.paper .band { background: #EDE4D4; }
   .accent { height: 3px; width: 36px; border-radius: 1px; margin-bottom: 4px; flex-shrink: 0; }
-  .card.mythique .art { inset: 0; }
-  .card.mythique .title {
+  .card.diamant .art { inset: 0; }
+  .card.diamant .title {
     position: absolute; left: 0; right: 0; top: 0;
     padding: 18px 12px 40px; text-align: center;
     background: linear-gradient(to bottom, rgba(8,7,6,.78) 32%, rgba(8,7,6,0));
     pointer-events: none;
   }
-  .card.mythique .title .myth-name {
+  .card.diamant .title .myth-name {
     font-family: "Big Shoulders Display", Oswald, sans-serif;
     font-weight: 800; line-height: 1; letter-spacing: .06em;
     color: #F4F2EC; text-shadow: 0 1px 10px rgba(0,0,0,.55);
     text-transform: uppercase; white-space: nowrap;
   }
-  .card.mythique .band {
+  .card.diamant .band {
     left: 0; right: 0; bottom: 0; height: auto;
     padding: 24px 12px 28px; text-align: center;
     background: linear-gradient(to top, rgba(8,7,6,.88) 48%, rgba(8,7,6,0));
   }
-  .card.mythique .accent,
-  .card.mythique .band .name,
-  .card.mythique .rarete,
-  .card.mythique .meta,
-  .card.mythique .group { display: none; }
-  .card.mythique .line-rare {
+  .card.diamant .accent,
+  .card.diamant .band .name,
+  .card.diamant .rarete,
+  .card.diamant .meta,
+  .card.diamant .group { display: none; }
+  .card.diamant .line-rare {
     font-size: 10px; font-weight: 600;
     letter-spacing: .22em; text-transform: uppercase; color: #E8D5A3;
   }
-  .card.mythique .line-info {
+  .card.diamant .line-info {
     margin-top: 6px; font-size: 11px; letter-spacing: .03em; color: #c8c2b6;
   }
   .name {
@@ -640,7 +671,7 @@
   .marks .serie { letter-spacing: .12em; }
   .marks .no { letter-spacing: .04em; font-variant-numeric: tabular-nums; }
   .card.paper .marks { color: rgba(90,70,64,.45); }
-  .card.mythique .marks { color: rgba(232,213,163,.55); }
+  .card.diamant .marks { color: rgba(232,213,163,.55); }
   .frame { position: absolute; inset: 0; pointer-events: none; }
 
   .again {
@@ -704,9 +735,53 @@
     color: #e8e8ea;
   }
   dialog::backdrop { background: rgba(0,0,0,.78); }
-  #shop, #sell {
+  #shop, #sell, #offer, #trade, #confirm {
     border: 1px solid #2a2c32; padding: 0;
     max-width: min(360px, 92vw); width: 360px;
+  }
+  #trade { max-width: min(420px, 94vw); width: 420px; }
+  .trade-suggest {
+    display: flex; flex-direction: column; gap: 4px;
+    max-height: min(36vh, 220px); overflow: auto;
+    margin-top: 2px;
+  }
+  .trade-suggest button {
+    appearance: none; width: 100%; text-align: left;
+    border: 1px solid #2a2c32; background: #141518;
+    color: #d8d8dc; font: inherit; font-size: 12px;
+    padding: 8px 10px; border-radius: 8px; cursor: pointer;
+  }
+  .trade-suggest button:hover,
+  .trade-suggest button.on { background: #1c1e22; border-color: #3a3c44; }
+  .trade-suggest .name { font-weight: 600; color: #e8e8ea; }
+  .trade-suggest .sub { color: #8a9099; margin-top: 2px; font-size: 11px; }
+  .trade-suggest-empty {
+    margin: 0; padding: 8px 2px; font-size: 12px; color: #8a9099;
+  }
+  .trade-selected {
+    margin: 0; font-size: 12px; color: #d8b35c;
+  }
+  .trade-row-actions {
+    display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end;
+  }
+  .trade-row-actions button {
+    appearance: none; border: 1px solid #2a2c32; background: #141518;
+    color: #d8d8dc; font: inherit; font-size: 11px; padding: 5px 10px;
+    border-radius: 8px; cursor: pointer;
+  }
+  .trade-row-actions button.ok {
+    background: #e8e8ea; color: #111; border-color: #e8e8ea; font-weight: 600;
+  }
+  .market-row .name-link {
+    appearance: none; border: 0; background: transparent; padding: 0; margin: 0;
+    font: inherit; font-size: inherit; font-weight: 600; color: #e8e8ea;
+    cursor: pointer; text-decoration: underline; text-underline-offset: 2px;
+    text-decoration-color: #3a3c44;
+  }
+  .market-row .name-link:hover { color: #d8b35c; text-decoration-color: #d8b35c; }
+  .market-section-title {
+    margin: 4px 0 2px; font-size: 11px; font-weight: 600; color: #8a9099;
+    letter-spacing: .04em; text-transform: uppercase;
   }
   .shop-field {
     display: flex; flex-direction: column; gap: 6px;
@@ -761,6 +836,16 @@
     background: #e8e8ea; color: #111; border-color: #e8e8ea; font-weight: 600;
   }
   .shop-actions button:disabled { opacity: .35; cursor: default; }
+  .shop-modes { display: flex; flex-direction: column; gap: 8px; }
+  .shop-modes button {
+    appearance: none; width: 100%; text-align: left;
+    border: 1px solid #2a2c32; background: #141518;
+    color: #d8d8dc; font: inherit; font-size: 13px;
+    padding: 12px 14px; border-radius: 8px; cursor: pointer;
+  }
+  .shop-modes button:hover { background: #1c1e22; border-color: #3a3c44; }
+  .shop-modes .mode-title { font-weight: 600; color: #e8e8ea; }
+  .shop-modes .mode-sub { margin-top: 4px; font-size: 11px; color: #8a9099; line-height: 1.35; }
   .zoom-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; }
   .zoom-stage {
     position: relative;
@@ -1066,7 +1151,7 @@
     overflow: hidden; text-overflow: ellipsis;
   }
   .dup {
-    position: absolute; top: 6px; right: 6px; z-index: 3;
+    position: absolute; top: 36px; right: 6px; z-index: 3;
     background: #111; color: #e8e8ea; border: 1px solid #2a2c32;
     font-size: 10px; font-weight: 600; letter-spacing: .04em;
     padding: 2px 6px; border-radius: 999px;
@@ -1078,6 +1163,19 @@
     font-size: 9px; font-weight: 700; letter-spacing: .04em;
     text-transform: uppercase; white-space: nowrap;
     padding: 3px 8px; border-radius: 999px; pointer-events: none;
+  }
+  .album-cell .fav-btn {
+    appearance: none; position: absolute; top: 6px; right: 6px; z-index: 4;
+    width: 26px; height: 26px; padding: 0; margin: 0;
+    border: 1px solid #2a2c32; border-radius: 50%;
+    background: rgba(12, 12, 16, .82); color: #6a7078;
+    font: inherit; font-size: 14px; line-height: 1;
+    cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+  }
+  .album-cell .fav-btn:hover { color: #d8b35c; border-color: #3a3c44; }
+  .album-cell .fav-btn.on {
+    color: #d8b35c; border-color: #d8b35c;
+    background: rgba(20, 18, 12, .9);
   }
   .market-toolbar .tabs {
     display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
@@ -1121,6 +1219,7 @@
 <body>
 <header>
   <div class="nav" role="tablist">
+    <a class="nav-home" href="lobby.html" aria-label="Lobby">Lobby</a>
     <button type="button" data-view="booster" id="navBooster" class="on" role="tab">Booster<span class="nav-badge" id="packsBadge" hidden>0</span></button>
     <button type="button" data-view="album" id="navAlbum" role="tab">Classeur<span class="nav-badge" id="albumNewBadge" hidden>0</span></button>
     <button type="button" data-view="market" id="navMarket" role="tab">Marché</button>
@@ -1198,16 +1297,16 @@
     <select id="albumRare" aria-label="Rareté">
       <option value="">Toutes les raretés</option>
       <option value="commune">Commune</option>
-      <option value="peu commune">Peu commune</option>
-      <option value="rare">Rare</option>
-      <option value="épique">Épique</option>
-      <option value="mythique">Mythique</option>
+      <option value="argent">Argent</option>
+      <option value="or">Or</option>
+      <option value="platine">Platine</option>
+      <option value="diamant">Diamant</option>
     </select>
     <select id="albumFam" aria-label="Genre">
-      <option value="">Genre</option>
+      <option value="">Tous les genres</option>
     </select>
     <select id="albumInstr" aria-label="Instrument">
-      <option value="">Instrument</option>
+      <option value="">Tous les instruments</option>
     </select>
     <label class="switch">
       <input type="checkbox" id="albumOwned">
@@ -1218,6 +1317,11 @@
       <input type="checkbox" id="albumNewOnly">
       <span class="knob"></span>
       Nouvelles
+    </label>
+    <label class="switch">
+      <input type="checkbox" id="albumFavOnly">
+      <span class="knob"></span>
+      Favoris
     </label>
     <button type="button" class="chip" id="albumSeeAllNew" hidden>Tout voir</button>
     <div class="sorts" role="group" aria-label="Tri">
@@ -1250,23 +1354,24 @@
     <p class="hint">Prix libre · taxe 10&nbsp;% arrondie (&lt;5 cr = 0) · annuler est gratuit</p>
     <div class="tabs" role="tablist" aria-label="Annonces">
       <button type="button" class="chip on" data-market-tab="all" role="tab" aria-selected="true">Toutes</button>
-      <button type="button" class="chip" data-market-tab="mine" role="tab" aria-selected="false">Mes ventes<span class="nav-badge offer-badge" id="mineOffersBadge" hidden>Offre !</span></button>
-      <button type="button" class="chip" data-market-tab="offers" role="tab" aria-selected="false">Mes offres</button>
+      <button type="button" class="chip" data-market-tab="mine" role="tab" aria-selected="false">Mes ventes</button>
+      <button type="button" class="chip" data-market-tab="offers" role="tab" aria-selected="false">Offres reçues<span class="nav-badge offer-badge" id="offersBadge" hidden>Offre !</span></button>
+      <button type="button" class="chip" data-market-tab="trades" role="tab" aria-selected="false">Offres envoyées</button>
     </div>
     <input type="search" id="marketQ" placeholder="Nom ou groupe" autocomplete="off">
     <select id="marketRare" aria-label="Rareté">
       <option value="">Toutes les raretés</option>
       <option value="commune">Commune</option>
-      <option value="peu commune">Peu commune</option>
-      <option value="rare">Rare</option>
-      <option value="épique">Épique</option>
-      <option value="mythique">Mythique</option>
+      <option value="argent">Argent</option>
+      <option value="or">Or</option>
+      <option value="platine">Platine</option>
+      <option value="diamant">Diamant</option>
     </select>
     <select id="marketInstr" aria-label="Instrument">
-      <option value="">Instrument</option>
+      <option value="">Tous les instruments</option>
     </select>
     <select id="marketFam" aria-label="Genre">
-      <option value="">Genre</option>
+      <option value="">Tous les genres</option>
     </select>
     <button type="button" class="chip" id="marketRefreshNpc">Réapprovisionner PNJ</button>
   </div>
@@ -1281,9 +1386,9 @@
   </nav>
   <div class="proto-cheats">
     <span>Prototype</span>
-    <button type="button" data-force="rare">forcer une rare</button>
-    <button type="button" data-force="épique">forcer une épique</button>
-    <button type="button" data-force="mythique">forcer une mythique</button>
+    <button type="button" data-force="or">forcer un or</button>
+    <button type="button" data-force="platine">forcer un platine</button>
+    <button type="button" data-force="diamant">forcer un diamant</button>
   </div>
 </footer>
 
@@ -1308,11 +1413,19 @@
   <div class="shop-wrap" id="offerBody"></div>
 </dialog>
 
+<dialog id="trade">
+  <div class="shop-wrap" id="tradeBody"></div>
+</dialog>
+
+<dialog id="confirm">
+  <div class="shop-wrap" id="confirmBody"></div>
+</dialog>
+
 <script>
 const CW = 260, CH = 364;
 const EXEC = {
-  commune:"A", "peu commune":"B", rare:"A", épique:"B",
-  mythique:"B"
+  commune:"A", "argent":"B", or:"A", platine:"B",
+  diamant:"B"
 };
 const INSTR = {
   voix:"Voix", guitare:"Guitare", basse:"Basse", batterie:"Batterie",
@@ -1347,11 +1460,11 @@ function familyKey(f){
   return FAMILY_FROM_CATALOG[f] || f;
 }
 const TIERS = {
-  commune:      {rank:0, label:"Commune",     frame:"#5E6670", kind:"simple"},
-  "peu commune":{rank:1, label:"Peu commune", frame:"#8A949B", kind:"double"},
-  rare:         {rank:2, label:"Rare",        frame:"#B08D57", kind:"filets"},
-  épique:       {rank:3, label:"Épique",      frame:"#C3CAD1", kind:"filets"},
-  mythique:     {rank:4, label:"Mythique",    frame:"#D8B35C", kind:"none"}
+  commune:  {rank:0, label:"Commune",  frame:"#5E6670", kind:"simple"},
+  argent:   {rank:1, label:"Argent",   frame:"#8A949B", kind:"double"},
+  or:       {rank:2, label:"Or",       frame:"#B08D57", kind:"filets"},
+  platine:  {rank:3, label:"Platine",  frame:"#C3CAD1", kind:"filets"},
+  diamant:  {rank:4, label:"Diamant",  frame:"#D8B35C", kind:"none"}
 };
 const USERS = {
   u1: { id: "u1", name: "Joueur A", short: "A" },
@@ -1423,6 +1536,8 @@ function refreshAfterUserSwitch(){
   if($("zoom")?.open) $("zoom").close();
   if($("sell")?.open) $("sell").close();
   if($("offer")?.open) $("offer").close();
+  if($("trade")?.open) $("trade").close();
+  if($("confirm")?.open) closeAppConfirm();
   if($("shop")?.open) $("shop").close();
   if(document.body.classList.contains("album")) renderAlbum();
   else if(document.body.classList.contains("market")) renderMarket();
@@ -1441,7 +1556,7 @@ const STARTER_PACKS = 5;
 const MARKET_TAX = 0.10;
 const MARKET_PRICE_MIN = 1;
 const DESTROY_CREDITS = {
-  commune: 2, "peu commune": 6, rare: 20, épique: 60, mythique: 150
+  commune: 2, argent: 6, or: 20, platine: 60, diamant: 150
 };
 const SEAL = { x0: 0.160, x1: 0.848, y0: 0.066, y1: 0.188 };
 const params = new URLSearchParams(location.search);
@@ -1470,13 +1585,14 @@ let pulled = [];
 let albumSort = "num";
 let albumHideMissing = false;
 let albumNewOnly = false;
+let albumFavOnly = false;
 let albumPage = 1;
 let albumPageSize = 12;
 let marketTab = "all";
 let phase = "loading";
 let drag = null;
 let tearDir = 1;
-let revealing = false;
+let revealFxChain = Promise.resolve();
 let force = foldRare(params.get("force"));
 let canvasW = 0, canvasH = 0;
 const flapCanvas = document.createElement("canvas");
@@ -1484,10 +1600,27 @@ const flapCtx = flapCanvas.getContext("2d");
 
 function foldRare(s){
   const t = String(s || "").normalize("NFD").replace(/\p{M}/gu, "").toLowerCase().trim();
-  if(t === "legendaire") return "épique";
-  if(t === "mythique") return "mythique";
-  if(t === "epique") return "épique";
+  if(t === "legendaire" || t === "epique" || t === "platine") return "platine";
+  if(t === "mythique" || t === "diamant") return "diamant";
+  if(t === "rare" || t === "or") return "or";
+  if(t === "peu commune" || t === "peucommune" || t === "argent") return "argent";
+  if(t === "commune") return "commune";
   return t;
+}
+/** Normalise la recherche : accents, tirets Unicode (ex. i‐dle), apostrophes. */
+function foldSearch(s){
+  return String(s || "")
+    .normalize("NFD")
+    .replace(/\p{M}/gu, "")
+    .toLowerCase()
+    .replace(/[\u2010-\u2015\u2212\uFE58\uFE63\uFF0D]/g, "-")
+    .replace(/[\u2018\u2019\u201A\u2032]/g, "'")
+    .trim();
+}
+function matchesSearch(hay, needle){
+  const n = foldSearch(needle);
+  if(!n) return true;
+  return foldSearch(hay).includes(n);
 }
 
 const wait = ms => new Promise(r => setTimeout(r, ms));
@@ -1522,24 +1655,24 @@ function renderCard(card, opts={}){
   const tier = TIERS[card.rarete];
   const fam = FAMILIES[familyKey(card.famille)] || FAMILIES.rock;
   const paper = tier.rank <= 1;
-  const mythique = tier.rank >= 4;
+  const diamant = tier.rank >= 4;
   const nameSize = card.name.length > 16 ? 16 : card.name.length > 13 ? 18 : 21;
   const n = card.name.length;
   const mythName = n > 16 ? 22 : n > 13 ? 26 : n > 10 ? 30 : 34;
-  const bandStyle = paper || mythique ? "" : `background:${fam.fond};`;
+  const bandStyle = paper || diamant ? "" : `background:${fam.fond};`;
   const group = card.group || "Artiste solo";
-  const cls = `card r${tier.rank}${paper?" paper":""}${mythique?" mythique":""}${opts.zoomable===false?"":" zoomable"}`;
+  const cls = `card r${tier.rank}${paper?" paper":""}${diamant?" diamant":""}${opts.zoomable===false?"":" zoomable"}`;
   const info = `${fam.label} · ${INSTR[card.instrument] || card.instrument} · ${group}`;
   return `<div class="${cls}" tabindex="${opts.zoomable===false?"-1":"0"}" data-idx="${opts.idx ?? ""}">
     <div class="art"><img src="../out/illustrations/${esc(card.job)}.png" alt="" loading="lazy" onerror="this.onerror=function(){this.onerror=null;var m=this.src.replace('_x.png','_m.png');if(m!==this.src)this.src=m;};var s=this.src,n=s.indexOf('_B_')>=0?s.replace('_B_','_A_'):s.replace('_A_','_B_');if(n!==s)this.src=n;else{this.onerror=null;var m=s.replace('_x.png','_m.png');if(m!==s)this.src=m;}"></div>
-    ${mythique ? `<div class="title"><div class="myth-name" style="font-size:${mythName}px">${esc(card.name)}</div></div>` : ""}
+    ${diamant ? `<div class="title"><div class="myth-name" style="font-size:${mythName}px">${esc(card.name)}</div></div>` : ""}
     <div class="band" style="${bandStyle}">
       <div class="accent" style="background:${fam.a1}"></div>
       <div class="name" style="font-size:${nameSize}px">${esc(card.name)}</div>
       <div class="rarete" style="color:${tier.frame}">${tier.label}</div>
       <div class="meta">${esc(fam.label)} · ${esc(INSTR[card.instrument] || card.instrument)}</div>
       <div class="group">${esc(group)}</div>
-      ${mythique ? `<div class="line-rare">${tier.label}</div><div class="line-info">${esc(info)}</div>` : ""}
+      ${diamant ? `<div class="line-rare">${tier.label}</div><div class="line-info">${esc(info)}</div>` : ""}
     </div>
     <div class="marks" aria-hidden="true"><span class="serie">S1</span><span class="no">${card.rank || 0}/${catalog.length || 2000}</span></div>
     ${frameSvg(tier.kind, tier.rank, tier.frame)}
@@ -1586,15 +1719,88 @@ function loadOwned(userId){
     const data = JSON.parse(localStorage.getItem(ownedKey(userId)) || "");
     if(data && data.got && typeof data.got === "object"){
       if(!data.fresh || typeof data.fresh !== "object") data.fresh = {};
+      if(!data.fav || typeof data.fav !== "object") data.fav = {};
       return data;
     }
   } catch {}
-  return { v: 2, got: {}, fresh: {} };
+  return { v: 2, got: {}, fresh: {}, fav: {} };
 }
 function saveOwned(data, userId){
   data.v = 2;
   if(!data.fresh || typeof data.fresh !== "object") data.fresh = {};
+  if(!data.fav || typeof data.fav !== "object") data.fav = {};
   localStorage.setItem(ownedKey(userId), JSON.stringify(data));
+}
+function isFavorite(cardId, userId){
+  return !!(loadOwned(userId).fav || {})[cardId];
+}
+function favCount(){
+  return Object.keys(loadOwned().fav || {}).length;
+}
+function setFavorite(cardId, on){
+  if(!cardId) return false;
+  const data = loadOwned();
+  if(!data.fav || typeof data.fav !== "object") data.fav = {};
+  if(on){
+    data.fav[cardId] = true;
+    saveOwned(data);
+    // Favori = hors vente / échange : retire les annonces et propositions en cours.
+    const m = loadMarket();
+    let dirty = false;
+    m.listings = m.listings.filter(l => {
+      if(isMe(l.seller) && l.cardId === cardId){
+        cancelOffersForListing(m, l.id, "cancelled");
+        cancelTradesForListing(m, l.id, "cancelled");
+        dirty = true;
+        return false;
+      }
+      return true;
+    });
+    for(const t of m.trades || []){
+      if(t.status === "pending" && isMe(t.fromUser) && t.offerCardId === cardId){
+        t.status = "withdrawn";
+        dirty = true;
+      }
+    }
+    if(dirty){
+      saveMarket(m);
+      refreshOffersBadge();
+    }
+  } else {
+    delete data.fav[cardId];
+    saveOwned(data);
+  }
+  return !!on;
+}
+function toggleFavorite(cardId){
+  return setFavorite(cardId, !isFavorite(cardId));
+}
+function requestFavoriteToggle(cardId, onDone){
+  const card = byId.get(cardId);
+  if(!card) return;
+  const turningOn = !isFavorite(cardId);
+  const listed = myListingsFor(cardId);
+  const pendingTrade = loadMarket().trades.some(t =>
+    t.status === "pending" && isMe(t.fromUser) && t.offerCardId === cardId
+  );
+  const apply = () => {
+    const on = setFavorite(cardId, turningOn);
+    if(typeof onDone === "function") onDone(on);
+  };
+  if(turningOn && (listed.length || pendingTrade)){
+    let message = "Cette carte est concernée par une vente ou un échange.";
+    if(listed.length === 1) message += " L’annonce sera retirée.";
+    else if(listed.length > 1) message += ` Tes ${listed.length} annonces seront retirées.`;
+    if(pendingTrade) message += " Tes propositions d’échange avec cette carte seront annulées.";
+    showAppConfirm({
+      title: "Mettre en favori",
+      message,
+      confirmLabel: "Mettre en favori",
+      onConfirm: apply
+    });
+    return;
+  }
+  apply();
 }
 /** Migre l’ancien stock indexé par nom → card_id (après chargement du catalogue). */
 function migrateOwnedToIds(){
@@ -1611,7 +1817,12 @@ function migrateOwnedToIds(){
     const card = byId.get(key) || byName.get(key);
     if(card && got[card.id]) fresh[card.id] = true;
   }
-  saveOwned({ v: 2, got, fresh });
+  const fav = {};
+  for(const key of Object.keys(data.fav || {})){
+    const card = byId.get(key) || byName.get(key);
+    if(card) fav[card.id] = true;
+  }
+  saveOwned({ v: 2, got, fresh, fav });
 }
 function uniqueCount(){
   return Object.keys(loadOwned().got).length;
@@ -1759,34 +1970,71 @@ function spendPack(){
   refreshWallet();
   return true;
 }
+function otherPlayerId(){
+  return uid() === "u1" ? "u2" : "u1";
+}
 function myListingsFor(cardId){
   return loadMarket().listings.filter(l => isMe(l.seller) && l.cardId === cardId);
 }
+function listingsForUser(userId, cardId){
+  return loadMarket().listings.filter(l => l.seller === userId && l.cardId === cardId);
+}
 function freeCopies(cardId){
-  const got = loadOwned().got[cardId];
+  return freeCopiesFor(uid(), cardId);
+}
+function freeCopiesFor(userId, cardId){
+  const got = loadOwned(userId).got[cardId];
   const n = got ? (got.n || 0) : 0;
-  return Math.max(0, n - myListingsFor(cardId).length);
+  return Math.max(0, n - listingsForUser(userId, cardId).length);
+}
+function sameTradeValue(a, b){
+  return !!(a && b && a.rarete === b.rarete);
 }
 function destroyCopy(id){
   const card = byId.get(id);
   if(!card) return { ok: false, why: "Carte inconnue." };
+  if(isFavorite(id)){
+    return { ok: false, why: "Carte en favori — retire-la des favoris pour la défausser." };
+  }
   const data = loadOwned();
   const got = data.got[id];
-  if(!got || freeCopies(id) < 2){
-    return { ok: false, why: myListingsFor(id).length
-      ? "Exemplaire réservé par une annonce — retire-la d’abord ou garde un doublon libre."
-      : "Pas de doublon à détruire." };
+  const n = got ? (got.n || 0) : 0;
+  const free = freeCopies(id);
+  if(!got || n < 1 || free < 1){
+    return { ok: false, why: free < 1 && n >= 1
+      ? "Exemplaire réservé par une annonce — retire-la d’abord pour défausser."
+      : "Aucun exemplaire à défausser." };
   }
   got.n -= 1;
-  data.got[id] = got;
+  if(got.n < 1){
+    delete data.got[id];
+    if(data.fav) delete data.fav[id];
+    if(data.fresh) delete data.fresh[id];
+  } else {
+    data.got[id] = got;
+  }
   saveOwned(data);
+  // Annule les échanges en cours qui proposaient cette carte.
+  const m = loadMarket();
+  let dirty = false;
+  for(const t of m.trades || []){
+    if(t.status === "pending" && isMe(t.fromUser) && t.offerCardId === id){
+      t.status = "withdrawn";
+      dirty = true;
+    }
+  }
+  if(dirty){
+    saveMarket(m);
+    refreshOffersBadge();
+  }
   const gain = DESTROY_CREDITS[card.rarete] || 1;
   const w = ensureWallet();
   w.credits += gain;
   saveWallet(w);
   refreshCount();
   refreshWallet();
-  return { ok: true, gain, left: got.n };
+  refreshNewBadge();
+  return { ok: true, gain, left: got.n || 0 };
 }
 function collect(cards){
   const data = loadOwned();
@@ -1813,6 +2061,29 @@ function showSnackbar(message){
   clearTimeout(snackTimer);
   snackTimer = setTimeout(() => el.classList.remove("show"), 2800);
 }
+let confirmOnYes = null;
+function showAppConfirm({
+  title = "Confirmation",
+  message = "",
+  confirmLabel = "Confirmer",
+  cancelLabel = "Annuler",
+  onConfirm
+} = {}){
+  confirmOnYes = typeof onConfirm === "function" ? onConfirm : null;
+  $("confirmBody").innerHTML =
+    `<div class="shop-bar"><span>${esc(title)}</span>` +
+    `<button type="button" id="confirmClose">Fermer</button></div>` +
+    `<p class="shop-ask">${esc(message)}</p>` +
+    `<div class="shop-actions">` +
+    `<button type="button" class="primary" id="confirmYes">${esc(confirmLabel)}</button>` +
+    `<button type="button" id="confirmNo">${esc(cancelLabel)}</button>` +
+    `</div>`;
+  if(!$("confirm").open) $("confirm").showModal();
+}
+function closeAppConfirm(){
+  confirmOnYes = null;
+  if($("confirm")?.open) $("confirm").close();
+}
 function marketTax(price){
   const p = Math.floor(Number(price) || 0);
   if(p < MARKET_PRICE_MIN) return 0;
@@ -1836,14 +2107,16 @@ function loadMarket(){
     if(data && data.v === 1 && Array.isArray(data.listings)){
       if(!Array.isArray(data.offers)) data.offers = [];
       if(!Array.isArray(data.notifications)) data.notifications = [];
+      if(!Array.isArray(data.trades)) data.trades = [];
       return data;
     }
   } catch {}
-  return { v: 1, listings: [], offers: [], notifications: [], seeded: false };
+  return { v: 1, listings: [], offers: [], notifications: [], trades: [], seeded: false };
 }
 function saveMarket(data){
   if(!Array.isArray(data.offers)) data.offers = [];
   if(!Array.isArray(data.notifications)) data.notifications = [];
+  if(!Array.isArray(data.trades)) data.trades = [];
   localStorage.setItem(MARKET_KEY, JSON.stringify(data));
 }
 function pushNotification(note){
@@ -1854,6 +2127,7 @@ function pushNotification(note){
     type: note.type || "info",
     offerId: note.offerId || null,
     listingId: note.listingId || null,
+    tradeId: note.tradeId || null,
     cardId: note.cardId || null,
     toUser: note.toUser,
     title: note.title || "",
@@ -1914,6 +2188,185 @@ function pushSoldNotification(listing, buyerId, price){
     t: Date.now()
   });
 }
+function pushTradeOfferNotification(trade){
+  const offer = byId.get(trade.offerCardId);
+  const want = byId.get(trade.wantCardId);
+  pushNotification({
+    id: `ntf-trade-${trade.id}`,
+    type: "trade",
+    tradeId: trade.id,
+    cardId: trade.wantCardId,
+    toUser: trade.toUser,
+    title: `Échange proposé par ${userName(trade.fromUser)}`,
+    meta: `${offer ? offer.name : "?"} ↔ ${want ? want.name : "?"}`,
+    t: trade.t || Date.now()
+  });
+}
+function pushTradeResolvedNotification(trade, accepted){
+  const offer = byId.get(trade.offerCardId);
+  const want = byId.get(trade.wantCardId);
+  pushNotification({
+    id: `ntf-trade-${accepted ? "ok" : "no"}-${trade.id}`,
+    type: accepted ? "trade_accepted" : "trade_rejected",
+    tradeId: trade.id,
+    cardId: trade.offerCardId,
+    toUser: trade.fromUser,
+    title: accepted
+      ? `Échange accepté par ${userName(trade.toUser)}`
+      : `Échange refusé par ${userName(trade.toUser)}`,
+    meta: `${offer ? offer.name : "?"} ↔ ${want ? want.name : "?"}`,
+    t: Date.now()
+  });
+}
+function myTrades(){
+  return loadMarket().trades
+    .filter(t => !t.dismissed && (isMe(t.fromUser) || isMe(t.toUser)))
+    .sort((a, b) => b.t - a.t);
+}
+function myIncomingPendingTrades(){
+  return loadMarket().trades.filter(t => isMe(t.toUser) && t.status === "pending");
+}
+function cancelTradesForListing(m, listingId, status){
+  for(const t of m.trades || []){
+    if(t.listingId === listingId && t.status === "pending") t.status = status || "cancelled";
+  }
+}
+function proposeTrade(listingId, offerCardId){
+  const m = loadMarket();
+  const listing = m.listings.find(l => l.id === listingId);
+  if(!listing) return { ok: false, why: "Annonce introuvable." };
+  if(listing.seller === "npc") return { ok: false, why: "Les PNJ n’échangent pas." };
+  if(isMe(listing.seller)) return { ok: false, why: "Tu ne peux pas échanger sur ta propre annonce." };
+  const want = byId.get(listing.cardId);
+  const offer = byId.get(offerCardId);
+  if(!offer || !want) return { ok: false, why: "Carte introuvable." };
+  if(!sameTradeValue(offer, want)){
+    return { ok: false, why: "L’échange doit porter sur la même rareté." };
+  }
+  if(offerCardId === listing.cardId) return { ok: false, why: "Choisis une autre carte." };
+  if(isFavorite(offerCardId)){
+    return { ok: false, why: "Cette carte est en favori — retire-la des favoris pour l’échanger." };
+  }
+  if(freeCopies(offerCardId) < 1){
+    return { ok: false, why: "Tu n’as pas d’exemplaire libre à proposer (annonce en cours ?)." };
+  }
+  // La carte demandée est celle de l’annonce (exemplaire réservé OK).
+  const ownedSeller = loadOwned(listing.seller).got[listing.cardId];
+  if(!ownedSeller || (ownedSeller.n || 0) < 1){
+    return { ok: false, why: "Le vendeur n’a plus cette carte." };
+  }
+  const dup = m.trades.find(t =>
+    t.status === "pending" && isMe(t.fromUser) && t.listingId === listingId
+  );
+  if(dup){
+    dup.offerCardId = offerCardId;
+    dup.wantCardId = listing.cardId;
+    dup.t = Date.now();
+    saveMarket(m);
+    return { ok: true, id: dup.id, updated: true };
+  }
+  const trade = {
+    id: `tr-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+    fromUser: uid(),
+    toUser: listing.seller,
+    listingId,
+    offerCardId,
+    wantCardId: listing.cardId,
+    status: "pending",
+    seenByTarget: false,
+    dismissed: false,
+    t: Date.now()
+  };
+  m.trades.unshift(trade);
+  saveMarket(m);
+  pushTradeOfferNotification(trade);
+  refreshOffersBadge();
+  return { ok: true, id: trade.id };
+}
+function withdrawTrade(tradeId){
+  const m = loadMarket();
+  const t = m.trades.find(x => x.id === tradeId);
+  if(!t) return { ok: false, why: "Échange introuvable." };
+  if(!isMe(t.fromUser)) return { ok: false, why: "Ce n’est pas ta proposition." };
+  if(t.status !== "pending") return { ok: false, why: "Cet échange n’est plus actif." };
+  t.status = "withdrawn";
+  saveMarket(m);
+  refreshOffersBadge();
+  return { ok: true };
+}
+function dismissTrade(tradeId){
+  const m = loadMarket();
+  const t = m.trades.find(x => x.id === tradeId);
+  if(!t) return { ok: false, why: "Échange introuvable." };
+  if(!isMe(t.fromUser) && !isMe(t.toUser)) return { ok: false, why: "Cet échange ne te concerne pas." };
+  if(t.status === "pending") return { ok: false, why: "Retire ou réponds d’abord." };
+  t.dismissed = true;
+  saveMarket(m);
+  return { ok: true };
+}
+function rejectTrade(tradeId){
+  const m = loadMarket();
+  const t = m.trades.find(x => x.id === tradeId);
+  if(!t) return { ok: false, why: "Échange introuvable." };
+  if(!isMe(t.toUser)) return { ok: false, why: "Ce n’est pas pour toi." };
+  if(t.status !== "pending") return { ok: false, why: "Cet échange n’est plus actif." };
+  t.status = "rejected";
+  t.seenByTarget = true;
+  saveMarket(m);
+  pushTradeResolvedNotification(t, false);
+  refreshOffersBadge();
+  return { ok: true };
+}
+function acceptTrade(tradeId){
+  const m = loadMarket();
+  const t = m.trades.find(x => x.id === tradeId);
+  if(!t) return { ok: false, why: "Échange introuvable." };
+  if(!isMe(t.toUser)) return { ok: false, why: "Ce n’est pas pour toi." };
+  if(t.status !== "pending") return { ok: false, why: "Cet échange n’est plus actif." };
+  if(isFavorite(t.offerCardId, t.fromUser)){
+    return { ok: false, why: "La carte proposée est passée en favori chez l’autre joueur." };
+  }
+  if(isFavorite(t.wantCardId, t.toUser)){
+    return { ok: false, why: "Cette carte est en favori — retire-la des favoris pour accepter l’échange." };
+  }
+  if(freeCopiesFor(t.fromUser, t.offerCardId) < 1){
+    return { ok: false, why: "L’autre joueur n’a plus la carte proposée libre." };
+  }
+  const li = t.listingId
+    ? m.listings.findIndex(l => l.id === t.listingId)
+    : m.listings.findIndex(l => isMe(l.seller) && l.cardId === t.wantCardId);
+  if(li < 0){
+    return { ok: false, why: "L’annonce liée n’existe plus." };
+  }
+  const listing = m.listings[li];
+  if(listing.cardId !== t.wantCardId || listing.seller !== t.toUser){
+    return { ok: false, why: "L’annonce ne correspond plus à l’échange." };
+  }
+  const sellerOwned = loadOwned(t.toUser).got[t.wantCardId];
+  if(!sellerOwned || (sellerOwned.n || 0) < 1){
+    return { ok: false, why: "Tu n’as plus cette carte." };
+  }
+  if(!takeOwnedCopy(t.offerCardId, t.fromUser)){
+    return { ok: false, why: "Impossible de prendre la carte proposée." };
+  }
+  if(!takeOwnedCopy(t.wantCardId, t.toUser)){
+    giveOwnedCopy(t.offerCardId, { fresh: false, userId: t.fromUser });
+    return { ok: false, why: "Impossible de prendre ta carte mise en vente." };
+  }
+  giveOwnedCopy(t.offerCardId, { fresh: true, userId: t.toUser });
+  giveOwnedCopy(t.wantCardId, { fresh: true, userId: t.fromUser });
+  m.listings.splice(li, 1);
+  cancelOffersForListing(m, listing.id, "cancelled");
+  cancelTradesForListing(m, listing.id, "cancelled");
+  t.status = "accepted";
+  t.seenByTarget = true;
+  saveMarket(m);
+  pushTradeResolvedNotification(t, true);
+  refreshOffersBadge();
+  refreshCount();
+  refreshNewBadge();
+  return { ok: true };
+}
 function myNotifications(){
   return loadMarket().notifications.filter(n => !n.toUser || n.toUser === uid());
 }
@@ -1965,7 +2418,7 @@ function dismissRejectedOffer(offerId){
   const o = m.offers.find(x => x.id === offerId);
   if(!o) return { ok: false, why: "Offre introuvable." };
   if(!isMe(o.buyer)) return { ok: false, why: "Ce n’est pas ton offre." };
-  if(o.status !== "rejected") return { ok: false, why: "Seules les offres refusées peuvent être retirées." };
+  if(o.status === "pending") return { ok: false, why: "Retire d’abord l’offre en cours." };
   o.dismissed = true;
   saveMarket(m);
   return { ok: true };
@@ -1977,9 +2430,9 @@ function unseenIncomingOffers(){
   return myIncomingPendingOffers().filter(o => !o.seenBySeller);
 }
 function refreshOffersBadge(){
-  const pending = myIncomingPendingOffers().length;
+  const pending = myIncomingPendingOffers().length + myIncomingPendingTrades().length;
   const unread = unreadNotifications().length;
-  const badge = $("mineOffersBadge");
+  const badge = $("offersBadge");
   if(badge){
     badge.textContent = "Offre !";
     badge.hidden = pending < 1;
@@ -2023,6 +2476,7 @@ function goToMarketTab(tab){
 }
 function goToMySales(){ goToMarketTab("mine"); }
 function goToMyOffers(){ goToMarketTab("offers"); }
+function goToTrades(){ goToMarketTab("trades"); }
 function openNotification(nid){
   const m = loadMarket();
   const note = m.notifications.find(n => n.id === nid);
@@ -2039,9 +2493,18 @@ function openNotification(nid){
       saveMarket(m);
     }
   }
+  if(note.type === "trade" && note.tradeId){
+    const trade = m.trades.find(t => t.id === note.tradeId);
+    if(trade && !trade.seenByTarget){
+      trade.seenByTarget = true;
+      saveMarket(m);
+    }
+  }
   refreshOffersBadge();
-  if(note.type === "offer" || note.type === "sold") goToMySales();
+  if(note.type === "sold") goToMySales();
+  else if(note.type === "offer" || note.type === "trade") goToMyOffers();
   else if(note.type === "offer_accepted" || note.type === "offer_rejected") goToMyOffers();
+  else if(note.type === "trade_accepted" || note.type === "trade_rejected") goToTrades();
   else setNotifMenuOpen(false);
 }
 function markOffersSeen(listingId){
@@ -2136,6 +2599,9 @@ function listCardForSale(cardId, price){
   const card = byId.get(cardId);
   const p = Math.floor(Number(price) || 0);
   if(!card) return { ok: false, why: "Carte inconnue." };
+  if(isFavorite(cardId)){
+    return { ok: false, why: "Cette carte est en favori — retire-la des favoris pour la vendre." };
+  }
   if(!isValidMarketPrice(p)){
     return { ok: false, why: `Prix minimum : ${MARKET_PRICE_MIN} crédit.` };
   }
@@ -2168,6 +2634,7 @@ function cancelListing(listingId){
   if(!isMe(listing.seller)) return { ok: false, why: "Ce n’est pas ton annonce." };
   m.listings.splice(i, 1);
   cancelOffersForListing(m, listingId, "cancelled");
+  cancelTradesForListing(m, listingId, "cancelled");
   saveMarket(m);
   refreshOffersBadge();
   return { ok: true };
@@ -2198,6 +2665,7 @@ function buyListing(listingId){
   const buyerId = uid();
   m.listings.splice(i, 1);
   cancelOffersForListing(m, listingId, "cancelled");
+  cancelTradesForListing(m, listingId, "cancelled");
   saveMarket(m);
   giveOwnedCopy(listing.cardId, { fresh: true });
   if(soldListing.seller !== "npc") pushSoldNotification(soldListing, buyerId, soldPrice);
@@ -2343,36 +2811,160 @@ function offerStatusLabel(status){
     withdrawn: "Retirée"
   })[status] || status;
 }
+function renderIncomingTradeRow(t){
+  const offer = byId.get(t.offerCardId);
+  const want = byId.get(t.wantCardId);
+  if(!offer || !want) return "";
+  const pending = t.status === "pending";
+  let actions = "";
+  if(pending){
+    actions = `<div class="trade-row-actions">
+      <button type="button" class="ok" data-trade-act="accept" data-tid="${esc(t.id)}">Accepter</button>
+      <button type="button" data-trade-act="reject" data-tid="${esc(t.id)}">Refuser</button>
+    </div>`;
+  } else if(t.status === "rejected" || t.status === "accepted" || t.status === "withdrawn" || t.status === "cancelled"){
+    actions = `<div class="trade-row-actions">
+      <button type="button" data-trade-act="dismiss" data-tid="${esc(t.id)}">×</button>
+    </div>`;
+  }
+  // want = ta carte (annonce) · offer = carte proposée par l’autre
+  return `<div class="market-row" data-tid="${esc(t.id)}">
+    <div class="mini">${renderCard(want, { zoomable: false })}</div>
+    <div class="meta">
+      <div class="name">Offre de ${esc(userName(t.fromUser))}</div>
+      <div class="sub">
+        <button type="button" class="name-link" data-zoom-card="${esc(want.id)}" title="Voir la carte">${esc(want.name)}</button>
+        <span aria-hidden="true"> ↔ </span>
+        <button type="button" class="name-link" data-zoom-card="${esc(offer.id)}" title="Voir la carte">${esc(offer.name)}</button>
+        ${pending ? "" : ` · ${esc(tradeStatusLabel(t.status))}`}
+      </div>
+    </div>
+    <div class="side">${actions || `<div class="tap">${esc(tradeStatusLabel(t.status))}</div>`}</div>
+  </div>`;
+}
+function renderOutgoingCreditOfferRow(o){
+  const m = loadMarket();
+  const card = byId.get(o.cardId);
+  if(!card) return "";
+  const listing = m.listings.find(l => l.id === o.listingId);
+  const ask = listing ? listing.price : null;
+  const pending = o.status === "pending";
+  const rejected = o.status === "rejected";
+  const canDismiss = rejected || o.status === "withdrawn" || o.status === "accepted" || o.status === "cancelled";
+  const cross = pending
+    ? `<button type="button" class="dismiss" data-withdraw-offer="${esc(o.id)}" aria-label="Retirer l’offre" title="Retirer l’offre">×</button>`
+    : canDismiss
+      ? `<button type="button" class="dismiss" data-dismiss-offer="${esc(o.id)}" aria-label="Supprimer" title="Supprimer">×</button>`
+      : "";
+  return `<div class="market-row" data-lid="${esc(o.listingId || "")}" data-oid="${esc(o.id)}" role="button" tabindex="0">
+    <div class="mini">${renderCard(card, { zoomable: false })}</div>
+    <div class="meta">
+      <div class="name"><button type="button" class="name-link" data-zoom-card="${esc(card.id)}" title="Voir la carte">${esc(card.name)}</button></div>
+      <div class="sub">${esc(offerStatusLabel(o.status))}${ask != null ? ` · prix affiché ${ask} cr` : " · annonce retirée"}</div>
+    </div>
+    <div class="side">
+      <div class="price">${o.price} cr</div>
+      ${cross}
+    </div>
+  </div>`;
+}
+function renderIncomingCreditOfferRow(o){
+  const m = loadMarket();
+  const card = byId.get(o.cardId);
+  if(!card) return "";
+  const listing = m.listings.find(l => l.id === o.listingId);
+  const ask = listing ? listing.price : null;
+  const pending = o.status === "pending";
+  const pay = sellerPayout(o.price);
+  return `<div class="market-row" data-oid="${esc(o.id)}" data-lid="${esc(o.listingId || "")}">
+    <div class="mini">${renderCard(card, { zoomable: false })}</div>
+    <div class="meta">
+      <div class="name"><button type="button" class="name-link" data-zoom-card="${esc(card.id)}" title="Voir la carte">${esc(card.name)}</button></div>
+      <div class="sub">Offre de ${esc(userName(o.buyer))} · ${esc(offerStatusLabel(o.status))}${
+        ask != null ? ` · prix affiché ${ask} cr` : " · annonce retirée"
+      } · tu reçois ${pay} cr</div>
+    </div>
+    <div class="side">
+      <div class="price">${o.price} cr</div>
+      ${pending
+        ? `<div class="trade-row-actions">
+            <button type="button" class="ok" data-offer-act="accept" data-oid="${esc(o.id)}">Accepter</button>
+            <button type="button" data-offer-act="reject" data-oid="${esc(o.id)}">Refuser</button>
+          </div>`
+        : `<div class="tap">${esc(offerStatusLabel(o.status))}</div>`}
+    </div>
+  </div>`;
+}
 function renderMarketOffersTab(){
   const list = $("marketList");
-  const offers = myOutgoingOffers();
-  if(!offers.length){
-    list.innerHTML = `<p class="market-empty">Aucune contre-offre. Ouvre une annonce PNJ et propose un prix.</p>`;
+  markOffersSeen();
+  const incomingTrades = myTrades().filter(t => isMe(t.toUser));
+  const incomingCredits = myIncomingPendingOffers().sort((a, b) => b.t - a.t);
+  if(!incomingTrades.length && !incomingCredits.length){
+    list.innerHTML = `<p class="market-empty">Aucune offre reçue. Contre-offres crédits et échanges sur tes annonces apparaîtront ici.</p>`;
     return;
   }
-  const m = loadMarket();
-  list.innerHTML = offers.map(o => {
-    const card = byId.get(o.cardId);
-    if(!card) return "";
-    const listing = m.listings.find(l => l.id === o.listingId);
-    const ask = listing ? listing.price : null;
-    const pending = o.status === "pending";
-    const rejected = o.status === "rejected";
-    return `<div class="market-row" data-lid="${esc(o.listingId || "")}" data-oid="${esc(o.id)}" role="button" tabindex="0">
-      <div class="mini">${renderCard(card, { zoomable: false })}</div>
-      <div class="meta">
-        <div class="name">${esc(card.name)}</div>
-        <div class="sub">${esc(offerStatusLabel(o.status))}${ask != null ? ` · prix affiché ${ask} cr` : " · annonce retirée"}</div>
-      </div>
-      <div class="side">
-        ${rejected
-          ? `<button type="button" class="dismiss" data-dismiss-offer="${esc(o.id)}" aria-label="Supprimer" title="Supprimer">×</button>`
-          : ""}
-        <div class="price">${o.price} cr</div>
-        ${rejected ? "" : `<div class="tap">${pending ? "Voir / retirer" : "Voir"}</div>`}
-      </div>
-    </div>`;
-  }).join("");
+  const parts = [];
+  if(incomingTrades.length){
+    parts.push(`<div class="market-section-title">Échanges</div>`);
+    parts.push(incomingTrades.map(renderIncomingTradeRow).join(""));
+  }
+  if(incomingCredits.length){
+    parts.push(`<div class="market-section-title">Contre-offres (crédits)</div>`);
+    parts.push(incomingCredits.map(renderIncomingCreditOfferRow).join(""));
+  }
+  list.innerHTML = parts.join("");
+}
+function tradeStatusLabel(status){
+  return ({
+    pending: "En attente",
+    accepted: "Accepté",
+    rejected: "Refusé",
+    withdrawn: "Retiré",
+    cancelled: "Annulé"
+  })[status] || status;
+}
+function renderMarketTradesTab(){
+  const list = $("marketList");
+  // Offres envoyées : échanges carte + contre-offres crédits
+  const trades = myTrades().filter(t => isMe(t.fromUser));
+  const offers = myOutgoingOffers();
+  if(!trades.length && !offers.length){
+    list.innerHTML = `<p class="market-empty">Aucune offre envoyée. Ouvre une annonce joueur → Contre-offre (crédits ou échange).</p>`;
+    return;
+  }
+  const parts = [];
+  if(trades.length){
+    parts.push(`<div class="market-section-title">Échanges proposés</div>`);
+    parts.push(trades.map(t => {
+      const offer = byId.get(t.offerCardId);
+      const want = byId.get(t.wantCardId);
+      if(!offer || !want) return "";
+      const pending = t.status === "pending";
+      const cross = pending
+        ? `<button type="button" class="dismiss" data-trade-act="withdraw" data-tid="${esc(t.id)}" aria-label="Retirer l’échange" title="Retirer l’échange">×</button>`
+        : (t.status === "rejected" || t.status === "accepted" || t.status === "withdrawn" || t.status === "cancelled")
+          ? `<button type="button" class="dismiss" data-trade-act="dismiss" data-tid="${esc(t.id)}" aria-label="Supprimer" title="Supprimer">×</button>`
+          : "";
+      return `<div class="market-row" data-tid="${esc(t.id)}">
+        <div class="mini">${renderCard(offer, { zoomable: false })}</div>
+        <div class="meta">
+          <div class="name">
+            <button type="button" class="name-link" data-zoom-card="${esc(offer.id)}" title="Voir la carte">${esc(offer.name)}</button>
+            <span aria-hidden="true"> ↔ </span>
+            <button type="button" class="name-link" data-zoom-card="${esc(want.id)}" title="Voir la carte">${esc(want.name)}</button>
+          </div>
+          <div class="sub">${esc(tradeStatusLabel(t.status))} · à ${esc(userName(t.toUser))} · ${esc(TIERS[offer.rarete].label)}</div>
+        </div>
+        <div class="side">${cross}</div>
+      </div>`;
+    }).join(""));
+  }
+  if(offers.length){
+    parts.push(`<div class="market-section-title">Contre-offres (crédits)</div>`);
+    parts.push(offers.map(renderOutgoingCreditOfferRow).join(""));
+  }
+  list.innerHTML = parts.join("");
 }
 function renderMarket(){
   seedNpcListings(false);
@@ -2384,7 +2976,11 @@ function renderMarket(){
     renderMarketOffersTab();
     return;
   }
-  const q = ($("marketQ").value || "").trim().toLowerCase();
+  if(marketTab === "trades"){
+    renderMarketTradesTab();
+    return;
+  }
+  const q = $("marketQ").value || "";
   const rare = $("marketRare").value;
   const instr = $("marketInstr").value;
   const fam = $("marketFam") ? $("marketFam").value : "";
@@ -2396,10 +2992,7 @@ function renderMarket(){
     if(rare && card.rarete !== rare) return false;
     if(instr && card.instrument !== instr) return false;
     if(fam && card.famille !== fam) return false;
-    if(q){
-      const hay = `${card.name} ${card.group || ""}`.toLowerCase();
-      if(!hay.includes(q)) return false;
-    }
+    if(q && !matchesSearch(`${card.name} ${card.group || ""}`, q)) return false;
     return true;
   });
   rows.sort((a, b) => {
@@ -2426,11 +3019,8 @@ function renderMarket(){
     if(!card) return "";
     const mine = isMe(l.seller);
     const payout = sellerPayout(l.price);
-    const offers = mine ? pendingOffersForListing(l.id).sort((a, b) => b.price - a.price) : [];
-    const offersHtml = offers.length
-      ? `<div class="offers-side">${offers.map(o =>
-          `<span class="offer-chip">Offre ${o.price} cr</span>`
-        ).join("")}</div>`
+    const sideExtra = mine
+      ? `<button type="button" class="dismiss" data-cancel-listing="${esc(l.id)}" aria-label="Retirer l’annonce" title="Retirer l’annonce">×</button>`
       : `<div class="tap">Voir</div>`;
     const sellerLabel = mine
       ? `Ton annonce · tu recevras ${payout}`
@@ -2443,7 +3033,7 @@ function renderMarket(){
       </div>
       <div class="side">
         <div class="price">${l.price} cr</div>
-        ${offersHtml}
+        ${sideExtra}
       </div>
     </div>`;
   }).join("");
@@ -2532,31 +3122,31 @@ function savePity(data, userId){
   localStorage.setItem(pityKey(userId), JSON.stringify(data));
 }
 function rollChase(pity){
-  if(!pity.starterMyth && pity.n >= 9) return "mythique";
-  if(pity.sinceMyth >= 39) return "mythique";
-  if(pity.sinceEpic >= 19) return "épique";
+  if(!pity.starterMyth && pity.n >= 9) return "diamant";
+  if(pity.sinceMyth >= 39) return "diamant";
+  if(pity.sinceEpic >= 19) return "platine";
   const r = Math.random();
-  if(r < 0.05) return "mythique";
-  if(r < 0.25) return "épique";
-  return "rare";
+  if(r < 0.05) return "diamant";
+  if(r < 0.25) return "platine";
+  return "or";
 }
 function pullPack(){
   const pity = loadPity();
-  const chase = force === "mythique" ? "mythique"
-    : force === "épique" ? "épique"
-    : force === "rare" ? "rare"
+  const chase = force === "diamant" ? "diamant"
+    : force === "platine" ? "platine"
+    : force === "or" ? "or"
     : rollChase(pity);
   const pc = Math.random() < 0.5 ? 2 : 1;
   const slots = [];
-  for(let i = 0; i < pc; i++) slots.push("peu commune");
+  for(let i = 0; i < pc; i++) slots.push("argent");
   while(slots.length < 4) slots.push("commune");
   slots.push(chase);
   const used = new Set();
   const cards = slots.map(r => pick(pool[r], used));
   pity.n += 1;
-  pity.sinceMyth = chase === "mythique" ? 0 : pity.sinceMyth + 1;
-  pity.sinceEpic = (chase === "épique" || chase === "mythique") ? 0 : pity.sinceEpic + 1;
-  if(chase === "mythique") pity.starterMyth = true;
+  pity.sinceMyth = chase === "diamant" ? 0 : pity.sinceMyth + 1;
+  pity.sinceEpic = (chase === "platine" || chase === "diamant") ? 0 : pity.sinceEpic + 1;
+  if(chase === "diamant") pity.starterMyth = true;
   savePity(pity);
   return cards;
 }
@@ -2571,8 +3161,8 @@ function preload(cards){
 }
 
 function highest(cards){
-  if(cards.some(c => c.rarete === "mythique")) return "mythique";
-  if(cards.some(c => c.rarete === "épique")) return "épique";
+  if(cards.some(c => c.rarete === "diamant")) return "diamant";
+  if(cards.some(c => c.rarete === "platine")) return "platine";
   return "normal";
 }
 
@@ -2592,24 +3182,36 @@ function spawnDust(){
 function spawnCrowd(){
   const box = $("crowd");
   box.innerHTML = "";
-  for(let i = 0; i < 70; i++){
+  const poses = ["pose-cheer", "pose-phone", "pose-lean", "pose-close"];
+  for(let i = 0; i < 78; i++){
     const p = document.createElement("span");
-    p.className = "fan";
-    const s = 0.55 + Math.random() * 1.15;
+    const pose = poses[i % poses.length];
+    p.className = `fan ${pose}`;
+    const s = 0.45 + Math.random() * 1.25;
+    const rot = (Math.random() * 10 - 5).toFixed(1);
+    // Plus loin = plus haut / plus petit / un peu plus clair (profondeur)
+    const depth = Math.random();
+    const top = 52 + depth * 44;
+    const shade = Math.round(12 + depth * 10);
     p.style.cssText = [
-      `left:${Math.random() * 100}%`,
-      `top:${58 + Math.random() * 40}%`,
-      `--s:${s.toFixed(2)}`,
-      `animation-delay:${(-Math.random() * 1.1).toFixed(2)}s`
+      `left:${(Math.random() * 104 - 2).toFixed(1)}%`,
+      `top:${top.toFixed(1)}%`,
+      `--s:${(s * (0.7 + depth * 0.55)).toFixed(2)}`,
+      `--r:${rot}deg`,
+      `z-index:${Math.floor(depth * 20)}`,
+      `background:rgb(${shade},${shade},${shade + 4})`,
+      `animation-delay:${(-Math.random() * 1.15).toFixed(2)}s`,
+      `animation-duration:${(0.95 + Math.random() * 0.45).toFixed(2)}s`
     ].join(";");
     box.appendChild(p);
   }
-  for(let i = 0; i < 36; i++){
+  for(let i = 0; i < 40; i++){
     const d = document.createElement("span");
     d.className = "phone";
     d.style.cssText = [
       `left:${4 + Math.random() * 92}%`,
-      `top:${62 + Math.random() * 34}%`,
+      `top:${58 + Math.random() * 36}%`,
+      `z-index:22`,
       `animation-delay:${(-Math.random() * 1.3).toFixed(2)}s`
     ].join(";");
     box.appendChild(d);
@@ -2735,9 +3337,9 @@ function resetPackPose(){
 }
 
 function forceCopy(){
-  if(force === "mythique") return "Ce sachet contient une mythique. Glisse le scellé du haut.";
-  if(force === "épique") return "Ce sachet contient une épique. Glisse le scellé du haut.";
-  if(force === "rare") return "Ce sachet contient une rare. Glisse le scellé du haut.";
+  if(force === "diamant") return "Ce sachet contient un diamant. Glisse le scellé du haut.";
+  if(force === "platine") return "Ce sachet contient un platine. Glisse le scellé du haut.";
+  if(force === "or") return "Ce sachet contient un or. Glisse le scellé du haut.";
   return "Glisse le scellé du haut pour ouvrir le sachet.";
 }
 
@@ -2755,7 +3357,7 @@ function cardBack(){
 
 function armPack(){
   phase = "idle";
-  revealing = false;
+  revealFxChain = Promise.resolve();
   document.body.classList.remove("cutaway");
   stage.classList.remove("cutaway", "show-hit");
   fx.className = "";
@@ -2830,65 +3432,80 @@ async function openPack(){
   phase = "deal";
 }
 
+function finishRevealIfDone(){
+  if(phase !== "deal") return;
+  if(![...hand.children].every(n => n.classList.contains("revealed"))) return;
+  intro.textContent = "Clique une carte pour agrandir, ou ailleurs pour ranger.";
+  againRow.hidden = true;
+  hand.classList.add("stashable");
+  phase = "open";
+  refreshWallet();
+}
+
+async function playEpicMythReveal(el, card, i, flipMs){
+  const myth = card.rarete === "diamant";
+  el.classList.add("hit");
+  document.body.classList.add("cutaway");
+  stage.classList.add("cutaway");
+  await wait(280);
+
+  fx.className = "";
+  $("dust").innerHTML = "";
+  $("crowd").innerHTML = "";
+  $("flashes").innerHTML = "";
+  if(myth){
+    spawnCrowd();
+    spawnFlashes();
+    fx.className = "myth";
+    await wait(1450);
+  } else {
+    spawnDust();
+    fx.className = "epic";
+    await wait(950);
+  }
+
+  stage.classList.add("show-hit");
+  await wait(160);
+  el.classList.add("revealed", myth ? "fx-myth" : "fx-epic");
+  await wait(flipMs + (myth ? 520 : 380));
+
+  [...hand.children].forEach((n, j) => { if(j !== i) n.classList.add("dim"); });
+  document.body.classList.remove("cutaway");
+  stage.classList.remove("cutaway", "show-hit");
+  fx.classList.add("settled");
+  await wait(240);
+  el.classList.remove("hit");
+}
+
 async function revealCard(i){
   const el = hand.children[i];
   const card = pulled[i];
-  if(!el || !card || el.classList.contains("revealed") || revealing) return;
-  revealing = true;
-  const myth = card.rarete === "mythique";
-  const epic = card.rarete === "épique";
+  // Verrou par carte (pas global) : les clics rapides retournent bien chaque carte.
+  if(!el || !card || el.classList.contains("revealed") || el.dataset.revealing) return;
+  el.dataset.revealing = "1";
+  const myth = card.rarete === "diamant";
+  const epic = card.rarete === "platine";
   const flipMs = reduced ? 40 : 360;
 
-  if((myth || epic) && !reduced){
-    el.classList.add("hit");
-    document.body.classList.add("cutaway");
-    stage.classList.add("cutaway");
-    await wait(280);
-
-    fx.className = "";
-    $("dust").innerHTML = "";
-    $("crowd").innerHTML = "";
-    $("flashes").innerHTML = "";
-    if(myth){
-      spawnCrowd();
-      spawnFlashes();
-      fx.className = "myth";
-      await wait(1450);
+  try {
+    if((myth || epic) && !reduced){
+      // Une seule cutaway à la fois ; les communes/rares peuvent se retourner en parallèle.
+      const run = revealFxChain.then(() => playEpicMythReveal(el, card, i, flipMs));
+      revealFxChain = run.catch(() => {});
+      await run;
+    } else if(card.rarete === "or" && !reduced){
+      el.classList.add("revealed", "fx-rare");
+      await wait(flipMs + 420);
     } else {
-      spawnDust();
-      fx.className = "epic";
-      await wait(950);
+      el.classList.add("revealed");
+      await wait(flipMs);
     }
 
-    stage.classList.add("show-hit");
-    await wait(160);
-    el.classList.add("revealed", myth ? "fx-myth" : "fx-epic");
-    await wait(flipMs + (myth ? 520 : 380));
-
-    [...hand.children].forEach((n, j) => { if(j !== i) n.classList.add("dim"); });
-    document.body.classList.remove("cutaway");
-    stage.classList.remove("cutaway", "show-hit");
-    fx.classList.add("settled");
-    await wait(240);
-    el.classList.remove("hit");
-  } else if(card.rarete === "rare" && !reduced){
-    el.classList.add("revealed", "fx-rare");
-    await wait(flipMs + 420);
-  } else {
-    el.classList.add("revealed");
-    await wait(flipMs);
-  }
-
-  const face = el.querySelector(".face.front .card");
-  if(face){ face.classList.add("zoomable"); face.tabIndex = 0; }
-
-  revealing = false;
-  if([...hand.children].every(n => n.classList.contains("revealed"))){
-    intro.textContent = "Clique une carte pour agrandir, ou ailleurs pour ranger.";
-    againRow.hidden = true;
-    hand.classList.add("stashable");
-    phase = "open";
-    refreshWallet();
+    const face = el.querySelector(".face.front .card");
+    if(face){ face.classList.add("zoomable"); face.tabIndex = 0; }
+  } finally {
+    delete el.dataset.revealing;
+    finishRevealIfDone();
   }
 }
 
@@ -3154,6 +3771,16 @@ function renderSellConfirm(){
     `</div>`;
 }
 function openSellDialog(card){
+  if(isFavorite(card.id)){
+    showAppConfirm({
+      title: "Carte en favori",
+      message: `« ${card.name} » est en favori.\nRetire-la des favoris pour pouvoir la vendre.`,
+      confirmLabel: "OK",
+      cancelLabel: "Fermer",
+      onConfirm: () => {}
+    });
+    return;
+  }
   sellCard = card;
   sellPrice = suggestPrice(card);
   renderSellForm();
@@ -3181,6 +3808,143 @@ function finishSell(){
   });
   showView("market");
   showSnackbar(`Annonce publiée · ${name} à ${creditsLabel(price)}`);
+}
+
+let tradeListing = null;
+let tradeOfferCardId = null;
+const TRADE_SEARCH_MIN = 2;
+function myTradeOfferCandidates(wantCard){
+  const owned = loadOwned().got;
+  return catalog.filter(c =>
+    owned[c.id] &&
+    !isFavorite(c.id) &&
+    freeCopies(c.id) >= 1 &&
+    sameTradeValue(wantCard, c) &&
+    c.id !== wantCard.id
+  ).sort((a, b) => a.name.localeCompare(b.name, "fr"));
+}
+function filterTradeCandidates(wantCard, q){
+  const needle = foldSearch(q);
+  if(needle.length < TRADE_SEARCH_MIN) return [];
+  return myTradeOfferCandidates(wantCard).filter(c =>
+    matchesSearch(`${c.name} ${c.group || ""}`, needle)
+  ).slice(0, 10);
+}
+function syncTradeNextBtn(){
+  const next = $("tradeNext");
+  if(next) next.disabled = !tradeOfferCardId;
+}
+function updateTradeSelectedLabel(){
+  const el = $("tradeSelected");
+  if(!el) return;
+  const card = tradeOfferCardId ? byId.get(tradeOfferCardId) : null;
+  el.textContent = card
+    ? `Sélection : ${card.name}`
+    : "Aucune carte sélectionnée.";
+  el.classList.toggle("trade-selected", !!card);
+  syncTradeNextBtn();
+}
+function updateTradeSuggestions(){
+  const box = $("tradeSuggest");
+  if(!box || !tradeListing) return;
+  const want = byId.get(tradeListing.cardId);
+  if(!want) return;
+  const input = $("tradeSearchInput");
+  const q = input ? input.value : "";
+  const needle = String(q).trim();
+  if(needle.length < TRADE_SEARCH_MIN){
+    box.innerHTML = `<p class="trade-suggest-empty">Tape au moins ${TRADE_SEARCH_MIN} lettres (nom ou groupe).</p>`;
+    return;
+  }
+  const hits = filterTradeCandidates(want, needle);
+  if(!hits.length){
+    box.innerHTML = `<p class="trade-suggest-empty">Aucune de tes cartes libres ne correspond.</p>`;
+    return;
+  }
+  box.innerHTML = hits.map(c =>
+    `<button type="button" data-offer="${esc(c.id)}" class="${tradeOfferCardId === c.id ? "on" : ""}">
+      <div class="name">${esc(c.name)}</div>
+      <div class="sub">${esc(INSTR[c.instrument] || c.instrument)}${c.group ? ` · ${esc(c.group)}` : ""}</div>
+    </button>`
+  ).join("");
+}
+function renderTradeForm(){
+  if(!tradeListing) return;
+  const want = byId.get(tradeListing.cardId);
+  if(!want) return;
+  const partner = tradeListing.seller;
+  const picks = myTradeOfferCandidates(want);
+  const rare = TIERS[want.rarete]?.label || want.rarete;
+  const selected = tradeOfferCardId ? byId.get(tradeOfferCardId) : null;
+  let body;
+  if(!picks.length){
+    body = `<p class="shop-ask">Tu n’as aucune carte libre en ${esc(rare)} à proposer contre « ${esc(want.name)} ».</p>`;
+  } else {
+    body =
+      `<p class="shop-ask">Tu veux « ${esc(want.name)} » de ${esc(userName(partner))} (${esc(rare)}).\n` +
+      `Cherche une de tes cartes libres de même rareté :</p>` +
+      `<div class="shop-field">` +
+      `<label for="tradeSearchInput">Carte à proposer</label>` +
+      `<input type="search" id="tradeSearchInput" placeholder="Nom ou groupe…" autocomplete="off" value="${esc(selected ? selected.name : "")}">` +
+      `</div>` +
+      `<p class="shop-bal" id="tradeSelected"></p>` +
+      `<div class="trade-suggest" id="tradeSuggest"></div>`;
+  }
+  $("tradeBody").innerHTML =
+    `<div class="shop-bar"><span>Proposer un échange</span>` +
+    `<button type="button" id="tradeClose">Fermer</button></div>` +
+    body +
+    `<div class="shop-actions">` +
+    `<button type="button" class="primary" id="tradeNext" ${tradeOfferCardId ? "" : "disabled"}>Continuer</button>` +
+    `<button type="button" id="tradeChooser">Retour</button>` +
+    `</div>`;
+  if(picks.length){
+    updateTradeSelectedLabel();
+    updateTradeSuggestions();
+    const input = $("tradeSearchInput");
+    if(input) input.focus();
+  }
+}
+function renderTradeConfirm(){
+  if(!tradeListing || !tradeOfferCardId) return;
+  const want = byId.get(tradeListing.cardId);
+  const offer = byId.get(tradeOfferCardId);
+  if(!want || !offer) return;
+  $("tradeBody").innerHTML =
+    `<div class="shop-bar"><span>Confirmation</span>` +
+    `<button type="button" id="tradeClose">Fermer</button></div>` +
+    `<p class="shop-ask">Proposer à ${esc(userName(tradeListing.seller))} :\n` +
+    `« ${esc(offer.name)} » ↔ « ${esc(want.name)} » ?\n` +
+    `<div class="shop-actions">` +
+    `<button type="button" class="primary" id="tradeConfirm">Envoyer</button>` +
+    `<button type="button" id="tradeBack">Retour</button>` +
+    `</div>`;
+}
+function openTradeDialog(listing){
+  if(!listing || listing.seller === "npc" || isMe(listing.seller)) return;
+  tradeListing = listing;
+  tradeOfferCardId = null;
+  renderTradeForm();
+  if(!$("trade").open) $("trade").showModal();
+}
+function finishTrade(){
+  if(!tradeListing || !tradeOfferCardId) return;
+  const want = byId.get(tradeListing.cardId);
+  const offer = byId.get(tradeOfferCardId);
+  const res = proposeTrade(tradeListing.id, tradeOfferCardId);
+  if(!res.ok){
+    alert(res.why);
+    renderTradeForm();
+    return;
+  }
+  $("trade").close();
+  if($("zoom").open) $("zoom").close();
+  tradeListing = null;
+  tradeOfferCardId = null;
+  goToTrades();
+  showSnackbar(res.updated
+    ? `Échange mis à jour · ${offer ? offer.name : "?"} ↔ ${want ? want.name : "?"}`
+    : `Échange proposé · ${offer ? offer.name : "?"} ↔ ${want ? want.name : "?"}`);
 }
 $("sell").addEventListener("click", ev => {
   if(ev.target === $("sell")){ $("sell").close(); return; }
@@ -3214,6 +3978,145 @@ $("sell").addEventListener("keydown", ev => {
     if(next) next.click();
   }
 });
+$("trade").addEventListener("click", ev => {
+  if(ev.target === $("trade")){ $("trade").close(); return; }
+  if(ev.target.closest("#tradeClose")){ $("trade").close(); return; }
+  const pick = ev.target.closest("#tradeSuggest [data-offer]");
+  if(pick){
+    const card = byId.get(pick.dataset.offer);
+    if(!card) return;
+    tradeOfferCardId = card.id;
+    const input = $("tradeSearchInput");
+    if(input) input.value = card.name;
+    updateTradeSelectedLabel();
+    updateTradeSuggestions();
+    return;
+  }
+  if(ev.target.closest("#tradeNext")){
+    if(!tradeOfferCardId) return;
+    renderTradeConfirm();
+    return;
+  }
+  if(ev.target.closest("#tradeChooser")){
+    $("trade").close();
+    if(offerCard && offerListing){
+      renderOfferChooser();
+      if(!$("offer").open) $("offer").showModal();
+    }
+    return;
+  }
+  if(ev.target.closest("#tradeBack")){
+    renderTradeForm();
+    return;
+  }
+  if(ev.target.closest("#tradeConfirm")) finishTrade();
+});
+$("trade").addEventListener("input", ev => {
+  if(!ev.target || ev.target.id !== "tradeSearchInput") return;
+  const selected = tradeOfferCardId ? byId.get(tradeOfferCardId) : null;
+  if(selected && ev.target.value.trim() !== selected.name){
+    tradeOfferCardId = null;
+    updateTradeSelectedLabel();
+  }
+  updateTradeSuggestions();
+});
+$("trade").addEventListener("keydown", ev => {
+  if(ev.key !== "Enter" || !ev.target || ev.target.id !== "tradeSearchInput") return;
+  ev.preventDefault();
+  const first = $("tradeSuggest")?.querySelector("[data-offer]");
+  if(first) first.click();
+  else if(tradeOfferCardId){
+    const next = $("tradeNext");
+    if(next && !next.disabled) next.click();
+  }
+});
+function runTradeAct(act, tid){
+  let res;
+  if(act === "accept") res = acceptTrade(tid);
+  else if(act === "reject") res = rejectTrade(tid);
+  else if(act === "withdraw") res = withdrawTrade(tid);
+  else if(act === "dismiss") res = dismissTrade(tid);
+  else return;
+  if(!res.ok){ alert(res.why); return; }
+  if(act === "accept"){
+    showSnackbar("Échange accepté · cartes échangées");
+    if(document.body.classList.contains("album")) renderAlbum();
+  } else if(act === "reject"){
+    showSnackbar("Échange refusé");
+  }
+  renderMarket();
+  refreshOffersBadge();
+}
+function handleTradeAct(act, tid){
+  if(act === "dismiss"){
+    runTradeAct(act, tid);
+    return;
+  }
+  const t = loadMarket().trades.find(x => x.id === tid);
+  const offer = t && byId.get(t.offerCardId);
+  const want = t && byId.get(t.wantCardId);
+  const from = t ? userName(t.fromUser) : "";
+  if(act === "accept"){
+    showAppConfirm({
+      title: "Accepter l’échange",
+      message: `Accepter l’échange de ${from} ?\nTu donnes « ${want ? want.name : "?"} » et reçois « ${offer ? offer.name : "?"} ».`,
+      confirmLabel: "Accepter",
+      onConfirm: () => runTradeAct("accept", tid)
+    });
+    return;
+  }
+  if(act === "reject"){
+    showAppConfirm({
+      title: "Refuser l’échange",
+      message: `Refuser l’échange de ${from} ?`,
+      confirmLabel: "Refuser",
+      onConfirm: () => runTradeAct("reject", tid)
+    });
+    return;
+  }
+  if(act === "withdraw"){
+    showAppConfirm({
+      title: "Retirer l’échange",
+      message: "Retirer ta proposition d’échange ?",
+      confirmLabel: "Retirer",
+      onConfirm: () => runTradeAct("withdraw", tid)
+    });
+  }
+}
+function handleCreditOfferAct(act, oid){
+  const o = loadMarket().offers.find(x => x.id === oid);
+  if(!o){ alert("Offre introuvable."); return; }
+  const card = byId.get(o.cardId);
+  const name = card ? card.name : "?";
+  if(act === "accept"){
+    showAppConfirm({
+      title: "Accepter l’offre",
+      message: `Accepter l’offre à ${creditsLabel(o.price)} pour « ${name} » ? Tu recevras ${creditsLabel(sellerPayout(o.price))} (taxe déduite).`,
+      confirmLabel: "Accepter",
+      onConfirm: () => {
+        const res = acceptOffer(oid);
+        if(!res.ok){ alert(res.why); return; }
+        showSnackbar(`Offre acceptée · +${creditsLabel(res.pay)}`);
+        renderMarket();
+        if(document.body.classList.contains("album")) renderAlbum();
+      }
+    });
+    return;
+  }
+  if(act === "reject"){
+    showAppConfirm({
+      title: "Refuser l’offre",
+      message: `Refuser l’offre de ${userName(o.buyer)} sur « ${name} » ?`,
+      confirmLabel: "Refuser",
+      onConfirm: () => {
+        const res = rejectOffer(oid);
+        if(!res.ok){ alert(res.why); return; }
+        showSnackbar("Offre refusée");
+        renderMarket();
+      }
+    });
+  }
+}
 
 let offerListing = null;
 let offerCard = null;
@@ -3238,14 +4141,46 @@ function updateOfferHint(){
     ? `Il te manque ${raw - bal} crédits.`
     : `Prix affiché ${offerListing.price} cr · tu proposes ${raw} cr.`;
 }
+function canTradeOnListing(listing){
+  return !!(listing && listing.seller && listing.seller !== "npc" && !isMe(listing.seller));
+}
+function renderOfferChooser(){
+  if(!offerCard || !offerListing) return;
+  const tradeOk = canTradeOnListing(offerListing);
+  const mineOff = pendingOffersForListing(offerListing.id).find(o => isMe(o.buyer));
+  const mineTrade = tradeOk
+    ? loadMarket().trades.find(t => t.status === "pending" && isMe(t.fromUser) && t.listingId === offerListing.id)
+    : null;
+  const offered = mineTrade ? byId.get(mineTrade.offerCardId) : null;
+  $("offerBody").innerHTML =
+    `<div class="shop-bar"><span>Contre-offre · ${esc(offerCard.name)}</span>` +
+    `<button type="button" id="offerClose">Fermer</button></div>` +
+    `<p class="shop-bal">Prix affiché : <b>${offerListing.price} cr</b>` +
+    (mineOff ? ` · offre en cours ${mineOff.price} cr` : "") +
+    (mineTrade ? ` · échange en cours « ${esc(offered ? offered.name : "?")} »` : "") +
+    `</p>` +
+    `<div class="shop-modes">` +
+    `<button type="button" id="offerModeCredits">` +
+    `<div class="mode-title">Négocier en crédits</div>` +
+    `<div class="mode-sub">Propose un prix inférieur au prix affiché.</div>` +
+    `</button>` +
+    (tradeOk
+      ? `<button type="button" id="offerModeTrade">` +
+        `<div class="mode-title">Proposer un échange</div>` +
+        `<div class="mode-sub">Échange une de tes cartes libres de même rareté.</div>` +
+        `</button>`
+      : "") +
+    `</div>`;
+}
 function renderOfferForm(){
   if(!offerCard || !offerListing) return;
   if(offerPrice < MARKET_PRICE_MIN){
     offerPrice = Math.max(MARKET_PRICE_MIN, Math.floor(offerListing.price * 0.8));
     if(offerPrice >= offerListing.price) offerPrice = Math.max(MARKET_PRICE_MIN, offerListing.price - 1);
   }
+  const showBack = canTradeOnListing(offerListing);
   $("offerBody").innerHTML =
-    `<div class="shop-bar"><span>Contre-offre · ${esc(offerCard.name)}</span>` +
+    `<div class="shop-bar"><span>Offre en crédits · ${esc(offerCard.name)}</span>` +
     `<button type="button" id="offerClose">Fermer</button></div>` +
     `<p class="shop-bal">Prix affiché : <b>${offerListing.price} cr</b></p>` +
     `<div class="shop-field">` +
@@ -3255,6 +4190,7 @@ function renderOfferForm(){
     `<p class="shop-bal" id="offerHint"></p>` +
     `<div class="shop-actions">` +
     `<button type="button" class="primary" id="offerNext">Continuer</button>` +
+    (showBack ? `<button type="button" id="offerChooser">Retour</button>` : "") +
     `</div>`;
   updateOfferHint();
   const input = $("offerPriceInput");
@@ -3278,7 +4214,8 @@ function openOfferDialog(card, listing){
   const existing = pendingOffersForListing(listing.id).find(o => isMe(o.buyer));
   offerPrice = existing ? existing.price : Math.max(MARKET_PRICE_MIN, Math.floor(listing.price * 0.8));
   if(offerPrice >= listing.price) offerPrice = Math.max(MARKET_PRICE_MIN, listing.price - 1);
-  renderOfferForm();
+  if(canTradeOnListing(listing)) renderOfferChooser();
+  else renderOfferForm();
   if(!$("offer").open) $("offer").showModal();
 }
 function finishOffer(){
@@ -3310,6 +4247,21 @@ function finishOffer(){
 $("offer").addEventListener("click", ev => {
   if(ev.target === $("offer")){ $("offer").close(); return; }
   if(ev.target.closest("#offerClose")){ $("offer").close(); return; }
+  if(ev.target.closest("#offerModeCredits")){
+    renderOfferForm();
+    return;
+  }
+  if(ev.target.closest("#offerModeTrade")){
+    if(!offerListing || !canTradeOnListing(offerListing)) return;
+    const listing = offerListing;
+    $("offer").close();
+    openTradeDialog(listing);
+    return;
+  }
+  if(ev.target.closest("#offerChooser")){
+    renderOfferChooser();
+    return;
+  }
   if(ev.target.closest("#offerNext")){
     const raw = readOfferPrice();
     if(!offerListing || !isValidMarketPrice(raw) || raw >= offerListing.price){
@@ -3443,6 +4395,15 @@ function openCardZoom(card, opts={}){
         bits.push(`<div class="hint">Ton offre en cours : ${mineOff.price} cr</div>`);
         bits.push(`<button type="button" data-act="owithdraw" data-oid="${esc(mineOff.id)}" data-id="${esc(card.id)}">Retirer mon offre</button>`);
       }
+      if(listing.seller !== "npc"){
+        const mineTrade = loadMarket().trades.find(t =>
+          t.status === "pending" && isMe(t.fromUser) && t.listingId === listing.id
+        );
+        if(mineTrade){
+          const offered = byId.get(mineTrade.offerCardId);
+          bits.push(`<div class="hint">Échange en cours : tu proposes « ${esc(offered ? offered.name : "?")} »</div>`);
+        }
+      }
       if(!can) bits.push(`<div class="hint">Il te manque ${listing.price - loadWallet().credits} crédits pour le prix affiché.</div>`);
     }
   } else if(opts.fromMarket && !listing){
@@ -3454,7 +4415,11 @@ function openCardZoom(card, opts={}){
       }
     }
   } else {
+    const fav = opts.fromAlbum ? isFavorite(card.id) : false;
     if(opts.fromAlbum){
+      bits.push(
+        `<button type="button" data-act="fav" data-id="${esc(card.id)}">${fav ? "Retirer des favoris" : "Ajouter aux favoris"}</button>`
+      );
       bits.push(
         `<input type="number" class="qty" id="zoomQty" min="1" max="99" value="1" title="Exemplaires" aria-label="Exemplaires">` +
         `<button type="button" data-act="grant" data-id="${esc(card.id)}">Ajouter (test)</button>`
@@ -3462,12 +4427,17 @@ function openCardZoom(card, opts={}){
     }
     const listed = myListingsFor(card.id);
     const free = freeCopies(card.id);
-    if(free >= 2){
+    if(!missing && free >= 1 && !fav){
       const gain = DESTROY_CREDITS[card.rarete] || 1;
-      bits.push(`<button type="button" data-act="destroy" data-id="${esc(card.id)}">Détruire 1 doublon (+${gain} crédits)</button>`);
+      bits.push(`<button type="button" data-act="destroy" data-id="${esc(card.id)}">Défausser (+${gain} crédits)</button>`);
+    } else if(!missing && free < 1){
+      bits.push(`<div class="hint">Retire l’annonce pour défausser.</div>`);
     }
-    if(opts.fromAlbum && free >= 1){
+    if(opts.fromAlbum && free >= 1 && !fav){
       bits.push(`<button type="button" data-act="sell" data-id="${esc(card.id)}">Vendre</button>`);
+    }
+    if(opts.fromAlbum && fav){
+      bits.push(`<div class="hint">Favori — vente, échange et défausse indisponibles.</div>`);
     }
     if(opts.fromAlbum && listed.length){
       bits.push(`<button type="button" data-act="mcancel" data-id="${esc(card.id)}" data-lid="${esc(listed[0].id)}">Retirer l’annonce</button>`);
@@ -3492,6 +4462,10 @@ $("zoomActions").addEventListener("click", ev => {
     if(document.body.classList.contains("album")) renderAlbum();
     if(document.body.classList.contains("market")) renderMarket();
   };
+  if(btn.dataset.act === "fav"){
+    requestFavoriteToggle(card.id, () => reopen());
+    return;
+  }
   if(btn.dataset.act === "grant"){
     const qty = Math.max(1, Math.min(99, parseInt(($("zoomQty") || {}).value, 10) || 1));
     const batch = [];
@@ -3502,15 +4476,26 @@ $("zoomActions").addEventListener("click", ev => {
   }
   if(btn.dataset.act === "destroy"){
     const gain = DESTROY_CREDITS[card.rarete] || 1;
-    showZoomAsk(
-      `Êtes-vous sûr de vouloir détruire un doublon de « ${card.name} » ?\n` +
-      `${gain} crédit${gain > 1 ? "s" : ""} vous seront crédités.`,
-      () => {
+    const ownedN = (loadOwned().got[id] || {}).n || 0;
+    const last = ownedN <= 1;
+    showAppConfirm({
+      title: "Défausser",
+      message: last
+        ? `Défausser « ${card.name} » ? ${creditsLabel(gain)} seront crédités.`
+        : `Défausser un exemplaire de « ${card.name} » ? ${creditsLabel(gain)} seront crédités.`,
+      confirmLabel: "Défausser",
+      onConfirm: () => {
         const res = destroyCopy(id);
         if(!res.ok){ alert(res.why); reopen(); return; }
-        reopen();
+        showSnackbar(`Défaussé · +${creditsLabel(res.gain)}`);
+        if(res.left < 1){
+          $("zoom").close();
+          if(document.body.classList.contains("album")) renderAlbum();
+        } else {
+          reopen();
+        }
       }
-    );
+    });
     return;
   }
   if(btn.dataset.act === "sell"){
@@ -3624,6 +4609,28 @@ function openMarketRow(row){
   openMarketListing(row.dataset.lid || "", row.dataset.oid || null);
 }
 $("marketList").addEventListener("click", ev => {
+  const tradeBtn = ev.target.closest("[data-trade-act]");
+  if(tradeBtn){
+    ev.preventDefault();
+    ev.stopPropagation();
+    handleTradeAct(tradeBtn.dataset.tradeAct, tradeBtn.dataset.tid);
+    return;
+  }
+  const offerBtn = ev.target.closest("[data-offer-act]");
+  if(offerBtn){
+    ev.preventDefault();
+    ev.stopPropagation();
+    handleCreditOfferAct(offerBtn.dataset.offerAct, offerBtn.dataset.oid);
+    return;
+  }
+  const zoomCard = ev.target.closest("[data-zoom-card]");
+  if(zoomCard){
+    ev.preventDefault();
+    ev.stopPropagation();
+    const card = byId.get(zoomCard.dataset.zoomCard);
+    if(card) openCardZoom(card, { fromMarket: true });
+    return;
+  }
   const dismiss = ev.target.closest("[data-dismiss-offer]");
   if(dismiss){
     ev.preventDefault();
@@ -3631,6 +4638,51 @@ $("marketList").addEventListener("click", ev => {
     const res = dismissRejectedOffer(dismiss.dataset.dismissOffer);
     if(!res.ok){ alert(res.why); return; }
     renderMarket();
+    return;
+  }
+  const withdrawOfferBtn = ev.target.closest("[data-withdraw-offer]");
+  if(withdrawOfferBtn){
+    ev.preventDefault();
+    ev.stopPropagation();
+    const oid = withdrawOfferBtn.dataset.withdrawOffer;
+    const offer = loadMarket().offers.find(o => o.id === oid);
+    const card = offer && byId.get(offer.cardId);
+    showAppConfirm({
+      title: "Retirer l’offre",
+      message: card
+        ? `Retirer ton offre sur « ${card.name} » ?`
+        : "Retirer cette offre ?",
+      confirmLabel: "Retirer",
+      onConfirm: () => {
+        const res = withdrawOffer(oid);
+        if(!res.ok){ alert(res.why); return; }
+        showSnackbar("Offre retirée");
+        renderMarket();
+      }
+    });
+    return;
+  }
+  const cancelListingBtn = ev.target.closest("[data-cancel-listing]");
+  if(cancelListingBtn){
+    ev.preventDefault();
+    ev.stopPropagation();
+    const lid = cancelListingBtn.dataset.cancelListing;
+    const listing = loadMarket().listings.find(l => l.id === lid);
+    const card = listing && byId.get(listing.cardId);
+    showAppConfirm({
+      title: "Retirer l’annonce",
+      message: card
+        ? `Retirer l’annonce pour « ${card.name} » ?`
+        : "Retirer cette annonce ?",
+      confirmLabel: "Retirer",
+      onConfirm: () => {
+        const res = cancelListing(lid);
+        if(!res.ok){ alert(res.why); return; }
+        showSnackbar("Annonce retirée");
+        renderMarket();
+        if(document.body.classList.contains("album")) renderAlbum();
+      }
+    });
     return;
   }
   openMarketRow(ev.target.closest(".market-row"));
@@ -3650,13 +4702,13 @@ $("marketRefreshNpc").addEventListener("click", () => {
 document.querySelectorAll("#market [data-market-tab]").forEach(btn => {
   btn.addEventListener("click", () => {
     const tab = btn.dataset.marketTab;
-    marketTab = tab === "mine" || tab === "offers" ? tab : "all";
+    marketTab = (tab === "mine" || tab === "offers" || tab === "trades") ? tab : "all";
     document.querySelectorAll("#market [data-market-tab]").forEach(b => {
       const on = b.dataset.marketTab === marketTab;
       b.classList.toggle("on", on);
       b.setAttribute("aria-selected", on ? "true" : "false");
     });
-    if(marketTab === "mine") seedNpcOffersOnMyListings();
+    if(marketTab === "mine" || marketTab === "offers") seedNpcOffersOnMyListings();
     renderMarket();
   });
 });
@@ -3695,7 +4747,7 @@ $("marketQ").addEventListener("input", () => {
 function fillFamilyFilter(){
   const seen = new Set(catalog.map(c => c.famille).filter(k => FAMILIES[k]));
   const keys = Object.keys(FAMILIES).filter(k => seen.has(k));
-  const opts = `<option value="">Genre</option>` +
+  const opts = `<option value="">Tous les genres</option>` +
     keys.map(k => `<option value="${esc(k)}">${esc(FAMILIES[k].label)}</option>`).join("");
   if($("albumFam")) $("albumFam").innerHTML = opts;
   if($("marketFam")) $("marketFam").innerHTML = opts;
@@ -3704,7 +4756,7 @@ function fillFamilyFilter(){
 function fillInstrumentFilter(){
   const seen = new Set(catalog.map(c => c.instrument).filter(k => INSTR[k]));
   const keys = Object.keys(INSTR).filter(k => seen.has(k));
-  const opts = `<option value="">Instrument</option>` +
+  const opts = `<option value="">Tous les instruments</option>` +
     keys.map(k => `<option value="${esc(k)}">${esc(INSTR[k])}</option>`).join("");
   if($("albumInstr")) $("albumInstr").innerHTML = opts;
   if($("marketInstr")) $("marketInstr").innerHTML = opts;
@@ -3743,13 +4795,18 @@ function syncAlbumFilterSwitches(){
   // Source de vérité = DOM (évite le décalage après aller-retour marché / dialogs).
   if($("albumOwned")) albumHideMissing = !!$("albumOwned").checked;
   if($("albumNewOnly")) albumNewOnly = !!$("albumNewOnly").checked;
+  if($("albumFavOnly")) albumFavOnly = !!$("albumFavOnly").checked;
+}
+function favToggleBtn(cardId, on){
+  return `<button type="button" class="fav-btn${on ? " on" : ""}" data-fav-toggle="${esc(cardId)}" aria-label="${on ? "Retirer des favoris" : "Ajouter aux favoris"}" title="${on ? "Retirer des favoris" : "Ajouter aux favoris"}" aria-pressed="${on ? "true" : "false"}">★</button>`;
 }
 function renderAlbum(resetPage){
   syncAlbumFilterSwitches();
   const data = loadOwned();
   const owned = data.got;
   const fresh = data.fresh || {};
-  const q = ($("albumQ").value || "").trim().toLowerCase();
+  const fav = data.fav || {};
+  const q = $("albumQ").value || "";
   const rare = $("albumRare").value;
   const fam = $("albumFam").value;
   const instr = $("albumInstr").value;
@@ -3757,16 +4814,18 @@ function renderAlbum(resetPage){
   if(rare) list = list.filter(c => c.rarete === rare);
   if(fam) list = list.filter(c => c.famille === fam);
   if(instr) list = list.filter(c => c.instrument === instr);
-  if(q){
-    list = list.filter(c =>
-      c.name.toLowerCase().includes(q) ||
-      (c.group || "").toLowerCase().includes(q)
-    );
+  const qFold = foldSearch(q);
+  if(qFold){
+    list = list.filter(c => matchesSearch(`${c.name} ${c.group || ""}`, qFold));
   }
   // Recherche : tout le set (possédées + manquantes). Sinon, respect des interrupteurs.
-  if(!q && albumHideMissing) list = list.filter(c => owned[c.id]);
-  if(!q && albumNewOnly) list = list.filter(c => owned[c.id] && fresh[c.id]);
+  if(!qFold && albumHideMissing) list = list.filter(c => owned[c.id]);
+  if(!qFold && albumNewOnly) list = list.filter(c => owned[c.id] && fresh[c.id]);
+  if(!qFold && albumFavOnly) list = list.filter(c => fav[c.id]);
   list.sort((a, b) => {
+    const fa = fav[a.id] ? 1 : 0;
+    const fb = fav[b.id] ? 1 : 0;
+    if(fa !== fb) return fb - fa;
     if(albumSort === "name") return a.name.localeCompare(b.name, "fr");
     return (a.rank || 0) - (b.rank || 0);
   });
@@ -3777,11 +4836,13 @@ function renderAlbum(resetPage){
     albumPage = 1;
     pager.hidden = true;
     grid.innerHTML = `<p class="album-empty">${
-      albumNewOnly
-        ? "Aucune nouvelle carte."
-        : albumHideMissing && !uniqueCount()
-          ? "Ouvre un booster pour commencer la collection."
-          : "Aucune carte pour ce filtre."
+      albumFavOnly
+        ? "Aucun favori pour l’instant. Marque une carte avec ★."
+        : albumNewOnly
+          ? "Aucune nouvelle carte."
+          : albumHideMissing && !uniqueCount()
+            ? "Ouvre un booster pour commencer la collection."
+            : "Aucune carte pour ce filtre."
     }</p>`;
     return;
   }
@@ -3797,9 +4858,10 @@ function renderAlbum(resetPage){
   $("albumNext").disabled = albumPage >= pages;
   grid.innerHTML = pageList.map(c => {
     const got = owned[c.id];
+    const isFav = !!fav[c.id];
     if(!got){
       return `<div class="album-cell hole" data-id="${esc(c.id)}">
-        <div class="thumb">${cardBack()}</div>
+        <div class="thumb">${favToggleBtn(c.id, isFav)}${cardBack()}</div>
         <div class="hole-cap">${esc(c.name)}</div>
       </div>`;
     }
@@ -3807,7 +4869,7 @@ function renderAlbum(resetPage){
     const neuve = !!fresh[c.id];
     const onSale = myListingsFor(c.id).length > 0;
     return `<div class="album-cell${neuve ? " is-new" : ""}${onSale ? " on-sale" : ""}" data-id="${esc(c.id)}">
-      <div class="thumb">${n > 1 ? `<span class="dup">×${n}</span>` : ""}${
+      <div class="thumb">${favToggleBtn(c.id, isFav)}${n > 1 ? `<span class="dup">×${n}</span>` : ""}${
         onSale ? `<span class="sale-badge">En cours de vente</span>` : ""
       }${
         renderCard(c, { zoomable: true })
@@ -3847,6 +4909,10 @@ $("albumNewOnly").addEventListener("change", () => {
   syncSeeAllNewBtn();
   renderAlbum(true);
 });
+$("albumFavOnly").addEventListener("change", () => {
+  albumFavOnly = $("albumFavOnly").checked;
+  renderAlbum(true);
+});
 $("albumSeeAllNew").addEventListener("click", ev => {
   ev.preventDefault();
   ev.stopPropagation();
@@ -3872,6 +4938,29 @@ $("albumNext").addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 $("albumGrid").addEventListener("click", ev => {
+  const favBtn = ev.target.closest("[data-fav-toggle]");
+  if(favBtn){
+    ev.preventDefault();
+    ev.stopPropagation();
+    const id = favBtn.dataset.favToggle;
+    const wasOnSale = favBtn.closest(".album-cell")?.classList.contains("on-sale");
+    requestFavoriteToggle(id, on => {
+      if(albumFavOnly && !on){
+        renderAlbum();
+        return;
+      }
+      if(wasOnSale && on){
+        renderAlbum();
+        return;
+      }
+      const btn = document.querySelector(`[data-fav-toggle="${CSS.escape(id)}"]`) || favBtn;
+      btn.classList.toggle("on", on);
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+      btn.setAttribute("aria-label", on ? "Retirer des favoris" : "Ajouter aux favoris");
+      btn.title = on ? "Retirer des favoris" : "Ajouter aux favoris";
+    });
+    return;
+  }
   const cell = ev.target.closest(".album-cell");
   if(!cell) return;
   const card = byId.get(cell.dataset.id);
@@ -3883,29 +4972,51 @@ $("albumGrid").addEventListener("click", ev => {
   openCardZoom(card, { fromAlbum: true });
 });
 $("albumClear").addEventListener("click", () => {
-  if(!uniqueCount() && !loadWallet().credits && loadWallet().packs <= STARTER_PACKS) return;
-  if(!window.confirm(`Vider le classeur de ${userName(uid())} et réinitialiser ses crédits / boosters ?\n(Le marché partagé et l’autre joueur sont conservés.)`)) return;
-  const me = uid();
-  const m = loadMarket();
-  m.listings = m.listings.filter(l => l.seller !== me);
-  for(const o of m.offers){
-    if(o.buyer === me || o.seller === me){
-      if(o.status === "pending") o.status = "cancelled";
+  if(!uniqueCount() && !loadWallet().credits && loadWallet().packs <= STARTER_PACKS && !favCount()) return;
+  showAppConfirm({
+    title: "Vider le classeur",
+    message: `Vider le classeur de ${userName(uid())} et réinitialiser ses crédits / boosters ?\n(Le marché partagé et l’autre joueur sont conservés.)`,
+    confirmLabel: "Vider",
+    onConfirm: () => {
+      const me = uid();
+      const m = loadMarket();
+      m.listings = m.listings.filter(l => l.seller !== me);
+      for(const o of m.offers){
+        if(o.buyer === me || o.seller === me){
+          if(o.status === "pending") o.status = "cancelled";
+        }
+      }
+      for(const t of m.trades || []){
+        if((t.fromUser === me || t.toUser === me) && t.status === "pending"){
+          t.status = "cancelled";
+        }
+      }
+      m.notifications = (m.notifications || []).filter(n => n.toUser && n.toUser !== me);
+      saveMarket(m);
+      saveOwned({ v: 2, got: {}, fresh: {}, fav: {} });
+      saveWallet({ v: 1, credits: 0, packs: 0, lastDaily: "", starter: false });
+      savePity({ n: 0, sinceMyth: 0, sinceEpic: 0, starterMyth: false });
+      ensureWallet();
+      refreshCount();
+      refreshWallet();
+      refreshNewBadge();
+      refreshOffersBadge();
+      renderAlbum();
+      if(document.body.classList.contains("market")) renderMarket();
+      if(!document.body.classList.contains("album") && !document.body.classList.contains("market")) armNextPack();
     }
+  });
+});
+$("confirm").addEventListener("click", ev => {
+  if(ev.target === $("confirm") || ev.target.closest("#confirmClose") || ev.target.closest("#confirmNo")){
+    closeAppConfirm();
+    return;
   }
-  m.notifications = (m.notifications || []).filter(n => n.toUser && n.toUser !== me);
-  saveMarket(m);
-  saveOwned({ v: 2, got: {}, fresh: {} });
-  saveWallet({ v: 1, credits: 0, packs: 0, lastDaily: "", starter: false });
-  savePity({ n: 0, sinceMyth: 0, sinceEpic: 0, starterMyth: false });
-  ensureWallet();
-  refreshCount();
-  refreshWallet();
-  refreshNewBadge();
-  refreshOffersBadge();
-  renderAlbum();
-  if(document.body.classList.contains("market")) renderMarket();
-  if(!document.body.classList.contains("album") && !document.body.classList.contains("market")) armNextPack();
+  if(ev.target.closest("#confirmYes")){
+    const fn = confirmOnYes;
+    closeAppConfirm();
+    if(fn) fn();
+  }
 });
 document.querySelector(".user-switch")?.addEventListener("click", ev => {
   const btn = ev.target.closest("[data-user]");
@@ -3922,7 +5033,7 @@ document.querySelectorAll("[data-force]").forEach(btn => {
   btn.addEventListener("click", async () => {
     if(phase === "opening") return;
     force = foldRare(btn.dataset.force);
-    const q = force === "épique" ? "epique" : force;
+    const q = force === "platine" ? "epique" : force;
     history.replaceState(null, "", "?force=" + q);
     phase = "loading";
     await armNextPack();
@@ -3946,7 +5057,7 @@ async function boot(){
     catalog = rows;
     byId = new Map(rows.map(c => [c.id, c]));
     migrateOwnedToIds();
-    pool = { commune:[], "peu commune":[], rare:[], épique:[], mythique:[] };
+    pool = { commune:[], "argent":[], or:[], platine:[], diamant:[] };
     for(const c of rows){
       if(pool[c.rarete]) pool[c.rarete].push(c);
     }

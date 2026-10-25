@@ -7,6 +7,26 @@ Sortie brute : `data/validation.json`, journal : `data/run5.log`.
 **Les 8 cas de référence passent.** Mais deux enseignements importants sont apparus, dont
 une erreur dans ce que la spécification affirmait.
 
+## 0. Pipeline dumps — septembre 2026 validé
+
+Le dump `pageviews-202609-user.bz2` (6,33 Go) a été filtré : 216 M de lignes Wikipedia
+retenues, 3 654 hits sur l'échantillon, 30 éditions. Le format réel est
+`wiki titre page_id access views daily_vector` — le dernier champ n'est pas un entier.
+
+Premier recast avec normalisation `vues / √(V_w)` (dénominateur encore approximatif :
+trafic Wikipedia total, pas encore la médiane des musiciens) :
+
+| Artiste | Rang API anglais | Rang dump 30 langues | Delta |
+|---|---:|---:|---:|
+| Aya Nakamura | 30 | 21 | +9 |
+| Miles Davis | 6 | 6 | 0 |
+| Nina Simone | 10 | 10 | 0 |
+| John Lennon | 1 | 1 | 0 |
+
+La recette tient : Aya remonte, le patrimoine ne dégringole pas. Sur `fr.wikipedia` Aya
+fait 30 100 vues contre 16 581 sur `en` — exactement le signal que la somme brute
+anglophone écrasait.
+
 ---
 
 ## 1. Erreur corrigée : l'héritage peut inverser l'ordre interne au groupe

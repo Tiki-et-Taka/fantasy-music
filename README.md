@@ -21,9 +21,15 @@ Contraintes fondatrices du projet :
 | [`docs/04-distribution.md`](docs/04-distribution.md) | Boosters, taux de tirage, pity timer, volumétrie des paliers |
 | [`docs/05-direction-artistique.md`](docs/05-direction-artistique.md) | Trois styles, couches de composition, mapping des genres |
 | [`docs/06-reste-a-faire.md`](docs/06-reste-a-faire.md) | Ce qui est tranché, ce qui ne l'est pas |
+| [`docs/07-validation-resultats.md`](docs/07-validation-resultats.md) | Scoring sur données réelles |
+| [`docs/08-serie-1.md`](docs/08-serie-1.md) | Taille, mélange, algo de draft |
+| [`docs/09-schema-donnees.md`](docs/09-schema-donnees.md) | Catalogue, cliquet, appendice joueur |
+| [`docs/10-pipeline.md`](docs/10-pipeline.md) | Runbook pageviews → catalogue → WebP |
+| [`docs/11-marche.md`](docs/11-marche.md) | Marché à prix fixe, taxe 10 % |
 
 `references/` contient les quatre illustrations de direction artistique.
-`prototypes/` contient les maquettes HTML autonomes (ouvrables par double-clic).
+`prototypes/` contient les maquettes HTML autonomes (ouvrables via serveur local).
+Pages légales (brouillon) : [`prototypes/legal/`](prototypes/legal/).
 
 ## Découpage en briques
 
@@ -33,6 +39,6 @@ Contraintes fondatrices du projet :
 
 ## État de la brique 1
 
-Les mécaniques sont arrêtées. Restent la validation du scoring sur données réelles,
-les quotas de curation de la Série 1, et la production des assets. Voir
-[`docs/06-reste-a-faire.md`](docs/06-reste-a-faire.md).
+Mécaniques et Série 1 (2 000, mélange 80/400/900/600) sont arrêtées. Restent les
+planchers d'équilibre, quelques correctifs de pipeline, et la production des assets.
+Voir [`docs/06-reste-a-faire.md`](docs/06-reste-a-faire.md).

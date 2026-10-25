@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Compositeur de cartes — cinq paliers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Inter:wght@400;500;600&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 28px 32px 72px;
+    background: #0a0a0b; color: #e8e8ea;
+    font-family: Inter, "Segoe UI", system-ui, sans-serif;
+  }
+  h1 { font-size: 20px; margin: 0 0 6px; font-weight: 600; }
+  h2 { font-size: 12px; letter-spacing: 1.6px; text-transform: uppercase; color: #9aa0a8; margin: 36px 0 8px; }
+  h3 { font-size: 14px; margin: 22px 0 4px; font-weight: 600; }
+  p.intro, p.lead { margin: 0 0 18px; color: #9aa0a8; font-size: 13px; max-width: 920px; line-height: 1.55; }
+  .strip { display: flex; flex-wrap: wrap; gap: 22px 18px; }
+  .slot { width: 260px; }
+  .card {
+    position: relative; width: 260px; height: 364px;
+    border-radius: 10px; overflow: hidden;
+    background: #0F1012;
+    box-shadow: 0 10px 28px rgba(0,0,0,.45);
+  }
+  .card.paper { background: #EDE4D4; }
+  .card.zoomable { cursor: pointer; }
+  .card:focus { outline: 2px solid #d8b35c; outline-offset: 3px; }
+  .art {
+    position: absolute; top: 12px; left: 12px; right: 12px; bottom: 120px;
+    overflow: hidden; background: #111;
+  }
+  .art img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center 18%;
+    display: block;
+  }
+  .card.paper .art { background: #E6D9C4; }
+  .card.paper .art img { object-position: center top; }
+  .band {
+    position: absolute; left: 12px; right: 12px; bottom: 12px; height: 108px;
+    display: flex; flex-direction: column; justify-content: center;
+    gap: 3px; padding: 12px 12px 22px;
+  }
+  .card.paper .band { background: #EDE4D4; }
+  .accent {
+    height: 3px; width: 36px; border-radius: 1px;
+    margin-bottom: 4px; flex-shrink: 0;
+  }
+  .card.mythique .art { inset: 0; }
+  .card.mythique .title {
+    position: absolute; left: 0; right: 0; top: 0;
+    padding: 18px 12px 40px;
+    text-align: center;
+    background: linear-gradient(to bottom, rgba(8,7,6,.78) 32%, rgba(8,7,6,0));
+    pointer-events: none;
+  }
+  .card.mythique .title .myth-name {
+    font-family: "Big Shoulders Display", Oswald, sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 1;
+    letter-spacing: .06em;
+    color: #F4F2EC;
+    text-shadow: 0 1px 10px rgba(0,0,0,.55);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .card.mythique .band {
+    left: 0; right: 0; bottom: 0; height: auto;
+    padding: 24px 12px 28px;
+    text-align: center;
+    background: linear-gradient(to top, rgba(8,7,6,.88) 48%, rgba(8,7,6,0));
+  }
+  .card.mythique .accent,
+  .card.mythique .band .name,
+  .card.mythique .rarete,
+  .card.mythique .meta,
+  .card.mythique .group { display: none; }
+  .card.mythique .line-rare {
+    font-size: 10px; font-weight: 600;
+    letter-spacing: .22em; text-transform: uppercase;
+    color: #E8D5A3;
+  }
+  .card.mythique .line-info {
+    margin-top: 6px;
+    font-size: 11px;
+    letter-spacing: .03em;
+    color: #c8c2b6;
+  }
+  .name {
+    font-family: Oswald, Impact, sans-serif;
+    font-weight: 600; letter-spacing: .04em;
+    text-transform: uppercase; line-height: 1.05;
+    color: #F4F2EC;
+  }
+  .card.paper .name { color: #161410; }
+  .rarete {
+    font-size: 10px; font-weight: 600;
+    letter-spacing: .16em; text-transform: uppercase;
+  }
+  .meta { font-size: 10.5px; color: #c8c2b6; letter-spacing: .02em; }
+  .card.paper .meta { color: #5c564c; }
+  .group { font-size: 10.5px; color: #d8b35c; letter-spacing: .03em; }
+  .card.paper .group { color: #8a6a4f; }
+  .marks {
+    position: absolute; left: 16px; right: 16px; bottom: 10px; z-index: 2;
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 8px; font-weight: 600;
+    color: rgba(200,194,186,.55); pointer-events: none;
+  }
+  .marks .serie { letter-spacing: .12em; }
+  .marks .no { letter-spacing: .04em; font-variant-numeric: tabular-nums; }
+  .card.paper .marks { color: rgba(90,70,64,.45); }
+  .card.mythique .marks { color: rgba(232,213,163,.55); }
+  .frame { position: absolute; inset: 0; pointer-events: none; }
+  .cap { margin-top: 8px; }
+  .cap .t { font-size: 12px; font-weight: 600; }
+  .cap .s { font-size: 11px; color: #9aa0a8; margin-top: 1px; }
+  .cap .e { font-size: 10.5px; color: #6e747c; margin-top: 2px; line-height: 1.35; }
+
+  dialog {
+    border: 0; padding: 16px 22px 22px; background: #121316;
+    border-radius: 12px; overflow: visible;
+  }
+  dialog::backdrop { background: rgba(0,0,0,.78); }
+  .zoom-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .zoom-stage {
+    width: calc(260px * 1.55); height: calc(364px * 1.55);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .zoom-stage .card { cursor: default; transform: scale(1.55); }
+  .zoom-bar { display: flex; gap: 10px; align-items: center; color: #ccc; font-size: 12px; }
+  .zoom-bar button {
+    appearance: none; border: 1px solid #2a2c32; background: #141518;
+    color: #d8d8dc; font: inherit; font-size: 12px; padding: 5px 12px;
+    border-radius: 999px; cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<h1>Compositeur de cartes</h1>
+<p class="intro">
+  Cinq paliers. Bandeau de même hauteur, en retrait du cadre — le trait de
+  genre ne traverse plus les filets. Mythique&nbsp;: pas de bandeau, pas de filet,
+  le texte se pose sur l’image. Pas de sceau.
+</p>
+<div class="strip" id="strip"></div>
+
+<h2>Cadres rare → mythique</h2>
+<p class="lead">
+  Même plaque (Rob Bourdon) pour isoler le cadre. Commune = un filet gris.
+  Peu commune = double filet gris. On ne reprend pas les équerres, barres or, ni holo.
+</p>
+<div id="props"></div>
+
+<dialog id="zoom">
+  <div class="zoom-wrap">
+    <div class="zoom-bar"><span id="zoomcap"></span>
+      <button type="button" id="zoomclose">Fermer</button></div>
+    <div class="zoom-stage" id="zoomcard"></div>
+  </div>
+</dialog>
+
+<script>
+const CW = 260, CH = 364, BAND = 108;
+const INSTR = {
+  voix:"Voix", guitare:"Guitare", basse:"Basse", batterie:"Batterie",
+  claviers:"Claviers", vents:"Vents", cordes:"Cordes", machines:"Machines"
+};
+const FAMILIES = {
+  metal:     {label:"Métal",              fond:"#121214", a1:"#B8352F", a2:"#6E7276"},
+  punk:      {label:"Punk & hardcore",    fond:"#141416", a1:"#E04A2F", a2:"#F0E9D8"},
+  "hip-hop": {label:"Hip-hop",            fond:"#121410", a1:"#C8D44E", a2:"#6E7A52"},
+  électro:   {label:"Électronique",       fond:"#0B1220", a1:"#3FC1C9", a2:"#7A86D6"},
+  reggae:    {label:"Reggae & dub",       fond:"#0F1610", a1:"#D9B52B", a2:"#4E9B5A"},
+  afro:      {label:"Afro",               fond:"#16120C", a1:"#E09A2B", a2:"#4F8C6E"},
+  latin:     {label:"Latin",              fond:"#1C1210", a1:"#D4552F", a2:"#E0A83C"},
+  jazz:      {label:"Jazz",               fond:"#0E1A1C", a1:"#D8B35C", a2:"#6FA3A0"},
+  blues:     {label:"Blues",              fond:"#0C1420", a1:"#4A7FB5", a2:"#C4A062"},
+  funk:      {label:"Funk & disco",       fond:"#1A1222", a1:"#E0A32B", a2:"#C04FA8"},
+  "R&B":     {label:"R&B & soul",         fond:"#1A1012", a1:"#C47A5A", a2:"#8E6B8C"},
+  country:   {label:"Country",            fond:"#171310", a1:"#C89A4A", a2:"#8C6E4E"},
+  folk:      {label:"Folk",               fond:"#121710", a1:"#9CB06A", a2:"#C4A878"},
+  world:     {label:"Musiques du monde",  fond:"#101614", a1:"#B58A4E", a2:"#5E8C86"},
+  chanson:   {label:"Chanson & variété",  fond:"#16131A", a1:"#C9869B", a2:"#A08C5E"},
+  pop:       {label:"Pop",                fond:"#1C1020", a1:"#D45E8A", a2:"#E0B36A"},
+  rock:      {label:"Rock",               fond:"#15110E", a1:"#D98A2B", a2:"#8A6A4F"}
+};
+const TIERS = {
+  commune:      {rank:0, label:"Commune",      style:"Sérigraphie",  exec:"2 encres, trame grossière", frame:"#5E6670", kind:"simple"},
+  "peu commune":{rank:1, label:"Peu commune",  style:"Sérigraphie",  exec:"3 encres, trame fine",      frame:"#8A949B", kind:"double"},
+  rare:         {rank:2, label:"Rare",         style:"Contre-jour",  exec:"halo unique",               frame:"#B08D57", kind:"filets"},
+  épique:       {rank:3, label:"Épique",       style:"Contre-jour",  exec:"fumée, reflets de scène",   frame:"#C3CAD1", kind:"filets"},
+  mythique:     {rank:4, label:"Mythique",     style:"Encre & lavis",exec:"sans cadre, texte sur l’image", frame:"#D8B35C", kind:"none"}
+};
+
+const CARDS = [
+  {name:"Dan McCafferty", rarete:"commune", famille:"rock", instrument:"voix", group:"Nazareth", job:"serigraphie_A_voix_1_1960s_salle_m", rank:1840},
+  {name:"Barbara Pravi", rarete:"peu commune", famille:"chanson", instrument:"voix", group:null, job:"serigraphie_B_voix_3_2010s_festival_f", rank:612},
+  {name:"Rob Bourdon", rarete:"rare", famille:"metal", instrument:"batterie", group:"Linkin Park", job:"contrejour_A_batterie_5_1990s00s_festival_m", rank:240},
+  {name:"Ryūichi Sakamoto", rarete:"épique", famille:"électro", instrument:"claviers", group:"Yellow Magic Orchestra", job:"contrejour_B_claviers_3_1970s80s_stade_m", rank:88},
+  {name:"Miles Davis", rarete:"mythique", famille:"jazz", instrument:"vents", group:null, job:"encre_A_vents_4_pre1960_stade_m", rank:6},
+  {name:"John Lennon", rarete:"mythique", famille:"rock", instrument:"guitare", group:"The Beatles", job:"encre_B_guitare_7_pre1960_stade_m", rank:1}
+];
+
+const DEMO = {name:"Rob Bourdon", famille:"metal", instrument:"batterie", group:"Linkin Park", job:"contrejour_A_batterie_5_1990s00s_festival_m", rank:240};
+const PROPS = [
+  {
+    id:"filets", title:"A — Filets",
+    lead:"Même grammaire que commune / peu commune : on ajoute un filet, on change le métal.",
+    kinds:{rare:"filets", épique:"filets", mythique:"none"}
+  },
+  {
+    id:"metal", title:"B — Un filet, la couleur parle",
+    lead:"Un seul filet, même poids que la commune. Bronze / argent. Mythique : toujours sans cadre.",
+    kinds:{rare:"metal", épique:"metal", mythique:"none"}
+  },
+  {
+    id:"mark", title:"C — Double filet gris + signe",
+    lead:"Le cadre de la peu commune. Un losange (rare), deux (épique). Mythique : toujours sans cadre.",
+    kinds:{rare:"mark", épique:"mark", mythique:"none"}
+  },
+  {
+    id:"gravure", title:"D — Gravure intérieure",
+    lead:"Filet simple + ligne intérieure : pointillés, ticks. Mythique : toujours sans cadre.",
+    kinds:{rare:"gravure", épique:"gravure", mythique:"none"}
+  }
+];
+
+function ring(x,y,w,h,rx,color,sw,op){
+  return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="none" stroke="${color}" stroke-width="${sw}" opacity="${op??1}"/>`;
+}
+function diamond(cx,cy,s,color){
+  return `<path d="M${cx} ${cy-s} L${cx+s} ${cy} L${cx} ${cy+s} L${cx-s} ${cy} Z" fill="${color}"/>`;
+}
+function star(cx,cy,s,color){
+  let d="";
+  for(let i=0;i<5;i++){
+    const a=-Math.PI/2+i*2*Math.PI/5, b=a+Math.PI/5;
+    const cmd=i?"L":"M";
+    d+=`${cmd}${(cx+Math.cos(a)*s).toFixed(1)} ${(cy+Math.sin(a)*s).toFixed(1)} `;
+    d+=`L${(cx+Math.cos(b)*s*0.42).toFixed(1)} ${(cy+Math.sin(b)*s*0.42).toFixed(1)} `;
+  }
+  return `<path d="${d}Z" fill="${color}"/>`;
+}
+
+function frameSvg(kind, rank, color, uid){
+  if(kind==="none") return "";
+  const f=color;
+  let o="";
+  if(kind==="simple"){
+    o+=ring(4,4,CW-8,CH-8,8,f,1.5);
+  } else if(kind==="double"){
+    o+=ring(4,4,CW-8,CH-8,8,f,1.5);
+    o+=ring(8,8,CW-16,CH-16,6,f,0.7,0.55);
+  } else if(kind==="filets"){
+    o+=ring(4,4,CW-8,CH-8,8,f,1.5);
+    o+=ring(8,8,CW-16,CH-16,6,f,0.7,0.55);
+    if(rank>=3) o+=ring(12,12,CW-24,CH-24,5,f,0.7,0.4);
+  } else if(kind==="metal"){
+    const sw=rank>=4?2:1.5;
+    o+=ring(4,4,CW-8,CH-8,8,f,sw);
+  } else if(kind==="mark"){
+    o+=ring(4,4,CW-8,CH-8,8,"#8A949B",1.5);
+    o+=ring(8,8,CW-16,CH-16,6,"#8A949B",0.7,0.55);
+    const cx=CW/2, cy=CH-18;
+    if(rank===2) o+=diamond(cx,cy,4,f);
+    if(rank===3){ o+=diamond(cx-8,cy,4,f); o+=diamond(cx+8,cy,4,f); }
+    if(rank>=4) o+=star(cx,cy,6,f);
+  } else if(kind==="gravure"){
+    o+=ring(4,4,CW-8,CH-8,8,f,1.5);
+    if(rank===2) o+=ring(9,9,CW-18,CH-18,6,f,0.8,0.7).replace("/>",' stroke-dasharray="2.2 2.4"/>');
+    if(rank===3){
+      o+=ring(9,9,CW-18,CH-18,6,f,0.8,0.7);
+      [[CW/2,8,0,1],[CW/2,CH-8,0,-1],[8,CH/2,1,0],[CW-8,CH/2,-1,0]].forEach(([px,py,dx,dy])=>{
+        o+=`<line x1="${px}" y1="${py}" x2="${px+dx*8}" y2="${py+dy*8}" stroke="${f}" stroke-width="1.4"/>`;
+      });
+    }
+    if(rank>=4){
+      o+=ring(9,9,CW-18,CH-18,6,f,0.9,0.85);
+      o+=ring(13,13,CW-26,CH-26,5,f,0.6,0.45);
+    }
+  }
+  return `<svg class="frame" viewBox="0 0 ${CW} ${CH}" aria-hidden="true">${o}</svg>`;
+}
+
+function renderCard(card, opts={}){
+  const tier = TIERS[card.rarete];
+  const fam = FAMILIES[card.famille];
+  const paper = tier.rank <= 1;
+  const kind = opts.kind || tier.kind;
+  const frame = opts.frame || tier.frame;
+  const nameSize = card.name.length > 16 ? 16 : card.name.length > 13 ? 18 : 21;
+  const mythique = tier.rank >= 4;
+  const cls = `card r${tier.rank}${paper?" paper":""}${mythique?" mythique":""}${opts.zoomable===false?"":" zoomable"}`;
+  const bandStyle = paper || mythique ? "" : `background:${fam.fond};`;
+  const group = card.group || "Artiste solo";
+  const uid = (opts.uid || card.job) + "-" + kind + "-" + card.rarete;
+  const n = card.name.length;
+  const mythName = n > 16 ? 22 : n > 13 ? 26 : n > 10 ? 30 : 34;
+  return `<div class="${cls}" tabindex="${opts.zoomable===false?"-1":"0"}" data-name="${card.name}">
+    <div class="art">
+      <img src="../out/illustrations/${card.job}.png" alt="" onerror="this.onerror=function(){this.onerror=null;var m=this.src.replace('_x.png','_m.png');if(m!==this.src)this.src=m;};var s=this.src,n=s.indexOf('_B_')>=0?s.replace('_B_','_A_'):s.replace('_A_','_B_');if(n!==s)this.src=n;else{this.onerror=null;var m=s.replace('_x.png','_m.png');if(m!==s)this.src=m;}">
+    </div>
+    ${mythique ? `<div class="title"><div class="myth-name" style="font-size:${mythName}px">${card.name}</div></div>` : ""}
+    <div class="band" style="${bandStyle}">
+      <div class="accent" style="background:${fam.a1}"></div>
+      <div class="name" style="font-size:${nameSize}px">${card.name}</div>
+      <div class="rarete" style="color:${frame}">${tier.label}</div>
+      <div class="meta">${fam.label} · ${INSTR[card.instrument]}</div>
+      <div class="group">${group}</div>
+      ${mythique ? `<div class="line-rare">${tier.label}</div><div class="line-info">${fam.label} · ${INSTR[card.instrument]} · ${group}</div>` : ""}
+    </div>
+    <div class="marks" aria-hidden="true"><span class="serie">S1</span><span class="no">${card.rank || 0}/2000</span></div>
+    ${frameSvg(kind, tier.rank, frame, uid)}
+  </div>`;
+}
+
+function slot(card, extraCap){
+  const tier = TIERS[card.rarete];
+  return `<div class="slot">
+    ${renderCard(card)}
+    <div class="cap">
+      <div class="t" style="color:${tier.frame}">${tier.label}</div>
+      <div class="s">${tier.style}</div>
+      <div class="e">${extraCap || tier.exec}</div>
+    </div>
+  </div>`;
+}
+
+document.getElementById("strip").innerHTML = CARDS.map(c => slot(c)).join("");
+
+document.getElementById("props").innerHTML = PROPS.map(p => {
+  const row = ["rare","épique","mythique"].map(rarete => {
+    const tier = TIERS[rarete];
+    const card = {...DEMO, rarete};
+    return `<div class="slot">${renderCard(card, {kind:p.kinds[rarete], frame:tier.frame, zoomable:false, uid:p.id})}
+      <div class="cap"><div class="t" style="color:${tier.frame}">${tier.label}</div></div></div>`;
+  }).join("");
+  return `<h3>${p.title}</h3><p class="lead">${p.lead}</p><div class="strip">${row}</div>`;
+}).join("");
+
+document.querySelectorAll(".card img").forEach(img => {
+  img.addEventListener("error", () => {
+    if (img.dataset.retry) return;
+    img.dataset.retry = "1";
+    img.src = img.getAttribute("src").split("?")[0] + "?r=" + Date.now();
+  });
+});
+
+const dlg = document.getElementById("zoom");
+const zoomcard = document.getElementById("zoomcard");
+const zoomcap = document.getElementById("zoomcap");
+document.getElementById("strip").addEventListener("click", ev => {
+  const el = ev.target.closest(".card");
+  if(!el) return;
+  const card = CARDS.find(c => c.name === el.dataset.name);
+  if(!card) return;
+  const tier = TIERS[card.rarete];
+  zoomcap.textContent = `${card.name} — ${tier.label}`;
+  zoomcard.innerHTML = renderCard(card, {zoomable:false, uid: card.job+"-zoom"});
+  dlg.showModal();
+});
+document.getElementById("zoomclose").onclick = () => dlg.close();
+dlg.addEventListener("click", ev => { if(ev.target === dlg) dlg.close(); });
+</script>
+</body>
+</html>
