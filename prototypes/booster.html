@@ -6,93 +6,186 @@
 <title>Charts — Série 1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800&family=Inter:wght@400;500;600&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
+  :root {
+    --bg: #0d0d0d;
+    --bg-elev: #141414;
+    --ink: #f2f0eb;
+    --muted: #8a8680;
+    --line: #2a2a2a;
+    --line-hi: #3a3a3a;
+    --accent: #e68a1e;
+    --accent-ink: #111;
+    --panel: #161616;
+    --font-display: "Archivo Black", "Oswald", Impact, sans-serif;
+    --font-ui: "Oswald", sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
   * { box-sizing: border-box; }
   html, body { height: 100%; }
   body {
     margin: 0;
-    background: #050506;
-    color: #e8e8ea;
-    font-family: Inter, "Segoe UI", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-ui);
     overflow: hidden;
     overscroll-behavior: none;
     user-select: none;
   }
-  header {
+  .grain {
+    position: fixed; inset: 0; pointer-events: none; z-index: 50;
+    opacity: .14;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  header.top {
     position: absolute; top: 0; left: 0; right: 0; z-index: 6;
-    padding: 22px 28px 0; pointer-events: none;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 24px 0;
+    pointer-events: none;
     transition: opacity .25s ease;
+    background: linear-gradient(180deg, rgba(13,13,13,.96), rgba(13,13,13,.7) 70%, transparent);
   }
   body.cutaway header,
   body.cutaway footer { opacity: 0; pointer-events: none; }
-  header .nav { pointer-events: auto; display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; align-items: center; }
-  header .nav button,
-  header .nav .nav-home {
-    appearance: none; border: 1px solid #2a2c32; background: #141518;
-    color: #d8d8dc; font: inherit; font-size: 12px; padding: 5px 12px;
-    border-radius: 999px; cursor: pointer;
+  header .brand {
+    pointer-events: auto;
+    justify-self: start;
+    font-family: var(--font-display);
+    font-size: clamp(22px, 3vw, 30px);
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    line-height: 1;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  header .nav-main {
+    pointer-events: auto;
+    justify-self: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 6px 20px;
+  }
+  header .nav-main a,
+  header .nav-main button {
+    appearance: none;
+    border: 0;
+    background: none;
     position: relative;
     text-decoration: none;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 6px 0 8px;
+    cursor: pointer;
+    transition: color .15s ease;
   }
-  header .nav .nav-home:hover { background: #1c1e22; color: #e8e8ea; }
-  header .nav button.on { background: #e8e8ea; color: #111; border-color: #e8e8ea; }
-  header .nav button b { font-weight: 600; }
-  header .nav button:disabled { opacity: .35; cursor: default; }
+  header .nav-main a:hover,
+  header .nav-main button:hover { color: var(--ink); }
+  header .nav-main a.on,
+  header .nav-main button.on { color: var(--ink); }
+  header .nav-main a.on::after,
+  header .nav-main button.on::after {
+    content: "";
+    position: absolute; left: 0; right: 0; bottom: 0;
+    height: 2px;
+    background: var(--accent);
+  }
+  header .nav-main button:disabled { opacity: .35; cursor: default; }
   .nav-badge {
     position: absolute;
-    top: -6px; right: -6px;
-    min-width: 16px; height: 16px; padding: 0 5px;
-    border-radius: 999px;
-    background: #e11d48; color: #fff;
-    font-size: 10px; font-weight: 700; line-height: 16px;
+    top: -7px; right: -14px;
+    min-width: 15px; height: 15px; padding: 0 4px;
+    border-radius: 0;
+    background: var(--accent); color: var(--accent-ink);
+    font-family: var(--font-mono);
+    font-size: 9px; font-weight: 500; line-height: 15px;
     text-align: center;
-    box-shadow: 0 0 0 2px #050506;
+    letter-spacing: 0;
+    text-transform: none;
     pointer-events: none;
   }
   .nav-badge[hidden] { display: none; }
-  .wallet {
-    pointer-events: auto; margin-left: auto;
-    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
-    font-size: 12px; color: #c4c8ce;
+  .top-actions {
+    pointer-events: auto;
+    justify-self: end;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
   }
   .user-switch {
-    display: inline-flex; gap: 0; border: 1px solid #2a2c32;
-    border-radius: 999px; overflow: hidden; background: #141518;
+    display: inline-flex; gap: 0; border: 1px solid var(--line);
+    overflow: hidden; background: var(--panel);
   }
   .user-switch button {
     appearance: none; border: 0; background: transparent;
-    color: #9aa0a8; font: inherit; font-size: 11px; font-weight: 600;
+    color: var(--muted); font: inherit; font-size: 11px; font-weight: 600;
+    letter-spacing: .08em; text-transform: uppercase;
     padding: 6px 10px; cursor: pointer;
   }
-  .user-switch button.on { background: #e8e8ea; color: #111; }
-  .user-switch button:hover:not(.on) { color: #e8e8ea; }
-  .wallet .pill {
-    display: inline-flex; align-items: center; gap: 6px;
-    border: 1px solid #2a2c32; background: #141518;
-    padding: 5px 10px; border-radius: 999px;
+  .user-switch button.on { background: var(--accent); color: var(--accent-ink); }
+  .user-switch button:hover:not(.on) { color: var(--ink); }
+  .wallet-chip {
+    display: inline-flex; align-items: center; gap: 7px;
+    border: 1px solid var(--line); background: var(--panel);
+    padding: 6px 10px;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: var(--ink);
   }
-  .wallet .pill b { font-weight: 600; color: #e8e8ea; }
+  .wallet-chip .coin {
+    width: 12px; height: 12px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #f0c060, var(--accent) 55%, #8a4a10);
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.35);
+  }
+  .wallet-chip b { font-weight: 600; }
   .wallet .cheat {
-    appearance: none; border: 1px solid #3a3c42; background: #1c1e22;
-    color: #e8e8ea; font: inherit; font-size: 12px; padding: 5px 12px;
-    border-radius: 8px; cursor: pointer;
+    appearance: none; border: 1px solid var(--line-hi); background: var(--panel);
+    color: var(--muted); font: inherit; font-size: 11px;
+    letter-spacing: .08em; text-transform: uppercase;
+    padding: 6px 10px; cursor: pointer;
   }
-  .wallet .cheat:hover { background: #26282e; }
-  h1 { font-size: 18px; margin: 0 0 4px; font-weight: 600; }
-  p.intro { margin: 0; color: #9aa0a8; font-size: 13px; }
+  .wallet .cheat:hover { color: var(--ink); border-color: #4a4a4a; }
+  .head-copy {
+    pointer-events: none;
+    grid-column: 1 / -1;
+    margin-top: 6px;
+    padding-bottom: 8px;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 2.4vw, 24px);
+    margin: 0 0 4px; font-weight: 400;
+    letter-spacing: .04em; text-transform: uppercase;
+  }
+  p.intro {
+    margin: 0; color: var(--muted);
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: .04em;
+  }
   .zoom-actions {
     display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
     margin-top: 14px; max-width: 360px;
   }
   .zoom-actions button {
-    appearance: none; border: 1px solid #2a2c32; background: #141518;
-    color: #d8d8dc; font: inherit; font-size: 12px; padding: 7px 14px;
-    border-radius: 8px; cursor: pointer;
+    appearance: none; border: 1px solid var(--line); background: var(--panel);
+    color: var(--ink); font: inherit; font-size: 12px;
+    letter-spacing: .06em; text-transform: uppercase;
+    padding: 7px 14px; border-radius: 0; cursor: pointer;
   }
-  .zoom-actions button:hover { background: #1c1e22; }
+  .zoom-actions button:hover { background: #1c1c1c; border-color: var(--line-hi); }
   .zoom-actions button:disabled { opacity: .35; cursor: default; }
-  .zoom-actions button.primary { background: #e8e8ea; color: #111; border-color: #e8e8ea; }
+  .zoom-actions button.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
   .zoom-actions .hint {
     width: 100%; text-align: center; font-size: 11px; color: #8a9099;
     position: static; opacity: 1; letter-spacing: 0; text-transform: none;
@@ -113,9 +206,10 @@
   .empty-pack.show { display: flex; }
   .empty-pack p { margin: 0; color: #9aa0a8; font-size: 14px; line-height: 1.45; }
   .empty-pack button {
-    appearance: none; border: 1px solid #3a3c42; background: #1c1e22;
-    color: #e8e8ea; font: inherit; font-size: 13px; padding: 10px 16px;
-    border-radius: 8px; cursor: pointer;
+    appearance: none; border: 1px solid var(--line); background: var(--panel);
+    color: var(--ink); font: inherit; font-size: 12px;
+    letter-spacing: .08em; text-transform: uppercase;
+    padding: 10px 16px; border-radius: 0; cursor: pointer;
   }
   .empty-pack button:disabled { opacity: .35; cursor: default; }
   .stage {
@@ -124,6 +218,28 @@
     display: grid;
     place-items: center;
     overflow: hidden;
+    padding-top: 96px;
+  }
+  .stage.tearing {
+    overflow: visible;
+  }
+  @media (max-width: 820px) {
+    header.top {
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto auto auto;
+      padding: 10px 12px 0;
+    }
+    header .brand { grid-column: 1; }
+    header .top-actions { grid-column: 2; }
+    header .nav-main {
+      grid-column: 1 / -1;
+      justify-content: flex-start;
+      gap: 8px 14px;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+    }
+    header .head-copy { padding-bottom: 4px; }
+    .stage { padding-top: 120px; }
   }
 
   /* —— sachet —— */
@@ -133,31 +249,55 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
-    width: min(340px, 68vw);
+    gap: 14px;
+    width: min(220px, 48vw);
   }
   .pack-col[hidden] { display: none; }
   .pack-buy {
     appearance: none;
     width: 100%;
-    border: 1px solid #3a3c42;
-    background: #1c1e22;
-    color: #e8e8ea;
-    font: inherit;
+    border: 0;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-family: var(--font-display);
     font-size: 14px;
-    font-weight: 600;
-    letter-spacing: .04em;
+    font-weight: 400;
+    letter-spacing: .1em;
     text-transform: uppercase;
     padding: 12px 16px;
-    border-radius: 8px;
+    border-radius: 0;
     cursor: pointer;
   }
-  .pack-buy:hover { background: #26282e; }
-  .pack-buy:disabled { opacity: .35; cursor: default; }
+  .pack-buy:hover { filter: brightness(1.06); }
+  .pack-buy:disabled { opacity: .35; cursor: default; filter: none; }
+  .pack-buy[hidden] { display: none; }
+  .pack-left {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .pack-left[hidden] { display: none; }
+  .free-timer {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted, #8a8680);
+  }
+  .free-timer.ready { color: var(--accent); }
   .pack-wrap {
     position: relative;
     width: 100%;
     touch-action: none;
+    overflow: visible;
   }
   .pack-wrap.gone, .pack-wrap.locked, .pack-wrap.spent { pointer-events: none; }
   .pack-wrap.gone { opacity: 0; }
@@ -171,10 +311,12 @@
   .pack {
     position: relative;
     width: 100%;
-    overflow: hidden;
-    filter: drop-shadow(0 22px 36px rgba(0,0,0,.62));
+    overflow: visible;
+    background: transparent;
+    filter: drop-shadow(0 12px 16px rgba(0,0,0,.28));
     will-change: transform, filter;
   }
+  .pack-wrap { background: transparent; }
   .pack-art { display: block; width: 100%; height: auto; }
   .pack-wrap.idle .pack { animation: idleFloat 3.4s ease-in-out infinite; }
   @keyframes idleFloat {
@@ -186,8 +328,10 @@
     pointer-events: none; -webkit-user-drag: none;
   }
   .tear-layer {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
+    /* Oversized so the lifted flap isn't clipped (ghost corner / stray pixels). */
+    position: absolute;
+    left: -56px; right: -56px; top: -48px; bottom: -28px;
+    width: auto; height: auto;
     pointer-events: none;
     opacity: 0;
   }
@@ -196,24 +340,31 @@
   .pack-wrap.dragging .pack-art,
   .pack-wrap.locked .pack-art { visibility: hidden; }
   .seal-hit {
-    position: absolute; top: 5%; left: 14%; right: 14%;
+    position: absolute; top: 0; left: 5%; right: 5%;
     height: 16%;
     z-index: 4;
     cursor: ew-resize;
   }
   .shine {
-    position: absolute; inset: 8% 10% 10%;
+    position: absolute; inset: 0;
     background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.14) 48%, transparent 62%);
     mix-blend-mode: screen; pointer-events: none;
     transform: translateX(-120%);
+    -webkit-mask-image: url("img/booster-charts.png?v=24");
+    mask-image: url("img/booster-charts.png?v=24");
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
   }
   .pack-wrap.idle .shine { animation: shineSweep 3.8s ease-in-out 1.1s infinite; }
+  .shine { display: none; }
   @keyframes shineSweep {
     0% { transform: translateX(-120%); }
     35%, 100% { transform: translateX(120%); }
   }
   .hint {
-    position: absolute; left: 18%; right: 18%; top: 7.4%;
+    position: absolute; left: 12%; right: 12%; top: 6%;
     z-index: 3; pointer-events: none;
     display: flex; align-items: center; justify-content: center; gap: 10px;
     font-size: 10px; font-weight: 600;
@@ -451,6 +602,12 @@
     transform-style: preserve-3d;
     transition: transform .36s cubic-bezier(.18,.9,.22,1);
   }
+  .slot-card.flip-slow .flipper {
+    transition: transform 2.4s cubic-bezier(.22,.61,.36,1);
+  }
+  .slot-card.flip-myth .flipper {
+    transition: transform 3.2s cubic-bezier(.18,.55,.28,1);
+  }
   .slot-card.revealed .flipper { transform: rotateY(180deg); }
   .face {
     position: absolute; inset: 0;
@@ -677,11 +834,11 @@
   .again {
     position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
     z-index: 7; appearance: none;
-    border: 1px solid #2a2c32; background: #141518; color: #d8d8dc;
-    font: inherit; font-size: 12px; padding: 8px 16px; border-radius: 999px;
-    cursor: pointer; letter-spacing: .04em;
+    border: 1px solid var(--line); background: var(--panel); color: var(--ink);
+    font: inherit; font-size: 11px; padding: 8px 14px; border-radius: 0;
+    cursor: pointer; letter-spacing: .1em; text-transform: uppercase;
   }
-  .again:hover { background: #1c1e22; }
+  .again:hover { border-color: var(--line-hi); background: #1c1c1c; }
 
   footer.site-foot {
     position: fixed; left: 0; right: 0; bottom: 0;
@@ -689,8 +846,9 @@
     display: flex; flex-wrap: wrap; align-items: center;
     justify-content: space-between; gap: 10px 18px;
     padding: 12px 20px 14px;
-    background: linear-gradient(180deg, transparent, #050506f2 35%);
-    font-size: 12px; color: #5c6168;
+    background: linear-gradient(180deg, transparent, #0d0d0df2 35%);
+    font-family: var(--font-mono);
+    font-size: 10px; color: #6a6660; letter-spacing: .04em; text-transform: uppercase;
     pointer-events: none;
   }
   footer.site-foot a,
@@ -770,7 +928,7 @@
     border-radius: 8px; cursor: pointer;
   }
   .trade-row-actions button.ok {
-    background: #e8e8ea; color: #111; border-color: #e8e8ea; font-weight: 600;
+    background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600;
   }
   .market-row .name-link {
     appearance: none; border: 0; background: transparent; padding: 0; margin: 0;
@@ -810,14 +968,29 @@
   .shop-price { margin: 0; color: #9aa0a8; font-size: 13px; }
   .shop-price b { color: #e8e8ea; font-weight: 600; }
   .shop-qty {
-    display: flex; gap: 8px;
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch;
   }
   .shop-qty button {
-    flex: 1; appearance: none; border: 1px solid #2a2c32; background: #141518;
+    flex: 1; min-width: 64px; appearance: none; border: 1px solid #2a2c32; background: #141518;
     color: #d8d8dc; font: inherit; font-size: 13px; padding: 10px 12px;
     border-radius: 8px; cursor: pointer;
   }
-  .shop-qty button.on { background: #e8e8ea; color: #111; border-color: #e8e8ea; }
+  .shop-qty button.on { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .shop-qty-custom {
+    flex: 1 1 100%;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .shop-qty-custom label {
+    font-size: 12px; color: #9aa0a8;
+  }
+  .shop-qty-custom input {
+    appearance: none; border: 1px solid #2a2c32; background: #141518;
+    color: #e8e8ea; font: inherit; font-size: 15px; font-weight: 600;
+    padding: 10px 12px; border-radius: 8px; width: 100%;
+  }
+  .shop-qty-custom input:focus {
+    outline: none; border-color: var(--accent);
+  }
   .shop-total {
     margin: 0; font-size: 15px; font-weight: 600; color: #e8e8ea;
   }
@@ -833,7 +1006,7 @@
     border-radius: 8px; cursor: pointer;
   }
   .shop-actions button.primary {
-    background: #e8e8ea; color: #111; border-color: #e8e8ea; font-weight: 600;
+    background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600;
   }
   .shop-actions button:disabled { opacity: .35; cursor: default; }
   .shop-modes { display: flex; flex-direction: column; gap: 8px; }
@@ -989,7 +1162,7 @@
     color: #e8e8ea; font: inherit; font-size: 11px; padding: 5px 10px;
     border-radius: 8px; cursor: pointer;
   }
-  .zoom-offers .offer-row button.ok { background: #e8e8ea; color: #111; border-color: #e8e8ea; }
+  .zoom-offers .offer-row button.ok { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
   .market-empty { color: #8a9099; font-size: 14px; padding: 32px 8px; }
   .nav-badge.offer-badge {
     background: #d8b35c; color: #111;
@@ -999,14 +1172,14 @@
   .notif-wrap { position: relative; }
   .notif-btn {
     appearance: none; position: relative;
-    width: 36px; height: 36px; padding: 0; margin: 0;
-    border: 1px solid #2a2c32; background: #141518;
-    border-radius: 50%; cursor: pointer; color: #9aa0a8;
+    width: 34px; height: 34px; padding: 0; margin: 0;
+    border: 1px solid var(--line); background: var(--panel);
+    border-radius: 0; cursor: pointer; color: var(--muted);
     display: inline-flex; align-items: center; justify-content: center;
     line-height: 0;
   }
   .notif-btn:hover,
-  .notif-wrap.open .notif-btn { background: #1c1e22; color: #e8e8ea; }
+  .notif-wrap.open .notif-btn { background: #1c1c1c; color: var(--ink); border-color: var(--line-hi); }
   .notif-btn svg {
     width: 16px; height: 16px; display: block;
     flex-shrink: 0; transform: translateY(-0.5px);
@@ -1080,7 +1253,7 @@
     color: #d8d8dc; font: inherit; font-size: 11px; padding: 5px 10px;
     border-radius: 999px; cursor: pointer;
   }
-  .filters .chip.on { background: #e8e8ea; color: #111; border-color: #e8e8ea; }
+  .filters .chip.on { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
   .switch {
     display: flex; align-items: center; gap: 8px;
     font-size: 11px; color: #d8d8dc; cursor: pointer; user-select: none;
@@ -1105,7 +1278,7 @@
     background: #8a9099;
     transition: transform .15s ease, background .15s ease;
   }
-  .switch input:checked + .knob { background: #e8e8ea; border-color: #e8e8ea; }
+  .switch input:checked + .knob { background: var(--accent); border-color: var(--accent); }
   .switch input:checked + .knob::after { transform: translateX(14px); background: #111; }
   .switch input:focus-visible + .knob { outline: 1px solid #d8d8dc; outline-offset: 2px; }
   .album-grid {
@@ -1183,10 +1356,11 @@
   }
   .market-toolbar .tabs .chip {
     appearance: none; border: 1px solid #2a2c32; background: #141518;
-    color: #d8d8dc; font: inherit; font-size: 11px; padding: 5px 10px;
-    border-radius: 999px; cursor: pointer; position: relative;
+    color: #d8d8dc; font: inherit; font-size: 11px; padding: 6px 12px;
+    border-radius: 0; cursor: pointer; position: relative;
+    letter-spacing: .06em; text-transform: uppercase;
   }
-  .market-toolbar .tabs .chip.on { background: #e8e8ea; color: #111; border-color: #e8e8ea; }
+  .market-toolbar .tabs .chip.on { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
   .market-toolbar .tabs .chip .nav-badge { top: -7px; right: -7px; }
   .album-empty { color: #8a9099; font-size: 14px; padding: 48px 8px; grid-column: 1 / -1; }
   .pager {
@@ -1217,39 +1391,44 @@
 </style>
 </head>
 <body>
-<header>
-  <div class="nav" role="tablist">
-    <a class="nav-home" href="lobby.html" aria-label="Lobby">Lobby</a>
+<div class="grain" aria-hidden="true"></div>
+<header class="top">
+  <a class="brand" href="lobby.html">Charts</a>
+  <nav class="nav-main" role="tablist" aria-label="Principal">
+    <a href="lobby.html">Lobby</a>
     <button type="button" data-view="booster" id="navBooster" class="on" role="tab">Booster<span class="nav-badge" id="packsBadge" hidden>0</span></button>
-    <button type="button" data-view="album" id="navAlbum" role="tab">Classeur<span class="nav-badge" id="albumNewBadge" hidden>0</span></button>
+    <a href="classeur.html" id="navAlbum">Classeur<span class="nav-badge" id="albumNewBadge" hidden>0</span></a>
     <button type="button" data-view="market" id="navMarket" role="tab">Marché</button>
-    <div class="wallet" aria-label="Monnaie">
-      <div class="notif-wrap" id="notifWrap">
-        <button type="button" class="notif-btn" id="notifBtn" aria-label="Notifications" title="Notifications" aria-expanded="false" aria-haspopup="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2a2 2 0 0 1-.6 1.4L4 17h5"/>
-            <path d="M9.5 17a2.5 2.5 0 0 0 5 0"/>
-          </svg>
-          <span class="notif-dot" id="notifDot" hidden></span>
-        </button>
-        <div class="notif-menu" id="notifMenu" role="menu" hidden>
-          <div class="head">
-            <span>Notifications</span>
-            <button type="button" class="mark-all" id="notifMarkAll" hidden>Tout marquer lu</button>
-          </div>
-          <div id="notifList"><p class="empty">Aucune notification.</p></div>
+    <a href="fantasy.html?v=15">Fantasy</a>
+  </nav>
+  <div class="top-actions wallet" aria-label="Compte">
+    <div class="notif-wrap" id="notifWrap">
+      <button type="button" class="notif-btn" id="notifBtn" aria-label="Notifications" title="Notifications" aria-expanded="false" aria-haspopup="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2a2 2 0 0 1-.6 1.4L4 17h5"/>
+          <path d="M9.5 17a2.5 2.5 0 0 0 5 0"/>
+        </svg>
+        <span class="notif-dot" id="notifDot" hidden></span>
+      </button>
+      <div class="notif-menu" id="notifMenu" role="menu" hidden>
+        <div class="head">
+          <span>Notifications</span>
+          <button type="button" class="mark-all" id="notifMarkAll" hidden>Tout marquer lu</button>
         </div>
+        <div id="notifList"><p class="empty">Aucune notification.</p></div>
       </div>
-      <div class="user-switch" role="group" aria-label="Compte de test">
-        <button type="button" data-user="u1" id="userBtnA" class="on">Joueur A</button>
-        <button type="button" data-user="u2" id="userBtnB">Joueur B</button>
-      </div>
-      <span class="pill">Crédits <b id="creditsBal">0</b></span>
-      <button type="button" class="cheat" id="cheatCredits" title="Prototype">+ crédits</button>
     </div>
+    <div class="user-switch" role="group" aria-label="Compte de test">
+      <button type="button" data-user="u1" id="userBtnA" class="on">Joueur A</button>
+      <button type="button" data-user="u2" id="userBtnB">Joueur B</button>
+    </div>
+    <span class="wallet-chip"><span class="coin" aria-hidden="true"></span><span><b id="creditsBal">0</b> CR</span></span>
+    <button type="button" class="cheat" id="cheatCredits" title="Prototype">+ crédits</button>
   </div>
-  <h1 id="pageTitle">Booster — Charts</h1>
-  <p class="intro" id="intro">Glisse le scellé du haut pour ouvrir le sachet.</p>
+  <div class="head-copy">
+    <h1 id="pageTitle">Booster</h1>
+    <p class="intro" id="intro">Glisse le scellé du haut pour ouvrir le sachet.</p>
+  </div>
 </header>
 
 <div class="stage" id="stage">
@@ -1269,7 +1448,7 @@
   <div class="pack-col" id="packCol" hidden>
     <div class="pack-wrap idle" id="packWrap">
       <div class="pack" id="pack">
-        <img class="pack-art" id="packArt" src="img/booster-charts.jpg?v=3" alt="Sachet Charts — Série 1">
+        <img class="pack-art" id="packArt" src="img/booster-charts.png?v=24" alt="Sachet Charts — Série 1">
         <canvas class="tear-layer" id="tearLayer" aria-hidden="true"></canvas>
         <div class="shine"></div>
         <div class="hint"><span class="arr left"></span>Glisse le scellé<span class="arr right"></span></div>
@@ -1277,6 +1456,8 @@
       </div>
     </div>
     <button type="button" class="pack-buy" id="buyPack">Acheter</button>
+    <p class="pack-left" id="packLeft" hidden></p>
+    <p class="free-timer" id="freeTimer" aria-live="polite"></p>
   </div>
 
   <div class="hand" id="hand"></div>
@@ -1382,7 +1563,7 @@
 
 <footer class="site-foot">
   <nav class="legal-links" aria-label="Informations légales">
-    <a href="legal/index.html">Mentions légales</a>
+    <a href="legal/index.html?v=2">Mentions légales</a>
   </nav>
   <div class="proto-cheats">
     <span>Prototype</span>
@@ -1483,6 +1664,21 @@ function userName(id){
 function ownedKey(userId){ return `charts.s1.${userId || uid()}.owned`; }
 function walletKey(userId){ return `charts.s1.${userId || uid()}.wallet`; }
 function pityKey(userId){ return `charts.s1.${userId || uid()}.pity`; }
+function lineupKey(userId){ return `charts.s1.${userId || uid()}.lineup`; }
+function loadLineup(userId){
+  try {
+    const data = JSON.parse(localStorage.getItem(lineupKey(userId)) || "");
+    if(data && data.slots && typeof data.slots === "object") return data;
+  } catch {}
+  return { week: "", locked: false, slots: {} };
+}
+function lineupUses(userId, cardId){
+  const slots = loadLineup(userId).slots || {};
+  return Object.values(slots).filter(id => id === cardId).length;
+}
+function isLineupLocked(cardId, userId){
+  return lineupUses(userId, cardId) > 0;
+}
 function migrateLegacyUserStorage(){
   // Ancien stockage mono-joueur → Joueur A
   const legacyOwned = localStorage.getItem("charts.s1.owned");
@@ -1553,12 +1749,16 @@ function switchUser(nextId){
   refreshAfterUserSwitch();
 }
 const STARTER_PACKS = 5;
+const FREE_PACK_MS = 12 * 60 * 60 * 1000;
+const FREE_PACK_CATCHUP_MAX = 2;
 const MARKET_TAX = 0.10;
 const MARKET_PRICE_MIN = 1;
 const DESTROY_CREDITS = {
   commune: 2, argent: 6, or: 20, platine: 60, diamant: 150
 };
-const SEAL = { x0: 0.160, x1: 0.848, y0: 0.066, y1: 0.188 };
+/* Seal band as fractions of the pack image box (canvas tear).
+   y0=0 so the crimped top is part of the flap, not a fixed leftover. */
+const SEAL = { x0: 0.0, x1: 1.0, y0: 0.0, y1: 0.155 };
 const params = new URLSearchParams(location.search);
 
 const $ = id => document.getElementById(id);
@@ -1595,6 +1795,8 @@ let tearDir = 1;
 let revealFxChain = Promise.resolve();
 let force = foldRare(params.get("force"));
 let canvasW = 0, canvasH = 0;
+let packW = 0, packH = 0;
+const TEAR_PAD = { l: 56, r: 56, t: 48, b: 28 };
 const flapCanvas = document.createElement("canvas");
 const flapCtx = flapCanvas.getContext("2d");
 
@@ -1884,44 +2086,74 @@ function refreshNewBadge(){
   badge.hidden = n < 1;
   syncSeeAllNewBtn();
 }
-function todayKey(){
-  const d = new Date();
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+function formatCountdown(ms){
+  const total = Math.max(0, Math.ceil(ms / 60000));
+  const h = Math.floor(total / 60);
+  const m = total % 60;
+  return `${h}h ${String(m).padStart(2, "0")}m`;
 }
 function loadWallet(userId){
   try {
     const data = JSON.parse(localStorage.getItem(walletKey(userId)) || "");
     if(data && data.v === 1){
+      let nextFreeAt = Number(data.nextFreeAt) || 0;
+      // Migration depuis l’ancien daily : prochain gratuit dispo tout de suite.
+      if(!nextFreeAt && data.lastDaily) nextFreeAt = Date.now();
       return {
         v: 1,
         credits: Math.max(0, Number(data.credits ?? data.notes) || 0),
         packs: Math.max(0, Number(data.packs) || 0),
-        lastDaily: data.lastDaily || "",
+        nextFreeAt,
         starter: !!data.starter
       };
     }
   } catch {}
-  return { v: 1, credits: 0, packs: 0, lastDaily: "", starter: false };
+  return { v: 1, credits: 0, packs: 0, nextFreeAt: 0, starter: false };
 }
 function saveWallet(data, userId){
   localStorage.setItem(walletKey(userId), JSON.stringify(data));
 }
+function claimFreePacks(w, now = Date.now()){
+  if(!w.nextFreeAt) w.nextFreeAt = now + FREE_PACK_MS;
+  let claimed = 0;
+  while(now >= w.nextFreeAt && claimed < FREE_PACK_CATCHUP_MAX){
+    w.packs += 1;
+    w.nextFreeAt += FREE_PACK_MS;
+    claimed += 1;
+  }
+  if(now >= w.nextFreeAt) w.nextFreeAt = now + FREE_PACK_MS;
+  return claimed;
+}
 function ensureWallet(){
   const w = loadWallet();
   let dirty = false;
-  const today = todayKey();
+  const now = Date.now();
   if(!w.starter){
     w.packs += STARTER_PACKS;
     w.starter = true;
-    w.lastDaily = today;
+    w.nextFreeAt = now + FREE_PACK_MS;
     dirty = true;
-  } else if(w.lastDaily !== today){
-    w.packs += 1;
-    w.lastDaily = today;
-    dirty = true;
+  } else {
+    const claimed = claimFreePacks(w, now);
+    if(claimed > 0) dirty = true;
   }
   if(dirty) saveWallet(w);
   return w;
+}
+function msUntilFreePack(w = loadWallet()){
+  return Math.max(0, (w.nextFreeAt || 0) - Date.now());
+}
+function refreshFreeTimer(){
+  const el = $("freeTimer");
+  if(!el) return;
+  const left = msUntilFreePack();
+  if(left <= 0){
+    el.textContent = "Booster gratuit prêt";
+    el.classList.add("ready");
+  } else {
+    el.textContent = `Prochain gratuit · ${formatCountdown(left)}`;
+    el.classList.remove("ready");
+  }
 }
 function refreshPacksBadge(){
   const badge = $("packsBadge");
@@ -1935,11 +2167,23 @@ function refreshWallet(){
   $("creditsBal").textContent = String(w.credits);
   refreshPacksBadge();
   const canBuy = w.credits >= PACK_COST;
-  if($("buyPack")){
-    $("buyPack").disabled = !canBuy;
-    $("buyPack").title = canBuy
-      ? `Acheter un booster (${PACK_COST} crédits)`
-      : `Il faut ${PACK_COST} crédits`;
+  const buy = $("buyPack");
+  const left = $("packLeft");
+  if(buy && left){
+    if(w.packs > 0){
+      buy.hidden = true;
+      left.hidden = false;
+      left.textContent = w.packs === 1
+        ? "1 booster à ouvrir"
+        : `${w.packs} boosters à ouvrir`;
+    } else {
+      buy.hidden = false;
+      left.hidden = true;
+      buy.disabled = !canBuy;
+      buy.title = canBuy
+        ? `Acheter un booster (${PACK_COST} crédits)`
+        : `Il faut ${PACK_COST} crédits`;
+    }
   }
   if($("again") && !$("againRow").hidden){
     $("again").disabled = w.packs < 1;
@@ -1947,6 +2191,7 @@ function refreshWallet(){
       ? `Ouvrir un autre (${w.packs})`
       : "Plus de booster";
   }
+  refreshFreeTimer();
 }
 function buyPacks(n){
   const qty = Math.max(1, Math.min(99, n | 0));
@@ -1985,7 +2230,7 @@ function freeCopies(cardId){
 function freeCopiesFor(userId, cardId){
   const got = loadOwned(userId).got[cardId];
   const n = got ? (got.n || 0) : 0;
-  return Math.max(0, n - listingsForUser(userId, cardId).length);
+  return Math.max(0, n - listingsForUser(userId, cardId).length - lineupUses(userId, cardId));
 }
 function sameTradeValue(a, b){
   return !!(a && b && a.rarete === b.rarete);
@@ -2001,6 +2246,9 @@ function destroyCopy(id){
   const n = got ? (got.n || 0) : 0;
   const free = freeCopies(id);
   if(!got || n < 1 || free < 1){
+    if(free < 1 && n >= 1 && isLineupLocked(id)){
+      return { ok: false, why: "Carte dans le lineup Fantasy — retire-la du groupe pour défausser." };
+    }
     return { ok: false, why: free < 1 && n >= 1
       ? "Exemplaire réservé par une annonce — retire-la d’abord pour défausser."
       : "Aucun exemplaire à défausser." };
@@ -2248,7 +2496,9 @@ function proposeTrade(listingId, offerCardId){
     return { ok: false, why: "Cette carte est en favori — retire-la des favoris pour l’échanger." };
   }
   if(freeCopies(offerCardId) < 1){
-    return { ok: false, why: "Tu n’as pas d’exemplaire libre à proposer (annonce en cours ?)." };
+    return { ok: false, why: isLineupLocked(offerCardId)
+      ? "Carte dans le lineup Fantasy — retire-la du groupe pour l’échanger."
+      : "Tu n’as pas d’exemplaire libre à proposer (annonce en cours ?)." };
   }
   // La carte demandée est celle de l’annonce (exemplaire réservé OK).
   const ownedSeller = loadOwned(listing.seller).got[listing.cardId];
@@ -2606,6 +2856,9 @@ function listCardForSale(cardId, price){
     return { ok: false, why: `Prix minimum : ${MARKET_PRICE_MIN} crédit.` };
   }
   if(freeCopies(cardId) < 1){
+    if(isLineupLocked(cardId)){
+      return { ok: false, why: "Carte dans le lineup Fantasy — retire-la du groupe pour la vendre." };
+    }
     return { ok: false, why: myListingsFor(cardId).length
       ? "Tous tes exemplaires sont déjà en vente."
       : "Tu n’as pas cette carte." };
@@ -3059,7 +3312,7 @@ function showSpentPack(){
   packWrap.className = "pack-wrap spent";
   resetPackPose();
   phase = "empty";
-  intro.textContent = "Plus de booster. Reviens demain (+1) ou achète-en un.";
+  intro.textContent = "Plus de booster. Attends le gratuit (12 h) ou achète-en un.";
   refreshWallet();
 }
 function hideEmptyPack(){
@@ -3242,24 +3495,31 @@ function jag(x, seed, amp){
 function sizeTearCanvas(){
   const r = packArt.getBoundingClientRect();
   const dpr = window.devicePixelRatio || 1;
-  canvasW = r.width;
-  canvasH = r.height;
-  const bw = Math.max(1, Math.round(r.width * dpr));
-  const bh = Math.max(1, Math.round(r.height * dpr));
+  packW = r.width;
+  packH = r.height;
+  canvasW = r.width + TEAR_PAD.l + TEAR_PAD.r;
+  canvasH = r.height + TEAR_PAD.t + TEAR_PAD.b;
+  const bw = Math.max(1, Math.round(canvasW * dpr));
+  const bh = Math.max(1, Math.round(canvasH * dpr));
   tearLayer.width = bw;
   tearLayer.height = bh;
-  tearLayer.style.width = r.width + "px";
-  tearLayer.style.height = r.height + "px";
+  tearLayer.style.width = canvasW + "px";
+  tearLayer.style.height = canvasH + "px";
   tearCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
   flapCanvas.width = bw;
   flapCanvas.height = bh;
   flapCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 
-function sealHole(ctx, xA, xB, y0, y1, seed){
+function drawPackOn(ctx){
+  ctx.drawImage(packArt, TEAR_PAD.l, TEAR_PAD.t, packW, packH);
+}
+
+function sealHole(ctx, xA, xB, y0, y1, seed, {jagTop = false} = {}){
   ctx.beginPath();
-  ctx.moveTo(xA, y0 + jag(xA, seed, 2.2));
-  for(let x = xA; x <= xB; x += 2) ctx.lineTo(x, y0 + jag(x, seed, 2.8));
+  const topAt = (x) => jagTop ? y0 + jag(x, seed, 2.2) : y0;
+  ctx.moveTo(xA, topAt(xA));
+  for(let x = xA; x <= xB; x += 2) ctx.lineTo(x, topAt(x));
   ctx.lineTo(xB, y1 + jag(xB, seed + 8, 2.1));
   for(let x = xB; x >= xA; x -= 2) ctx.lineTo(x, y1 + jag(x, seed + 8, 2.4));
   ctx.closePath();
@@ -3268,43 +3528,52 @@ function sealHole(ctx, xA, xB, y0, y1, seed){
 function drawTear(progress, dir, seed){
   const w = canvasW, h = canvasH;
   const ctx = tearCtx;
+  const ox = TEAR_PAD.l, oy = TEAR_PAD.t;
   ctx.clearRect(0, 0, w, h);
-  if(!packArt.complete || w < 2) return;
-  ctx.drawImage(packArt, 0, 0, w, h);
+  if(!packArt.complete || packW < 2) return;
+  drawPackOn(ctx);
   if(progress <= 0.012) return;
 
-  const xL = w * SEAL.x0, xR = w * SEAL.x1;
-  const y0 = h * SEAL.y0, y1 = h * SEAL.y1;
+  const xL = ox + packW * SEAL.x0, xR = ox + packW * SEAL.x1;
+  const y0 = oy + packH * SEAL.y0, y1 = oy + packH * SEAL.y1;
   const torn = Math.min(1, progress) * (xR - xL);
   const xA = dir > 0 ? xL : xR - torn;
   const xB = dir > 0 ? xL + torn : xR;
+  /* Eat pack corners outside the seal inset, in canvas space. */
+  const clearL = dir > 0 ? ox - 6 : xA - 4;
+  const clearR = dir > 0 ? xB + 4 : ox + packW + 6;
   const yMid = (y0 + y1) / 2;
-  const mouth = progress * h * 0.02;
+  const mouth = progress * packH * 0.018;
+  const holeTop = oy - 6;
+  const holeBot = y1 + 8 + mouth;
 
   flapCtx.clearRect(0, 0, w, h);
-  flapCtx.drawImage(packArt, 0, 0, w, h);
+  drawPackOn(flapCtx);
   flapCtx.save();
   flapCtx.globalCompositeOperation = "destination-in";
-  sealHole(flapCtx, xA, xB, y0, y1, seed);
+  sealHole(flapCtx, clearL, clearR, holeTop, y1, seed, {jagTop: false});
   flapCtx.fill();
   flapCtx.restore();
 
+  /* Hard wipe first so no crimp tip / corner speck survives the jag. */
   ctx.save();
   ctx.globalCompositeOperation = "destination-out";
-  sealHole(ctx, xA - 4, xB + 4, y0 - 6, y1 + 10 + mouth, seed);
+  ctx.beginPath();
+  ctx.rect(clearL, holeTop, clearR - clearL, holeBot - holeTop);
   ctx.fill();
   ctx.restore();
 
   ctx.save();
-  sealHole(ctx, xA - 3, xB + 3, y0 - 5, y1 + 8 + mouth, seed);
+  ctx.beginPath();
+  ctx.rect(clearL, holeTop, clearR - clearL, holeBot - holeTop);
   ctx.clip();
-  ctx.fillStyle = "#0b0a0c";
-  ctx.fillRect(xA - 10, y0 - 14, xB - xA + 20, y1 - y0 + 32);
+  ctx.fillStyle = "#0d0d0d";
+  ctx.fillRect(clearL - 1, holeTop - 1, clearR - clearL + 2, holeBot - holeTop + 2);
   ctx.restore();
 
-  const lift = 7 + progress * 20;
-  const shift = dir * (7 + progress * 14);
-  const ang = -dir * progress * 0.3;
+  const lift = 6 + progress * 16;
+  const shift = dir * (5 + progress * 12);
+  const ang = -dir * progress * 0.22;
   const pivot = dir > 0 ? xB : xA;
   ctx.save();
   ctx.translate(pivot + shift, yMid - lift);
@@ -3313,16 +3582,37 @@ function drawTear(progress, dir, seed){
   ctx.drawImage(flapCanvas, 0, 0, w, h);
   ctx.restore();
 
-  ctx.save();
-  ctx.strokeStyle = "rgba(255,255,255,.5)";
-  ctx.lineWidth = 1.15;
-  ctx.beginPath();
-  const edgeX = dir > 0 ? xB : xA;
-  ctx.moveTo(edgeX, y0 - 2);
-  ctx.lineTo(edgeX + dir * 6, yMid);
-  ctx.lineTo(edgeX, y1 + 2);
-  ctx.stroke();
-  ctx.restore();
+  /* Scrub 1px specular crumbs left in the void above the pack. */
+  scrubTearSpecks(ctx, w, h, oy - 2);
+}
+
+function scrubTearSpecks(ctx, w, h, yMax){
+  const y1 = Math.max(1, Math.min(h, Math.ceil(yMax + 10)));
+  const img = ctx.getImageData(0, 0, Math.ceil(w), y1);
+  const d = img.data;
+  const stride = Math.ceil(w) * 4;
+  const ww = Math.ceil(w);
+  for(let y = 1; y < y1 - 1; y++){
+    for(let x = 1; x < ww - 1; x++){
+      const i = y * stride + x * 4;
+      const a = d[i + 3];
+      if(a < 40) continue;
+      const bright = Math.max(d[i], d[i + 1], d[i + 2]);
+      if(bright < 160) continue;
+      let near = 0;
+      for(let dy = -1; dy <= 1; dy++){
+        for(let dx = -1; dx <= 1; dx++){
+          if(!dx && !dy) continue;
+          const j = (y + dy) * stride + (x + dx) * 4;
+          if(d[j + 3] > 40 && Math.max(d[j], d[j + 1], d[j + 2]) > 100) near++;
+        }
+      }
+      if(near <= 1){
+        d[i] = d[i + 1] = d[i + 2] = d[i + 3] = 0;
+      }
+    }
+  }
+  ctx.putImageData(img, 0, 0);
 }
 
 function resetPackPose(){
@@ -3330,9 +3620,9 @@ function resetPackPose(){
   pack.style.opacity = "";
   pack.style.filter = "";
   pack.style.transition = "";
-  if(canvasW){
+  if(canvasW && packW){
     tearCtx.clearRect(0, 0, canvasW, canvasH);
-    tearCtx.drawImage(packArt, 0, 0, canvasW, canvasH);
+    drawPackOn(tearCtx);
   }
 }
 
@@ -3371,9 +3661,9 @@ function armPack(){
   packCol.hidden = false;
   packWrap.hidden = false;
   packWrap.className = "pack-wrap idle";
+  stage.classList.remove("tearing");
   resetPackPose();
-  const w = loadWallet();
-  intro.textContent = `${forceCopy()} · ${w.packs} booster${w.packs > 1 ? "s" : ""}`;
+  intro.textContent = forceCopy();
   refreshWallet();
 }
 
@@ -3385,6 +3675,7 @@ async function openPack(){
   phase = "opening";
   packWrap.classList.remove("idle", "dragging");
   packWrap.classList.add("locked");
+  stage.classList.remove("tearing");
 
   const start = drag && drag.progress != null ? drag.progress : 0.7;
   const seed = (drag && drag.seed) || 2.2;
@@ -3444,7 +3735,7 @@ function finishRevealIfDone(){
 
 async function playEpicMythReveal(el, card, i, flipMs){
   const myth = card.rarete === "diamant";
-  el.classList.add("hit");
+  el.classList.add("hit", myth ? "flip-myth" : "flip-slow");
   document.body.classList.add("cutaway");
   stage.classList.add("cutaway");
   await wait(280);
@@ -3467,7 +3758,7 @@ async function playEpicMythReveal(el, card, i, flipMs){
   stage.classList.add("show-hit");
   await wait(160);
   el.classList.add("revealed", myth ? "fx-myth" : "fx-epic");
-  await wait(flipMs + (myth ? 520 : 380));
+  await wait(flipMs + (myth ? 420 : 280));
 
   [...hand.children].forEach((n, j) => { if(j !== i) n.classList.add("dim"); });
   document.body.classList.remove("cutaway");
@@ -3485,7 +3776,7 @@ async function revealCard(i){
   el.dataset.revealing = "1";
   const myth = card.rarete === "diamant";
   const epic = card.rarete === "platine";
-  const flipMs = reduced ? 40 : 360;
+  const flipMs = reduced ? 40 : myth ? 3200 : epic ? 2400 : 360;
 
   try {
     if((myth || epic) && !reduced){
@@ -3537,6 +3828,7 @@ function onDown(ev){
   sizeTearCanvas();
   packWrap.classList.remove("idle");
   packWrap.classList.add("dragging");
+  stage.classList.add("tearing");
   drag = {
     x: ev.clientX,
     t: performance.now(),
@@ -3587,6 +3879,7 @@ function onUp(ev){
       else {
         packWrap.classList.remove("dragging");
         packWrap.classList.add("idle");
+        stage.classList.remove("tearing");
         resetPackPose();
       }
     };
@@ -3631,12 +3924,18 @@ again.addEventListener("click", async () => {
   if(phase !== "open") return;
   await stashHand();
 });
-$("toAlbum").addEventListener("click", () => showView("album"));
-$("emptyAlbum").addEventListener("click", () => showView("album"));
+$("toAlbum").addEventListener("click", () => { location.href = "classeur.html"; });
+$("emptyAlbum").addEventListener("click", () => { location.href = "classeur.html"; });
+function clampShopQty(n){
+  const v = Math.floor(Number(n));
+  if(!Number.isFinite(v) || v < 1) return 1;
+  return Math.min(99, v);
+}
 function shopTotal(){
   return PACK_COST * shopQty;
 }
 function renderShopSelect(){
+  shopQty = clampShopQty(shopQty);
   const w = loadWallet();
   const total = shopTotal();
   const can = w.credits >= total;
@@ -3647,6 +3946,10 @@ function renderShopSelect(){
     `<div class="shop-qty" role="group" aria-label="Quantité">` +
     `<button type="button" data-qty="1" class="${shopQty === 1 ? "on" : ""}">1</button>` +
     `<button type="button" data-qty="10" class="${shopQty === 10 ? "on" : ""}">10</button>` +
+    `<div class="shop-qty-custom">` +
+    `<label for="shopQtyInput">Ou saisir une quantité</label>` +
+    `<input type="number" id="shopQtyInput" min="1" max="99" step="1" value="${shopQty}" inputmode="numeric">` +
+    `</div>` +
     `</div>` +
     `<p class="shop-total">Total : ${total} crédits</p>` +
     `<p class="shop-bal">Solde : ${w.credits} crédits` +
@@ -3672,6 +3975,10 @@ function openShop(){
   shopQty = 1;
   renderShopSelect();
   $("shop").showModal();
+  requestAnimationFrame(() => {
+    const qtyInput = $("shopQtyInput");
+    if(qtyInput){ qtyInput.focus(); qtyInput.select(); }
+  });
 }
 function finishBuy(qty){
   if(!buyPacks(qty)){
@@ -3683,24 +3990,43 @@ function finishBuy(qty){
     armNextPack();
   } else {
     refreshWallet();
-    if(phase === "idle"){
-      const w = loadWallet();
-      intro.textContent = `${forceCopy()} · ${w.packs} booster${w.packs > 1 ? "s" : ""}`;
-    }
+    if(phase === "idle") intro.textContent = forceCopy();
   }
 }
 $("buyPack").addEventListener("click", openShop);
+function applyShopQtyInput(raw, { rerender = true } = {}){
+  shopQty = clampShopQty(raw);
+  if(rerender) renderShopSelect();
+  else {
+    const w = loadWallet();
+    const total = shopTotal();
+    const can = w.credits >= total;
+    const totalEl = $("shopBody")?.querySelector(".shop-total");
+    const balEl = $("shopBody")?.querySelector(".shop-bal");
+    const next = $("shopNext");
+    if(totalEl) totalEl.textContent = `Total : ${total} crédits`;
+    if(balEl){
+      balEl.textContent = `Solde : ${w.credits} crédits` +
+        (can ? "" : ` · il en manque ${total - w.credits}`);
+    }
+    if(next) next.disabled = !can;
+    $("shopBody")?.querySelectorAll(".shop-qty [data-qty]").forEach(btn => {
+      btn.classList.toggle("on", Number(btn.dataset.qty) === shopQty);
+    });
+  }
+}
 $("shop").addEventListener("click", ev => {
   if(ev.target === $("shop")) $("shop").close();
   const close = ev.target.closest("#shopClose");
   if(close){ $("shop").close(); return; }
   const qtyBtn = ev.target.closest(".shop-qty [data-qty]");
   if(qtyBtn){
-    shopQty = Number(qtyBtn.dataset.qty) === 10 ? 10 : 1;
+    shopQty = clampShopQty(qtyBtn.dataset.qty);
     renderShopSelect();
     return;
   }
   if(ev.target.closest("#shopNext")){
+    shopQty = clampShopQty($("shopQtyInput")?.value ?? shopQty);
     renderShopConfirm();
     return;
   }
@@ -3711,6 +4037,21 @@ $("shop").addEventListener("click", ev => {
   if(ev.target.closest("#shopConfirm")){
     finishBuy(shopQty);
   }
+});
+$("shop").addEventListener("input", ev => {
+  const input = ev.target.closest("#shopQtyInput");
+  if(!input) return;
+  // Pas de re-render : un rebuild au blur/change mangerait le 1er clic sur Continuer.
+  applyShopQtyInput(input.value, { rerender: false });
+  if(document.activeElement !== input) input.value = String(shopQty);
+});
+$("shop").addEventListener("keydown", ev => {
+  if(ev.key !== "Enter") return;
+  if(!ev.target.closest("#shopQtyInput")) return;
+  ev.preventDefault();
+  shopQty = clampShopQty($("shopQtyInput")?.value ?? shopQty);
+  if(loadWallet().credits >= shopTotal()) renderShopConfirm();
+  else renderShopSelect();
 });
 
 let sellCard = null;
@@ -4431,10 +4772,14 @@ function openCardZoom(card, opts={}){
       const gain = DESTROY_CREDITS[card.rarete] || 1;
       bits.push(`<button type="button" data-act="destroy" data-id="${esc(card.id)}">Défausser (+${gain} crédits)</button>`);
     } else if(!missing && free < 1){
-      bits.push(`<div class="hint">Retire l’annonce pour défausser.</div>`);
+      bits.push(`<div class="hint">${isLineupLocked(card.id)
+        ? "Lineup Fantasy — retire la carte du groupe pour défausser."
+        : "Retire l’annonce pour défausser."}</div>`);
     }
     if(opts.fromAlbum && free >= 1 && !fav){
       bits.push(`<button type="button" data-act="sell" data-id="${esc(card.id)}">Vendre</button>`);
+    } else if(opts.fromAlbum && !missing && free < 1 && isLineupLocked(card.id) && !fav){
+      bits.push(`<div class="hint">Lineup Fantasy — vente indisponible.</div>`);
     }
     if(opts.fromAlbum && fav){
       bits.push(`<div class="hint">Favori — vente, échange et défausse indisponibles.</div>`);
@@ -4766,28 +5111,28 @@ async function showView(view){
   if((view === "album" || view === "market") && phase === "open") await stashHand();
   document.body.classList.toggle("album", view === "album");
   document.body.classList.toggle("market", view === "market");
-  document.querySelectorAll("header .nav [data-view]").forEach(b => {
+  document.querySelectorAll("header .nav-main [data-view]").forEach(b => {
     b.classList.toggle("on", b.dataset.view === view);
   });
   if(view === "album"){
-    $("pageTitle").textContent = "Classeur — Série 1";
+    $("pageTitle").textContent = "Classeur";
     if(location.hash !== "#classeur") history.replaceState(null, "", "#classeur");
     intro.textContent = `${uniqueCount()} / ${catalog.length || 2000} cartes uniques.`;
     syncAlbumFilterSwitches();
     renderAlbum(true);
   } else if(view === "market"){
-    $("pageTitle").textContent = "Marché — prix fixe";
+    $("pageTitle").textContent = "Marché";
     if(location.hash !== "#marche") history.replaceState(null, "", "#marche");
     intro.textContent = "Achète, vends ou négocie des cartes contre des crédits.";
     refreshOffersBadge();
     renderMarket();
   } else {
-    $("pageTitle").textContent = "Booster — Charts";
+    $("pageTitle").textContent = "Booster";
     if(location.hash) history.replaceState(null, "", location.pathname + location.search);
     if(phase === "idle") intro.textContent = forceCopy();
     else if(phase === "deal") intro.textContent = "Clique une carte pour la découvrir.";
     else if(phase === "open") intro.textContent = "Clique une carte pour agrandir, ou ailleurs pour ranger.";
-    else if(phase === "empty") intro.textContent = "Plus de booster. Reviens demain (+1) ou achète-en un.";
+    else if(phase === "empty") intro.textContent = "Plus de booster. Attends le gratuit (12 h) ou achète-en un.";
   }
 }
 
@@ -4878,7 +5223,7 @@ function renderAlbum(resetPage){
   }).join("");
 }
 
-document.querySelectorAll("header .nav [data-view]").forEach(btn => {
+document.querySelectorAll("header .nav-main [data-view]").forEach(btn => {
   btn.addEventListener("click", () => showView(btn.dataset.view));
 });
 document.querySelectorAll("#album .chip[data-sort]").forEach(btn => {
@@ -4994,7 +5339,7 @@ $("albumClear").addEventListener("click", () => {
       m.notifications = (m.notifications || []).filter(n => n.toUser && n.toUser !== me);
       saveMarket(m);
       saveOwned({ v: 2, got: {}, fresh: {}, fav: {} });
-      saveWallet({ v: 1, credits: 0, packs: 0, lastDaily: "", starter: false });
+      saveWallet({ v: 1, credits: 0, packs: 0, nextFreeAt: 0, starter: false });
       savePity({ n: 0, sinceMyth: 0, sinceEpic: 0, starterMyth: false });
       ensureWallet();
       refreshCount();
@@ -5024,7 +5369,7 @@ document.querySelector(".user-switch")?.addEventListener("click", ev => {
   switchUser(btn.dataset.user);
 });
 window.addEventListener("hashchange", () => {
-  if(location.hash === "#classeur") showView("album");
+  if(location.hash === "#classeur") location.replace("classeur.html");
   else if(location.hash === "#marche") showView("market");
   else showView("booster");
 });
@@ -5045,6 +5390,17 @@ document.querySelector(".legal-links")?.addEventListener("click", ev => {
   ev.preventDefault();
   location.assign(a.getAttribute("href"));
 });
+
+function tickFreePack(){
+  const before = loadWallet();
+  const packsBefore = before.packs;
+  const nextBefore = before.nextFreeAt || 0;
+  const w = ensureWallet();
+  refreshFreeTimer();
+  if(w.packs === packsBefore && w.nextFreeAt === nextBefore) return;
+  refreshWallet();
+  if(phase === "empty" && w.packs > packsBefore) armNextPack();
+}
 
 async function boot(){
   try {
@@ -5069,8 +5425,12 @@ async function boot(){
     refreshOffersBadge();
     statusEl.remove();
     await armNextPack();
-    if(location.hash === "#classeur") showView("album");
-    else if(location.hash === "#marche") showView("market");
+    setInterval(tickFreePack, 1000);
+    if(location.hash === "#classeur"){
+      location.replace("classeur.html");
+      return;
+    }
+    if(location.hash === "#marche") showView("market");
   } catch (err) {
     statusEl.textContent = "Impossible de charger le catalogue. Lance export_catalog.py puis ouvre via le serveur local.";
   }

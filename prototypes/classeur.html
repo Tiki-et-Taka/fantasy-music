@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Charts — Classeur</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Big+Shoulders+Display:wght@800&family=IBM+Plex+Mono:wght@400;500&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --bg-elev: #141414;
+    --ink: #f2f0eb;
+    --muted: #8a8680;
+    --line: #2a2a2a;
+    --line-hi: #3a3a3a;
+    --accent: #e68a1e;
+    --accent-ink: #111;
+    --panel: #161616;
+    --font-display: "Archivo Black", "Oswald", Impact, sans-serif;
+    --font-ui: "Oswald", sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { min-height: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-ui);
+  }
+  a { color: inherit; }
+  .grain {
+    position: fixed; inset: 0; pointer-events: none; z-index: 50;
+    opacity: .14;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .top {
+    position: sticky; top: 0; z-index: 20;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 24px;
+    background: rgba(13,13,13,.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .brand {
+    justify-self: start;
+    font-family: var(--font-display);
+    font-size: clamp(22px, 3vw, 30px);
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    line-height: 1;
+  }
+  .nav-main {
+    justify-self: center;
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 22px;
+  }
+  .nav-main a {
+    position: relative;
+    text-decoration: none;
+    font-size: 13px; font-weight: 600;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--muted); padding: 6px 0 8px;
+  }
+  .nav-main a:hover { color: var(--ink); }
+  .nav-main a.on { color: var(--ink); }
+  .nav-main a.on::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+    height: 2px; background: var(--accent);
+  }
+  .top-actions {
+    justify-self: end; display: flex; align-items: center; gap: 10px;
+  }
+  .chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid var(--line); background: var(--panel);
+    padding: 8px 12px; font-size: 12px; font-weight: 600;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--ink);
+    white-space: nowrap;
+  }
+  .chip .coin {
+    width: 14px; height: 14px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #f0c060, var(--accent) 55%, #8a4a10);
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.35);
+  }
+  .chip.btn {
+    appearance: none; font: inherit; cursor: pointer; color: inherit;
+  }
+  .chip.btn .ico { width: 16px; height: 16px; }
+
+  .wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 28px 24px 64px;
+  }
+  .page-head { margin-bottom: 22px; }
+  .page-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(36px, 6vw, 56px);
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    line-height: .95;
+  }
+  .page-meta {
+    margin: 10px 0 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .filters {
+    border: 1px solid var(--line-hi);
+    outline: 1px solid var(--line);
+    outline-offset: 3px;
+    padding: 14px 16px 12px;
+    margin-bottom: 22px;
+    display: grid;
+    gap: 12px;
+  }
+  .filt-row {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px;
+  }
+  .filt-label {
+    flex: 0 0 auto;
+    min-width: 72px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .filt-chips { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; }
+  .fchip {
+    appearance: none; border: 1px solid var(--line); background: transparent;
+    color: var(--muted); font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: .06em; text-transform: uppercase;
+    padding: 6px 10px; cursor: pointer;
+  }
+  .fchip:hover { color: var(--ink); border-color: var(--line-hi); }
+  .fchip.on {
+    color: var(--accent-ink); background: var(--accent); border-color: var(--accent);
+  }
+  .filt-sort {
+    margin-left: auto;
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+  }
+  .filt-sort select {
+    appearance: none;
+    border: 1px solid var(--line); background: var(--panel); color: var(--ink);
+    font: inherit; padding: 6px 28px 6px 10px; cursor: pointer;
+    background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+      linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+    background-position: calc(100% - 12px) 55%, calc(100% - 7px) 55%;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+  }
+  .filt-search {
+    width: min(240px, 100%);
+    border: 1px solid var(--line); background: var(--panel); color: var(--ink);
+    font-family: var(--font-mono); font-size: 11px;
+    padding: 7px 10px;
+  }
+  .filt-search::placeholder { color: #5a5650; }
+
+  .binder {
+    position: relative;
+    border: 1px solid var(--line-hi);
+    background: linear-gradient(90deg, #101010 0 28px, var(--bg-elev) 28px);
+    padding: 18px 18px 18px 40px;
+    min-height: 420px;
+  }
+  .binder-rings {
+    position: absolute; left: 0; top: 0; bottom: 0; width: 28px;
+    display: flex; flex-direction: column; justify-content: space-evenly; align-items: center;
+    pointer-events: none;
+  }
+  .binder-rings i {
+    width: 12px; height: 12px; border-radius: 50%;
+    border: 2px solid #3a3a3a; background: #0a0a0a;
+    box-shadow: inset 0 0 0 2px #1a1a1a;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(154px, 1fr));
+    gap: 20px 14px;
+  }
+  @media (max-width: 720px) {
+    .top { grid-template-columns: 1fr auto; }
+    .nav-main { grid-column: 1 / -1; justify-content: flex-start; }
+    .filt-sort { margin-left: 0; width: 100%; }
+  }
+
+  .cell {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+  }
+  .thumb {
+    position: relative;
+    width: 148px; height: 207px;
+    filter: drop-shadow(0 10px 16px rgba(0,0,0,.45));
+  }
+  .thumb .card {
+    position: absolute; top: 0; left: 0;
+    transform: scale(0.569); transform-origin: top left;
+  }
+  .cell.hole .thumb { filter: none; opacity: .72; }
+  .cell.hole .card { cursor: default; }
+  .cell.is-new .thumb {
+    border-radius: 12px;
+    box-shadow:
+      0 0 0 2px #f59e0b,
+      0 0 22px rgba(245, 158, 11, .55),
+      0 10px 16px rgba(0,0,0,.45);
+  }
+  .cell.is-new .thumb::after {
+    content: "Nouveau";
+    position: absolute; top: 6px; left: 6px; z-index: 3;
+    background: #f59e0b; color: #111;
+    font-family: var(--font-mono); font-size: 9px; font-weight: 500;
+    letter-spacing: .04em; text-transform: uppercase;
+    padding: 2px 6px;
+  }
+  .dup {
+    position: absolute; top: 8px; right: 6px; z-index: 3;
+    background: #111; color: #e8e8ea; border: 1px solid #2a2c32;
+    font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+    letter-spacing: .04em; padding: 2px 6px;
+  }
+  /* carte (même DA que booster) */
+  .card {
+    position: relative; width: 260px; height: 364px;
+    border-radius: 10px; overflow: hidden;
+    background: #0F1012;
+  }
+  .card.paper { background: #EDE4D4; }
+  .card.zoomable { cursor: pointer; }
+  .art {
+    position: absolute; top: 12px; left: 12px; right: 12px; bottom: 120px;
+    overflow: hidden; background: #111;
+  }
+  .art img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center 18%;
+    display: block;
+  }
+  .card.paper .art { background: #E6D9C4; }
+  .card.paper .art img { object-position: center top; }
+  .band {
+    position: absolute; left: 12px; right: 12px; bottom: 12px; height: 108px;
+    display: flex; flex-direction: column; justify-content: center;
+    gap: 3px; padding: 12px 12px 22px;
+  }
+  .card.paper .band { background: #EDE4D4; }
+  .accent { height: 3px; width: 36px; border-radius: 1px; margin-bottom: 4px; flex-shrink: 0; }
+  .card.diamant .art { inset: 0; }
+  .card.diamant .title {
+    position: absolute; left: 0; right: 0; top: 0;
+    padding: 18px 12px 40px; text-align: center;
+    background: linear-gradient(to bottom, rgba(8,7,6,.78) 32%, rgba(8,7,6,0));
+    pointer-events: none;
+  }
+  .card.diamant .title .myth-name {
+    font-family: "Big Shoulders Display", Oswald, sans-serif;
+    font-weight: 800; line-height: 1; letter-spacing: .06em;
+    color: #F4F2EC; text-shadow: 0 1px 10px rgba(0,0,0,.55);
+    text-transform: uppercase; white-space: nowrap;
+  }
+  .card.diamant .band {
+    left: 0; right: 0; bottom: 0; height: auto;
+    padding: 24px 12px 28px; text-align: center;
+    background: linear-gradient(to top, rgba(8,7,6,.88) 48%, rgba(8,7,6,0));
+  }
+  .card.diamant .accent,
+  .card.diamant .band .name,
+  .card.diamant .rarete,
+  .card.diamant .meta,
+  .card.diamant .group { display: none; }
+  .card.diamant .line-rare {
+    font-size: 10px; font-weight: 600;
+    letter-spacing: .22em; text-transform: uppercase; color: #E8D5A3;
+  }
+  .card.diamant .line-info {
+    margin-top: 6px; font-size: 11px; letter-spacing: .03em; color: #c8c2b6;
+  }
+  .name {
+    font-family: Oswald, Impact, sans-serif;
+    font-weight: 600; letter-spacing: .04em;
+    text-transform: uppercase; line-height: 1.05; color: #F4F2EC;
+  }
+  .card.paper .name { color: #161410; }
+  .rarete { font-size: 10px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+  .meta { font-size: 10.5px; color: #c8c2b6; letter-spacing: .02em; }
+  .card.paper .meta { color: #5c564c; }
+  .group { font-size: 10.5px; color: #d8b35c; letter-spacing: .03em; }
+  .card.paper .group { color: #8a6a4f; }
+  .marks {
+    position: absolute; left: 16px; right: 16px; bottom: 10px; z-index: 2;
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 8px; font-weight: 600;
+    color: rgba(200,194,186,.55); pointer-events: none;
+  }
+  .marks .serie { letter-spacing: .12em; }
+  .marks .no { letter-spacing: .04em; font-variant-numeric: tabular-nums; }
+  .card.paper .marks { color: rgba(90,70,64,.45); }
+  .card.diamant .marks { color: rgba(232,213,163,.55); }
+  .frame { position: absolute; inset: 0; pointer-events: none; }
+
+  .card.card-back { background: #EDE4D4; }
+  .bk-field {
+    position: absolute; top: 12px; left: 12px; right: 12px; bottom: 78px;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at 50% 40%, rgba(92, 28, 24, .08), transparent 62%),
+      #E6D9C4;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 14px;
+  }
+  .bk-field::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(92, 32, 28, .28) 0.7px, transparent 0.9px);
+    background-size: 5px 5px;
+    pointer-events: none;
+  }
+  .bk-plate {
+    position: absolute; inset: 14px;
+    border: 1px solid rgba(90, 38, 34, .28);
+    pointer-events: none;
+  }
+  .bk-mark { position: relative; z-index: 1; }
+  .wave { display: flex; align-items: flex-end; gap: 5px; height: 34px; }
+  .wave i { display: block; width: 6px; border-radius: 0; background: #8F2A28; }
+  .wave i:nth-child(1){ height: 11px; }
+  .wave i:nth-child(2){ height: 19px; }
+  .wave i:nth-child(3){ height: 28px; }
+  .wave i:nth-child(4){ height: 34px; }
+  .wave i:nth-child(5){ height: 23px; }
+  .wave i:nth-child(6){ height: 14px; }
+  .bk-name {
+    position: relative; z-index: 1;
+    font-family: Oswald, sans-serif; font-weight: 600;
+    letter-spacing: .12em; font-size: 22px; color: #1A1412;
+  }
+  .bk-band {
+    position: absolute; left: 12px; right: 12px; bottom: 12px; height: 66px;
+    display: flex; align-items: center; justify-content: center;
+    background: #EDE4D4;
+  }
+  .bk-foot {
+    font-size: 9px; font-weight: 600;
+    letter-spacing: .14em; text-transform: uppercase; color: #6A5650;
+  }
+
+  .empty {
+    grid-column: 1 / -1;
+    padding: 48px 16px;
+    text-align: center;
+    font-family: var(--font-mono); font-size: 12px; color: var(--muted);
+  }
+
+  .pager {
+    display: flex; align-items: center; justify-content: center; gap: 14px;
+    margin-top: 18px;
+  }
+  .pager button {
+    appearance: none; border: 1px solid var(--line); background: var(--panel);
+    color: var(--ink); font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: .1em; text-transform: uppercase; padding: 8px 14px; cursor: pointer;
+  }
+  .pager button:disabled { opacity: .35; cursor: default; }
+  .pager .lbl {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+  }
+
+  .foot {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 12px; margin-top: 28px; padding-top: 14px; border-top: 1px solid var(--line);
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: .06em; text-transform: uppercase; color: #5a5650;
+  }
+  .foot a { text-decoration: none; }
+  .foot a:hover { color: var(--ink); }
+  .status {
+    font-family: var(--font-mono); font-size: 12px; color: var(--muted);
+    padding: 40px 0; text-align: center;
+  }
+
+  /* drawer */
+  .drawer-veil {
+    position: fixed; inset: 0; background: rgba(0,0,0,.55); z-index: 40;
+  }
+  .drawer {
+    position: fixed; top: 0; right: 0; bottom: 0; width: min(320px, 92vw);
+    background: var(--bg-elev); border-left: 1px solid var(--line);
+    z-index: 45; padding: 18px; overflow: auto;
+  }
+  .drawer .head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 18px;
+  }
+  .drawer h2 {
+    margin: 0; font-family: var(--font-display); font-size: 20px;
+    letter-spacing: .06em; text-transform: uppercase;
+  }
+  .drawer .close {
+    appearance: none; border: 0; background: transparent; color: var(--muted);
+    font-size: 28px; line-height: 1; cursor: pointer;
+  }
+  .drawer label {
+    display: block; font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .user-switch { display: flex; gap: 8px; margin-bottom: 20px; }
+  .user-switch button {
+    flex: 1; appearance: none; border: 1px solid var(--line); background: transparent;
+    color: var(--muted); font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: .08em; text-transform: uppercase; padding: 10px; cursor: pointer;
+  }
+  .user-switch button.on { border-color: var(--accent); color: var(--accent); }
+  .drawer .links a {
+    display: block; font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: .08em; text-transform: uppercase; text-decoration: none;
+    color: var(--muted); padding: 8px 0;
+  }
+
+  /* zoom — display:none by default; :not([hidden]) so [hidden] is not overridden */
+  .zoom {
+    position: fixed; inset: 0; z-index: 60;
+    display: none;
+    place-items: center;
+    background: rgba(0,0,0,.78); padding: 24px;
+  }
+  .zoom:not([hidden]) { display: grid; }
+  .zoom-card {
+    filter: drop-shadow(0 18px 40px rgba(0,0,0,.55));
+  }
+  .zoom-card .card { cursor: default; }
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="top">
+  <a class="brand" href="lobby.html">Charts</a>
+  <nav class="nav-main" aria-label="Principal">
+    <a href="lobby.html">Lobby</a>
+    <a href="booster.html">Booster</a>
+    <a class="on" href="classeur.html" aria-current="page">Classeur</a>
+    <a href="booster.html#marche">Marché</a>
+    <a href="fantasy.html?v=15">Fantasy</a>
+  </nav>
+  <div class="top-actions">
+    <span class="chip" aria-label="Crédits">
+      <span class="coin" aria-hidden="true"></span>
+      <span><b id="creditsBal">0</b> CR</span>
+    </span>
+    <button type="button" class="chip btn" id="menuBtn" aria-label="Profil" aria-expanded="false" aria-controls="drawer" aria-haspopup="dialog">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 19c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg>
+      <span id="playerName">Joueur A</span>
+    </button>
+  </div>
+</header>
+
+<main class="wrap">
+  <header class="page-head">
+    <h1 class="page-title">Classeur</h1>
+    <p class="page-meta" id="pageMeta">Chargement…</p>
+  </header>
+
+  <section class="filters" aria-label="Filtres">
+    <div class="filt-row">
+      <span class="filt-label">Rareté</span>
+      <div class="filt-chips" id="rareChips" role="group" aria-label="Rareté"></div>
+    </div>
+    <div class="filt-row">
+      <span class="filt-label">Instrument</span>
+      <div class="filt-chips" id="instrChips" role="group" aria-label="Instrument"></div>
+    </div>
+    <div class="filt-row">
+      <span class="filt-label">Genre</span>
+      <div class="filt-chips" id="genreChips" role="group" aria-label="Genre"></div>
+      <div class="filt-sort">
+        <label for="sortBy">Trier par</label>
+        <select id="sortBy">
+          <option value="num">Numéro de série</option>
+          <option value="name">Nom</option>
+          <option value="rare">Rareté</option>
+        </select>
+      </div>
+    </div>
+    <div class="filt-row">
+      <span class="filt-label">Recherche</span>
+      <input class="filt-search" type="search" id="q" placeholder="Nom ou groupe" autocomplete="off">
+      <button type="button" class="fchip" id="hideMissing" aria-pressed="false">Masquer manquantes</button>
+      <button type="button" class="fchip" id="newOnly" aria-pressed="false">Nouvelles</button>
+    </div>
+  </section>
+
+  <div class="status" id="status">Chargement du set…</div>
+
+  <div class="binder" id="binder" hidden>
+    <div class="binder-rings" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="grid" id="grid"></div>
+  </div>
+
+  <div class="pager" id="pager" hidden>
+    <button type="button" id="prev">Précédent</button>
+    <span class="lbl" id="pageLbl">Page 1 / 1</span>
+    <button type="button" id="next">Suivant</button>
+  </div>
+
+  <footer class="foot">
+    <span>Charts archives · Série 1</span>
+    <a href="legal/index.html?v=2">Mentions légales</a>
+  </footer>
+</main>
+
+<div class="drawer-veil" id="drawerVeil" hidden></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" hidden>
+  <div class="head">
+    <h2 id="drawerTitle">Profil</h2>
+    <button type="button" class="close" id="drawerClose" aria-label="Fermer">×</button>
+  </div>
+  <label>Compte de test</label>
+  <div class="user-switch" role="group" aria-label="Compte de test">
+    <button type="button" data-user="u1" class="on">Joueur A</button>
+    <button type="button" data-user="u2">Joueur B</button>
+  </div>
+  <div class="links">
+    <a href="legal/index.html?v=2">Mentions légales</a>
+  </div>
+</aside>
+
+<div class="zoom" id="zoom" hidden>
+  <div class="zoom-card" id="zoomCard"></div>
+</div>
+
+<script>
+const EXEC = {
+  commune:"A", argent:"B", or:"A", platine:"B", diamant:"B"
+};
+const INSTR = {
+  voix:"Voix", guitare:"Guitare", basse:"Basse", batterie:"Batterie",
+  claviers:"Claviers", vents:"Vents", cordes:"Cordes", machines:"Machines"
+};
+const INSTR_ORDER = ["voix","guitare","basse","batterie","claviers","vents","cordes","machines"];
+const FAMILIES = {
+  metal:     {label:"Métal",              fond:"#121214", a1:"#B8352F"},
+  punk:      {label:"Punk & hardcore",    fond:"#141416", a1:"#E04A2F"},
+  "hip-hop": {label:"Hip-hop",            fond:"#121410", a1:"#C8D44E"},
+  électro:   {label:"Électronique",       fond:"#0B1220", a1:"#3FC1C9"},
+  reggae:    {label:"Reggae & dub",       fond:"#0F1610", a1:"#D9B52B"},
+  afro:      {label:"Afro",               fond:"#16120C", a1:"#E09A2B"},
+  latin:     {label:"Latin",              fond:"#1C1210", a1:"#D4552F"},
+  jazz:      {label:"Jazz",               fond:"#0E1A1C", a1:"#D8B35C"},
+  blues:     {label:"Blues",              fond:"#0C1420", a1:"#4A7FB5"},
+  funk:      {label:"Funk & disco",       fond:"#1A1222", a1:"#E0A32B"},
+  "R&B":     {label:"R&B & soul",         fond:"#1A1012", a1:"#C47A5A"},
+  country:   {label:"Country",            fond:"#171310", a1:"#C89A4A"},
+  folk:      {label:"Folk",               fond:"#121710", a1:"#9CB06A"},
+  world:     {label:"Musiques du monde",  fond:"#101614", a1:"#B58A4E"},
+  chanson:   {label:"Chanson & variété",  fond:"#16131A", a1:"#C9869B"},
+  pop:       {label:"Pop",                fond:"#1C1020", a1:"#D45E8A"},
+  rock:      {label:"Rock",               fond:"#15110E", a1:"#D98A2B"}
+};
+const GENRE_ORDER = Object.keys(FAMILIES);
+const FAMILY_FROM_CATALOG = { hiphop:"hip-hop", electro:"électro", rnb:"R&B" };
+const TIERS = {
+  commune: { rank:0, label:"Commune", frame:"#5E6670", kind:"simple" },
+  argent:  { rank:1, label:"Argent",  frame:"#8A949B", kind:"double" },
+  or:      { rank:2, label:"Or",      frame:"#B08D57", kind:"filets" },
+  platine: { rank:3, label:"Platine", frame:"#C3CAD1", kind:"filets" },
+  diamant: { rank:4, label:"Diamant", frame:"#D8B35C", kind:"none" }
+};
+const CW = 260, CH = 364;
+const RARE_ORDER = ["commune","argent","or","platine","diamant"];
+const USERS = { u1:"Joueur A", u2:"Joueur B" };
+const ACTIVE_USER_KEY = "charts.s1.activeUser";
+const PAGE_SIZE = 18;
+
+let activeUserId = "u1";
+let catalog = [];
+let filterRare = "";
+let filterInstr = "";
+let filterGenre = "";
+let filterQ = "";
+let hideMissing = false;
+let newOnly = false;
+let sortBy = "num";
+let page = 1;
+
+const $ = id => document.getElementById(id);
+
+function familyKey(f){ return FAMILY_FROM_CATALOG[f] || f; }
+function ownedKey(userId){ return `charts.s1.${userId || activeUserId}.owned`; }
+function walletKey(userId){ return `charts.s1.${userId || activeUserId}.wallet`; }
+function foldRare(s){
+  const t = String(s || "").normalize("NFD").replace(/\p{M}/gu, "").toLowerCase().trim();
+  if(t === "legendaire" || t === "epique" || t === "platine") return "platine";
+  if(t === "mythique" || t === "diamant") return "diamant";
+  if(t === "rare" || t === "or") return "or";
+  if(t === "peu commune" || t === "peucommune" || t === "argent") return "argent";
+  if(t === "commune") return "commune";
+  return t;
+}
+function foldSearch(s){
+  return String(s || "").normalize("NFD").replace(/\p{M}/gu, "").toLowerCase()
+    .replace(/[\u2010-\u2015\u2212\uFE58\uFE63\uFF0D]/g, "-")
+    .replace(/[\u2018\u2019\u201A\u2032]/g, "'").trim();
+}
+function matchesSearch(hay, needle){
+  const n = foldSearch(needle);
+  if(!n) return true;
+  return foldSearch(hay).includes(n);
+}
+function esc(s){
+  return String(s ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"
+  }[c]));
+}
+function plateJob(plate, rarete){
+  const exec = EXEC[rarete] || "A";
+  return `${plate.style}_${exec}_${plate.instrument}_${plate.pose}_${plate.costume}_${plate.venue}_${plate.sil}`;
+}
+function cardsFromCatalog(doc){
+  const artists = Object.fromEntries((doc.artists || []).map(a => [a.qid, a]));
+  const plates = Object.fromEntries((doc.plates || []).map(p => [p.id, p]));
+  const groups = Object.fromEntries((doc.groups || []).map(g => [g.mbid, g]));
+  const out = [];
+  for(const row of doc.cards || []){
+    if(row.in_booster_pool === false) continue;
+    const artist = artists[row.artist_qid];
+    const plate = plates[row.plate_id];
+    if(!artist || !plate) continue;
+    const rarete = foldRare(row.rarity_current || row.rarity_initial);
+    if(!TIERS[rarete]) continue;
+    const g = row.group_mbid ? groups[row.group_mbid] : null;
+    out.push({
+      id: row.id,
+      name: artist.name,
+      rarete,
+      famille: familyKey(row.family),
+      instrument: artist.instrument || plate.instrument,
+      group: g ? g.name : null,
+      job: plateJob(plate, rarete),
+      rank: Number(row.rank_in_series) || 0
+    });
+  }
+  return out;
+}
+function loadOwned(){
+  try {
+    const data = JSON.parse(localStorage.getItem(ownedKey()) || "");
+    if(data && data.got && typeof data.got === "object"){
+      if(!data.fresh || typeof data.fresh !== "object") data.fresh = {};
+      if(!data.fav || typeof data.fav !== "object") data.fav = {};
+      return data;
+    }
+  } catch {}
+  return { v:2, got:{}, fresh:{}, fav:{} };
+}
+function saveOwned(data){
+  data.v = 2;
+  if(!data.fresh || typeof data.fresh !== "object") data.fresh = {};
+  if(!data.fav || typeof data.fav !== "object") data.fav = {};
+  localStorage.setItem(ownedKey(), JSON.stringify(data));
+}
+function isFresh(cardId){
+  return !!(loadOwned().fresh || {})[cardId];
+}
+function clearFresh(cardId){
+  const data = loadOwned();
+  if(!data.fresh || !data.fresh[cardId]) return false;
+  delete data.fresh[cardId];
+  saveOwned(data);
+  return true;
+}
+function formatCredits(n){ return Number(n || 0).toLocaleString("fr-FR"); }
+function refreshCredits(){
+  let credits = 0;
+  try {
+    const data = JSON.parse(localStorage.getItem(walletKey()) || "");
+    if(data && typeof data.credits === "number") credits = data.credits;
+  } catch {}
+  $("creditsBal").textContent = formatCredits(credits);
+}
+function loadActiveUser(){
+  const saved = localStorage.getItem(ACTIVE_USER_KEY);
+  activeUserId = saved === "u2" ? "u2" : "u1";
+  syncUserUI();
+  refreshCredits();
+}
+function syncUserUI(){
+  document.querySelectorAll(".user-switch [data-user]").forEach(btn => {
+    btn.classList.toggle("on", btn.dataset.user === activeUserId);
+  });
+  $("playerName").textContent = USERS[activeUserId] || activeUserId;
+}
+function switchUser(nextId){
+  if(nextId !== "u1" && nextId !== "u2") return;
+  if(nextId === activeUserId) return;
+  activeUserId = nextId;
+  localStorage.setItem(ACTIVE_USER_KEY, activeUserId);
+  syncUserUI();
+  refreshCredits();
+  page = 1;
+  render();
+}
+
+function imgFallback(el){
+  el.onerror = function(){
+    this.onerror = function(){
+      this.onerror = null;
+      const m = this.src.replace("_x.png", "_m.png");
+      if(m !== this.src) this.src = m;
+    };
+    const s = this.src;
+    const n = s.indexOf("_B_") >= 0 ? s.replace("_B_", "_A_") : s.replace("_A_", "_B_");
+    if(n !== s) this.src = n;
+    else {
+      this.onerror = null;
+      const m = s.replace("_x.png", "_m.png");
+      if(m !== s) this.src = m;
+    }
+  };
+}
+
+function ring(x, y, w, h, rx, color, sw, op){
+  return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="none" stroke="${color}" stroke-width="${sw}" opacity="${op ?? 1}"/>`;
+}
+function frameSvg(kind, rank, color){
+  if(kind === "none") return "";
+  let o = "";
+  if(kind === "simple"){
+    o += ring(4, 4, CW - 8, CH - 8, 8, color, 1.5);
+  } else if(kind === "double"){
+    o += ring(4, 4, CW - 8, CH - 8, 8, color, 1.5);
+    o += ring(8, 8, CW - 16, CH - 16, 6, color, 0.7, 0.55);
+  } else {
+    o += ring(4, 4, CW - 8, CH - 8, 8, color, 1.5);
+    o += ring(8, 8, CW - 16, CH - 16, 6, color, 0.7, 0.55);
+    if(rank >= 3) o += ring(12, 12, CW - 24, CH - 24, 5, color, 0.7, 0.4);
+  }
+  return `<svg class="frame" viewBox="0 0 ${CW} ${CH}" aria-hidden="true">${o}</svg>`;
+}
+
+function renderCard(card, opts={}){
+  const tier = TIERS[card.rarete];
+  const fam = FAMILIES[familyKey(card.famille)] || FAMILIES.rock;
+  const paper = tier.rank <= 1;
+  const diamant = tier.rank >= 4;
+  const nameSize = card.name.length > 16 ? 16 : card.name.length > 13 ? 18 : 21;
+  const n = card.name.length;
+  const mythName = n > 16 ? 22 : n > 13 ? 26 : n > 10 ? 30 : 34;
+  const bandStyle = paper || diamant ? "" : `background:${fam.fond};`;
+  const group = card.group || "Artiste solo";
+  const cls = `card r${tier.rank}${paper ? " paper" : ""}${diamant ? " diamant" : ""}${opts.zoomable === false ? "" : " zoomable"}`;
+  const info = `${fam.label} · ${INSTR[card.instrument] || card.instrument} · ${group}`;
+  return `<div class="${cls}" tabindex="${opts.zoomable === false ? "-1" : "0"}" data-id="${esc(card.id)}">
+    <div class="art"><img src="../out/illustrations/${esc(card.job)}.png" alt="" loading="lazy"></div>
+    ${diamant ? `<div class="title"><div class="myth-name" style="font-size:${mythName}px">${esc(card.name)}</div></div>` : ""}
+    <div class="band" style="${bandStyle}">
+      <div class="accent" style="background:${fam.a1}"></div>
+      <div class="name" style="font-size:${nameSize}px">${esc(card.name)}</div>
+      <div class="rarete" style="color:${tier.frame}">${tier.label}</div>
+      <div class="meta">${esc(fam.label)} · ${esc(INSTR[card.instrument] || card.instrument)}</div>
+      <div class="group">${esc(group)}</div>
+      ${diamant ? `<div class="line-rare">${tier.label}</div><div class="line-info">${esc(info)}</div>` : ""}
+    </div>
+    <div class="marks" aria-hidden="true"><span class="serie">S1</span><span class="no">${card.rank || 0}/${catalog.length || 2000}</span></div>
+    ${frameSvg(tier.kind, tier.rank, tier.frame)}
+  </div>`;
+}
+
+function cardBack(){
+  return `<div class="card card-back">
+    <div class="bk-field">
+      <div class="bk-plate"></div>
+      <div class="bk-mark"><div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+      <div class="bk-name">CHARTS</div>
+    </div>
+    <div class="bk-band"><div class="bk-foot">Music collectibles</div></div>
+    ${frameSvg("double", 1, "#7A4A46")}
+  </div>`;
+}
+
+function ownedCardHtml(card, n, neuve){
+  return `<div class="cell${neuve ? " is-new" : ""}" data-id="${esc(card.id)}">
+    <div class="thumb">${n > 1 ? `<span class="dup">×${n}</span>` : ""}${renderCard(card)}</div>
+  </div>`;
+}
+
+function holeHtml(card){
+  return `<div class="cell hole" data-id="${esc(card.id)}">
+    <div class="thumb">${cardBack()}</div>
+  </div>`;
+}
+
+function filteredList(){
+  const owned = loadOwned().got;
+  let list = catalog.slice();
+  if(filterRare) list = list.filter(c => c.rarete === filterRare);
+  if(filterInstr) list = list.filter(c => c.instrument === filterInstr);
+  if(filterGenre) list = list.filter(c => c.famille === filterGenre);
+  if(filterQ) list = list.filter(c => matchesSearch(`${c.name} ${c.group || ""}`, filterQ));
+  if(hideMissing) list = list.filter(c => owned[c.id]);
+  list.sort((a, b) => {
+    if(sortBy === "name") return a.name.localeCompare(b.name, "fr");
+    if(sortBy === "rare"){
+      const d = (TIERS[b.rarete]?.rank || 0) - (TIERS[a.rarete]?.rank || 0);
+      if(d) return d;
+    }
+    return (a.rank || 0) - (b.rank || 0);
+  });
+  return list;
+}
+
+function counts(){
+  const owned = loadOwned().got;
+  const ownedCards = catalog.filter(c => owned[c.id]);
+  const byRare = Object.fromEntries(RARE_ORDER.map(r => [r, 0]));
+  for(const c of ownedCards) byRare[c.rarete] = (byRare[c.rarete] || 0) + 1;
+  return {
+    owned: ownedCards.length,
+    total: catalog.length,
+    pct: catalog.length
+      ? Math.round(ownedCards.length * 1000 / catalog.length) / 10
+      : 0,
+    byRare
+  };
+}
+
+function buildFilterChips(){
+  const c = counts();
+  $("rareChips").innerHTML = [
+    `<button type="button" class="fchip${!filterRare ? " on" : ""}" data-rare="">Tout (${c.owned})</button>`,
+    ...RARE_ORDER.map(r =>
+      `<button type="button" class="fchip${filterRare === r ? " on" : ""}" data-rare="${r}">${TIERS[r].label} (${c.byRare[r] || 0})</button>`
+    )
+  ].join("");
+  $("instrChips").innerHTML = [
+    `<button type="button" class="fchip${!filterInstr ? " on" : ""}" data-instr="">Tous</button>`,
+    ...INSTR_ORDER.map(id =>
+      `<button type="button" class="fchip${filterInstr === id ? " on" : ""}" data-instr="${esc(id)}">${esc(INSTR[id])}</button>`
+    )
+  ].join("");
+  $("genreChips").innerHTML = [
+    `<button type="button" class="fchip${!filterGenre ? " on" : ""}" data-genre="">Tous</button>`,
+    ...GENRE_ORDER.map(id =>
+      `<button type="button" class="fchip${filterGenre === id ? " on" : ""}" data-genre="${esc(id)}">${esc(FAMILIES[id].label)}</button>`
+    )
+  ].join("");
+}
+
+function render(){
+  buildFilterChips();
+  const c = counts();
+  $("pageMeta").textContent =
+    `${c.owned.toLocaleString("fr-FR")} / ${c.total.toLocaleString("fr-FR")} cartes collectées · taux de complétion ${c.pct} %`;
+
+  const list = filteredList();
+  const owned = loadOwned().got;
+  const pages = Math.max(1, Math.ceil(list.length / PAGE_SIZE));
+  if(page > pages) page = pages;
+  if(page < 1) page = 1;
+  const slice = list.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  $("status").hidden = true;
+  $("binder").hidden = false;
+  const grid = $("grid");
+  if(!slice.length){
+    grid.innerHTML = `<p class="empty">${
+      hideMissing && !c.owned
+        ? "Ouvre un booster pour commencer la collection."
+        : "Aucune carte pour ce filtre."
+    }</p>`;
+  } else {
+    grid.innerHTML = slice.map(card => {
+      const got = owned[card.id];
+      return got ? ownedCardHtml(card, got.n || 1) : holeHtml(card);
+    }).join("");
+    grid.querySelectorAll(".art img").forEach(imgFallback);
+  }
+
+  $("pager").hidden = pages <= 1;
+  $("pageLbl").textContent = `Page ${page} / ${pages}`;
+  $("prev").disabled = page <= 1;
+  $("next").disabled = page >= pages;
+}
+
+function openZoom(cardId){
+  const card = catalog.find(c => c.id === cardId);
+  const got = loadOwned().got[cardId];
+  if(!card || !got) return;
+  $("zoomCard").innerHTML = renderCard(card, { zoomable: false });
+  $("zoomCard").querySelectorAll(".art img").forEach(imgFallback);
+  $("zoom").hidden = false;
+}
+
+/* events */
+$("rareChips").addEventListener("click", ev => {
+  const btn = ev.target.closest("[data-rare]");
+  if(!btn) return;
+  filterRare = btn.dataset.rare || "";
+  page = 1;
+  render();
+});
+$("instrChips").addEventListener("click", ev => {
+  const btn = ev.target.closest("[data-instr]");
+  if(!btn) return;
+  filterInstr = btn.dataset.instr || "";
+  page = 1;
+  render();
+});
+$("genreChips").addEventListener("click", ev => {
+  const btn = ev.target.closest("[data-genre]");
+  if(!btn) return;
+  filterGenre = btn.dataset.genre || "";
+  page = 1;
+  render();
+});
+$("sortBy").addEventListener("change", () => {
+  sortBy = $("sortBy").value;
+  page = 1;
+  render();
+});
+let qTimer = 0;
+$("q").addEventListener("input", () => {
+  clearTimeout(qTimer);
+  qTimer = setTimeout(() => {
+    filterQ = $("q").value || "";
+    page = 1;
+    render();
+  }, 120);
+});
+$("hideMissing").addEventListener("click", () => {
+  hideMissing = !hideMissing;
+  $("hideMissing").classList.toggle("on", hideMissing);
+  $("hideMissing").setAttribute("aria-pressed", hideMissing ? "true" : "false");
+  page = 1;
+  render();
+});
+$("prev").addEventListener("click", () => { page--; render(); });
+$("next").addEventListener("click", () => { page++; render(); });
+$("grid").addEventListener("click", ev => {
+  if(ev.target.closest(".cell.hole")) return;
+  const cell = ev.target.closest(".cell:not(.hole)");
+  if(cell) openZoom(cell.dataset.id);
+});
+$("grid").addEventListener("keydown", ev => {
+  if(ev.key !== "Enter" && ev.key !== " ") return;
+  const card = ev.target.closest(".card.zoomable");
+  if(!card) return;
+  ev.preventDefault();
+  openZoom(card.dataset.id);
+});
+$("zoom").addEventListener("click", () => { $("zoom").hidden = true; });
+
+const menuBtn = $("menuBtn");
+const drawer = $("drawer");
+const veil = $("drawerVeil");
+function setMenuOpen(open){
+  menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+  drawer.hidden = !open;
+  veil.hidden = !open;
+  if(open) refreshCredits();
+}
+menuBtn.addEventListener("click", () => setMenuOpen(menuBtn.getAttribute("aria-expanded") !== "true"));
+$("drawerClose").addEventListener("click", () => setMenuOpen(false));
+veil.addEventListener("click", () => setMenuOpen(false));
+document.addEventListener("keydown", ev => {
+  if(ev.key === "Escape"){
+    setMenuOpen(false);
+    $("zoom").hidden = true;
+  }
+});
+document.querySelector(".user-switch").addEventListener("click", ev => {
+  const btn = ev.target.closest("[data-user]");
+  if(btn) switchUser(btn.dataset.user);
+});
+
+async function boot(){
+  loadActiveUser();
+  try {
+    const res = await fetch("../data/census/catalog_s1.json", { cache: "no-store" });
+    if(!res.ok) throw new Error("catalog");
+    catalog = cardsFromCatalog(await res.json());
+    catalog.sort((a, b) => (a.rank || 0) - (b.rank || 0));
+    render();
+  } catch (err) {
+    $("status").textContent = "Impossible de charger le catalogue.";
+  }
+}
+boot();
+</script>
+</body>
+</html>
