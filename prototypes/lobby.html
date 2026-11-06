@@ -196,37 +196,34 @@
     min-height: 0;
     border: 0;
     background: transparent;
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
     padding: 8px 12px 4px;
+    container-type: size;
   }
-  .card-booster .card-art img {
+  .card-booster .pack {
+    position: relative;
+    width: min(100cqw, calc(100cqh * 599 / 971));
+    max-width: 100%;
+  }
+  .card-booster .pack img {
     display: block;
-    width: auto;
+    width: 100%;
     height: auto;
-    max-width: min(190px, 64%);
-    max-height: min(310px, 82%);
-    object-fit: contain;
-  }
-  .card-booster .card-body {
-    position: absolute;
-    left: 0; right: 0; top: 0;
-    z-index: 2;
-    padding: 22% 6% 0;
-    background: none;
-    pointer-events: none;
-    align-items: center;
-    min-height: 0;
   }
   .card-booster .cta {
-    display: block;
-    width: auto;
+    position: absolute;
+    top: 5.5%;
+    left: 8%;
+    right: 8%;
+    z-index: 2;
     margin: 0;
-    min-height: 0;
     padding: 0;
     border: 0;
     background: none;
+    pointer-events: none;
     color: #fff;
     font-family: var(--font-mono);
     font-size: 10px;
@@ -443,10 +440,7 @@
       aspect-ratio: 16 / 11;
       min-height: 140px;
     }
-    .card-booster .card-art img {
-      max-width: min(140px, 48%);
-      max-height: min(210px, 82%);
-    }
+    .card-booster .pack { width: min(100%, 220px); }
     .card-classeur { grid-column: 1; grid-row: 2; }
     .card-marche { grid-column: 2; grid-row: 2; }
     .card-fantasy { grid-column: 1 / -1; grid-row: 3; }
@@ -490,10 +484,10 @@
   <nav class="grid" aria-label="Accès rapides">
     <a class="card card-booster" href="booster.html" aria-label="Ouvrir un booster">
       <div class="card-art">
-        <img src="img/lobby/booster.png?v=19" alt="">
-      </div>
-      <div class="card-body">
-        <span class="cta">Ouvrir un booster</span>
+        <div class="pack">
+          <img src="img/lobby/booster.png?v=19" alt="">
+          <span class="cta">Ouvrir un booster</span>
+        </div>
       </div>
     </a>
     <a class="card card-classeur" href="classeur.html">
