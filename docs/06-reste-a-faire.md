@@ -152,8 +152,15 @@ Par ordre d'urgence :
 
 - Brique 2 — économie : monnaie + marché prix fixe amorcés dans le proto
   (`docs/11-marche.md`) ; pas de craft — reste anti-bot comptes, historique.
-- Brique 3 — boucle de jeu : constituer des groupes fantasy ; le score de compétition
-  est la somme des écoutes hebdomadaires des membres. *Ébauche, pas encore spécifiée.*
+- Brique 3 — Fantasy Game : lineup 5 postes, ListenBrainz hebdo, score relatif par
+  poste, verrou marché — spécifié dans [`12-fantasy-game.md`](12-fantasy-game.md) ;
+  proto [`prototypes/fantasy.html`](../prototypes/fantasy.html).
+- [x] **Coattail rhythm section** — admission basse/batterie via groupes prestige
+  MusicBrainz (`tools/coattail_rhythm.py`) ; 1 098 admis dans `eligible.json`.
+  Pageviews de septembre 2026 refiltrées sur l’allowlist à jour, puis
+  `score_vivier` : 240 sortent du dernier quintile (5 connus, 53 scène, 182 deep).
+  Les 858 restants n’ont toujours pas assez de consultations pour quitter l’exclu.
+  Série 1 re-draftée : planchers basse 170 et batterie 175 tenus.
 - [ ] **Version anglaise du site** (UI + pages légales), après stabilisation du français.
 
 

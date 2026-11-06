@@ -169,9 +169,14 @@ def main() -> int:
     missing_name = 0
     editorial = 0
     forced_of = CFG.get("artist_group_override") or {}
+    forced_solo = set(CFG.get("artist_group_solo_override") or [])
     for rec in serie:
         artist = display_name(rec["qid"], titles)
         rec["artiste"] = artist
+        if rec["qid"] in forced_solo:
+            rec["groupe"] = ""
+            editorial += 1
+            continue
         forced = forced_of.get(rec["qid"])
         if forced:
             rec["groupe"] = forced

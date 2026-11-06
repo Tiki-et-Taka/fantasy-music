@@ -37,6 +37,14 @@ comme source primaire pour ces champs.
 - Attention : les *annotations* sont en CC BY-NC-SA, et les images du Cover Art Archive
   ne sont pas librement réutilisables.
 
+### Coattail rhythm section (basse / batterie)
+
+Les bassistes et batteurs de groupes déjà représentés par un membre à forte
+visibilité Wiki peuvent entrer dans le vivier malgré des sitelinks perso bas
+(`tools/coattail_rhythm.py`, config `coattail_rhythm`). Source d’appartenance :
+dump MusicBrainz `member of band`. Détail produit :
+[`12-fantasy-game.md`](12-fantasy-game.md).
+
 ### ListenBrainz — statistiques d'écoute
 
 Données d'écoute réelles en CC0. C'est l'alternative juridiquement propre à Spotify et

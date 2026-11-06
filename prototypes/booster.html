@@ -4,9 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Charts — Série 1</title>
+<link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css?v=17">
+<script src="js/site-scale.js?v=8"></script>
 <style>
   :root {
     --bg: #0d0d0d;
@@ -123,18 +126,79 @@
     gap: 8px;
     align-items: center;
   }
+  .profile-chip {
+    appearance: none; cursor: pointer; font: inherit;
+    display: inline-flex; align-items: center; gap: 7px;
+    border: 1px solid var(--line); background: var(--panel);
+    padding: 6px 10px;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: var(--ink); white-space: nowrap;
+  }
+  .profile-chip:hover { border-color: var(--line-hi); background: #1c1c1c; }
+  .profile-chip .ico { width: 14px; height: 14px; opacity: .75; }
   .user-switch {
     display: inline-flex; gap: 0; border: 1px solid var(--line);
     overflow: hidden; background: var(--panel);
   }
   .user-switch button {
     appearance: none; border: 0; background: transparent;
-    color: var(--muted); font: inherit; font-size: 11px; font-weight: 600;
+    color: var(--muted); font: inherit; font-size: 12px; font-weight: 600;
     letter-spacing: .08em; text-transform: uppercase;
-    padding: 6px 10px; cursor: pointer;
+    padding: 8px 14px; cursor: pointer;
   }
   .user-switch button.on { background: var(--accent); color: var(--accent-ink); }
   .user-switch button:hover:not(.on) { color: var(--ink); }
+  .drawer-veil {
+    position: fixed; inset: 0; z-index: 40;
+    background: rgba(0,0,0,.6);
+    opacity: 0; pointer-events: none;
+    transition: opacity .25s ease;
+  }
+  .drawer-veil.open { opacity: 1; pointer-events: auto; }
+  .drawer {
+    position: fixed; top: 0; right: 0; bottom: 0; z-index: 41;
+    width: min(320px, 88vw);
+    background: #101010;
+    border-left: 1px solid var(--line);
+    padding: 22px 20px;
+    transform: translateX(100%);
+    transition: transform .28s cubic-bezier(.2,.8,.2,1);
+    display: flex; flex-direction: column; gap: 22px;
+    pointer-events: auto;
+  }
+  .drawer.open { transform: translateX(0); }
+  .drawer[hidden], .drawer-veil[hidden] { display: none; }
+  .drawer .head {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .drawer .head h2 {
+    margin: 0;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  .drawer .close {
+    appearance: none; border: 0; background: none;
+    color: var(--muted); font-size: 22px; line-height: 1;
+    cursor: pointer; padding: 4px 8px;
+  }
+  .drawer .close:hover { color: var(--ink); }
+  .drawer .block label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px; color: var(--muted);
+    letter-spacing: .14em; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .drawer .links { margin-top: auto; display: flex; flex-direction: column; gap: 10px; }
+  .drawer .links a {
+    color: var(--muted); text-decoration: none;
+    font-family: var(--font-mono); font-size: 12px;
+  }
+  .drawer .links a:hover { color: var(--ink); }
   .wallet-chip {
     display: inline-flex; align-items: center; gap: 7px;
     border: 1px solid var(--line); background: var(--panel);
@@ -144,18 +208,12 @@
     color: var(--ink);
   }
   .wallet-chip .coin {
-    width: 12px; height: 12px; border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, #f0c060, var(--accent) 55%, #8a4a10);
-    box-shadow: inset 0 0 0 1px rgba(0,0,0,.35);
+    width: 22px; height: 14px; border-radius: 0;
+    display: block; object-fit: contain;
+    box-shadow: none;
+    flex: 0 0 auto;
   }
   .wallet-chip b { font-weight: 600; }
-  .wallet .cheat {
-    appearance: none; border: 1px solid var(--line-hi); background: var(--panel);
-    color: var(--muted); font: inherit; font-size: 11px;
-    letter-spacing: .08em; text-transform: uppercase;
-    padding: 6px 10px; cursor: pointer;
-  }
-  .wallet .cheat:hover { color: var(--ink); border-color: #4a4a4a; }
   .head-copy {
     pointer-events: none;
     grid-column: 1 / -1;
@@ -175,7 +233,7 @@
   }
   .zoom-actions {
     display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
-    margin-top: 14px; max-width: 360px;
+    margin-top: 0; width: min(360px, calc(100vw - 40px)); max-width: 100%;
   }
   .zoom-actions button {
     appearance: none; border: 1px solid var(--line); background: var(--panel);
@@ -217,11 +275,13 @@
     position: relative;
     display: grid;
     place-items: center;
-    overflow: hidden;
-    padding-top: 96px;
-  }
-  .stage.tearing {
+    /* visible : sinon les libellés sous le sachet sont clipés
+       (et n’apparaissaient que pendant .tearing = clic/glisse) */
     overflow: visible;
+    /* Haut pousse le sachet vers le bas ; bas calé sur le footer compact */
+    padding-top: 132px;
+    padding-bottom: 56px;
+    box-sizing: border-box;
   }
   @media (max-width: 820px) {
     header.top {
@@ -239,32 +299,54 @@
       flex-wrap: nowrap;
     }
     header .head-copy { padding-bottom: 4px; }
-    .stage { padding-top: 120px; }
+    .stage { padding-top: 148px; padding-bottom: 64px; }
   }
 
   /* —— sachet —— */
+  /* Main / empty : taille visuelle native. Le sachet grossit via width (pas de zoom sur le bouton). */
+  .hand,
+  .empty-pack,
+  .again-row {
+    zoom: var(--ui-unscale);
+  }
+  .pack-stack {
+    position: relative;
+    z-index: 45;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 36px;
+  }
+  .pack-stack[hidden] { display: none; }
   .pack-col {
     position: relative;
     z-index: 3;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 14px;
-    width: min(220px, 48vw);
+    gap: 10px;
+    /* 220px / 0.82 ≈ taille visuelle d’origine sous l’échelle globale */
+    width: min(268px, 56vw);
   }
-  .pack-col[hidden] { display: none; }
   .pack-buy {
     appearance: none;
+    box-sizing: border-box;
     width: 100%;
+    height: 42px;
     border: 0;
+    margin: 0;
+    padding: 0;
     background: var(--accent);
     color: var(--accent-ink);
-    font-family: var(--font-display);
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: .1em;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-indent: .14em;
     text-transform: uppercase;
-    padding: 12px 16px;
+    text-align: center;
+    line-height: 42px;
     border-radius: 0;
     cursor: pointer;
   }
@@ -277,22 +359,38 @@
     text-align: center;
     font-family: var(--font-mono);
     font-size: 12px;
+    line-height: 1.45;
     letter-spacing: .1em;
     text-transform: uppercase;
     color: var(--accent);
+    padding: 4px 8px 2px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 46;
   }
   .pack-left[hidden] { display: none; }
   .free-timer {
     margin: 0;
-    width: 100%;
+    width: min(268px, 56vw);
+    flex: 0 0 auto;
     text-align: center;
     font-family: var(--font-mono);
     font-size: 11px;
+    line-height: 1.5;
     letter-spacing: .08em;
     text-transform: uppercase;
     color: var(--muted, #8a8680);
+    padding: 2px 10px 4px;
+    min-height: 1.5em;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 46;
   }
   .free-timer.ready { color: var(--accent); }
+  .free-timer[hidden] { display: none; }
+  .free-timer:empty::before {
+    content: "\00a0";
+  }
   .pack-wrap {
     position: relative;
     width: 100%;
@@ -844,9 +942,10 @@
     position: fixed; left: 0; right: 0; bottom: 0;
     z-index: 40;
     display: flex; flex-wrap: wrap; align-items: center;
-    justify-content: space-between; gap: 10px 18px;
-    padding: 12px 20px 14px;
-    background: linear-gradient(180deg, transparent, #0d0d0df2 35%);
+    justify-content: space-between; gap: 8px 18px;
+    /* Bandeau bas compact : laisse voir sachet + libellés au-dessus */
+    padding: 6px 20px 8px;
+    background: rgba(13, 13, 13, .97);
     font-family: var(--font-mono);
     font-size: 10px; color: #6a6660; letter-spacing: .04em; text-transform: uppercase;
     pointer-events: none;
@@ -892,6 +991,17 @@
     border-radius: 12px; overflow: visible;
     color: #e8e8ea;
   }
+  /* Aperçu carte : tient dans n’importe quel écran, le reste défile dans la fenêtre */
+  #zoom {
+    box-sizing: border-box;
+    width: max-content;
+    max-width: calc(100vw - 16px);
+    max-height: calc(100dvh - 16px);
+    margin: auto;
+    padding: 4px 12px 12px;
+    overflow: auto;
+    border: 1px solid #2a2c32;
+  }
   dialog::backdrop { background: rgba(0,0,0,.78); }
   #shop, #sell, #offer, #trade, #confirm {
     border: 1px solid #2a2c32; padding: 0;
@@ -925,7 +1035,7 @@
   .trade-row-actions button {
     appearance: none; border: 1px solid #2a2c32; background: #141518;
     color: #d8d8dc; font: inherit; font-size: 11px; padding: 5px 10px;
-    border-radius: 8px; cursor: pointer;
+    border-radius: 0; cursor: pointer;
   }
   .trade-row-actions button.ok {
     background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600;
@@ -1019,13 +1129,23 @@
   .shop-modes button:hover { background: #1c1e22; border-color: #3a3c44; }
   .shop-modes .mode-title { font-weight: 600; color: #e8e8ea; }
   .shop-modes .mode-sub { margin-top: 4px; font-size: 11px; color: #8a9099; line-height: 1.35; }
-  .zoom-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .zoom-wrap {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    max-width: 100%;
+  }
   .zoom-stage {
     position: relative;
-    width: calc(260px * 1.55); height: calc(364px * 1.55);
-    display: flex; align-items: center; justify-content: center;
+    /* 320 px max, sinon la hauteur restante après barre + boutons */
+    width: min(320px, calc(100vw - 40px), calc((100dvh - 168px) * 260 / 364));
+    aspect-ratio: 260 / 364;
+    overflow: hidden;
   }
-  .zoom-stage .card { cursor: default; transform: scale(1.55); }
+  .zoom-stage .card {
+    cursor: default;
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: center center;
+  }
   .zoom-owned {
     position: absolute; top: 10px; left: 10px; z-index: 3;
     background: #111; color: #e8e8ea; border: 1px solid #3a3c44;
@@ -1054,11 +1174,7 @@
   body.market { overflow: auto; overflow-x: hidden; }
   body.album .stage,
   body.market .stage { display: none; }
-  body.album footer.site-foot,
-  body.market footer.site-foot {
-    background: #050506;
-    border-top: 1px solid #1c1d21;
-  }
+  body.market footer.site-foot .proto-cheats { display: none !important; }
   body.album header,
   body.market header {
     position: sticky; top: 0; background: #050506ee;
@@ -1101,7 +1217,7 @@
     grid-template-columns: 72px 1fr auto;
     gap: 14px; align-items: center;
     border: 1px solid #2a2c32; background: #121418;
-    border-radius: 12px; padding: 10px 12px;
+    border-radius: 0; padding: 10px 12px;
     cursor: pointer;
   }
   .market-row:hover { border-color: #3a3c44; background: #16181c; }
@@ -1133,26 +1249,28 @@
   }
   .market-row .offer-chip {
     font-size: 11px; font-weight: 600; color: #111; background: #d8b35c;
-    border-radius: 999px; padding: 2px 8px; white-space: nowrap;
+    border-radius: 0; padding: 2px 8px; white-space: nowrap;
   }
   .market-row .offer-chip.dim { background: #2a2c32; color: #9aa0a8; font-weight: 500; }
   .market-row .dismiss {
     appearance: none; border: 0; background: transparent;
     color: #6a7078; font: inherit; font-size: 18px; line-height: 1;
     width: 28px; height: 28px; padding: 0; margin: -4px -4px 0 0;
-    border-radius: 6px; cursor: pointer;
+    border-radius: 0; cursor: pointer;
     display: inline-flex; align-items: center; justify-content: center;
   }
   .market-row .dismiss:hover { color: #e8e8ea; background: #1c1e22; }
   .zoom-offers {
     width: 100%; max-width: 360px;
     display: flex; flex-direction: column; gap: 8px; margin-top: 4px;
+    max-height: min(32dvh, 220px);
+    overflow: auto;
   }
   .zoom-offers .offer-row {
     display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
     justify-content: space-between;
     border: 1px solid #2a2c32; background: #141518;
-    border-radius: 8px; padding: 8px 10px;
+    border-radius: 0; padding: 8px 10px;
   }
   .zoom-offers .offer-row .lbl { font-size: 12px; color: #d8d8dc; }
   .zoom-offers .offer-row .lbl b { color: #d8b35c; }
@@ -1160,7 +1278,7 @@
   .zoom-offers .offer-row button {
     appearance: none; border: 1px solid #2a2c32; background: #1c1e22;
     color: #e8e8ea; font: inherit; font-size: 11px; padding: 5px 10px;
-    border-radius: 8px; cursor: pointer;
+    border-radius: 0; cursor: pointer;
   }
   .zoom-offers .offer-row button.ok { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
   .market-empty { color: #8a9099; font-size: 14px; padding: 32px 8px; }
@@ -1342,8 +1460,14 @@
     width: 26px; height: 26px; padding: 0; margin: 0;
     border: 1px solid #2a2c32; border-radius: 50%;
     background: rgba(12, 12, 16, .82); color: #6a7078;
-    font: inherit; font-size: 14px; line-height: 1;
-    cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+    font-family: system-ui, "Segoe UI", sans-serif;
+    font-size: 13px; line-height: 1; font-weight: 700;
+    cursor: pointer; display: grid; place-items: center;
+  }
+  .album-cell .fav-btn::before {
+    content: "★";
+    display: block;
+    transform: translateY(-1.5px);
   }
   .album-cell .fav-btn:hover { color: #d8b35c; border-color: #3a3c44; }
   .album-cell .fav-btn.on {
@@ -1393,13 +1517,13 @@
 <body>
 <div class="grain" aria-hidden="true"></div>
 <header class="top">
-  <a class="brand" href="lobby.html">Charts</a>
+  <a class="brand" href="lobby.html"><img class="brand-logo" src="img/favicon.png" alt="" width="32" height="32">Charts</a>
   <nav class="nav-main" role="tablist" aria-label="Principal">
     <a href="lobby.html">Lobby</a>
     <button type="button" data-view="booster" id="navBooster" class="on" role="tab">Booster<span class="nav-badge" id="packsBadge" hidden>0</span></button>
     <a href="classeur.html" id="navAlbum">Classeur<span class="nav-badge" id="albumNewBadge" hidden>0</span></a>
     <button type="button" data-view="market" id="navMarket" role="tab">Marché</button>
-    <a href="fantasy.html?v=15">Fantasy</a>
+    <a href="fantasy.html?v=16">Fantasy</a>
   </nav>
   <div class="top-actions wallet" aria-label="Compte">
     <div class="notif-wrap" id="notifWrap">
@@ -1418,12 +1542,12 @@
         <div id="notifList"><p class="empty">Aucune notification.</p></div>
       </div>
     </div>
-    <div class="user-switch" role="group" aria-label="Compte de test">
-      <button type="button" data-user="u1" id="userBtnA" class="on">Joueur A</button>
-      <button type="button" data-user="u2" id="userBtnB">Joueur B</button>
-    </div>
-    <span class="wallet-chip"><span class="coin" aria-hidden="true"></span><span><b id="creditsBal">0</b> CR</span></span>
-    <button type="button" class="cheat" id="cheatCredits" title="Prototype">+ crédits</button>
+    <span class="wallet-chip"><img class="coin" src="img/credit-ticket.png?v=1" alt="" width="22" height="14" aria-hidden="true"><span><b id="creditsBal">0</b> CR</span></span>
+    <button type="button" class="profile-chip no-avatar" id="menuBtn" aria-label="Profil" aria-expanded="false" aria-controls="drawer" aria-haspopup="dialog">
+      <span class="avatar-face sm empty" data-avatar-face aria-hidden="true"></span>
+      <svg class="ico" data-avatar-fallback viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 19c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg>
+      <span id="playerName">Joueur A</span>
+    </button>
   </div>
   <div class="head-copy">
     <h1 id="pageTitle">Booster</h1>
@@ -1445,18 +1569,20 @@
     <div class="flashes" id="flashes"></div>
   </div>
 
-  <div class="pack-col" id="packCol" hidden>
-    <div class="pack-wrap idle" id="packWrap">
-      <div class="pack" id="pack">
-        <img class="pack-art" id="packArt" src="img/booster-charts.png?v=24" alt="Sachet Charts — Série 1">
-        <canvas class="tear-layer" id="tearLayer" aria-hidden="true"></canvas>
-        <div class="shine"></div>
-        <div class="hint"><span class="arr left"></span>Glisse le scellé<span class="arr right"></span></div>
-        <div class="seal-hit" id="sealHit" role="button" aria-label="Sachet Charts — glisser le scellé du haut"></div>
+  <div class="pack-stack" id="packStack" hidden>
+    <div class="pack-col" id="packCol">
+      <div class="pack-wrap idle" id="packWrap">
+        <div class="pack" id="pack">
+          <img class="pack-art" id="packArt" src="img/booster-charts.png?v=24" alt="Sachet Charts — Série 1">
+          <canvas class="tear-layer" id="tearLayer" aria-hidden="true"></canvas>
+          <div class="shine"></div>
+          <div class="hint"><span class="arr left"></span>Glisse le scellé<span class="arr right"></span></div>
+          <div class="seal-hit" id="sealHit" role="button" aria-label="Sachet Charts — glisser le scellé du haut"></div>
+        </div>
       </div>
+      <button type="button" class="pack-buy" id="buyPack">Acheter</button>
+      <p class="pack-left" id="packLeft" hidden></p>
     </div>
-    <button type="button" class="pack-buy" id="buyPack">Acheter</button>
-    <p class="pack-left" id="packLeft" hidden></p>
     <p class="free-timer" id="freeTimer" aria-live="polite"></p>
   </div>
 
@@ -1542,11 +1668,11 @@
     <input type="search" id="marketQ" placeholder="Nom ou groupe" autocomplete="off">
     <select id="marketRare" aria-label="Rareté">
       <option value="">Toutes les raretés</option>
-      <option value="commune">Commune</option>
-      <option value="argent">Argent</option>
-      <option value="or">Or</option>
-      <option value="platine">Platine</option>
       <option value="diamant">Diamant</option>
+      <option value="platine">Platine</option>
+      <option value="or">Or</option>
+      <option value="argent">Argent</option>
+      <option value="commune">Commune</option>
     </select>
     <select id="marketInstr" aria-label="Instrument">
       <option value="">Tous les instruments</option>
@@ -1560,6 +1686,31 @@
 </section>
 
 <div id="snackbar" role="status" aria-live="polite"></div>
+
+<div class="drawer-veil" id="drawerVeil" hidden></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" hidden>
+  <div class="head">
+    <h2 id="drawerTitle">Profil</h2>
+    <button type="button" class="close" id="drawerClose" aria-label="Fermer">×</button>
+  </div>
+  <div class="block avatar-block">
+    <label class="avatar-pick" title="Changer la photo">
+      <span class="avatar-face empty" data-avatar-face aria-hidden="true"></span>
+      <input type="file" id="avatarFile" accept="image/*" hidden>
+    </label>
+    <p class="avatar-status" id="avatarStatus"></p>
+  </div>
+  <div class="block">
+    <label>Compte de test</label>
+    <div class="user-switch" role="group" aria-label="Compte de test">
+      <button type="button" data-user="u1" id="userBtnA" class="on">Joueur A</button>
+      <button type="button" data-user="u2" id="userBtnB">Joueur B</button>
+    </div>
+  </div>
+  <div class="links">
+    <a href="legal/index.html?v=2">Mentions légales</a>
+  </div>
+</aside>
 
 <footer class="site-foot">
   <nav class="legal-links" aria-label="Informations légales">
@@ -1602,6 +1753,8 @@
   <div class="shop-wrap" id="confirmBody"></div>
 </dialog>
 
+<script src="js/profile-avatar.js"></script>
+<script src="js/credits-shop.js?v=1"></script>
 <script>
 const CW = 260, CH = 364;
 const EXEC = {
@@ -1716,11 +1869,14 @@ function loadActiveUser(){
   const saved = localStorage.getItem(ACTIVE_USER_KEY);
   activeUserId = saved === "u2" ? "u2" : "u1";
   syncUserSwitchUI();
+  if(window.ChartsAvatar) ChartsAvatar.refresh(activeUserId);
 }
 function syncUserSwitchUI(){
   document.querySelectorAll(".user-switch [data-user]").forEach(btn => {
     btn.classList.toggle("on", btn.dataset.user === activeUserId);
   });
+  const nameEl = $("playerName");
+  if(nameEl) nameEl.textContent = userName(activeUserId);
 }
 function refreshAfterUserSwitch(){
   ensureWallet();
@@ -1729,6 +1885,7 @@ function refreshAfterUserSwitch(){
   refreshNewBadge();
   refreshOffersBadge();
   setNotifMenuOpen(false);
+  if(window.ChartsAvatar) ChartsAvatar.refresh(activeUserId);
   if($("zoom")?.open) $("zoom").close();
   if($("sell")?.open) $("sell").close();
   if($("offer")?.open) $("offer").close();
@@ -1748,6 +1905,21 @@ function switchUser(nextId){
   syncUserSwitchUI();
   refreshAfterUserSwitch();
 }
+function setMenuOpen(open){
+  const menuBtn = $("menuBtn");
+  const drawer = $("drawer");
+  const veil = $("drawerVeil");
+  if(!menuBtn || !drawer || !veil) return;
+  menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+  drawer.hidden = !open;
+  veil.hidden = !open;
+  drawer.classList.toggle("open", open);
+  veil.classList.toggle("open", open);
+  if(open){
+    refreshWallet();
+    syncUserSwitchUI();
+  }
+}
 const STARTER_PACKS = 5;
 const FREE_PACK_MS = 12 * 60 * 60 * 1000;
 const FREE_PACK_CATCHUP_MAX = 2;
@@ -1762,7 +1934,12 @@ const SEAL = { x0: 0.0, x1: 1.0, y0: 0.0, y1: 0.155 };
 const params = new URLSearchParams(location.search);
 
 const $ = id => document.getElementById(id);
+const packStack = $("packStack");
 const packCol = $("packCol");
+function setPackStackVisible(on){
+  if(packStack) packStack.hidden = !on;
+  if(packCol) packCol.hidden = false;
+}
 const packWrap = $("packWrap");
 const pack = $("pack");
 const packArt = $("packArt");
@@ -1789,6 +1966,10 @@ let albumFavOnly = false;
 let albumPage = 1;
 let albumPageSize = 12;
 let marketTab = "all";
+{
+  const mtab = params.get("mtab");
+  if(mtab === "mine" || mtab === "offers" || mtab === "trades") marketTab = mtab;
+}
 let phase = "loading";
 let drag = null;
 let tearDir = 1;
@@ -1853,6 +2034,10 @@ function frameSvg(kind, rank, color){
   return `<svg class="frame" viewBox="0 0 ${CW} ${CH}" aria-hidden="true">${o}</svg>`;
 }
 
+function instrumentLabel(card){
+  const instruments = card.instruments?.length ? card.instruments : [card.instrument];
+  return instruments.filter(Boolean).map(x => INSTR[x] || x).join(" + ");
+}
 function renderCard(card, opts={}){
   const tier = TIERS[card.rarete];
   const fam = FAMILIES[familyKey(card.famille)] || FAMILIES.rock;
@@ -1864,7 +2049,7 @@ function renderCard(card, opts={}){
   const bandStyle = paper || diamant ? "" : `background:${fam.fond};`;
   const group = card.group || "Artiste solo";
   const cls = `card r${tier.rank}${paper?" paper":""}${diamant?" diamant":""}${opts.zoomable===false?"":" zoomable"}`;
-  const info = `${fam.label} · ${INSTR[card.instrument] || card.instrument} · ${group}`;
+  const info = `${fam.label} · ${instrumentLabel(card)} · ${group}`;
   return `<div class="${cls}" tabindex="${opts.zoomable===false?"-1":"0"}" data-idx="${opts.idx ?? ""}">
     <div class="art"><img src="../out/illustrations/${esc(card.job)}.png" alt="" loading="lazy" onerror="this.onerror=function(){this.onerror=null;var m=this.src.replace('_x.png','_m.png');if(m!==this.src)this.src=m;};var s=this.src,n=s.indexOf('_B_')>=0?s.replace('_B_','_A_'):s.replace('_A_','_B_');if(n!==s)this.src=n;else{this.onerror=null;var m=s.replace('_x.png','_m.png');if(m!==s)this.src=m;}"></div>
     ${diamant ? `<div class="title"><div class="myth-name" style="font-size:${mythName}px">${esc(card.name)}</div></div>` : ""}
@@ -1872,7 +2057,7 @@ function renderCard(card, opts={}){
       <div class="accent" style="background:${fam.a1}"></div>
       <div class="name" style="font-size:${nameSize}px">${esc(card.name)}</div>
       <div class="rarete" style="color:${tier.frame}">${tier.label}</div>
-      <div class="meta">${esc(fam.label)} · ${esc(INSTR[card.instrument] || card.instrument)}</div>
+      <div class="meta">${esc(fam.label)} · ${esc(instrumentLabel(card))}</div>
       <div class="group">${esc(group)}</div>
       ${diamant ? `<div class="line-rare">${tier.label}</div><div class="line-info">${esc(info)}</div>` : ""}
     </div>
@@ -1906,6 +2091,7 @@ function cardsFromCatalog(doc){
       rarete,
       famille: familyKey(row.family),
       instrument: artist.instrument || plate.instrument,
+      instruments: artist.instruments || [artist.instrument || plate.instrument],
       group: g ? g.name : null,
       bande: row.band || "",
       job: plateJob(plate, rarete),
@@ -1916,12 +2102,33 @@ function cardsFromCatalog(doc){
   return out;
 }
 
+function normalizeGot(data){
+  let dirty = false;
+  for(const [id, got] of Object.entries(data.got || {})){
+    if(typeof got === "number"){
+      const n = Math.max(0, got | 0);
+      data.got[id] = {
+        n,
+        t: 0,
+        origins: Array.from({ length: n }, () => ({ k: "booster" }))
+      };
+      dirty = true;
+    } else if(got && typeof got === "object" && !Array.isArray(got.origins)){
+      const n = Math.max(0, got.n | 0);
+      got.n = n;
+      got.origins = Array.from({ length: n }, () => ({ k: "booster" }));
+      dirty = true;
+    }
+  }
+  return dirty;
+}
 function loadOwned(userId){
   try {
     const data = JSON.parse(localStorage.getItem(ownedKey(userId)) || "");
     if(data && data.got && typeof data.got === "object"){
       if(!data.fresh || typeof data.fresh !== "object") data.fresh = {};
       if(!data.fav || typeof data.fav !== "object") data.fav = {};
+      if(normalizeGot(data)) saveOwned(data, userId);
       return data;
     }
   } catch {}
@@ -2114,14 +2321,20 @@ function saveWallet(data, userId){
   localStorage.setItem(walletKey(userId), JSON.stringify(data));
 }
 function claimFreePacks(w, now = Date.now()){
+  // Plus d’un booster en stock : le délai reste figé à 12 h, rien n’est crédité.
+  if((w.packs || 0) > 1) return 0;
   if(!w.nextFreeAt) w.nextFreeAt = now + FREE_PACK_MS;
   let claimed = 0;
-  while(now >= w.nextFreeAt && claimed < FREE_PACK_CATCHUP_MAX){
+  while(now >= w.nextFreeAt && claimed < FREE_PACK_CATCHUP_MAX && (w.packs || 0) <= 1){
     w.packs += 1;
     w.nextFreeAt += FREE_PACK_MS;
     claimed += 1;
+    if(w.packs > 1){
+      w.nextFreeAt = now + FREE_PACK_MS;
+      break;
+    }
   }
-  if(now >= w.nextFreeAt) w.nextFreeAt = now + FREE_PACK_MS;
+  if((w.packs || 0) <= 1 && now >= w.nextFreeAt) w.nextFreeAt = now + FREE_PACK_MS;
   return claimed;
 }
 function ensureWallet(){
@@ -2146,6 +2359,13 @@ function msUntilFreePack(w = loadWallet()){
 function refreshFreeTimer(){
   const el = $("freeTimer");
   if(!el) return;
+  if((loadWallet().packs || 0) > 1){
+    el.hidden = true;
+    el.textContent = "";
+    el.classList.remove("ready");
+    return;
+  }
+  el.hidden = false;
   const left = msUntilFreePack();
   if(left <= 0){
     el.textContent = "Booster gratuit prêt";
@@ -2199,7 +2419,9 @@ function buyPacks(n){
   const w = ensureWallet();
   if(w.credits < cost) return false;
   w.credits -= cost;
+  const wasRunning = w.packs <= 1;
   w.packs += qty;
+  if(wasRunning && w.packs > 1) w.nextFreeAt = Date.now() + FREE_PACK_MS;
   saveWallet(w);
   refreshWallet();
   return true;
@@ -2210,7 +2432,9 @@ function buyPack(){
 function spendPack(){
   const w = ensureWallet();
   if(w.packs < 1) return false;
+  const wasHeld = w.packs > 1;
   w.packs -= 1;
+  if(wasHeld && w.packs <= 1) w.nextFreeAt = Date.now() + FREE_PACK_MS;
   saveWallet(w);
   refreshWallet();
   return true;
@@ -2254,6 +2478,7 @@ function destroyCopy(id){
       : "Aucun exemplaire à défausser." };
   }
   got.n -= 1;
+  if(Array.isArray(got.origins)) got.origins.shift();
   if(got.n < 1){
     delete data.got[id];
     if(data.fav) delete data.fav[id];
@@ -2284,13 +2509,24 @@ function destroyCopy(id){
   refreshNewBadge();
   return { ok: true, gain, left: got.n || 0 };
 }
+function withOrigin(prev, origin){
+  const n = prev && prev.n ? prev.n : 0;
+  const origins = Array.isArray(prev && prev.origins) ? prev.origins.slice() : [];
+  while(origins.length < n) origins.push({ k: "booster" });
+  origins.push(origin && origin.k ? origin : { k: "booster" });
+  return origins.slice(-(n + 1));
+}
+function originCardName(id){
+  const card = byId.get(id);
+  return card && card.name ? card.name : "une carte";
+}
 function collect(cards){
   const data = loadOwned();
   const now = Date.now();
   for(const c of cards){
     if(!c || !c.id) continue;
     const prev = data.got[c.id] || { n: 0 };
-    data.got[c.id] = { n: prev.n + 1, t: now };
+    data.got[c.id] = { n: prev.n + 1, t: now, origins: withOrigin(prev, { k: "booster" }) };
     data.fresh[c.id] = true;
   }
   saveOwned(data);
@@ -2596,15 +2832,25 @@ function acceptTrade(tradeId){
   if(!sellerOwned || (sellerOwned.n || 0) < 1){
     return { ok: false, why: "Tu n’as plus cette carte." };
   }
-  if(!takeOwnedCopy(t.offerCardId, t.fromUser)){
+  const offeredBack = takeOwnedCopy(t.offerCardId, t.fromUser);
+  if(!offeredBack){
     return { ok: false, why: "Impossible de prendre la carte proposée." };
   }
-  if(!takeOwnedCopy(t.wantCardId, t.toUser)){
-    giveOwnedCopy(t.offerCardId, { fresh: false, userId: t.fromUser });
+  const wantedBack = takeOwnedCopy(t.wantCardId, t.toUser);
+  if(!wantedBack){
+    giveOwnedCopy(t.offerCardId, { fresh: false, userId: t.fromUser, origin: offeredBack });
     return { ok: false, why: "Impossible de prendre ta carte mise en vente." };
   }
-  giveOwnedCopy(t.offerCardId, { fresh: true, userId: t.toUser });
-  giveOwnedCopy(t.wantCardId, { fresh: true, userId: t.fromUser });
+  giveOwnedCopy(t.offerCardId, {
+    fresh: true,
+    userId: t.toUser,
+    origin: { k: "trade", for: originCardName(t.wantCardId) }
+  });
+  giveOwnedCopy(t.wantCardId, {
+    fresh: true,
+    userId: t.fromUser,
+    origin: { k: "trade", for: originCardName(t.offerCardId) }
+  });
   m.listings.splice(li, 1);
   cancelOffersForListing(m, listing.id, "cancelled");
   cancelTradesForListing(m, listing.id, "cancelled");
@@ -2773,7 +3019,10 @@ function takeOwnedCopy(cardId, userId){
   const data = loadOwned(userId);
   const got = data.got[cardId];
   if(!got || (got.n || 0) < 1) return false;
+  const origins = Array.isArray(got.origins) ? got.origins.slice() : [];
+  const origin = origins.shift() || { k: "booster" };
   got.n -= 1;
+  got.origins = origins;
   if(got.n < 1){
     delete data.got[cardId];
     if(data.fresh) delete data.fresh[cardId];
@@ -2782,12 +3031,16 @@ function takeOwnedCopy(cardId, userId){
   }
   saveOwned(data, userId);
   if(!userId || userId === uid()) refreshCount();
-  return true;
+  return origin;
 }
-function giveOwnedCopy(cardId, { fresh = false, userId } = {}){
+function giveOwnedCopy(cardId, { fresh = false, userId, origin } = {}){
   const data = loadOwned(userId);
   const prev = data.got[cardId] || { n: 0 };
-  data.got[cardId] = { n: prev.n + 1, t: Date.now() };
+  data.got[cardId] = {
+    n: prev.n + 1,
+    t: Date.now(),
+    origins: withOrigin(prev, origin)
+  };
   if(fresh) data.fresh[cardId] = true;
   saveOwned(data, userId);
   if(!userId || userId === uid()){
@@ -2809,7 +3062,14 @@ function reconcileMyListings(){
     const got = data.got[id];
     const n = got ? (got.n || 0) : 0;
     if(n < nNeed){
-      data.got[id] = { n: nNeed, t: (got && got.t) || Date.now() };
+      const origins = Array.isArray(got && got.origins) ? got.origins.slice() : [];
+      while(origins.length < n) origins.push({ k: "booster" });
+      while(origins.length < nNeed) origins.push({ k: "booster" });
+      data.got[id] = {
+        n: nNeed,
+        t: (got && got.t) || Date.now(),
+        origins
+      };
       dirty = true;
     }
   }
@@ -2920,7 +3180,7 @@ function buyListing(listingId){
   cancelOffersForListing(m, listingId, "cancelled");
   cancelTradesForListing(m, listingId, "cancelled");
   saveMarket(m);
-  giveOwnedCopy(listing.cardId, { fresh: true });
+  giveOwnedCopy(listing.cardId, { fresh: true, origin: { k: "buy", cr: listing.price } });
   if(soldListing.seller !== "npc") pushSoldNotification(soldListing, buyerId, soldPrice);
   refreshWallet();
   refreshOffersBadge();
@@ -3009,7 +3269,9 @@ function acceptOffer(offerId){
   const w = ensureWallet();
   w.credits += pay;
   saveWallet(w);
-  if(o.buyer !== "npc") giveOwnedCopy(o.cardId, { fresh: true, userId: o.buyer });
+  if(o.buyer !== "npc"){
+    giveOwnedCopy(o.cardId, { fresh: true, userId: o.buyer, origin: { k: "buy", cr: o.price } });
+  }
   m.listings.splice(li, 1);
   o.status = "accepted";
   o.seenBySeller = true;
@@ -3282,7 +3544,7 @@ function renderMarket(){
       <div class="mini">${renderCard(card, { zoomable: false })}</div>
       <div class="meta">
         <div class="name">${esc(card.name)}</div>
-        <div class="sub">${esc(TIERS[card.rarete].label)} · ${esc(INSTR[card.instrument] || card.instrument)} · ${esc(sellerLabel)}</div>
+        <div class="sub">${esc(TIERS[card.rarete].label)} · ${esc(instrumentLabel(card))} · ${esc(sellerLabel)}</div>
       </div>
       <div class="side">
         <div class="price">${l.price} cr</div>
@@ -3307,12 +3569,12 @@ function showSpentPack(){
   hand.className = "hand";
   hand.innerHTML = "";
   againRow.hidden = true;
-  packCol.hidden = false;
+  setPackStackVisible(true);
   packWrap.hidden = false;
   packWrap.className = "pack-wrap spent";
   resetPackPose();
   phase = "empty";
-  intro.textContent = "Plus de booster. Attends le gratuit (12 h) ou achète-en un.";
+  intro.textContent = "Plus de booster. Attends une nouvelle distribution ou achète-en un.";
   refreshWallet();
 }
 function hideEmptyPack(){
@@ -3492,13 +3754,24 @@ function jag(x, seed, amp){
     + Math.sin(x * 1.05 + seed * 0.4) * amp * 0.28;
 }
 
+function cssZoomFactor(){
+  const z = Number.parseFloat(getComputedStyle(document.documentElement).zoom);
+  return Number.isFinite(z) && z > 0 ? z : 1;
+}
 function sizeTearCanvas(){
-  const r = packArt.getBoundingClientRect();
   const dpr = window.devicePixelRatio || 1;
-  packW = r.width;
-  packH = r.height;
-  canvasW = r.width + TEAR_PAD.l + TEAR_PAD.r;
-  canvasH = r.height + TEAR_PAD.t + TEAR_PAD.b;
+  // offset* = pixels CSS layout. getBoundingClientRect() est déjà zoomé :
+  // s’en servir pour style.width sous html{zoom} rapetissait le sachet au drag.
+  packW = packArt.offsetWidth || packArt.clientWidth;
+  packH = packArt.offsetHeight || packArt.clientHeight;
+  if(packW < 2 || packH < 2){
+    const r = packArt.getBoundingClientRect();
+    const z = cssZoomFactor();
+    packW = r.width / z;
+    packH = r.height / z;
+  }
+  canvasW = packW + TEAR_PAD.l + TEAR_PAD.r;
+  canvasH = packH + TEAR_PAD.t + TEAR_PAD.b;
   const bw = Math.max(1, Math.round(canvasW * dpr));
   const bh = Math.max(1, Math.round(canvasH * dpr));
   tearLayer.width = bw;
@@ -3658,7 +3931,7 @@ function armPack(){
   hand.innerHTML = "";
   againRow.hidden = true;
   hideEmptyPack();
-  packCol.hidden = false;
+  setPackStackVisible(true);
   packWrap.hidden = false;
   packWrap.className = "pack-wrap idle";
   stage.classList.remove("tearing");
@@ -3695,7 +3968,7 @@ async function openPack(){
   pack.style.transform = "scale(1.03)";
   await wait(reduced ? 60 : 280);
   packWrap.classList.add("gone");
-  packCol.hidden = true;
+  setPackStackVisible(false);
   packWrap.hidden = true;
   resetPackPose();
 
@@ -3914,7 +4187,7 @@ hand.addEventListener("click", ev => {
 });
 stage.addEventListener("click", ev => {
   if(phase !== "open") return;
-  if(ev.target.closest(".slot-card, header, footer, dialog, .wallet, .pack-col, .nav")) return;
+  if(ev.target.closest(".slot-card, header, footer, dialog, .wallet, .pack-col, .pack-stack, .nav")) return;
   stashHand();
 });
 $("zoomclose").onclick = () => $("zoom").close();
@@ -4205,7 +4478,7 @@ function updateTradeSuggestions(){
   box.innerHTML = hits.map(c =>
     `<button type="button" data-offer="${esc(c.id)}" class="${tradeOfferCardId === c.id ? "on" : ""}">
       <div class="name">${esc(c.name)}</div>
-      <div class="sub">${esc(INSTR[c.instrument] || c.instrument)}${c.group ? ` · ${esc(c.group)}` : ""}</div>
+      <div class="sub">${esc(instrumentLabel(c))}${c.group ? ` · ${esc(c.group)}` : ""}</div>
     </button>`
   ).join("");
 }
@@ -4636,18 +4909,35 @@ $("offer").addEventListener("keydown", ev => {
     if(next) next.click();
   }
 });
-$("cheatCredits").addEventListener("click", () => {
-  const raw = window.prompt("Combien de crédits ajouter ?", "500");
-  if(raw == null) return;
-  const n = Math.max(0, Math.floor(Number(String(raw).replace(",", ".")) || 0));
-  if(!n) return;
-  const w = ensureWallet();
-  w.credits += n;
-  saveWallet(w);
-  refreshWallet();
-});
-
 let zoomCtx = { card: null, fromAlbum: false, fromMarket: false, fromPack: false, listingId: null, offerId: null };
+
+function fitCardZoom(){
+  const dlg = $("zoom");
+  const stage = $("zoomcard");
+  const card = stage?.querySelector(".card");
+  if(!dlg?.open || !stage || !card) return;
+  stage.style.width = "";
+  stage.style.height = "";
+  const paint = () => {
+    const w = stage.getBoundingClientRect().width;
+    if(w > 0) card.style.transform = `translate(-50%, -50%) scale(${w / CW})`;
+  };
+  paint();
+  const extra = dlg.scrollHeight - dlg.clientHeight;
+  if(extra > 2){
+    const box = stage.getBoundingClientRect();
+    const nextH = Math.max(150, box.height - extra - 6);
+    stage.style.width = (nextH * CW / CH) + "px";
+    stage.style.height = nextH + "px";
+    paint();
+  }
+}
+function scheduleFitCardZoom(){
+  requestAnimationFrame(() => requestAnimationFrame(fitCardZoom));
+}
+window.addEventListener("resize", () => {
+  if($("zoom")?.open) fitCardZoom();
+});
 
 function zoomOptsFromCtx(){
   return {
@@ -4674,6 +4964,7 @@ function showZoomAsk(message, onYes){
     else if(zoomCtx.card) openCardZoom(zoomCtx.card, zoomOptsFromCtx());
   };
   actions.addEventListener("click", onClick);
+  scheduleFitCardZoom();
 }
 
 function openCardZoom(card, opts={}){
@@ -4795,6 +5086,7 @@ function openCardZoom(card, opts={}){
   actions.innerHTML = bits.join("");
   actions.hidden = !bits.length;
   if(!$("zoom").open) $("zoom").showModal();
+  scheduleFitCardZoom();
 }
 $("zoomActions").addEventListener("click", ev => {
   const btn = ev.target.closest("button[data-act]");
@@ -5078,7 +5370,9 @@ document.addEventListener("click", ev => {
   setNotifMenuOpen(false);
 });
 document.addEventListener("keydown", ev => {
-  if(ev.key === "Escape") setNotifMenuOpen(false);
+  if(ev.key !== "Escape") return;
+  setNotifMenuOpen(false);
+  setMenuOpen(false);
 });
 let marketQTimer = 0;
 $("marketQ").addEventListener("input", () => {
@@ -5123,7 +5417,13 @@ async function showView(view){
   } else if(view === "market"){
     $("pageTitle").textContent = "Marché";
     if(location.hash !== "#marche") history.replaceState(null, "", "#marche");
-    intro.textContent = "Achète, vends ou négocie des cartes contre des crédits.";
+    intro.textContent = "Achète, vends ou échange des cartes.";
+    document.querySelectorAll("#market [data-market-tab]").forEach(b => {
+      const on = b.dataset.marketTab === marketTab;
+      b.classList.toggle("on", on);
+      b.setAttribute("aria-selected", on ? "true" : "false");
+    });
+    if(marketTab === "mine" || marketTab === "offers") seedNpcOffersOnMyListings();
     refreshOffersBadge();
     renderMarket();
   } else {
@@ -5132,7 +5432,7 @@ async function showView(view){
     if(phase === "idle") intro.textContent = forceCopy();
     else if(phase === "deal") intro.textContent = "Clique une carte pour la découvrir.";
     else if(phase === "open") intro.textContent = "Clique une carte pour agrandir, ou ailleurs pour ranger.";
-    else if(phase === "empty") intro.textContent = "Plus de booster. Attends le gratuit (12 h) ou achète-en un.";
+    else if(phase === "empty") intro.textContent = "Plus de booster. Attends une nouvelle distribution ou achète-en un.";
   }
 }
 
@@ -5143,7 +5443,7 @@ function syncAlbumFilterSwitches(){
   if($("albumFavOnly")) albumFavOnly = !!$("albumFavOnly").checked;
 }
 function favToggleBtn(cardId, on){
-  return `<button type="button" class="fav-btn${on ? " on" : ""}" data-fav-toggle="${esc(cardId)}" aria-label="${on ? "Retirer des favoris" : "Ajouter aux favoris"}" title="${on ? "Retirer des favoris" : "Ajouter aux favoris"}" aria-pressed="${on ? "true" : "false"}">★</button>`;
+  return `<button type="button" class="fav-btn${on ? " on" : ""}" data-fav-toggle="${esc(cardId)}" aria-label="${on ? "Retirer des favoris" : "Ajouter aux favoris"}" title="${on ? "Retirer des favoris" : "Ajouter aux favoris"}" aria-pressed="${on ? "true" : "false"}"></button>`;
 }
 function renderAlbum(resetPage){
   syncAlbumFilterSwitches();
@@ -5363,6 +5663,11 @@ $("confirm").addEventListener("click", ev => {
     if(fn) fn();
   }
 });
+$("menuBtn")?.addEventListener("click", () => {
+  setMenuOpen($("menuBtn").getAttribute("aria-expanded") !== "true");
+});
+$("drawerClose")?.addEventListener("click", () => setMenuOpen(false));
+$("drawerVeil")?.addEventListener("click", () => setMenuOpen(false));
 document.querySelector(".user-switch")?.addEventListener("click", ev => {
   const btn = ev.target.closest("[data-user]");
   if(!btn) return;
@@ -5405,6 +5710,9 @@ function tickFreePack(){
 async function boot(){
   try {
     loadActiveUser();
+    if(window.ChartsAvatar){
+      ChartsAvatar.bind({ getUserId: () => activeUserId });
+    }
     const res = await fetch("../data/census/catalog_s1.json", { cache: "no-store" });
     if(!res.ok) throw new Error(res.status);
     const doc = await res.json();
@@ -5436,6 +5744,7 @@ async function boot(){
   }
 }
 boot();
+document.addEventListener("charts:credits-changed", () => refreshWallet());
 </script>
 </body>
 </html>

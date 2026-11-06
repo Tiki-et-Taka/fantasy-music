@@ -46,6 +46,21 @@ python tools/run_pipeline.py --stage prerender
 Un seul mois suffit à valider la formule ; **6 mois** pour calibrer ; **24** pour
 figer la prod (médiane anti-pics). Les dumps ne sont pas commités.
 
+### Coattail basse / batterie (après un census)
+
+```bash
+python tools/coattail_rhythm.py --merge
+python tools/fetch_mbids.py          # nouveaux QID
+python tools/build_census_allowlist.py
+# si le dump du mois est encore sur disque, refiltrer avant de scorer
+python tools/ingest_pageviews_dump.py --month 2026-09 --skip-download --keep-dump
+python tools/aggregate_pageviews.py
+python tools/score_vivier.py
+# puis titres / illustration / draft selon besoin
+```
+
+Voir `coattail_rhythm` dans `tools/census_config.json` et [`12-fantasy-game.md`](12-fantasy-game.md).
+
 ### Catalogue
 
 ```bash

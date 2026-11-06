@@ -4,9 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Charts — Fantasy League</title>
+<link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Big+Shoulders+Display:wght@800&family=IBM+Plex+Mono:wght@400;500&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css?v=17">
+<script src="js/site-scale.js?v=8"></script>
 <style>
   :root {
     --bg: #0d0d0d;
@@ -61,12 +64,12 @@
   }
   .nav-main {
     justify-self: center;
-    display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 22px;
+    display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px 20px;
   }
   .nav-main a {
     position: relative;
     text-decoration: none;
-    font-size: 13px; font-weight: 600;
+    font-size: 12px; font-weight: 600;
     letter-spacing: .14em; text-transform: uppercase;
     color: var(--muted); padding: 6px 0 8px;
   }
@@ -77,24 +80,27 @@
     height: 2px; background: var(--accent);
   }
   .top-actions {
-    justify-self: end; display: flex; align-items: center; gap: 10px;
+    justify-self: end; display: flex; align-items: center; gap: 8px;
   }
   .chip {
-    display: inline-flex; align-items: center; gap: 8px;
+    display: inline-flex; align-items: center; gap: 7px;
     border: 1px solid var(--line); background: var(--panel);
-    padding: 8px 12px; font-size: 12px; font-weight: 600;
+    padding: 6px 10px; font-size: 11px; font-weight: 600;
     letter-spacing: .08em; text-transform: uppercase; color: var(--ink);
     white-space: nowrap;
   }
   .chip .coin {
-    width: 14px; height: 14px; border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, #f0c060, var(--accent) 55%, #8a4a10);
-    box-shadow: inset 0 0 0 1px rgba(0,0,0,.35);
+    width: 22px; height: 14px; border-radius: 0;
+    display: block; object-fit: contain;
+    box-shadow: none;
+    flex: 0 0 auto;
   }
   .chip.btn {
     appearance: none; font: inherit; cursor: pointer; color: inherit;
   }
-  .chip.btn .ico { width: 16px; height: 16px; }
+  .chip.btn:hover { border-color: var(--line-hi); background: #1c1c1c; }
+  .chip .ico,
+  .chip.btn .ico { width: 14px; height: 14px; opacity: .75; }
 
   .wrap {
     max-width: 1100px;
@@ -109,7 +115,7 @@
   .page-title {
     margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(36px, 6vw, 56px);
+    font-size: clamp(28px, 4.5vw, 42px);
     letter-spacing: .04em;
     text-transform: uppercase;
     line-height: .95;
@@ -406,21 +412,23 @@
 <div class="grain" aria-hidden="true"></div>
 
 <header class="top">
-  <a class="brand" href="lobby.html">Charts</a>
+  <a class="brand" href="lobby.html"><img class="brand-logo" src="img/favicon.png" alt="" width="32" height="32">Charts</a>
   <nav class="nav-main" aria-label="Principal">
     <a href="lobby.html">Lobby</a>
     <a href="booster.html">Booster</a>
     <a href="classeur.html">Classeur</a>
     <a href="booster.html#marche">Marché</a>
-    <a class="on" href="fantasy.html?v=15" aria-current="page">Fantasy</a>
+    <a class="on" href="fantasy.html?v=16" aria-current="page">Fantasy</a>
   </nav>
   <div class="top-actions">
+    <div id="notifMount"></div>
     <span class="chip" aria-label="Crédits">
-      <span class="coin" aria-hidden="true"></span>
+      <img class="coin" src="img/credit-ticket.png?v=1" alt="" width="22" height="14" aria-hidden="true">
       <span><b id="creditsBal">0</b> CR</span>
     </span>
-    <button type="button" class="chip btn" id="menuBtn" aria-label="Profil" aria-expanded="false" aria-controls="drawer" aria-haspopup="dialog">
-      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 19c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg>
+    <button type="button" class="chip btn no-avatar" id="menuBtn" aria-label="Profil" aria-expanded="false" aria-controls="drawer" aria-haspopup="dialog">
+      <span class="avatar-face sm empty" data-avatar-face aria-hidden="true"></span>
+      <svg class="ico" data-avatar-fallback viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 19c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg>
       <span id="playerName">Joueur A</span>
     </button>
   </div>
@@ -439,9 +447,10 @@
 
   <div class="comp-list" id="compList" role="list"></div>
 
-  <footer class="foot">
-    <span>Charts archives · Fantasy</span>
-    <a href="legal/index.html?v=2">Mentions légales</a>
+  <footer class="site-foot">
+    <nav class="legal-links" aria-label="Informations légales">
+      <a href="legal/index.html?v=2">Mentions légales</a>
+    </nav>
   </footer>
 </main>
 
@@ -450,6 +459,13 @@
   <div class="head">
     <h2 id="drawerTitle">Profil</h2>
     <button type="button" class="close" id="drawerClose" aria-label="Fermer">×</button>
+  </div>
+  <div class="avatar-block">
+    <label class="avatar-pick" title="Changer la photo">
+      <span class="avatar-face empty" data-avatar-face aria-hidden="true"></span>
+      <input type="file" id="avatarFile" accept="image/*" hidden>
+    </label>
+    <p class="avatar-status" id="avatarStatus"></p>
   </div>
   <label>Compte de test</label>
   <div class="user-switch" role="group" aria-label="Compte de test">
@@ -461,6 +477,9 @@
   </div>
 </aside>
 
+<script src="js/profile-avatar.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/credits-shop.js?v=1"></script>
 <script>
 const USERS = { u1: "Joueur A", u2: "Joueur B" };
 const ACTIVE_USER_KEY = "charts.s1.activeUser";
@@ -566,6 +585,7 @@ function cardsFromCatalog(doc){
       rarete,
       famille: familyKey(row.family),
       instrument: artist.instrument || plate.instrument,
+      instruments: artist.instruments || [artist.instrument || plate.instrument],
       group: g ? g.name : null,
       job: plateJob(plate, rarete),
       rank: Number(row.rank_in_series) || 0
@@ -591,6 +611,10 @@ function frameSvg(kind, rank, color){
   }
   return `<svg class="frame" viewBox="0 0 ${CW} ${CH}" aria-hidden="true">${o}</svg>`;
 }
+function instrumentLabel(card){
+  const instruments = card.instruments?.length ? card.instruments : [card.instrument];
+  return instruments.filter(Boolean).map(x => INSTR[x] || x).join(" + ");
+}
 function renderCard(card){
   const tier = TIERS[card.rarete];
   const fam = FAMILIES[familyKey(card.famille)] || FAMILIES.rock;
@@ -602,7 +626,7 @@ function renderCard(card){
   const bandStyle = paper || diamant ? "" : `background:${fam.fond};`;
   const group = card.group || "Artiste solo";
   const cls = `card r${tier.rank}${paper ? " paper" : ""}${diamant ? " diamant" : ""}`;
-  const info = `${fam.label} · ${INSTR[card.instrument] || card.instrument} · ${group}`;
+  const info = `${fam.label} · ${instrumentLabel(card)} · ${group}`;
   return `<div class="${cls}" data-id="${esc(card.id)}">
     <div class="art"><img src="../out/illustrations/${esc(card.job)}.png" alt="" loading="lazy"></div>
     ${diamant ? `<div class="title"><div class="myth-name" style="font-size:${mythName}px">${esc(card.name)}</div></div>` : ""}
@@ -610,7 +634,7 @@ function renderCard(card){
       <div class="accent" style="background:${fam.a1}"></div>
       <div class="name" style="font-size:${nameSize}px">${esc(card.name)}</div>
       <div class="rarete" style="color:${tier.frame}">${tier.label}</div>
-      <div class="meta">${esc(fam.label)} · ${esc(INSTR[card.instrument] || card.instrument)}</div>
+      <div class="meta">${esc(fam.label)} · ${esc(instrumentLabel(card))}</div>
       <div class="group">${esc(group)}</div>
       ${diamant ? `<div class="line-rare">${tier.label}</div><div class="line-info">${esc(info)}</div>` : ""}
     </div>
@@ -697,6 +721,8 @@ function loadActiveUser(){
   activeUserId = saved === "u2" ? "u2" : "u1";
   syncUserUI();
   refreshCredits();
+  if(window.ChartsAvatar) ChartsAvatar.refresh(activeUserId);
+  if(window.ChartsNotif) ChartsNotif.refresh();
 }
 
 function switchUser(nextId){
@@ -706,6 +732,8 @@ function switchUser(nextId){
   localStorage.setItem(ACTIVE_USER_KEY, activeUserId);
   syncUserUI();
   refreshCredits();
+  if(window.ChartsAvatar) ChartsAvatar.refresh(activeUserId);
+  if(window.ChartsNotif) ChartsNotif.refresh();
   render();
 }
 
@@ -815,6 +843,12 @@ document.querySelector(".user-switch").addEventListener("click", ev => {
 });
 
 async function boot(){
+  if(window.ChartsAvatar){
+    ChartsAvatar.bind({ getUserId: () => activeUserId });
+  }
+  if(window.ChartsNotif){
+    ChartsNotif.bind({ getUserId: () => activeUserId });
+  }
   loadActiveUser();
   try {
     const res = await fetch("../data/census/catalog_s1.json", { cache: "no-store" });
@@ -826,6 +860,7 @@ async function boot(){
 }
 window.addEventListener("resize", scaleMiniCards);
 boot();
+document.addEventListener("charts:credits-changed", () => refreshCredits());
 </script>
 </body>
 </html>

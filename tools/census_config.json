@@ -17,15 +17,25 @@
   "umbrella_families": ["pop", "rock"],
   "celebrity_occupations": [
     "Q33999", "Q10800557", "Q10798782", "Q2259451", "Q2405480",
-    "Q4610556", "Q82955"
+    "Q4610556", "Q82955",
+    "Q36180", "Q6625963", "Q49757", "Q214917",
+    "Q116", "Q1097498",
+    "Q2066131", "Q937857", "Q3665646", "Q10873124", "Q19204627"
   ],
+  "comment_celebrity_occupations": "acteur/mannequin/politicien + écrivain/poète + monarque + sportifs. Filtre census toutes familles ; purge albums/groupes : tools/purge_fake_musicians.py",
   "artist_exclude": [
     "Q171530",
     "Q117012",
     "Q193815",
     "Q454010",
-    "Q191755"
+    "Q191755",
+    "Q43874",
+    "Q189489",
+    "Q171905"
   ],
+  "artist_mbid_override": {
+    "Q15869": "022589ac-7177-460d-a178-9976cf70e29f"
+  },
   "artist_era_override": {
     "Q2831": "1970s80s"
   },
@@ -51,7 +61,9 @@
     "Q44479972": "contrejour|voix|2|2010s|festival|m",
     "Q834621": "contrejour|voix|2|1970s80s|stade|m",
     "Q359066": "contrejour|machines|6|1990s00s|festival|m",
-    "Q486063": "contrejour|voix|1|1990s00s|stade|m"
+    "Q486063": "contrejour|voix|1|1990s00s|stade|m",
+    "Q1873734": "serigraphie|guitare|3|1970s80s|cave|m",
+    "Q468741": "serigraphie|voix|7|1970s80s|cave|f"
   },
   "artist_group_override": {
     "Q15869": "Queen",
@@ -59,7 +71,15 @@
     "Q57415344": "Måneskin",
     "Q12006": "Foo Fighters"
   },
+  "artist_group_solo_override": [
+    "Q1225",
+    "Q131814"
+  ],
   "artist_instrument_override": {
+    "Q468741": "voix",
+    "Q486063": "voix",
+    "Q1873734": "guitare",
+    "Q313453": "machines",
     "Q15869": "voix",
     "Q457839": "voix",
     "Q128121": "voix",
@@ -189,10 +209,25 @@
     "Q17517186": "latin"
   },
   "strong_music_occupations": [
-    "Q753110", "Q488205", "Q2252262", "Q130857",
+    "Q488205", "Q2252262", "Q130857",
     "Q15981151", "Q12374149", "Q102277154", "Q60723829",
-    "Q486748", "Q36834"
+    "Q486748",
+    "Q177220", "Q639669", "Q855091", "Q36834", "Q753110"
   ],
+  "purge_strong_music_occupations": [
+    "Q488205", "Q2252262", "Q130857",
+    "Q15981151", "Q12374149", "Q102277154", "Q60723829",
+    "Q486748"
+  ],
+  "coattail_rhythm": {
+    "enabled": true,
+    "instruments": ["basse", "batterie"],
+    "anchor_bands": ["icones", "connus"],
+    "min_anchor_sitelinks": 40,
+    "min_member_sitelinks": 1,
+    "min_years": 1,
+    "comment": "Admet basse/batterie des groupes ancrés par un membre déjà fort (sitelinks perso insuffisants sinon). Voir tools/coattail_rhythm.py et docs/12-fantasy-game.md."
+  },
   "genre_seed": {
     "Q38848": "metal",
     "Q483251": "metal",
@@ -432,5 +467,19 @@
     "Q862501": "machines",
     "Q831698": "machines",
     "Q512191": "claviers"
+  },
+  "fantasy_instrument_quotas": {
+    "comment": "Cibles Fantasy Game (docs/12-fantasy-game.md) pour un set de 2000. Planchers basse/batterie, plafond voix. Appliqués dans draft_serie1.py.",
+    "set_size": 2000,
+    "voix_cap": 900,
+    "floors": {
+      "basse": 160,
+      "batterie": 160,
+      "guitare": 280,
+      "claviers": 80,
+      "machines": 70,
+      "vents": 60,
+      "cordes": 40
+    }
   }
 }

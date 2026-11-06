@@ -29,10 +29,17 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 
-from attach_group_names import load_names, pick_principal  # noqa: E402
+from attach_group_names import (  # noqa: E402
+    ARTIST_TABLE,
+    clean_label,
+    is_self_named,
+    load_names,
+    pick_principal,
+)
 from score_vivier import display_name  # noqa: E402
 
 CENSUS = ROOT / "data" / "census"
+CFG_PATH = ROOT / "tools" / "census_config.json"
 SCHEMA_JSON = ROOT / "data" / "schema" / "catalog.schema.json"
 SCHEMA_SQL = ROOT / "data" / "schema" / "catalog.sql"
 OUT_JSON = CENSUS / "catalog_s1.json"
@@ -45,6 +52,59 @@ STYLES = {"serigraphie", "contrejour", "encre"}
 
 def load_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def lookup_group_mbids_by_name(labels: set[str]) -> dict[str, str]:
+    """Nom nettoyé (minuscule) → mbid, via la table artist MusicBrainz."""
+    wanted = {clean_label(n).casefold(): n for n in labels if clean_label(n)}
+    if not wanted or not ARTIST_TABLE.exists():
+        return {}
+    found: dict[str, str] = {}
+    with ARTIST_TABLE.open("r", encoding="utf-8", errors="replace", newline="") as fh:
+        for line in fh:
+            cols = line.split("\t")
+            if len(cols) < 3:
+                continue
+            key = clean_label(cols[2]).casefold()
+            if key not in wanted or key in found:
+                continue
+            found[key] = cols[1]
+            if len(found) >= len(wanted):
+                break
+    return {wanted[k]: mbid for k, mbid in found.items()}
+
+
+def resolve_card_group(
+    *,
+    qid: str,
+    artist_name: str,
+    g_list: list[dict],
+    names: dict[str, str],
+    overrides: dict[str, str],
+    override_mbids: dict[str, str],
+    solo_overrides: set[str],
+) -> str | None:
+    """MBID du groupe affiché sur la carte, ou None = Artiste solo."""
+    if qid in solo_overrides:
+        return None
+    forced_label = (overrides.get(qid) or "").strip()
+    if forced_label:
+        target = clean_label(forced_label).casefold()
+        for g in g_list:
+            mbid = g.get("mbid")
+            if not mbid:
+                continue
+            if clean_label(names.get(mbid, "")).casefold() == target:
+                return mbid
+        return override_mbids.get(forced_label)
+
+    primary = pick_principal(g_list)
+    if not primary:
+        return None
+    label = clean_label(names.get(primary, ""))
+    if not label or is_self_named(label, artist_name):
+        return None
+    return primary
 
 
 def parse_plate(plaque: str, rec: dict) -> dict | None:
@@ -81,14 +141,22 @@ def build_catalog() -> dict:
     titles = load_json(CENSUS / "qid_titles.json") if (CENSUS / "qid_titles.json").exists() else {}
     mbids = load_json(CENSUS / "mbids.json") if (CENSUS / "mbids.json").exists() else {}
     mb = load_json(CENSUS / "musicbrainz.json") if (CENSUS / "musicbrainz.json").exists() else {}
+    instrument_doc = (
+        load_json(CENSUS / "instrument_extra.json")
+        if (CENSUS / "instrument_extra.json").exists() else {}
+    )
+    instrument_extra: dict[str, list[str]] = dict(instrument_doc.get("extra") or {})
+    cfg = load_json(CFG_PATH) if CFG_PATH.exists() else {}
+    overrides: dict[str, str] = dict(cfg.get("artist_group_override") or {})
+    solo_overrides = set(cfg.get("artist_group_solo_override") or [])
 
     artists: dict[str, dict] = {}
     plates: dict[str, dict] = {}
     cards: list[dict] = []
     groups: dict[str, dict] = {}
     memberships: list[dict] = []
-    primary_group: dict[str, str | None] = {}
     wanted_group_mbids: set[str] = set()
+    pending: list[tuple[dict, list[dict], str]] = []
 
     for rec in serie1:
         qid = rec["qid"]
@@ -97,12 +165,19 @@ def build_catalog() -> dict:
         sex = rec.get("silhouette") or None
         if sex not in ("f", "m", "x"):
             sex = None
+        artist_name = display_name(qid, titles)
+        primary_instrument = rec.get("instrument") or None
+        instruments = []
+        for instrument in [primary_instrument, *instrument_extra.get(qid, [])]:
+            if instrument and instrument not in instruments:
+                instruments.append(instrument)
         artists[qid] = {
             "qid": qid,
             "mbid": artist_mbid or None,
-            "name": display_name(qid, titles),
+            "name": artist_name,
             "sex": sex,
-            "instrument": rec.get("instrument") or None,
+            "instrument": primary_instrument,
+            "instruments": instruments,
         }
 
         plaque = rec.get("plaque") or ""
@@ -112,33 +187,16 @@ def build_catalog() -> dict:
         plates[plate["id"]] = plate
 
         g_list = list(mb_row.get("groups") or [])
-        primary = pick_principal(g_list)
-        primary_group[qid] = primary
-        if primary:
-            wanted_group_mbids.add(primary)
-
-        seen_g: set[str] = set()
         for g in g_list:
             gmbid = g.get("mbid")
-            if not gmbid or gmbid in seen_g:
-                continue
-            seen_g.add(gmbid)
-            wanted_group_mbids.add(gmbid)
-            start = g.get("start")
-            end = g.get("end")
-            memberships.append({
-                "artist_qid": qid,
-                "group_mbid": gmbid,
-                "start": f"{int(start):04d}-01-01" if start else None,
-                "end": f"{int(end):04d}-12-31" if end else None,
-                "is_primary": gmbid == primary,
-            })
+            if gmbid:
+                wanted_group_mbids.add(gmbid)
 
         rarity = rec["rarete"]
         if rarity not in RARITIES:
             raise SystemExit(f"Rareté inconnue {rarity!r} pour {qid}")
 
-        cards.append({
+        card = {
             "id": f"{SERIES_ID}:{qid}",
             "series_id": SERIES_ID,
             "artist_qid": qid,
@@ -152,11 +210,50 @@ def build_catalog() -> dict:
             "era": rec.get("era"),
             "motif": rec.get("draft_reason"),
             "plate_id": plate["id"],
-            "group_mbid": primary,
+            "group_mbid": None,
             "in_booster_pool": True,
-        })
+        }
+        cards.append(card)
+        pending.append((card, g_list, artist_name))
 
+    override_mbids = lookup_group_mbids_by_name(set(overrides.values()))
+    wanted_group_mbids.update(override_mbids.values())
     names = load_names(wanted_group_mbids)
+    # Noms issus du dump pour les overrides (au cas où absents des memberships)
+    for label, mbid in override_mbids.items():
+        names.setdefault(mbid, label)
+
+    for card, g_list, artist_name in pending:
+        qid = card["artist_qid"]
+        primary = resolve_card_group(
+            qid=qid,
+            artist_name=artist_name,
+            g_list=g_list,
+            names=names,
+            overrides=overrides,
+            override_mbids=override_mbids,
+            solo_overrides=solo_overrides,
+        )
+        card["group_mbid"] = primary
+        if primary:
+            wanted_group_mbids.add(primary)
+
+        seen_g: set[str] = set()
+        for g in g_list:
+            gmbid = g.get("mbid")
+            if not gmbid or gmbid in seen_g:
+                continue
+            seen_g.add(gmbid)
+            start = g.get("start")
+            end = g.get("end")
+            memberships.append({
+                "artist_qid": qid,
+                "group_mbid": gmbid,
+                "start": f"{int(start):04d}-01-01" if start else None,
+                "end": f"{int(end):04d}-12-31" if end else None,
+                "is_primary": gmbid == primary,
+            })
+
     for gmbid in sorted(wanted_group_mbids):
         groups[gmbid] = {
             "mbid": gmbid,
@@ -164,7 +261,6 @@ def build_catalog() -> dict:
             "qid": None,
         }
 
-    # Drop memberships / card.group_mbid whose group has no row (always have rows now).
     catalog = {
         "version": 1,
         "series": [{

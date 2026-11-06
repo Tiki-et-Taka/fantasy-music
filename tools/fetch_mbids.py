@@ -11,13 +11,24 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 
-from census_vivier import SPARQL, fetch_json, qid_of  # noqa: E402
+from census_vivier import CFG, SPARQL, fetch_json, qid_of  # noqa: E402
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 OUT = ROOT / "data" / "census"
 BATCH = 150
+
+
+def apply_overrides(mapping: dict[str, str]) -> int:
+    """Force les MBID éditoriaux (ex. Freddie ≠ Farrokh Bulsara)."""
+    overrides = CFG.get("artist_mbid_override") or {}
+    n = 0
+    for qid, mbid in overrides.items():
+        if mbid and mapping.get(qid) != mbid:
+            mapping[qid] = mbid
+            n += 1
+    return n
 
 
 def main() -> int:
@@ -30,7 +41,9 @@ def main() -> int:
         print(f"reprise : {len(mapping)} MBID déjà là", flush=True)
     todo = [q for q in all_qids if q not in mapping]
     if not todo:
-        print(f"Déjà complet : {len(mapping)}/{len(all_qids)}", flush=True)
+        n = apply_overrides(mapping)
+        dest.write_text(json.dumps(mapping, ensure_ascii=False), encoding="utf-8")
+        print(f"Déjà complet : {len(mapping)}/{len(all_qids)}  overrides={n}", flush=True)
         return 0
     print(f"{len(todo)} à aller chercher ({len(all_qids)} éligibles)", flush=True)
     for i in range(0, len(todo), BATCH):
@@ -51,10 +64,11 @@ def main() -> int:
                 mapping[qid] = mbid
         print(f"  {min(i + BATCH, len(todo))}/{len(todo)}  {len(mapping)} MBID", flush=True)
         if (i // BATCH) % 10 == 9:
-            dest.write_text(json.dumps(mapping), encoding="utf-8")
+            dest.write_text(json.dumps(mapping, ensure_ascii=False), encoding="utf-8")
         time.sleep(1.2)
-    dest.write_text(json.dumps(mapping), encoding="utf-8")
-    print(f"{len(mapping)}/{len(all_qids)} avec P434 → {dest.relative_to(ROOT)}")
+    n = apply_overrides(mapping)
+    dest.write_text(json.dumps(mapping, ensure_ascii=False), encoding="utf-8")
+    print(f"{len(mapping)}/{len(all_qids)} avec P434  overrides={n} → {dest.relative_to(ROOT)}")
     return 0
 
 

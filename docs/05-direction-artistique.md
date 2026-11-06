@@ -7,6 +7,29 @@ représente juridiquement personne.
 
 Illustrations de référence dans [`../references/`](../references/).
 
+## Shell UI — Archives / presse litho (lobby)
+
+Référence produit : [`prototypes/lobby.html`](../prototypes/lobby.html).
+Ambiance **archives audio + presse lithographique** : fond charbon, accent ambre,
+typo condensée display, mono pour les légendes.
+
+| Token | Valeur | Usage |
+|---|---|---|
+| `--bg` | `#0d0d0d` | Fond page |
+| `--bg-elev` / `--panel` | `#141414` / `#161616` | Cartes, chips |
+| `--ink` | `#f2f0eb` | Texte principal |
+| `--muted` | `#8a8680` | Secondaire |
+| `--line` | `#2a2a2a` | Filets 1 px |
+| `--accent` | `#e68a1e` | CTA, soulignement nav active |
+| Display | Archivo Black / Oswald | Marque, titres, CTA |
+| Mono | IBM Plex Mono | Tags, footers, sous-titres cartes |
+
+Structure lobby : header (marque · nav · crédits/profil) → grille de tuiles
+**même format** (Booster centré au-dessus, puis Classeur / Marché / Fantasy ;
+CTA orange dans la tuile Booster) → footer archives. Pas de pills arrondies ;
+coins droits ; grain léger en overlay. À propager ensuite sur booster /
+classeur / marché / fantasy.
+
 ## Les trois styles retenus
 
 | Style | Caractère | Référence |

@@ -1,0 +1,2429 @@
+﻿rang;qid;artiste;famille;instrument_primary;p1303;occ_instrument;decision;secondaires
+1;Q2831;Michael Jackson;pop;voix;claviers|guitare|batterie;;voix_seul;
+2;Q303;Elvis Presley;rock;voix;claviers|guitare|basse;;voix_seul;
+3;Q19848;Lady Gaga;pop;voix;claviers;;voix_plus;claviers
+5;Q34424;Shakira;pop;voix;guitare|vents|batterie;guitare;voix_plus;guitare
+9;Q1744;Madonna;pop;voix;guitare|batterie;guitare;voix_plus;guitare
+11;Q26876;Taylor Swift;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+17;Q40912;Frank Sinatra;jazz;voix;guitare|batterie;;voix_seul;
+21;Q5383;David Bowie;rock;voix;claviers|guitare|vents|batterie;claviers|guitare|vents;voix_plus;guitare|claviers|vents
+32;Q317784;Jermaine Jackson;R&B;voix;guitare|basse;;voix_plus;guitare
+33;Q11975;Britney Spears;pop;voix;claviers;;voix_plus;claviers
+35;Q151892;Ariana Grande;pop;voix;batterie;;voix_seul;
+36;Q42455;Björk;pop;voix;claviers|vents|cordes;machines;voix_plus;machines
+42;Q15897;Amy Winehouse;R&B;voix;guitare|batterie;;voix_plus;guitare
+43;Q83287;Selena Gomez;pop;voix;batterie;;voix_seul;
+44;Q4235;Miley Cyrus;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+51;Q5950;James Brown;R&B;voix;claviers|guitare|batterie;;voix_seul;
+52;Q544387;Ray Charles;R&B;voix;claviers;;voix_plus;claviers
+58;Q47447;Ed Sheeran;pop;voix;guitare;;voix_plus;guitare
+63;Q6078;Dr. Dre;hip-hop;voix;claviers|machines;;voix_plus;machines
+65;Q29564107;Billie Eilish;pop;voix;guitare|claviers;;voix_plus;guitare|claviers
+69;Q336222;Tito Jackson;R&B;voix;guitare;;voix_plus;guitare
+70;Q128121;Mick Jagger;rock;voix;claviers|guitare|vents;guitare;voix_plus;guitare
+73;Q1450;Bruno Mars;R&B;voix;claviers|guitare|basse|batterie;;voix_seul;
+77;Q125121;Aretha Franklin;R&B;voix;claviers;;voix_plus;claviers
+81;Q15869;Freddie Mercury;rock;voix;claviers|guitare|vents;claviers|guitare;voix_plus;guitare|claviers
+85;Q122003;Julio Iglesias;pop;voix;guitare;;voix_plus;guitare
+100;Q131324;Janet Jackson;R&B;voix;claviers;;voix_plus;claviers
+107;Q41173;Demi Lovato;pop;voix;claviers|guitare|batterie;;voix_seul;
+110;Q2121062;The Weeknd;pop;voix;claviers;;voix_plus;claviers
+122;Q199943;Adriano Celentano;pop;voix;claviers|guitare|batterie;guitare;voix_plus;guitare
+133;Q80424;Nelly Furtado;R&B;voix;claviers|guitare|vents|basse;;voix_seul;
+137;Q201908;Anni-Frid Lyngstad;pop;voix;claviers;;voix_plus;claviers
+138;Q214582;Benny Andersson;pop;voix;claviers;claviers;voix_plus;claviers
+140;Q349461;Randy Jackson;pop;voix;claviers|batterie;guitare;voix_plus;guitare
+142;Q121507;Alicia Keys;R&B;voix;claviers;;voix_plus;claviers
+143;Q512;Vladimir Vyssotski;pop;voix;;guitare;voix_plus;guitare
+147;Q1698;Serge Gainsbourg;chanson;voix;claviers|guitare|basse;claviers;voix_plus;claviers
+148;Q229760;Rita Ora;R&B;voix;claviers;;voix_plus;claviers
+149;Q31164;Ellie Goulding;pop;voix;claviers|guitare|vents|batterie;;voix_seul;
+150;Q4177928;Zara Larsson;pop;voix;claviers;;voix_plus;claviers
+156;Q26695;Lionel Richie;R&B;voix;claviers|vents;;voix_plus;claviers
+160;Q179682;Björn Ulvaeus;pop;voix;guitare;guitare;voix_plus;guitare
+161;Q212015;Johnny Hallyday;chanson;voix;guitare;;voix_plus;guitare
+164;Q313013;Brian Wilson;pop;voix;claviers|basse;claviers|guitare;voix_plus;guitare|claviers
+170;Q19201;Mike Shinoda;metal;voix;claviers|guitare|basse|batterie|machines;;voix_seul;
+173;Q206439;Isaac Hayes;R&B;voix;claviers;;voix_plus;claviers
+174;Q1666;Jacques Brel;chanson;voix;guitare;;voix_plus;guitare
+188;Q190243;John Paul Jones;R&B;voix;basse|claviers|guitare;;voix_seul;
+189;Q63243883;Olivia Rodrigo;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+191;Q908933;Donna Summer;pop;voix;claviers;;voix_plus;claviers
+192;Q233937;Nancy Sinatra;pop;voix;;machines;voix_plus;machines
+197;Q59185;Busta Rhymes;hip-hop;voix;batterie|machines;;voix_plus;machines
+199;Q217160;Kenny Rogers;pop;voix;;claviers|guitare;voix_plus;guitare|claviers
+200;Q3008;Mike Oldfield;pop;voix;claviers|guitare|basse;guitare;voix_plus;guitare
+210;Q26707663;Lisa;pop;voix;guitare;;voix_plus;guitare
+213;Q13605596;Travis Scott;hip-hop;voix;machines|claviers;;voix_plus;machines
+214;Q299138;Kid Cudi;hip-hop;voix;machines;;voix_plus;machines
+229;Q143945;Carla Bruni;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+230;Q184841;Marie Fredriksson;pop;voix;claviers;claviers;voix_plus;claviers
+231;Q221310;Anggun;pop;voix;claviers;;voix_plus;claviers
+234;Q636;Kate Bush;pop;voix;claviers|guitare|cordes|basse;;voix_seul;
+239;Q44398;Falco;hip-hop;voix;guitare|basse;;voix_seul;
+248;Q487473;Toto Cutugno;pop;voix;guitare|vents|claviers|batterie;batterie|guitare|vents;voix_plus;batterie|guitare|vents
+250;Q295120;Corey Taylor;metal;voix;guitare;;voix_plus;guitare
+261;Q328753;Gary Barlow;pop;voix;claviers;;voix_plus;claviers
+263;Q213647;Barry White;R&B;voix;claviers;;voix_plus;claviers
+267;Q82222;Little Richard;R&B;voix;claviers;;voix_plus;claviers
+274;Q201656;Nick Jonas;R&B;voix;claviers|guitare|batterie;;voix_seul;
+277;Q20145;IU;pop;voix;guitare;;voix_plus;guitare
+279;Q40580;Lisa Gerrard;world;voix;guitare|claviers;;voix_seul;
+291;Q53939;Françoise Hardy;pop;voix;guitare;;voix_plus;guitare
+297;Q80510;Alla Pougatcheva;pop;voix;claviers;claviers;voix_plus;claviers
+301;Q192655;Lara Fabian;pop;voix;claviers;;voix_plus;claviers
+312;Q229550;Laura Branigan;pop;voix;;claviers;voix_plus;claviers
+315;Q185928;Henry Mancini;pop;voix;claviers|vents;claviers;voix_plus;claviers
+330;Q17198340;Shawn Mendes;pop;voix;claviers;claviers|guitare;voix_plus;guitare|claviers
+332;Q272943;Joe Dassin;chanson;voix;claviers|guitare|cordes;;voix_seul;
+349;Q311450;Billy Preston;R&B;voix;claviers|guitare|vents|machines;;voix_seul;
+357;Q333187;Karel Gott;chanson;voix;guitare;;voix_plus;guitare
+358;Q219237;Rick Astley;pop;voix;guitare;;voix_plus;guitare
+360;Q18810940;Camila Cabello;pop;voix;guitare;;voix_plus;guitare
+366;Q192410;Jennifer Hudson;R&B;voix;claviers;;voix_plus;claviers
+368;Q27655344;Rosé;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+369;Q27655361;Kim Ji-soo;pop;voix;batterie;;voix_seul;
+371;Q218091;Seal;R&B;voix;guitare;;voix_plus;guitare
+379;Q312801;Per Gessle;pop;voix;guitare|vents;guitare;voix_plus;guitare
+380;Q296872;Barry Gibb;pop;voix;guitare;guitare;voix_plus;guitare
+386;Q82238;Cliff Richard;pop;voix;guitare;guitare;voix_plus;guitare
+392;Q52447;RZA;hip-hop;voix;machines|claviers;;voix_plus;machines
+395;Q312610;Salvatore Adamo;chanson;voix;guitare;;voix_plus;guitare
+404;Q1362169;Agnez Mo;R&B;voix;claviers;;voix_plus;claviers
+408;Q219631;Adam Levine;R&B;voix;guitare;;voix_plus;guitare
+421;Q450429;Grace Jones;R&B;voix;claviers;;voix_plus;claviers
+423;Q214226;Lauryn Hill;R&B;voix;guitare;;voix_plus;guitare
+428;Q18388296;V;R&B;voix;claviers|guitare|vents;;voix_seul;
+429;Q108560;Allah Rakha Rahman;pop;voix;claviers|guitare|vents|cordes|basse|batterie;;voix_seul;
+432;Q113581;Conchita Wurst;pop;voix;vents;;voix_seul;
+437;Q188668;Thom Yorke;électro;voix;guitare;;voix_seul;
+439;Q313281;Michel Legrand;pop;voix;claviers;claviers;voix_plus;claviers
+441;Q151814;Sarah Brightman;pop;voix;claviers;;voix_plus;claviers
+446;Q151304;Jack Antonoff;pop;voix;guitare;guitare;voix_plus;guitare
+447;Q449;Georges Brassens;chanson;voix;claviers|guitare;;voix_plus;guitare|claviers
+448;Q7013;Lena Meyer-Landrut;pop;voix;claviers;claviers;voix_plus;claviers
+454;Q714;Stevie Wonder;R&B;voix;claviers|vents|batterie;;voix_seul;
+455;Q33605;Kesha;pop;voix;guitare|claviers|batterie|machines|vents;;voix_seul;
+459;Q18534249;Halsey;pop;voix;claviers|cordes|basse|guitare;guitare;voix_plus;guitare
+463;Q191088;Joe Jonas;pop;voix;guitare;guitare;voix_plus;guitare
+466;Q220140;Travis Barker;hip-hop;voix;batterie;;voix_seul;
+468;Q295919;Sam Cooke;R&B;voix;vents;;voix_seul;
+482;Q21621919;Post Malone;hip-hop;voix;guitare;;voix_seul;
+485;Q182725;Etta James;R&B;voix;guitare;;voix_plus;guitare
+492;Q117970;Grimes;électro;voix;claviers;;voix_seul;
+493;Q155236;Udo Jürgens;chanson;voix;claviers;;voix_plus;claviers
+500;Q775231;Niall Horan;pop;voix;claviers|guitare;guitare;voix_plus;guitare|claviers
+503;Q1354843;Machine Gun Kelly;hip-hop;voix;guitare;;voix_seul;
+506;Q217787;Carole King;pop;voix;claviers|guitare;claviers;voix_plus;guitare|claviers
+508;Q238795;St. Vincent;pop;voix;guitare|basse|claviers;guitare;voix_plus;guitare
+520;Q16185856;Bebe Rexha;R&B;voix;claviers|guitare|vents;;voix_seul;
+525;Q15948790;Tove Lo;pop;voix;claviers|batterie;;voix_seul;
+533;Q160433;Gilbert Bécaud;chanson;voix;claviers;;voix_plus;claviers
+537;Q214466;Nick Carter;pop;voix;guitare;;voix_plus;guitare
+545;Q243639;Jason Derulo;R&B;voix;claviers;;voix_plus;claviers
+549;Q44857;John Legend;R&B;voix;claviers;;voix_plus;claviers
+550;Q216341;Connie Francis;pop;voix;claviers;;voix_plus;claviers
+551;Q80805;DJ Khaled;hip-hop;voix;machines;;voix_plus;machines
+554;Q484484;Jonghyun;pop;voix;claviers|guitare|basse;;voix_seul;
+572;Q131259;Alexander Rybak;pop;voix;claviers|guitare|cordes;claviers;voix_plus;claviers
+576;Q1362028;Troye Sivan;pop;voix;claviers;;voix_plus;claviers
+577;Q19329827;Aurora;pop;voix;claviers|cordes|batterie;claviers;voix_plus;claviers
+580;Q155412;Toni Braxton;R&B;voix;claviers;;voix_plus;claviers
+583;Q281034;Harry Nilsson;pop;voix;claviers|guitare;claviers|guitare;voix_plus;guitare|claviers
+595;Q111087;Ofra Haza;pop;voix;claviers;claviers;voix_plus;claviers
+616;Q234598;Hikaru Utada;pop;voix;claviers|guitare;claviers;voix_plus;guitare|claviers
+617;Q217839;Otis Redding;R&B;voix;claviers;;voix_plus;claviers
+632;Q202663;Wyclef Jean;R&B;voix;guitare;;voix_plus;guitare
+643;Q236212;Petula Clark;pop;voix;claviers;;voix_plus;claviers
+646;Q18222476;Sofia Carson;pop;voix;claviers;;voix_plus;claviers
+648;Q212762;Burt Bacharach;pop;voix;claviers;claviers;voix_plus;claviers
+650;Q160772;Vicky Leandros;pop;voix;guitare;;voix_plus;guitare
+677;Q208881;Bo Diddley;hip-hop;voix;guitare;;voix_seul;
+683;Q356140;Ben E. King;R&B;voix;claviers;;voix_plus;claviers
+692;Q42315001;Lewis Capaldi;rock;voix;claviers|guitare;;voix_plus;guitare
+706;Q232468;Gianna Nannini;rock;voix;claviers|cordes;guitare;voix_plus;guitare
+707;Q43137;Sofia Rotaru;folk;voix;batterie;;voix_seul;
+712;Q296876;Maurice Gibb;funk;voix;claviers|guitare|basse;;voix_seul;
+716;Q109063;Jimmy Cliff;reggae;voix;guitare|batterie;;voix_seul;
+719;Q44709;Jean-Jacques Goldman;pop;voix;claviers|guitare|vents|cordes|basse;claviers|guitare;voix_plus;guitare|claviers
+720;Q358513;Michel Sardou;pop;voix;basse;;voix_seul;
+726;Q380988;Roger Hodgson;pop;voix;claviers|guitare;claviers|guitare;voix_plus;guitare|claviers
+731;Q17403494;Meghan Trainor;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+747;Q293985;Georges Moustaki;chanson;voix;guitare;;voix_plus;guitare
+754;Q228826;Lena Katina;pop;voix;claviers;;voix_plus;claviers
+771;Q45036;Nek;rock;voix;basse;;voix_seul;
+779;Q7859785;Ty Dolla Sign;hip-hop;voix;guitare|basse|claviers|batterie|machines;;voix_seul;
+787;Q24852571;Poppy;metal;voix;claviers|guitare|basse|batterie|machines;;voix_seul;
+792;Q76906;Dieter Bohlen;électro;voix;claviers|guitare|vents;;voix_seul;
+795;Q16211162;Melanie Martinez;électro;voix;guitare;;voix_seul;
+802;Q316878;Mike Patton;metal;voix;machines;;voix_seul;
+804;Q174547;Al Jarreau;jazz;voix;batterie;;voix_seul;
+806;Q302762;Barry Manilow;pop;voix;;claviers;voix_plus;claviers
+808;Q19603912;Hwasa;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+814;Q178237;Chris de Burgh;rock;voix;claviers|guitare;;voix_plus;guitare
+816;Q228832;Julia Volkova;pop;voix;claviers;;voix_plus;claviers
+830;Q44606;Gackt Camui;rock;voix;claviers|guitare|batterie;claviers|guitare;voix_plus;guitare|claviers
+831;Q248207;Rick James;funk;voix;guitare|basse;;voix_plus;guitare
+835;Q129119;Ruslana;pop;voix;claviers|guitare|batterie;claviers;voix_plus;claviers
+837;Q319297;Joe Lynn Turner;rock;voix;guitare|vents;guitare;voix_plus;guitare
+838;Q494596;Philipp Kirkorov;pop;voix;guitare;;voix_plus;guitare
+840;Q311267;Bobby Darin;jazz;voix;claviers|guitare|vents|batterie;;voix_seul;
+847;Q301818;Aaron Carter;hip-hop;voix;claviers|guitare|vents|batterie;;voix_seul;
+848;Q309838;Layne Staley;rock;voix;guitare;guitare;voix_plus;guitare
+855;Q4027095;Tom Odell;pop;voix;claviers|guitare;claviers;voix_plus;guitare|claviers
+859;Q455704;Jimmy Somerville;pop;voix;guitare|basse|claviers|machines;;voix_seul;
+870;Q181683;Carly Simon;pop;voix;;claviers|guitare;voix_plus;guitare|claviers
+871;Q204019;M.I.A.;hip-hop;voix;batterie;;voix_seul;
+873;Q20203583;Álvaro Soler;latin;voix;guitare|vents;;voix_seul;
+876;Q435780;Sammy Hagar;rock;voix;;guitare;voix_plus;guitare
+877;Q193600;Kate Ryan;pop;voix;guitare;;voix_plus;guitare
+878;Q153141;Scatman John;électro;voix;claviers;;voix_seul;
+880;Q234169;Irene Cara;funk;voix;claviers;;voix_plus;claviers
+887;Q273079;Cab Calloway;jazz;voix;vents;;voix_seul;
+888;Q231713;Christina Grimmie;R&B;voix;claviers|basse;;voix_plus;claviers
+889;Q21075020;Suga;hip-hop;voix;claviers;;voix_seul;
+896;Q188401;Emily Osment;pop;voix;guitare;;voix_plus;guitare
+900;Q365042;Bret Michaels;rock;voix;;guitare;voix_plus;guitare
+906;Q357645;Frank Ocean;R&B;voix;claviers;;voix_plus;claviers
+907;Q318485;Rain;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+914;Q106301562;Gracie Abrams;pop;voix;guitare;;voix_plus;guitare
+915;Q360501;Paul Young;R&B;voix;guitare;;voix_plus;guitare
+931;Q229445;Robyn;pop;voix;claviers;;voix_plus;claviers
+935;Q35109;Noemi;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+941;Q240082;Seohyun;pop;voix;guitare|cordes;;voix_seul;
+943;Q1804;Barbara;chanson;voix;claviers;;voix_plus;claviers
+945;Q313260;Al Green;R&B;voix;guitare;;voix_plus;guitare
+950;Q270724;Lykke Li;pop;voix;cordes;;voix_seul;
+951;Q313318;Salif Keïta;afro;voix;guitare;;voix_seul;
+966;Q319502;Sufjan Stevens;pop;voix;claviers|guitare|batterie;claviers|guitare|vents;voix_plus;guitare|claviers|vents
+969;Q139933;Zack de la Rocha;hip-hop;voix;guitare;;voix_seul;
+976;Q933598;D'Angelo;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+978;Q228818;Delta Goodrem;pop;voix;claviers;claviers;voix_plus;claviers
+984;Q317427;Donovan;pop;voix;guitare|vents;guitare;voix_plus;guitare
+991;Q231942;Natalie Cole;funk;voix;claviers;;voix_plus;claviers
+993;Q233385;Sooyoung;pop;voix;guitare;;voix_plus;guitare
+997;Q238819;Jay Chou;hip-hop;voix;claviers|cordes|batterie|basse|vents;;voix_seul;
+1001;Q229940;Lucy Hale;pop;voix;guitare;;voix_plus;guitare
+1004;Q320146;Léo Ferré;chanson;voix;claviers;;voix_plus;claviers
+1008;Q15291033;FKA Twigs;électro;voix;claviers;;voix_seul;
+1011;Q276158;Yuri;pop;voix;claviers;claviers;voix_plus;claviers
+1017;Q47500295;Yungblud;rock;voix;claviers|guitare|basse|batterie;;voix_seul;
+1024;Q1141809;Masaharu Fukuyama;pop;voix;guitare;guitare;voix_plus;guitare
+1025;Q442656;Barış Manço;rock;voix;batterie;;voix_seul;
+1027;Q284196;Sam Brown;pop;voix;claviers|guitare|vents;;voix_seul;
+1028;Q184697;Gloria Estefan;pop;voix;guitare|batterie;;voix_seul;
+1030;Q231484;Roberta Flack;R&B;voix;claviers;;voix_plus;claviers
+1031;Q314206;Dan Bălan;pop;voix;guitare;;voix_plus;guitare
+1035;Q27643209;Dara;pop;voix;claviers;;voix_plus;claviers
+1049;Q467027;Buffy Sainte-Marie;électro;voix;guitare;;voix_seul;
+1050;Q346396;Joey Tempest;rock;voix;guitare;;voix_plus;guitare
+1053;Q201204;Dana International;pop;voix;basse;;voix_seul;
+1066;Q130547;Jason Orange;pop;voix;;guitare;voix_plus;guitare
+1068;Q130565;Howard Donald;pop;voix;claviers|vents|batterie;machines|batterie|claviers;voix_plus;batterie|claviers|machines
+1076;Q145480;Taboo;hip-hop;voix;guitare;;voix_seul;
+1086;Q442697;Emma Marrone;pop;voix;guitare;;voix_plus;guitare
+1087;Q434907;Loredana Bertè;pop;voix;guitare;guitare;voix_plus;guitare
+1088;Q489643;Gotye;rock;voix;guitare;batterie|guitare;voix_plus;batterie|guitare
+1090;Q12433089;John Newman;R&B;voix;guitare;;voix_plus;guitare
+1092;Q236361;Gal Costa;latin;voix;guitare;;voix_seul;
+1094;Q229065;Tina Karol;pop;voix;claviers;claviers;voix_plus;claviers
+1096;Q42904;Dima Bilan;pop;voix;claviers;;voix_plus;claviers
+1100;Q188648;Raven-Symoné;R&B;voix;claviers;;voix_plus;claviers
+1110;Q295777;Kenny G;pop;voix;vents;vents;voix_plus;vents
+1120;Q21060390;Cha Eun-woo;latin;voix;claviers|guitare|vents|cordes;;voix_seul;
+1122;Q275875;Verka Serduchka;funk;voix;claviers|guitare|machines;;voix_seul;
+1128;Q492029;Tiziano Ferro;R&B;voix;claviers;;voix_plus;claviers
+1136;Q371986;Paul Weller;pop;voix;guitare;batterie|guitare;voix_plus;batterie|guitare
+1141;Q28113670;Nemo;hip-hop;voix;claviers|cordes|batterie;;voix_seul;
+1144;Q235825;Lena Philipsson;chanson;voix;claviers;;voix_plus;claviers
+1150;Q312883;Boy George;pop;voix;vents;machines;voix_plus;machines
+1153;Q104012678;Ado;pop;voix;guitare;;voix_plus;guitare
+1156;Q1239933;Donald Glover;hip-hop;voix;claviers|batterie;;voix_seul;
+1158;Q224981;Yōko Kanno;pop;voix;claviers;;voix_plus;claviers
+1162;Q311256;Richard Marx;pop;voix;claviers|guitare;claviers|guitare;voix_plus;guitare|claviers
+1164;Q22695683;Francesco Gabbani;pop;voix;claviers|guitare|batterie;;voix_seul;
+1165;Q352246;B-Real;hip-hop;voix;batterie;;voix_seul;
+1168;Q249107;Kevin Richardson;pop;voix;claviers;;voix_plus;claviers
+1170;Q488423;Lee Jun-ho;pop;voix;claviers;;voix_plus;claviers
+1176;Q45667;B.o.B;hip-hop;voix;claviers|guitare;;voix_seul;
+1181;Q179516;Paolo Conte;pop;voix;claviers|batterie;claviers;voix_plus;claviers
+1182;Q10670047;MØ;électro;voix;claviers;;voix_seul;
+1185;Q18161827;Sophie;pop;voix;;machines;voix_plus;machines
+1190;Q316872;Afrika Bambaataa;électro;voix;claviers|machines;;voix_plus;machines
+1199;Q241660;Angie Stone;R&B;voix;vents|claviers;;voix_plus;claviers
+1208;Q233817;Deborah Gibson;pop;voix;claviers;claviers;voix_plus;claviers
+1212;Q497759;Nile Rodgers;R&B;voix;guitare;;voix_plus;guitare
+1222;Q295502;Darren Criss;pop;voix;claviers|guitare|batterie;;voix_seul;
+1223;Q298559;Johnny Logan;pop;voix;guitare;;voix_plus;guitare
+1231;Q1374560;Nicky Jam;hip-hop;voix;claviers;;voix_seul;
+1234;Q265179;Rita Lee;latin;voix;guitare|cordes;;voix_seul;
+1238;Q14517;Mac DeMarco;pop;voix;guitare;;voix_plus;guitare
+1242;Q504636;Marian Gold;pop;voix;;guitare;voix_plus;guitare
+1244;Q3313730;Miki Matsubara;pop;voix;claviers;;voix_plus;claviers
+1251;Q61973202;Laufey;pop;voix;;claviers|guitare;voix_plus;guitare|claviers
+1260;Q18684181;Louane;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+1262;Q331731;Gary Numan;électro;voix;guitare|claviers;;voix_seul;
+1263;Q213736;Bridgit Mendler;R&B;voix;guitare|machines|vents;;voix_seul;
+1271;Q56678033;Jo Yu-ri;pop;voix;claviers;;voix_plus;claviers
+1272;Q45192617;Angèle;chanson;voix;claviers;;voix_plus;claviers
+1273;Q434745;Tinashe;hip-hop;voix;claviers;;voix_seul;
+1279;Q38393;Asha Bhosle;folk;voix;guitare;;voix_plus;guitare
+1281;Q191819;George Martin;pop;voix;claviers;;voix_plus;claviers
+1287;Q310170;Curtis Mayfield;funk;voix;guitare|basse;;voix_plus;guitare
+1295;Q2938630;Redfoo;hip-hop;voix;claviers;;voix_seul;
+1297;Q237081;Ani Lorak;pop;voix;claviers;;voix_plus;claviers
+1300;Q346565;Bill Withers;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+1320;Q362258;Vitas;rock;voix;claviers;;voix_seul;
+1330;Q16232225;Lizzo;R&B;voix;vents;;voix_seul;
+1334;Q231880;Nina Persson;pop;voix;vents|claviers;;voix_seul;
+1335;Q132433;Yuki Kajiura;pop;voix;claviers;claviers;voix_plus;claviers
+1345;Q237387;Dulce María;pop;voix;guitare;;voix_plus;guitare
+1353;Q77112;David Foster;R&B;voix;claviers;;voix_plus;claviers
+1357;Q60758679;Duncan Laurence;pop;voix;claviers;;voix_plus;claviers
+1361;Q489854;Kim Hyun-joong;pop;voix;batterie;;voix_seul;
+1382;Q505455;Jovanotti;pop;voix;batterie;machines;voix_plus;machines
+1383;Q49888;Solomon Burke;R&B;voix;guitare;;voix_plus;guitare
+1387;Q59194713;Morgenshtern;hip-hop;voix;guitare|claviers;;voix_seul;
+1400;Q467423;Robin Thicke;R&B;voix;vents;;voix_seul;
+1404;Q81637;Calvin Harris;électro;voix;claviers|guitare|basse|machines;;voix_seul;
+1410;Q471811;Steve Cropper;R&B;voix;guitare;;voix_plus;guitare
+1416;Q703767;Booker T. Jones;R&B;voix;claviers|guitare|vents;;voix_seul;
+1418;Q230484;Imogen Heap;électro;voix;claviers|guitare|vents|cordes|batterie;;voix_seul;
+1421;Q204005;Debby Ryan;pop;voix;claviers;;voix_plus;claviers
+1429;Q435789;James Ingram;R&B;voix;claviers;;voix_plus;claviers
+1430;Q263194;Joan Armatrading;pop;voix;claviers|guitare;guitare;voix_plus;guitare|claviers
+1431;Q362333;Phil Manzanera;pop;voix;guitare;guitare;voix_plus;guitare
+1433;Q496329;Hyolyn;pop;voix;claviers;claviers;voix_plus;claviers
+1435;Q233081;Vanessa Carlton;pop;voix;claviers;claviers;voix_plus;claviers
+1436;Q272374;Susanna Hoffs;pop;voix;guitare;guitare;voix_plus;guitare
+1445;Q6667429;Logic;hip-hop;voix;claviers|machines;;voix_plus;machines
+1464;Q483158;Yesung;pop;voix;claviers;;voix_plus;claviers
+1472;Q318060;Henri Salvador;latin;voix;guitare;;voix_seul;
+1493;Q207867;Ian Curtis;punk;voix;guitare|claviers;;voix_plus;guitare
+1495;Q192402;Rufus Wainwright;pop;voix;claviers|guitare|vents;claviers;voix_plus;claviers
+1497;Q185610;Will.i.am;hip-hop;voix;basse|claviers|batterie;;voix_seul;
+1505;Q719205;Tetsuya Komuro;pop;voix;claviers|guitare;guitare;voix_plus;guitare|claviers
+1510;Q294449;Lil Jon;hip-hop;voix;claviers|machines;;voix_plus;machines
+1520;Q717626;James Arthur;pop;voix;guitare|batterie;guitare;voix_plus;guitare
+1524;Q242792;Laura Marano;pop;voix;claviers;;voix_plus;claviers
+1539;Q231228;Solange Knowles;R&B;voix;claviers;;voix_plus;claviers
+1541;Q207177;Pixie Lott;pop;voix;claviers;;voix_plus;claviers
+1547;Q1195390;Andrew Ridgeley;pop;voix;claviers|guitare;guitare;voix_plus;guitare|claviers
+1553;Q105542333;Teddy Swims;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+1557;Q217716;DJ Shadow;hip-hop;voix;claviers|machines;;voix_plus;machines
+1563;Q235143;Sharon Corr;pop;voix;claviers|guitare|cordes;claviers|guitare;voix_plus;guitare|claviers
+1566;Q448837;André 3000;hip-hop;voix;guitare;;voix_seul;
+1568;Q125933527;Sarah Toscano;pop;voix;claviers;;voix_plus;claviers
+1569;Q20090091;Alessia Cara;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+1575;Q215300;Jordin Sparks;R&B;voix;guitare;;voix_plus;guitare
+1591;Q5354186;PJ Morton;R&B;voix;machines;;voix_plus;machines
+1599;Q55956050;Oliver Tree;pop;voix;guitare|basse|claviers|machines;;voix_seul;
+1611;Q3595893;Zubeen Garg;pop;voix;claviers|guitare|batterie;;voix_seul;
+1623;Q1053260;Cem Karaca;rock;voix;guitare;;voix_plus;guitare
+1630;Q457306;David Cassidy;pop;voix;claviers;guitare;voix_plus;guitare|claviers
+1631;Q361297;Joseph Jackson;pop;voix;guitare;;voix_plus;guitare
+1632;Q60970;Sákis Rouvás;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+1633;Q229732;Kumi Kōda;électro;voix;guitare;;voix_seul;
+1650;Q239195;Hayley Kiyoko;pop;voix;guitare;;voix_plus;guitare
+1653;Q552479;Brendan Perry;punk;voix;batterie;;voix_seul;
+1658;Q235934;Lisa Stansfield;R&B;voix;guitare;;voix_plus;guitare
+1662;Q209926;Svetlana Loboda;pop;voix;claviers|guitare|batterie|machines;;voix_seul;
+1675;Q176537;Andy Gibb;pop;voix;guitare;;voix_plus;guitare
+1678;Q558799;Muslim Magomayev;pop;voix;claviers;;voix_plus;claviers
+1685;Q28769131;Maggie Rogers;pop;voix;guitare;;voix_plus;guitare
+1687;Q471344;Richard Cocciante;pop;voix;claviers;;voix_plus;claviers
+1689;Q42025;Q-Tip;hip-hop;voix;guitare|basse|claviers|batterie|machines;;voix_seul;
+1690;Q352218;J Dilla;hip-hop;voix;cordes|batterie|claviers;;voix_seul;
+1694;Q887347;Bo Burnham;hip-hop;voix;claviers;;voix_seul;
+1704;Q182991;Benjamin Biolay;chanson;voix;claviers|guitare|vents;;voix_seul;
+1728;Q62887629;Tones and I;pop;voix;claviers;;voix_plus;claviers
+1730;Q455754;Screamin' Jay Hawkins;R&B;voix;claviers;;voix_plus;claviers
+1731;Q356994;Jarvis Cocker;pop;voix;guitare;guitare;voix_plus;guitare
+1732;Q706641;Chad Hugo;hip-hop;voix;claviers|guitare|vents|basse;;voix_seul;
+1742;Q552384;Terence Trent D'Arby;R&B;voix;claviers;;voix_plus;claviers
+1749;Q2750368;Maher Zain;R&B;voix;claviers|guitare|batterie;;voix_seul;
+1750;Q239917;Tina Arena;R&B;voix;claviers;;voix_plus;claviers
+1753;Q951025;Marc Lavoine;chanson;voix;claviers;;voix_plus;claviers
+1756;Q1356701;Julien Clerc;chanson;voix;claviers;;voix_plus;claviers
+1760;Q323470;RedOne;pop;voix;guitare|claviers|batterie;;voix_seul;
+1767;Q471650;Guy-Manuel de Homem-Christo;électro;voix;guitare|basse|batterie|machines;;voix_seul;
+1768;Q62140662;Girl in Red;pop;voix;guitare;;voix_plus;guitare
+1772;Q22072;John Farnham;pop;voix;claviers|guitare|batterie;claviers;voix_plus;claviers
+1774;Q233932;Emina Jahović;pop;voix;guitare;;voix_plus;guitare
+1779;Q466762;Lali Espósito;pop;voix;guitare|vents;;voix_seul;
+1780;Q344983;Kenneth Edmonds;R&B;voix;guitare;;voix_plus;guitare
+1781;Q297548;Jeanette;pop;voix;guitare;;voix_plus;guitare
+1786;Q233750;Skylar Grey;pop;voix;claviers|guitare;claviers|guitare;voix_plus;guitare|claviers
+1788;Q336278;Neil Tennant;pop;voix;guitare|claviers;;voix_plus;guitare|claviers
+1796;Q12470060;Chance the Rapper;hip-hop;voix;claviers;;voix_seul;
+1804;Q25153;Angelo Branduardi;pop;voix;cordes;;voix_seul;
+1812;Q12494180;Lay Zhang;pop;voix;claviers|cordes|batterie|guitare;;voix_seul;
+1826;Q351061;Ryan Tedder;pop;voix;claviers|guitare;claviers|guitare;voix_plus;guitare|claviers
+1839;Q7825754;Tori Kelly;R&B;voix;claviers|guitare|batterie;;voix_seul;
+1842;Q205640;Vinnie Vincent;pop;voix;guitare;guitare;voix_plus;guitare
+1848;Q454807;Gilbert O'Sullivan;pop;voix;claviers;claviers;voix_plus;claviers
+1877;Q19365890;Ermal Meta;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+1895;Q65214814;Conan Gray;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+1900;Q249719;YUI;pop;voix;guitare;guitare;voix_plus;guitare
+1910;Q543613;Michel Berger;chanson;voix;claviers;;voix_plus;claviers
+1913;Q232514;Belinda Peregrín;pop;voix;batterie;;voix_seul;
+1929;Q470216;Matthias Reim;chanson;voix;guitare;;voix_plus;guitare
+1933;Q61100678;Felix Lee;pop;voix;claviers;;voix_plus;claviers
+1959;Q251068;Wang Lee-hom;pop;voix;claviers|guitare|cordes|vents|batterie;guitare;voix_plus;guitare
+1960;Q1153370;Brian McKnight;R&B;voix;claviers|guitare|vents;;voix_seul;
+1969;Q117249;Robbie Robertson;R&B;voix;guitare|cordes|claviers;;voix_seul;
+1982;Q50023;Yōko Hikasa;pop;voix;basse;;voix_seul;
+1987;Q17107619;Astrid S;pop;voix;claviers|guitare|vents;;voix_seul;
+2002;Q380579;Nicholas Tse;pop;voix;guitare;;voix_plus;guitare
+2006;Q386053;Donny Osmond;pop;voix;claviers|vents;vents;voix_plus;vents
+2012;Q26689986;Mark Lee;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+2013;Q235820;Kikki Danielsson;pop;voix;claviers;;voix_plus;claviers
+2018;Q1250861;Karen Carpenter;pop;voix;batterie;batterie;voix_plus;batterie
+2020;Q235182;Kimbra;R&B;voix;guitare;;voix_plus;guitare
+2025;Q540134;Trini Lopez;pop;voix;guitare;guitare;voix_plus;guitare
+2034;Q665090;GEM;R&B;voix;claviers;;voix_plus;claviers
+2035;Q526406;Ric Ocasek;pop;voix;guitare;guitare;voix_plus;guitare
+2039;Q350362;James Blake;électro;voix;claviers|guitare|machines;;voix_seul;
+2043;Q337722;Gavin DeGraw;pop;voix;claviers|guitare;claviers|guitare;voix_plus;guitare|claviers
+2046;Q2420983;Sanna Nielsen;pop;voix;vents;;voix_seul;
+2048;Q320915;David Gray;pop;voix;claviers|guitare;guitare;voix_plus;guitare|claviers
+2057;Q471087;Patrick Fiori;chanson;voix;claviers;;voix_plus;claviers
+2059;Q53453;Alain Souchon;chanson;voix;claviers|guitare;;voix_plus;guitare|claviers
+2061;Q1429449;Florent Pagny;pop;voix;claviers;;voix_plus;claviers
+2062;Q559502;Calogero;chanson;voix;claviers|guitare|basse;;voix_seul;
+2065;Q469734;Véronique Sanson;chanson;voix;claviers|guitare;;voix_plus;guitare|claviers
+2066;Q1363146;Laurent Voulzy;chanson;voix;guitare;;voix_plus;guitare
+2068;Q778539;Cornelius;électro;voix;guitare;;voix_seul;
+2084;Q708236;Ronnie Lane;R&B;voix;guitare|basse;;voix_plus;guitare
+2089;Q1802;Daniel Balavoine;pop;voix;claviers|guitare|batterie;claviers|guitare;voix_plus;guitare|claviers
+2090;Q304675;MF DOOM;hip-hop;voix;machines;;voix_plus;machines
+2102;Q371202;Big Boi;hip-hop;voix;claviers;;voix_seul;
+2112;Q470848;Mel Tormé;pop;voix;claviers|batterie;;voix_seul;
+2127;Q556589;Austin Mahone;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+2135;Q29452199;Jorja Smith;R&B;voix;claviers;;voix_plus;claviers
+2139;Q2365459;Matthieu Chedid;funk;voix;guitare;;voix_plus;guitare
+2140;Q276745;Lenka;pop;voix;claviers;;voix_plus;claviers
+2146;Q49319;Aloe Blacc;R&B;voix;vents|basse|claviers;;voix_seul;
+2153;Q53714;Chord Overstreet;pop;voix;guitare;guitare;voix_plus;guitare
+2158;Q28112930;Sevdaliza;électro;voix;claviers;;voix_seul;
+2161;Q240830;Alison Sudol;pop;voix;claviers;;voix_plus;claviers
+2176;Q503031;Madlib;hip-hop;voix;batterie|machines;;voix_plus;machines
+2179;Q523995;Andrés Calamaro;pop;voix;claviers|guitare|batterie;;voix_seul;
+2189;Q472663;F. R. David;pop;voix;;guitare;voix_plus;guitare
+2191;Q663116;Alexander Rosenbaum;chanson;voix;claviers|guitare;;voix_plus;guitare|claviers
+2197;Q15216612;Jasmine Thompson;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+2199;Q304966;Glenn Medeiros;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+2203;Q558440;Plastic Bertrand;pop;voix;batterie;;voix_seul;
+2204;Q559599;Al Stewart;pop;voix;guitare;;voix_plus;guitare
+2208;Q59670293;Bang Chan;électro;voix;claviers|guitare|machines;;voix_seul;
+2221;Q62871650;Lennon Stella;pop;voix;guitare;;voix_plus;guitare
+2226;Q6176881;Jelly Roll;hip-hop;voix;guitare;;voix_seul;
+2229;Q1154190;Tatsurō Yamashita;pop;voix;guitare;;voix_plus;guitare
+2231;Q267471;Yumi Matsutōya;pop;voix;claviers;claviers;voix_plus;claviers
+2232;Q29561472;Morgan Wallen;pop;voix;;guitare;voix_plus;guitare
+2236;Q2272493;Florence Welch;pop;voix;guitare;batterie|guitare;voix_plus;batterie|guitare
+2267;Q19560068;Alec Benjamin;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+2269;Q233944;Kerli;pop;voix;claviers;claviers;voix_plus;claviers
+2276;Q7696122;Zico;hip-hop;voix;claviers|batterie;;voix_seul;
+2279;Q494190;Jang Na-ra;pop;voix;claviers;;voix_plus;claviers
+2282;Q446945;Kenan Doğulu;pop;voix;guitare;;voix_plus;guitare
+2283;Q214831;David Archuleta;pop;voix;claviers|vents;;voix_seul;
+2286;Q464191;Mari Boine;world;voix;batterie;;voix_seul;
+2294;Q21405456;Jain;électro;voix;guitare|batterie;;voix_seul;
+2295;Q21015390;Sayuri;pop;voix;guitare;;voix_plus;guitare
+2299;Q350353;Jeff Porcaro;pop;voix;batterie;batterie;voix_plus;batterie
+2301;Q282002;Michael McDonald;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+2302;Q356745;Billy Ocean;R&B;voix;guitare;;voix_plus;guitare
+2313;Q453812;Nik Kershaw;pop;voix;guitare|claviers;;voix_plus;guitare|claviers
+2331;Q256910;Minori Chihara;électro;voix;guitare;;voix_seul;
+2332;Q1345099;King Curtis;R&B;voix;vents;;voix_seul;
+2335;Q1010602;Giorgio Gaber;pop;voix;guitare;guitare;voix_plus;guitare
+2339;Q19483782;Moonbyul;pop;voix;claviers|guitare|batterie;;voix_seul;
+2340;Q19603930;Wheein;pop;voix;claviers|batterie;;voix_seul;
+2359;Q63987;Éric Serra;pop;voix;basse;;voix_seul;
+2362;Q111193171;Rosa Linn;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+2364;Q42397176;Pomme;pop;voix;guitare|cordes;;voix_seul;
+2382;Q388286;Bobby Womack;R&B;voix;guitare;;voix_plus;guitare
+2384;Q326281;Scott McKenzie;pop;voix;guitare;;voix_plus;guitare
+2406;Q2086086;Valery Meladze;pop;voix;claviers;claviers;voix_plus;claviers
+2419;Q235095;Peaches;électro;voix;guitare;;voix_seul;
+2428;Q26897673;Grace VanderWaal;pop;voix;claviers|guitare|vents;;voix_seul;
+2433;Q22137038;Bleona Qereti;pop;voix;cordes;;voix_seul;
+2454;Q127252;MakSim;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+2455;Q1972952;Ryan Lewis;hip-hop;voix;guitare;;voix_seul;
+2460;Q896109;Boz Scaggs;R&B;voix;guitare;;voix_plus;guitare
+2464;Q297693;K'Naan;hip-hop;voix;guitare;;voix_seul;
+2470;Q955209;Tomas Ledin;pop;voix;guitare;;voix_plus;guitare
+2476;Q503717;Herman van Veen;chanson;voix;cordes;;voix_seul;
+2478;Q506900;Grandmaster Flash;hip-hop;voix;machines;;voix_plus;machines
+2487;Q53832755;Noah Kahan;pop;voix;guitare;;voix_plus;guitare
+2489;Q85868033;Sanah;pop;voix;cordes|vents;claviers;voix_plus;claviers
+2490;Q39069621;Mabel;pop;voix;claviers;;voix_plus;claviers
+2500;Q294907;Jay Sean;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+2501;Q286547;Alice;pop;voix;claviers;claviers;voix_plus;claviers
+2503;Q1056805;Cesare Cremonini;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+2505;Q20051697;Julia Michaels;électro;voix;claviers;;voix_seul;
+2506;Q313698;Daniel Powter;pop;voix;claviers|guitare;claviers;voix_plus;guitare|claviers
+2509;Q960660;Paulinho Da Costa;R&B;voix;batterie;;voix_seul;
+2510;Q15838567;Christine and the Queens;pop;voix;claviers;claviers;voix_plus;claviers
+2512;Q65028269;Halle Bailey;R&B;voix;claviers|guitare|machines;;voix_seul;
+2518;Q322915;Danger Mouse;hip-hop;voix;guitare|batterie|machines|claviers;;voix_seul;
+2523;Q1074038;Hironobu Kageyama;pop;voix;guitare|vents;;voix_seul;
+2525;Q17811637;James Bay;R&B;voix;guitare;;voix_plus;guitare
+2544;Q230943;China Anne McClain;pop;voix;claviers|guitare|basse;;voix_seul;
+2564;Q22246459;Jonas Blue;hip-hop;voix;claviers;;voix_seul;
+2565;Q380123;Kim Hee-chul;pop;voix;batterie;batterie;voix_plus;batterie
+2568;Q822558;Bernard Lavilliers;chanson;voix;guitare;;voix_plus;guitare
+2578;Q455762;Willy DeVille;R&B;voix;guitare|vents;;voix_plus;guitare
+2580;Q439571;Francesca Michielin;pop;voix;claviers;;voix_plus;claviers
+2588;Q959153;Frank Stallone;pop;voix;;guitare;voix_plus;guitare
+2589;Q1355431;Michael Kiwanuka;R&B;voix;claviers|guitare|basse;;voix_seul;
+2590;Q73463;Miguel;R&B;voix;guitare;;voix_plus;guitare
+2599;Q18613182;Vianney;chanson;voix;claviers|guitare;;voix_plus;guitare|claviers
+2603;Q437927;Irene Grandi;pop;voix;guitare;;voix_plus;guitare
+2622;Q713829;Sly Stone;funk;voix;guitare|claviers;;voix_plus;guitare|claviers
+2623;Q471032;Larry Graham;funk;voix;guitare|basse;;voix_plus;guitare
+2631;Q2706308;Mike D;hip-hop;voix;batterie;;voix_seul;
+2638;Q381883;Aesop Rock;hip-hop;voix;guitare;;voix_seul;
+2641;Q3081533;Francis Lalanne;chanson;voix;guitare;;voix_plus;guitare
+2644;Q12237722;Layal Abboud;pop;voix;claviers;;voix_plus;claviers
+2655;Q2994183;Oleg Gazmanov;chanson;voix;guitare;;voix_plus;guitare
+2659;Q983419;Emin Agalarov;pop;voix;guitare;;voix_plus;guitare
+2668;Q253652;Eliza Doolittle;pop;voix;claviers;;voix_plus;claviers
+2671;Q292092;Sophie B. Hawkins;pop;voix;guitare;guitare;voix_plus;guitare
+2687;Q450453;Michael Holm;chanson;voix;machines;;voix_seul;
+2702;Q16730833;Kiesza;électro;voix;guitare;;voix_seul;
+2708;Q236370;Souad Massi;pop;voix;guitare;guitare;voix_plus;guitare
+2731;Q54836;Molly Sandén;pop;voix;claviers;;voix_plus;claviers
+2738;Q66771;Jasmin Tabatabai;pop;voix;;guitare;voix_plus;guitare
+2739;Q357455;Ray Davies;pop;voix;guitare|vents|claviers;guitare;voix_plus;guitare
+2744;Q153638;Lee Dong-hae;pop;voix;claviers;claviers;voix_plus;claviers
+2747;Q144589;Zak Starkey;pop;voix;batterie;batterie;voix_plus;batterie
+2760;Q504954;Nils Lofgren;pop;voix;guitare|claviers;claviers|guitare;voix_plus;guitare|claviers
+2780;Q231479;Ai Ōtsuka;pop;voix;claviers;claviers;voix_plus;claviers
+2783;Q286298;Justyna Steczkowska;pop;voix;cordes;;voix_seul;
+2786;Q21084;Porter Robinson;pop;voix;claviers|guitare;machines;voix_plus;guitare|claviers|machines
+2796;Q60467634;Seungmin;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+2797;Q505285;Richie Havens;R&B;voix;guitare;;voix_plus;guitare
+2800;Q202752;Željko Joksimović;pop;voix;claviers;;voix_plus;claviers
+2801;Q2662849;Iryna Bilyk;pop;voix;claviers;claviers;voix_plus;claviers
+2813;Q380147;Lucky Dube;reggae;voix;guitare;;voix_seul;
+2825;Q510568;Afric Simone;pop;voix;guitare|batterie;;voix_seul;
+2826;Q433587;Chris Lowe;pop;voix;claviers;;voix_plus;claviers
+2835;Q1373824;Pierre Bachelet;chanson;voix;claviers;;voix_plus;claviers
+2836;Q60994278;Han Ji-sung;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+2837;Q347159;Kevin Moore;électro;voix;claviers;;voix_seul;
+2839;Q237548;Kate Nash;pop;voix;guitare|basse;guitare;voix_plus;guitare
+2845;Q958683;Nick Kamen;pop;voix;guitare|basse;;voix_seul;
+2848;Q621294;Alessandro Cortini;électro;voix;guitare|basse|claviers|machines;;voix_seul;
+2851;Q716361;Richard Hawley;pop;voix;guitare;guitare;voix_plus;guitare
+2852;Q29016765;Alice Merton;pop;voix;claviers;claviers;voix_plus;claviers
+2854;Q27953522;Woodz;pop;voix;guitare;;voix_plus;guitare
+2862;Q269532;MISIA;R&B;voix;claviers;;voix_plus;claviers
+2865;Q561484;Antonello Venditti;pop;voix;claviers;claviers;voix_plus;claviers
+2875;Q1056163;Marc Cerrone;funk;voix;batterie;;voix_seul;
+2876;Q435681;Ben Folds;pop;voix;claviers;claviers;voix_plus;claviers
+2877;Q300300;AZ;hip-hop;voix;claviers;;voix_seul;
+2879;Q60458248;Bilal Hassani;pop;voix;claviers;;voix_plus;claviers
+2881;Q268284;Mike Posner;pop;voix;claviers;machines;voix_plus;claviers|machines
+2882;Q17306112;Tyler Joseph;hip-hop;voix;claviers|basse|guitare|batterie;claviers|guitare;voix_plus;guitare|claviers
+2883;Q489838;Leeteuk;pop;voix;claviers;claviers;voix_plus;claviers
+2904;Q316301;James Morrison;R&B;voix;guitare|vents;;voix_plus;guitare
+2910;Q558304;Murat Boz;R&B;voix;claviers|cordes|batterie;;voix_seul;
+2911;Q483288;Nichkhun;hip-hop;voix;claviers;;voix_seul;
+2915;Q720599;Tevin Campbell;R&B;voix;claviers;;voix_plus;claviers
+2917;Q65063;Nino de Angelo;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+2940;Q489556;Amber Liu;pop;voix;guitare;;voix_plus;guitare
+2946;Q117353279;Zaho de Sagazan;pop;voix;claviers|machines;;voix_seul;
+2950;Q453048;Everlast;hip-hop;voix;guitare;;voix_seul;
+2953;Q302400;Aaron Neville;funk;voix;batterie;;voix_seul;
+2956;Q144166;Zaho;hip-hop;voix;claviers|guitare;;voix_seul;
+2969;Q235613;Younha;pop;voix;claviers;claviers;voix_plus;claviers
+2983;Q2028076;Yuri Shatunov;pop;voix;guitare|claviers|batterie|machines|vents;;voix_seul;
+2984;Q258750;India.Arie;R&B;voix;guitare|vents;;voix_plus;guitare
+2989;Q68543;Clarence Clemons;R&B;voix;vents;;voix_seul;
+3004;Q237654;Lisa Loeb;pop;voix;guitare;machines|guitare;voix_plus;guitare|machines
+3005;Q145633;Graham Bonnet;R&B;voix;guitare;;voix_plus;guitare
+3007;Q746618;Philip Bailey;R&B;voix;claviers|batterie;;voix_plus;claviers
+3008;Q267666;Nikka Costa;pop;voix;guitare;;voix_plus;guitare
+3018;Q505692;Peter Murphy;punk;voix;guitare;;voix_plus;guitare
+3019;Q257182;Yvonne Elliman;pop;voix;claviers;guitare;voix_plus;guitare|claviers
+3025;Q504458;Huey Lewis;R&B;voix;vents;;voix_seul;
+3028;Q717198;Pick Withers;funk;voix;batterie;;voix_seul;
+3030;Q235931;Teena Marie;funk;voix;guitare|claviers|batterie;;voix_seul;
+3037;Q3268191;Saara Aalto;pop;voix;claviers;;voix_plus;claviers
+3040;Q315181;Alex Sparrow;pop;voix;claviers|guitare|vents|cordes|batterie;;voix_seul;
+3041;Q2356011;Youri Antonov;pop;voix;claviers|guitare|machines;guitare;voix_plus;guitare
+3051;Q1273345;Johnny Ace;R&B;voix;claviers;;voix_plus;claviers
+3052;Q311970;Brian McFadden;pop;voix;guitare;;voix_plus;guitare
+3055;Q291405;Sky Ferreira;pop;voix;guitare;;voix_plus;guitare
+3077;Q714167;Björn Skifs;pop;voix;claviers;;voix_plus;claviers
+3078;Q229449;Severina Vučković;pop;voix;claviers;;voix_plus;claviers
+3090;Q2072790;Adam Young;pop;voix;claviers;batterie|guitare;voix_plus;batterie|guitare|claviers
+3092;Q229383;Sirusho;R&B;voix;claviers;;voix_plus;claviers
+3100;Q464138;Yael Naim;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+3104;Q551154;Daz Dillinger;hip-hop;voix;claviers|batterie|machines;;voix_seul;
+3129;Q225855;Afroman;hip-hop;voix;guitare|basse;;voix_seul;
+3131;Q762906;JoeyStarr;hip-hop;voix;batterie;;voix_seul;
+3142;Q1242168;Michael Schulte;pop;voix;;guitare;voix_plus;guitare
+3147;Q346607;Dee Dee Ramone;hip-hop;voix;guitare|basse;;voix_seul;
+3153;Q482855;Kim Ryeo-wook;pop;voix;claviers;claviers;voix_plus;claviers
+3166;Q1601889;Helena Josefsson;pop;voix;vents;;voix_seul;
+3193;Q1783775;Kool Keith;hip-hop;voix;guitare|basse;;voix_seul;
+3209;Q983452;Guy Sebastian;pop;voix;guitare;;voix_plus;guitare
+3219;Q944744;Bill Bailey;pop;voix;claviers|guitare;claviers|guitare;voix_plus;guitare|claviers
+3220;Q454567;Tove Styrke;pop;voix;guitare;;voix_plus;guitare
+3221;Q1051876;Chisato Moritaka;pop;voix;guitare|claviers|batterie;batterie|guitare;voix_plus;batterie|guitare
+3228;Q18802;Eva Simons;pop;voix;vents;;voix_seul;
+3232;Q313627;Tricky;électro;voix;vents|claviers;;voix_seul;
+3233;Q12309788;Ella Henderson;pop;voix;claviers;;voix_plus;claviers
+3242;Q1353559;Mort Shuman;pop;voix;claviers|guitare;claviers;voix_plus;guitare|claviers
+3255;Q260597;Veronica Maggio;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+3261;Q552500;Christopher;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+3263;Q26451151;Ten;pop;voix;claviers;;voix_plus;claviers
+3265;Q84803821;Fujii Kaze;R&B;voix;claviers|vents;;voix_plus;claviers
+3269;Q494222;Lee Sung-min;pop;voix;claviers;claviers;voix_plus;claviers
+3270;Q483161;Eunhyuk;pop;voix;claviers;;voix_plus;claviers
+3273;Q24064;Amanda Somerville;pop;voix;claviers;;voix_plus;claviers
+3290;Q705333;David Clayton-Thomas;funk;voix;guitare;;voix_plus;guitare
+3297;Q526625;Andy Mackay;pop;voix;cordes|vents|claviers;vents;voix_plus;vents
+3302;Q265508;Ivana Spagna;funk;voix;claviers;;voix_plus;claviers
+3310;Q107424;Akiko Yano;pop;voix;claviers;claviers;voix_plus;claviers
+3313;Q365400;Arsenie Todiraș;funk;voix;basse;;voix_seul;
+3333;Q133288725;Sofia Isella;pop;voix;guitare|cordes|claviers;;voix_seul;
+3334;Q438175;Pål Waaktaar-Savoy;pop;voix;guitare;claviers|guitare;voix_plus;guitare|claviers
+3337;Q1372615;Yui Makino;pop;voix;claviers;claviers;voix_plus;claviers
+3342;Q368852;Seo Tai-ji;pop;voix;guitare|basse;;voix_seul;
+3347;Q446588;Eva Dahlgren;pop;voix;guitare;;voix_plus;guitare
+3350;Q1262889;Anohni;électro;voix;claviers;;voix_seul;
+3351;Q435968;Jenny Lewis;pop;voix;claviers|guitare|basse|vents;;voix_seul;
+3357;Q483638;Park Ye-eun;pop;voix;claviers;claviers;voix_plus;claviers
+3358;Q116450762;Alessandra Mele;pop;voix;guitare;;voix_plus;guitare
+3359;Q16240326;Bea Miller;pop;voix;guitare;;voix_plus;guitare
+3363;Q549233;Sam Hui;pop;voix;guitare;;voix_plus;guitare
+3372;Q21932286;Kristian Kostov;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+3384;Q983256;Roddy Bottum;pop;voix;;guitare;voix_plus;guitare
+3388;Q498199;Song Jieun;pop;voix;claviers;claviers;voix_plus;claviers
+3400;Q2026639;Noize MC;hip-hop;voix;guitare|basse|claviers;;voix_seul;
+3401;Q372438;Ralf Hütter;électro;voix;machines|claviers;;voix_plus;machines
+3406;Q964028;Håkan Hellström;pop;voix;guitare|claviers|batterie|basse;batterie;voix_plus;batterie
+3417;Q510361;Nina Nesbitt;pop;voix;claviers|guitare|batterie|vents;claviers|guitare;voix_plus;guitare|claviers
+3435;Q1086377;Christophe Maé;pop;voix;guitare|cordes|batterie;;voix_seul;
+3437;Q955347;Raphaël;chanson;voix;guitare;guitare;voix_plus;guitare
+3458;Q822401;Bernard Edwards;R&B;voix;guitare;;voix_plus;guitare
+3473;Q292373;Barbara Mandrell;pop;voix;guitare|vents|claviers;;voix_seul;
+3489;Q1391164;Tamer Hosny;pop;voix;claviers|guitare;claviers|guitare;voix_plus;guitare|claviers
+3491;Q19310473;Levante;pop;voix;claviers|guitare|basse;;voix_seul;
+3499;Q537899;Chris Vrenna;R&B;voix;batterie;;voix_seul;
+3500;Q223595;Željko Bebek;pop;voix;guitare;;voix_plus;guitare
+3501;Q72720;Meshell Ndegeocello;hip-hop;voix;guitare|basse|claviers;;voix_seul;
+3508;Q45402;Rainhard Fendrich;pop;voix;guitare;;voix_plus;guitare
+3517;Q153773;Heo Young-saeng;pop;voix;claviers;machines;voix_plus;claviers|machines
+3518;Q236066;Amanda Michalka;pop;voix;claviers|guitare;guitare;voix_plus;guitare|claviers
+3520;Q237345;Crystal Kay;R&B;voix;claviers;;voix_plus;claviers
+3524;Q558582;Ronnie Milsap;pop;voix;claviers;claviers;voix_plus;claviers
+3526;Q59831589;Yang Jeong-in;pop;voix;claviers;;voix_plus;claviers
+3527;Q1377827;Ayaka Hirahara;pop;voix;vents;vents;voix_plus;vents
+3558;Q568578;Julien Doré;chanson;voix;guitare;;voix_plus;guitare
+3577;Q1154184;Ryō Nishikido;pop;voix;guitare;;voix_plus;guitare
+3595;Q552529;Ted Gärdestad;pop;voix;claviers;;voix_plus;claviers
+3597;Q353454;Horace Andy;électro;voix;guitare|batterie;;voix_seul;
+3603;Q116020;Patrick Juvet;funk;voix;claviers;;voix_plus;claviers
+3604;Q455147;Susanne Sundfør;pop;voix;claviers|vents;;voix_seul;
+3606;Q1249010;Nat Wolff;pop;voix;claviers;;voix_plus;claviers
+3615;Q319784;Tapio Rautavaara;chanson;voix;guitare;;voix_plus;guitare
+3619;Q755830;Atif Aslam;pop;voix;guitare;;voix_plus;guitare
+3624;Q486847;Yoo Young-jin;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+3628;Q59209423;Roddy Ricch;hip-hop;voix;claviers;;voix_seul;
+3639;Q1277670;Marshall Grant;électro;voix;guitare|basse;;voix_seul;
+3650;Q17305889;Josh Dun;pop;voix;vents|batterie;batterie;voix_plus;batterie
+3655;Q2631745;Igor Krutoy;pop;voix;claviers;claviers;voix_plus;claviers
+3662;Q233971;Lenny Kuhr;pop;voix;guitare;guitare;voix_plus;guitare
+3666;Q268904;Titiyo;pop;voix;guitare;;voix_plus;guitare
+3671;Q254611;Yukiko Okada;pop;voix;claviers;claviers;voix_plus;claviers
+3688;Q483926;Kim Hyung-jun;pop;voix;;machines;voix_plus;machines
+3695;Q456747;Vitaa;R&B;voix;claviers;;voix_plus;claviers
+3696;Q1395732;Moein;pop;voix;cordes;;voix_seul;
+3710;Q863212;Billy Paul;R&B;voix;vents;;voix_seul;
+3712;Q26058;James Maslow;pop;voix;claviers|guitare|batterie;;voix_seul;
+3718;Q1359620;Satomi Satō;pop;voix;batterie;;voix_seul;
+3720;Q958290;Shane Harper;pop;voix;guitare;;voix_plus;guitare
+3736;Q483171;Shindong;pop;voix;claviers;;voix_plus;claviers
+3740;Q455443;Anna Jantar;funk;voix;claviers;;voix_plus;claviers
+3755;Q45447;Georg Danzer;pop;voix;guitare;;voix_plus;guitare
+3757;Q211337;Ívi Adámou;pop;voix;vents;;voix_seul;
+3761;Q235645;Axelle Red;pop;voix;guitare;;voix_plus;guitare
+3764;Q231472;Corinne Bailey Rae;R&B;voix;guitare;;voix_plus;guitare
+3783;Q2260801;Al B. Sure!;R&B;voix;claviers;;voix_plus;claviers
+3784;Q5351107;El DeBarge;R&B;voix;claviers;;voix_plus;claviers
+3785;Q258846;Rickie Lee Jones;pop;voix;claviers|guitare|machines;guitare;voix_plus;guitare
+3791;Q230470;Connie Talbot;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+3807;Q45383;Frank Zander;chanson;voix;guitare;;voix_plus;guitare
+3812;Q563057;Charlie Rich;pop;voix;claviers|guitare;claviers;voix_plus;guitare|claviers
+3825;Q1369920;Greg Phillinganes;R&B;voix;claviers;;voix_plus;claviers
+3829;Q304229;Gianluca Grignani;pop;voix;guitare;;voix_plus;guitare
+3834;Q298360;Greyson Chance;pop;voix;claviers;claviers;voix_plus;claviers
+3835;Q506288;Andrew McMahon;pop;voix;claviers;claviers;voix_plus;claviers
+3844;Q235440;Lotta Engberg;chanson;voix;claviers;;voix_plus;claviers
+3846;Q339031;Van Dyke Parks;pop;voix;guitare;claviers;voix_plus;guitare|claviers
+3864;Q689968;Luca Hänni;pop;voix;claviers|guitare|batterie;guitare;voix_plus;guitare
+3866;Q230836;Emilie Autumn;électro;voix;claviers|cordes;;voix_seul;
+3870;Q2837697;Allan Clarke;pop;voix;;guitare;voix_plus;guitare
+3873;Q438874;Tracey Thorn;pop;voix;guitare;guitare;voix_plus;guitare
+3875;Q60194;Sonique;électro;voix;machines;;voix_plus;machines
+3881;Q1751354;Andy Khachaturian;électro;voix;batterie;;voix_seul;
+3882;Q2045848;Michael Patrick Kelly;pop;voix;guitare;guitare;voix_plus;guitare
+3888;Q306665;Miwa;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+3894;Q21005558;Daya;pop;voix;claviers|guitare|vents|cordes;;voix_seul;
+3908;Q96711898;Lilas Ikuta;pop;voix;guitare;;voix_plus;guitare
+3913;Q732135;Chrisye;pop;voix;basse;;voix_seul;
+3918;Q242589;Meja;pop;voix;guitare;;voix_plus;guitare
+3920;Q493526;Yong Jun-hyung;pop;voix;claviers;;voix_plus;claviers
+3926;Q472891;Jeremih;hip-hop;voix;batterie;;voix_seul;
+3939;Q940891;Alex Wolff;pop;voix;guitare;batterie;voix_plus;batterie|guitare
+3940;Q15715520;Ichiko Aoba;pop;voix;guitare;guitare;voix_plus;guitare
+3945;Q707990;Pete Rock;hip-hop;voix;machines;;voix_plus;machines
+3949;Q233946;Kate Voegele;pop;voix;claviers|guitare;claviers|guitare;voix_plus;guitare|claviers
+3956;Q6969;Stefan Raab;pop;voix;batterie|vents;;voix_seul;
+3963;Q2421754;Andranik Madadian;pop;voix;guitare;;voix_plus;guitare
+3968;Q267764;DJ Paul;hip-hop;voix;claviers|machines;;voix_plus;machines
+3974;Q106604082;Jamie Miller;R&B;voix;claviers;;voix_plus;claviers
+3988;Q1161511;Daniel Lavoie;pop;voix;claviers;claviers;voix_plus;claviers
+3991;Q56733980;Steve Lacy;R&B;voix;guitare|claviers|batterie|machines;;voix_seul;
+4005;Q465296;Beth Orton;électro;voix;guitare;;voix_seul;
+4019;Q236075;Alyson Michalka;pop;voix;claviers|guitare;guitare;voix_plus;guitare|claviers
+4025;Q362277;Kazunari Ninomiya;pop;voix;guitare;guitare;voix_plus;guitare
+4028;Q721223;Christophe Willem;pop;voix;claviers;;voix_plus;claviers
+4029;Q51010;Stephan Eicher;pop;voix;claviers|guitare|machines;;voix_seul;
+4030;Q1600132;Roch Voisine;pop;voix;guitare;;voix_plus;guitare
+4031;Q6723363;Ruth Lorenzo;pop;voix;guitare;;voix_plus;guitare
+4036;Q56278318;Yoon San-ha;pop;voix;guitare;;voix_plus;guitare
+4050;Q983297;Shahin Najafi;hip-hop;voix;guitare;;voix_seul;
+4051;Q263582;Vika Jigulina;électro;voix;claviers|guitare;;voix_seul;
+4055;Q359474;Necro;hip-hop;voix;guitare;;voix_seul;
+4067;Q108489502;Chloe Bailey;R&B;voix;claviers|guitare|machines;;voix_seul;
+4071;Q1335425;Mike Campbell;pop;voix;guitare;guitare;voix_plus;guitare
+4076;Q762673;Joyce Jonathan;pop;voix;claviers|guitare;guitare;voix_plus;guitare|claviers
+4077;Q1444256;Lodovica Comello;pop;voix;guitare;;voix_plus;guitare
+4079;Q433039;Natalia Gordienko;R&B;voix;claviers;;voix_plus;claviers
+4082;Q11773473;Roy Kim;pop;voix;guitare;;voix_plus;guitare
+4089;Q652535;Agnes Chan;pop;voix;guitare;;voix_plus;guitare
+4100;Q234428;Marit Larsen;pop;voix;guitare;claviers|guitare;voix_plus;guitare|claviers
+4104;Q4283235;Aleksandr Marshal;pop;voix;claviers|guitare|basse;guitare;voix_plus;guitare
+4115;Q446767;Marcella Bella;pop;voix;guitare;;voix_plus;guitare
+4153;Q23091498;Desiigner;hip-hop;voix;batterie;;voix_seul;
+4156;Q20972211;Wen Junhui;pop;voix;claviers;;voix_plus;claviers
+4162;Q27671324;Tash Sultana;R&B;voix;guitare|batterie|claviers;;voix_seul;
+4182;Q430744;Kristina;pop;voix;claviers;;voix_plus;claviers
+4183;Q32361743;Monetotchka;pop;voix;claviers|machines;;voix_seul;
+4188;Q20729;Cro;hip-hop;voix;claviers;;voix_seul;
+4198;Q236078;Aysel Teymurzade;pop;voix;claviers;claviers;voix_plus;claviers
+4222;Q353853;Luan Santana;pop;voix;guitare;;voix_plus;guitare
+4224;Q206693;Alex Chilton;pop;voix;guitare;guitare;voix_plus;guitare
+4239;Q740036;Genesis P-Orridge;électro;voix;cordes|guitare|machines;;voix_seul;
+4262;Q138312989;Akylas;hip-hop;voix;guitare;;voix_seul;
+4274;Q684702;Henri Dès;chanson;voix;guitare;;voix_plus;guitare
+4290;Q555311;Bénabar;chanson;voix;guitare;;voix_plus;guitare
+4292;Q2990358;Frédéric François;pop;voix;cordes;;voix_seul;
+4296;Q738505;Renan Luce;chanson;voix;claviers|guitare|basse;;voix_seul;
+4297;Q2597731;Axel Bauer;pop;voix;;guitare;voix_plus;guitare
+4313;Q445944;Anita Doth;électro;voix;claviers;;voix_seul;
+4317;Q100592185;Luna;pop;voix;cordes;;voix_seul;
+4321;Q1895317;Rod Argent;pop;voix;claviers;claviers;voix_plus;claviers
+4324;Q3496995;Gabriela Gunčíková;pop;voix;guitare;;voix_plus;guitare
+4328;Q459443;Peter Cornelius;pop;voix;guitare;guitare;voix_plus;guitare
+4335;Q554971;Johnny Dorelli;pop;voix;;claviers;voix_plus;claviers
+4344;Q72429;Judith Holofernes;pop;voix;claviers|guitare;claviers|guitare;voix_plus;guitare|claviers
+4349;Q540655;Graham Gouldman;pop;voix;guitare;guitare;voix_plus;guitare
+4361;Q781767;Boots Randolph;pop;voix;vents;vents;voix_plus;vents
+4364;Q453565;Jim Keltner;R&B;voix;batterie;;voix_seul;
+4366;Q2353921;Steve Jordan;funk;voix;batterie;;voix_seul;
+4368;Q545186;Dave Edmunds;pop;voix;guitare;guitare;voix_plus;guitare
+4376;Q361329;Gazebo;funk;voix;claviers|guitare;;voix_plus;guitare|claviers
+4378;Q442942;Miho Hatori;électro;voix;guitare|machines;;voix_plus;machines
+4380;Q61989561;Milet;électro;voix;guitare;;voix_seul;
+4399;Q133040458;Zoë Më;pop;voix;;claviers;voix_plus;claviers
+4402;Q344784;Adam Yauch;hip-hop;voix;guitare|basse;;voix_seul;
+4406;Q486443;Henry Lau;pop;voix;claviers|guitare|cordes|batterie;;voix_seul;
+4414;Q594644;Félix Leclerc;chanson;voix;guitare;;voix_plus;guitare
+4419;Q357168;Kurt Nilsen;pop;voix;guitare;guitare;voix_plus;guitare
+4420;Q20810369;Anderson .Paak;R&B;voix;batterie;;voix_seul;
+4421;Q442721;Kendall Schmidt;pop;voix;guitare;;voix_plus;guitare
+4422;Q26294;Logan Henderson;pop;voix;claviers;claviers|guitare;voix_plus;guitare|claviers
+4425;Q242873;Ingrid Michaelson;pop;voix;claviers|guitare;claviers|guitare;voix_plus;guitare|claviers
+4429;Q2327625;Hector Zazou;pop;voix;claviers;;voix_plus;claviers
+4432;Q954231;Randy Edelman;pop;voix;claviers;;voix_plus;claviers
+4433;Q45430;Florian Silbereisen;chanson;voix;claviers;;voix_plus;claviers
+4439;Q372820;Jerry Butler;R&B;voix;claviers|guitare|vents|basse|batterie;;voix_seul;
+4449;Q493733;Lasse Berghagen;pop;voix;guitare;;voix_plus;guitare
+4453;Q235203;Angela Aki;pop;voix;claviers;claviers;voix_plus;claviers
+4460;Q66102;Mandy Capristo;pop;voix;claviers;claviers;voix_plus;claviers
+4462;Q40856678;Noga Erez;hip-hop;voix;machines;;voix_plus;machines
+4466;Q454959;May J.;R&B;voix;guitare;;voix_plus;guitare
+4477;Q633278;Akira Terao;pop;voix;guitare;;voix_plus;guitare
+4483;Q1198056;Johnnie Ray;pop;voix;claviers;claviers;voix_plus;claviers
+4495;Q55078258;Ana Guerra;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+4503;Q441600;Spike Edney;R&B;voix;claviers;;voix_plus;claviers
+4505;Q454075;Magne Furuholmen;pop;voix;claviers|guitare;claviers|guitare;voix_plus;guitare|claviers
+4532;Q43571872;Mikolas Josef;hip-hop;voix;guitare;;voix_seul;
+4535;Q449525;Chas Chandler;R&B;voix;guitare|basse;;voix_plus;guitare
+4544;Q463826;Bianka;R&B;voix;claviers;;voix_plus;claviers
+4548;Q54867;Trace Cyrus;pop;voix;guitare;guitare;voix_plus;guitare
+4558;Q1351217;Eric Bobo;hip-hop;voix;batterie;;voix_seul;
+4561;Q180723;Ami Suzuki;pop;voix;guitare;machines;voix_plus;guitare|machines
+4562;Q284066;Aiko;pop;voix;claviers;;voix_plus;claviers
+4563;Q469256;Emel Mathlouthi;électro;voix;guitare;;voix_seul;
+4567;Q1775181;Mark Feehily;pop;voix;claviers;claviers;voix_plus;claviers
+4575;Q62929;Tom Beck;pop;voix;claviers;claviers|guitare;voix_plus;guitare|claviers
+4594;Q237439;Paula Seling;pop;voix;vents;machines;voix_plus;machines
+4599;Q28109988;Jeangu Macrooy;pop;voix;guitare;;voix_plus;guitare
+4601;Q2338487;Svika Pick;pop;voix;claviers;;voix_plus;claviers
+4609;Q260570;Karin Dreijer;électro;voix;guitare|claviers;;voix_seul;
+4627;Q349799;Ad-Rock;hip-hop;voix;guitare;;voix_seul;
+4634;Q283385;Sharleen Spiteri;pop;voix;guitare;;voix_plus;guitare
+4638;Q1154202;DJ Mehdi;hip-hop;voix;machines;;voix_plus;machines
+4648;Q1342944;Michel Jonasz;R&B;voix;guitare|claviers;;voix_plus;guitare|claviers
+4649;Q26924937;Weyes Blood;pop;voix;guitare;;voix_plus;guitare
+4660;Q235601;Rachael Yamagata;R&B;voix;claviers;;voix_plus;claviers
+4662;Q1199942;Alaska;pop;voix;guitare;;voix_plus;guitare
+4669;Q461316;Antonella Ruggiero;pop;voix;batterie;;voix_seul;
+4678;Q15640304;Max Korzh;hip-hop;voix;claviers|guitare|machines;;voix_seul;
+4680;Q552341;Plan B;pop;voix;guitare;guitare;voix_plus;guitare
+4687;Q1337779;Raphael Saadiq;R&B;voix;guitare|basse;;voix_plus;guitare
+4697;Q726170;Erlend Øye;électro;voix;claviers|guitare;;voix_seul;
+4703;Q944563;Richard Coles;pop;voix;claviers|vents;;voix_seul;
+4714;Q489952;Eugene;pop;voix;claviers;claviers;voix_plus;claviers
+4718;Q497735;Baek A-yeon;pop;voix;claviers;claviers;voix_plus;claviers
+4731;Q863257;Billy Vaughn;pop;voix;vents;;voix_seul;
+4732;Q46321;Tinie Tempah;électro;voix;claviers;;voix_seul;
+4741;Q4170757;Yohio;pop;voix;claviers;guitare;voix_plus;guitare|claviers
+4745;Q713964;Lil' Cease;hip-hop;voix;claviers;;voix_seul;
+4756;Q25442068;Mélovin;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+4763;Q730108;Sisqó;R&B;voix;claviers;;voix_plus;claviers
+4772;Q233393;Marion Raven;pop;voix;;guitare;voix_plus;guitare
+4784;Q1647719;Caroline Corr;pop;voix;claviers|batterie;batterie|claviers;voix_plus;batterie|claviers
+4798;Q451821;Scott Storch;hip-hop;voix;claviers|guitare;;voix_seul;
+4801;Q2781934;Kamaliya;pop;voix;cordes;;voix_seul;
+4808;Q236491;Poli Guénova;pop;voix;vents;;voix_seul;
+4811;Q453841;Tal;chanson;voix;guitare;;voix_plus;guitare
+4825;Q529942;Francis Bebey;électro;voix;guitare|vents;;voix_seul;
+4843;Q624995;Sunmi;pop;voix;basse;;voix_seul;
+4844;Q242113;Kanon Wakeshima;pop;voix;cordes;;voix_seul;
+4853;Q2521353;Hirokazu Tanaka;pop;voix;claviers;;voix_plus;claviers
+4863;Q704160;Diego Torres;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+4864;Q490938;Yang Hyun-suk;hip-hop;voix;batterie;;voix_seul;
+4867;Q63248118;Maisie Peters;pop;voix;guitare;;voix_plus;guitare
+4889;Q5428556;Erika Ikuta;pop;voix;claviers;claviers;voix_plus;claviers
+4890;Q234106;Emilia Rydberg;R&B;voix;claviers;;voix_plus;claviers
+4897;Q463221;Lynsey de Paul;pop;voix;claviers;claviers;voix_plus;claviers
+4907;Q381405;Gareth Gates;pop;voix;claviers;;voix_plus;claviers
+4908;Q1955143;Tim Finn;pop;voix;claviers|guitare;claviers;voix_plus;guitare|claviers
+4909;Q1347285;Erick Sermon;hip-hop;voix;machines;;voix_plus;machines
+4921;Q1384492;Lars Winnerbäck;pop;voix;guitare;;voix_plus;guitare
+4925;Q825557;Bernhard Lloyd;pop;voix;claviers;;voix_plus;claviers
+4927;Q15493504;Aram Mp3;pop;voix;claviers|guitare;guitare;voix_plus;guitare|claviers
+4931;Q205322;Frankie Knuckles;R&B;voix;machines;;voix_plus;machines
+4932;Q290914;Cécile Corbel;pop;voix;cordes;;voix_seul;
+4938;Q950117;Magnus Carlsson;pop;voix;claviers;;voix_plus;claviers
+4944;Q433273;Carol Kaye;R&B;voix;guitare|basse;;voix_plus;guitare
+4949;Q1974797;Igor Nikolayev;pop;voix;claviers|guitare|machines;guitare;voix_plus;guitare
+4959;Q311601;Tom Dice;pop;voix;guitare;guitare;voix_plus;guitare
+4962;Q236505;Lisa Miskovsky;pop;voix;guitare|vents;guitare;voix_plus;guitare
+4963;Q122823;Stella Mwangi;pop;voix;claviers;;voix_plus;claviers
+4964;Q287553;Sylwia Grzeszczak;R&B;voix;claviers;;voix_plus;claviers
+4982;Q303464;Alan Dawa Dolma;pop;voix;claviers;claviers;voix_plus;claviers
+4986;Q1067043;Charlie Wilson;R&B;voix;claviers|batterie;;voix_plus;claviers
+4987;Q498805;Bada;pop;voix;claviers;;voix_plus;claviers
+4991;Q324327;Corneille;R&B;voix;guitare;;voix_plus;guitare
+5005;Q1380592;Krzysztof Krawczyk;funk;voix;guitare;;voix_plus;guitare
+5006;Q20752020;Madilyn Bailey;pop;voix;claviers|guitare|batterie|basse;;voix_seul;
+5012;Q21824868;Xu Minghao;électro;voix;machines;;voix_plus;machines
+5032;Q116524740;Blanka Stajkow;pop;voix;guitare;;voix_plus;guitare
+5039;Q783992;Burton Cummings;pop;voix;claviers|guitare|vents|batterie;claviers;voix_plus;claviers
+5049;Q1989101;Dmitry Malikov;pop;voix;claviers;claviers;voix_plus;claviers
+5058;Q1523538;Henry Kaiser;funk;voix;guitare;;voix_plus;guitare
+5063;Q297835;Sophie Zelmani;pop;voix;guitare;guitare;voix_plus;guitare
+5065;Q29855173;Eve;pop;voix;guitare;;voix_plus;guitare
+5068;Q305161;Pasha Parfeni;pop;voix;claviers;;voix_plus;claviers
+5089;Q266080;Sara Tavares;pop;voix;guitare;claviers|guitare;voix_plus;guitare|claviers
+5091;Q87065831;Gjon's Tears;pop;voix;claviers;;voix_plus;claviers
+5105;Q1335192;Gérald de Palmas;pop;voix;guitare;;voix_plus;guitare
+5106;Q2451001;Yves Simon;chanson;voix;guitare;;voix_plus;guitare
+5111;Q2287482;Simon Fowler;pop;voix;guitare;guitare;voix_plus;guitare
+5126;Q590978;Dani Martín;pop;voix;guitare;;voix_plus;guitare
+5138;Q5244872;Kurt Hugo Schneider;pop;voix;claviers;claviers;voix_plus;claviers
+5140;Q444518;Ninet Tayeb;pop;voix;guitare;;voix_plus;guitare
+5142;Q2484709;Perfume Genius;pop;voix;claviers;;voix_plus;claviers
+5158;Q230395;Meaghan Jette Martin;pop;voix;claviers|guitare;claviers|guitare;voix_plus;guitare|claviers
+5164;Q708506;David Banner;hip-hop;voix;machines;;voix_plus;machines
+5187;Q528835;Grégoire;pop;voix;guitare;;voix_plus;guitare
+5188;Q3376698;Peter Kingsbery;pop;voix;claviers;claviers;voix_plus;claviers
+5212;Q291431;Nneka;R&B;voix;claviers|guitare|batterie;;voix_seul;
+5218;Q54351;Lee Seung-chul;pop;voix;guitare;;voix_plus;guitare
+5227;Q28589212;Irina Rimes;pop;voix;claviers;;voix_plus;claviers
+5242;Q1041749;Kōji Tamaki;pop;voix;guitare;;voix_plus;guitare
+5246;Q491902;Lee Jung-shin;hip-hop;voix;basse;;voix_seul;
+5251;Q518206;Orlando Brown;R&B;voix;batterie;;voix_seul;
+5270;Q2610405;Taylor Hanson;pop;voix;claviers;;voix_plus;claviers
+5296;Q255129;Leslie Carter;pop;voix;vents;claviers;voix_plus;claviers
+5311;Q350588;Dr. Luke;pop;voix;guitare;;voix_plus;guitare
+5318;Q713198;Mark King;pop;voix;basse;;voix_seul;
+5322;Q718123;Danny Chan;pop;voix;claviers;;voix_plus;claviers
+5323;Q1139725;Motohiro Hata;pop;voix;guitare;;voix_plus;guitare
+5329;Q117355818;Noam Bettan;pop;voix;guitare;;voix_plus;guitare
+5331;Q2916422;Vigen;pop;voix;;guitare;voix_plus;guitare
+5338;Q1052494;Sayaka Yamamoto;pop;voix;guitare;guitare;voix_plus;guitare
+5346;Q1051540;Tom Fletcher;pop;voix;claviers|guitare;claviers|guitare;voix_plus;guitare|claviers
+5353;Q1154259;Shinji Tanimura;pop;voix;guitare;;voix_plus;guitare
+5357;Q362271;Satoshi Ōno;pop;voix;;machines;voix_plus;machines
+5358;Q925947;Matt Cardle;pop;voix;guitare;guitare;voix_plus;guitare
+5361;Q271100;Bonnie Pink;pop;voix;guitare;;voix_plus;guitare
+5364;Q52586206;NIKI;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+5370;Q266911;Phoebe Snow;pop;voix;guitare;guitare;voix_plus;guitare
+5372;Q1050947;Paula Vesala;hip-hop;voix;claviers|cordes;;voix_seul;
+5383;Q2427845;Björn Afzelius;pop;voix;guitare;guitare;voix_plus;guitare
+5397;Q2668601;Una Healy;pop;voix;;guitare;voix_plus;guitare
+5399;Q720993;Michális Chatzigiánnis;pop;voix;claviers|guitare;claviers;voix_plus;guitare|claviers
+5403;Q262467;Anna Calvi;pop;voix;claviers|guitare|cordes|basse;guitare;voix_plus;guitare
+5405;Q2706686;Warren Cuccurullo;pop;voix;guitare;guitare;voix_plus;guitare
+5417;Q285832;KOKIA;pop;voix;claviers|cordes;;voix_seul;
+5421;Q359345;Dave Benton;pop;voix;batterie;;voix_seul;
+5424;Q1343144;Ramses Shaffy;chanson;voix;claviers;;voix_plus;claviers
+5426;Q234394;Åse Kleveland;pop;voix;guitare;guitare;voix_plus;guitare
+5431;Q26053;Carlos Pena, Jr.;pop;voix;guitare;;voix_plus;guitare
+5432;Q228593;Safura Alizadeh;pop;voix;vents;vents;voix_plus;vents
+5436;Q543053;Tinkara Kovač;pop;voix;vents;;voix_seul;
+5437;Q448876;Melba Moore;R&B;voix;claviers;;voix_plus;claviers
+5438;Q2404590;Khalil Fong;R&B;voix;guitare;;voix_plus;guitare
+5440;Q451084;Butch Vig;pop;voix;batterie;;voix_seul;
+5443;Q888545;Bobby Goldsboro;pop;voix;guitare;guitare;voix_plus;guitare
+5444;Q451812;Lianne La Havas;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+5447;Q30122853;Tom Walker;pop;voix;guitare;guitare;voix_plus;guitare
+5449;Q25094096;Petit Biscuit;électro;voix;claviers|guitare|machines;;voix_seul;
+5459;Q19734;DJ Ötzi;pop;voix;;machines;voix_plus;machines
+5460;Q1383840;Michael Franks;pop;voix;guitare;guitare;voix_plus;guitare
+5467;Q114865231;Jvke;pop;voix;claviers|guitare|cordes|batterie|basse;;voix_seul;
+5481;Q2026055;Bonnie McKee;pop;voix;claviers;;voix_plus;claviers
+5486;Q96276794;Amanda Tenfjord;pop;voix;claviers;;voix_plus;claviers
+5492;Q54357938;Tom Grennan;pop;voix;guitare;;voix_plus;guitare
+5501;Q263024;Questlove;hip-hop;voix;batterie;;voix_seul;
+5502;Q573323;Anthony Hamilton;R&B;voix;basse;;voix_seul;
+5505;Q922252;Pino Palladino;R&B;voix;basse;;voix_seul;
+5514;Q273614;Soraya;pop;voix;guitare;guitare;voix_plus;guitare
+5515;Q565419;Xatar;hip-hop;voix;claviers;;voix_seul;
+5533;Q3986754;Basta;hip-hop;voix;guitare|vents|machines;;voix_seul;
+5546;Q483041;Changmin;pop;voix;guitare;;voix_plus;guitare
+5547;Q96713094;Ayase;pop;voix;claviers;;voix_plus;claviers
+5552;Q286754;Edyta Bartosiewicz;pop;voix;guitare;;voix_plus;guitare
+5561;Q2829653;Alain Chamfort;pop;voix;claviers;claviers;voix_plus;claviers
+5575;Q55956247;Freya Ridings;pop;voix;claviers;claviers;voix_plus;claviers
+5580;Q70130;Gil Ofarim;pop;voix;guitare;guitare;voix_plus;guitare
+5598;Q4166662;Ivan Dorn;funk;voix;claviers;;voix_plus;claviers
+5602;Q4389679;Leo Ieiri;pop;voix;guitare;;voix_plus;guitare
+5604;Q12010;Eldar Qasımov;R&B;voix;claviers;;voix_plus;claviers
+5606;Q42848278;Aisel;pop;voix;claviers;claviers;voix_plus;claviers
+5607;Q1948488;Morris Albert;pop;voix;claviers;claviers|guitare;voix_plus;guitare|claviers
+5609;Q540533;Eddie Hazel;R&B;voix;guitare;;voix_plus;guitare
+5616;Q9002169;Harry Wayne Casey;funk;voix;claviers;;voix_plus;claviers
+5622;Q168555;Alison Goldfrapp;électro;voix;claviers;;voix_seul;
+5628;Q83688261;Imanbek;pop;voix;;machines;voix_plus;machines
+5637;Q272382;Kimya Dawson;pop;voix;guitare;guitare;voix_plus;guitare
+5639;Q2427665;Brenda Asnicar;pop;voix;claviers;;voix_plus;claviers
+5659;Q417100;Akeboshi;électro;voix;claviers|guitare;;voix_seul;
+5660;Q255645;Şebnem Ferah;pop;voix;cordes;;voix_seul;
+5688;Q237450;Kati Wolf;pop;voix;claviers;;voix_plus;claviers
+5689;Q316644;Taylor Hicks;R&B;voix;vents;;voix_seul;
+5693;Q10729153;Yoon;pop;voix;guitare;guitare;voix_plus;guitare
+5700;Q60991892;Jinjin;pop;voix;batterie;;voix_seul;
+5712;Q131621175;Red Sebastian;pop;voix;claviers;;voix_plus;claviers
+5748;Q492738;Park Cho-rong;pop;voix;claviers;claviers;voix_plus;claviers
+5772;Q15941115;DJ Mustard;hip-hop;voix;claviers;;voix_seul;
+5781;Q1165283;Danzel;pop;voix;;machines;voix_plus;machines
+5799;Q1095377;Clarence Carter;R&B;voix;guitare;;voix_plus;guitare
+5808;Q4760361;Andy Allo;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+5812;Q863061;Billy Crawford;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+5837;Q293102;Kasia Kowalska;pop;voix;guitare;;voix_plus;guitare
+5845;Q9388403;Zbigniew Wodecki;R&B;voix;claviers|vents|cordes;;voix_seul;
+5850;Q983689;Sam Tsui;R&B;voix;claviers;;voix_plus;claviers
+5865;Q16732185;Lauren Mayberry;pop;voix;claviers|batterie;;voix_seul;
+5872;Q1141804;Naotaro Moriyama;pop;voix;guitare;;voix_plus;guitare
+5874;Q258183;Misono;pop;voix;guitare;;voix_plus;guitare
+5878;Q2916576;Linn Berggren;électro;voix;claviers|cordes;;voix_seul;
+5905;Q1378643;Maxwell;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+5934;Q6943248;Mustafa Ceceli;pop;voix;claviers;;voix_plus;claviers
+5935;Q1370974;Peter Allen;pop;voix;claviers;claviers;voix_plus;claviers
+5947;Q846828;Takeshi Kobayashi;pop;voix;claviers;;voix_plus;claviers
+5956;Q123471;Paolo Meneguzzi;pop;voix;guitare;;voix_plus;guitare
+5965;Q1626575;Elena Vaenga;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+5975;Q272578;Donna Lewis;pop;voix;claviers;claviers;voix_plus;claviers
+5985;Q576944;Tommy Seebach;pop;voix;claviers|guitare;claviers;voix_plus;guitare|claviers
+5995;Q271679;Selah Sue;R&B;voix;guitare;;voix_plus;guitare
+5998;Q1370043;Alan Sorrenti;pop;voix;;guitare;voix_plus;guitare
+5999;Q47690025;Johnny Suh;hip-hop;voix;claviers;;voix_seul;
+6001;Q442881;Lena Park;R&B;voix;vents;;voix_seul;
+6012;Q350581;Colby O'Donis;pop;voix;guitare;;voix_plus;guitare
+6041;Q716158;Ivri Lider;pop;voix;claviers|guitare;claviers;voix_plus;guitare|claviers
+6048;Q333908;Ott Lepland;pop;voix;claviers;claviers;voix_plus;claviers
+6058;Q313571;Daniel Diges;pop;voix;claviers;claviers;voix_plus;claviers
+6059;Q571816;Jimmy Nail;pop;voix;guitare;;voix_plus;guitare
+6064;Q457272;Tina Dico;pop;voix;guitare;;voix_plus;guitare
+6084;Q598728;Kian Egan;pop;voix;batterie;;voix_seul;
+6097;Q1740419;Tiffany Alvord;pop;voix;guitare;;voix_plus;guitare
+6109;Q540915;Oleksandr Ponomariov;pop;voix;claviers;;voix_plus;claviers
+6116;Q345373;Bob Klose;R&B;voix;guitare;;voix_plus;guitare
+6117;Q449030;Hal David;pop;voix;;claviers;voix_plus;claviers
+6147;Q21824990;Woozi;pop;voix;claviers|guitare|vents|batterie;;voix_seul;
+6150;Q12124379;Monatik;pop;voix;claviers;;voix_plus;claviers
+6151;Q1074694;Masayoshi Yamazaki;pop;voix;;guitare;voix_plus;guitare
+6169;Q208740;Soluna Samay;pop;voix;batterie;;voix_seul;
+6174;Q466674;Semino Rossi;chanson;voix;guitare;;voix_plus;guitare
+6180;Q466435;Vesna Pisarović;pop;voix;vents;;voix_seul;
+6195;Q707895;Dave Wang;pop;voix;claviers|guitare|basse|batterie;;voix_seul;
+6196;Q1078163;Tokiko Katō;chanson;voix;guitare;;voix_plus;guitare
+6212;Q1145166;Yusuke Kamiji;pop;voix;guitare;;voix_plus;guitare
+6215;Q512975;Chris Willis;électro;voix;claviers;;voix_seul;
+6219;Q4768556;Anne Linnet;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+6225;Q1196321;Yasutaka Nakata;pop;voix;;machines;voix_plus;machines
+6229;Q267265;Tweet;R&B;voix;guitare;;voix_plus;guitare
+6231;Q2811954;ZAQ;pop;voix;claviers;;voix_plus;claviers
+6238;Q313217;Piotr Nalitch;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+6243;Q130355;Gilbert Montagné;pop;voix;claviers;claviers;voix_plus;claviers
+6261;Q79798734;Emma Muscat;pop;voix;;claviers;voix_plus;claviers
+6262;Q60998;Shantel;pop;voix;guitare;machines|guitare;voix_plus;guitare|machines
+6265;Q1269271;Funkmaster Flex;hip-hop;voix;machines;;voix_plus;machines
+6268;Q2407643;Fumiya Fujii;pop;voix;guitare;;voix_plus;guitare
+6270;Q58975;Elefthería Eleftheríou;pop;voix;vents;;voix_seul;
+6274;Q454260;Amandine Bourgeois;R&B;voix;guitare|vents;guitare;voix_plus;guitare
+6277;Q531913;MC Eiht;hip-hop;voix;claviers;;voix_seul;
+6295;Q1036131;Caribou;électro;voix;guitare|basse|batterie|machines;;voix_seul;
+6305;Q1035151;Captain Sensible;pop;voix;guitare|basse;guitare;voix_plus;guitare
+6313;Q62396696;Beomgyu;électro;voix;guitare;;voix_seul;
+6321;Q1532874;Chilly Gonzales;hip-hop;voix;claviers;;voix_seul;
+6331;Q435525;Chihiro Onitsuka;pop;voix;claviers;;voix_plus;claviers
+6343;Q1389081;Werner Böhm;pop;voix;;claviers;voix_plus;claviers
+6353;Q1389182;Jimi Tenor;électro;voix;claviers|vents|machines;;voix_seul;
+6357;Q938029;Paul Hardcastle;pop;voix;machines;;voix_seul;
+6360;Q678230;Koit Toome;pop;voix;claviers;claviers;voix_plus;claviers
+6372;Q2519476;Jakko Jakszyk;pop;voix;guitare;guitare;voix_plus;guitare
+6387;Q6798489;Mazhar Alanson;pop;voix;guitare;;voix_plus;guitare
+6391;Q493028;Andraé Crouch;R&B;voix;claviers;;voix_plus;claviers
+6392;Q30311663;Kim Jae-hwan;pop;voix;guitare;;voix_plus;guitare
+6393;Q52516479;Hoshi;chanson;voix;claviers|guitare;;voix_plus;guitare|claviers
+6402;Q3639887;Bijan Mortazavi;pop;voix;cordes;;voix_seul;
+6403;Q264774;Chantal Kreviazuk;pop;voix;claviers;claviers;voix_plus;claviers
+6407;Q484165;Lee Soo-man;pop;voix;guitare;;voix_plus;guitare
+6414;Q123920992;Clara;pop;voix;claviers;;voix_plus;claviers
+6427;Q55614888;James Newman;pop;voix;guitare;;voix_plus;guitare
+6442;Q547810;Patrick Wolf;électro;voix;claviers|cordes;;voix_seul;
+6445;Q334920;Ben Lee;pop;voix;guitare;;voix_plus;guitare
+6449;Q529532;Ania Bukstein;pop;voix;claviers|guitare;claviers;voix_plus;guitare|claviers
+6453;Q55449;Tay Zonday;R&B;voix;claviers;;voix_plus;claviers
+6455;Q490559;Richard Sanderson;pop;voix;guitare|claviers|vents;claviers|guitare;voix_plus;guitare|claviers
+6460;Q21931273;Johnny Orlando;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+6479;Q113336396;Asha Banks;pop;voix;guitare;;voix_plus;guitare
+6491;Q117832250;Zhang Hao;pop;voix;cordes;;voix_seul;
+6508;Q28743526;Joci Pápai;hip-hop;voix;guitare;;voix_seul;
+6509;Q1964606;Vyacheslav Dobrynin;pop;voix;claviers|guitare;guitare;voix_plus;guitare|claviers
+6520;Q57911410;DPR Ian;hip-hop;voix;guitare|batterie;;voix_seul;
+6528;Q66809901;Mxmtoon;pop;voix;guitare;;voix_plus;guitare
+6529;Q461151;Anita Tsoy;pop;voix;claviers|guitare|cordes|vents;;voix_seul;
+6533;Q1278365;Easy Mo Bee;hip-hop;voix;machines;;voix_plus;machines
+6542;Q452411;Bootsy Collins;funk;voix;basse;;voix_seul;
+6565;Q17450386;Son Tung M-TP;électro;voix;claviers|vents;;voix_seul;
+6574;Q427884;Keziah Jones;R&B;voix;guitare;;voix_plus;guitare
+6575;Q19873750;Børns;pop;voix;guitare;;voix_plus;guitare
+6592;Q2617377;Jonna Lee;pop;voix;claviers|guitare|batterie|machines|vents;;voix_seul;
+6602;Q3156516;Izïa Higelin;électro;voix;claviers|guitare;;voix_seul;
+6607;Q765416;Bernard Purdie;R&B;voix;batterie;;voix_seul;
+6611;Q29591607;Juliette Armanet;funk;voix;claviers;;voix_plus;claviers
+6642;Q2142219;Vincent Delerm;pop;voix;claviers;claviers;voix_plus;claviers
+6659;Q2523966;Deen Castronovo;pop;voix;batterie;batterie;voix_plus;batterie
+6670;Q657139;Klaus Wunderlich;pop;voix;vents;;voix_seul;
+6673;Q1974330;Sagopa Kajmer;hip-hop;voix;claviers|batterie;;voix_seul;
+6702;Q43148140;Iza;R&B;voix;claviers;;voix_plus;claviers
+6703;Q139121;Flying Lotus;électro;voix;claviers;;voix_seul;
+6717;Q2316428;Eric Avery;pop;voix;guitare|basse;guitare;voix_plus;guitare
+6725;Q238827;Uffie;pop;voix;claviers;machines;voix_plus;claviers|machines
+6731;Q7454137;Sergey Zhukov;pop;voix;;machines;voix_plus;machines
+6735;Q1369910;René Dif;pop;voix;;machines;voix_plus;machines
+6751;Q1094947;Masaki Kyomoto;pop;voix;;guitare;voix_plus;guitare
+6752;Q434915;Jann Arden;pop;voix;guitare;;voix_plus;guitare
+6755;Q7462294;Shahrum Kashani;pop;voix;claviers;;voix_plus;claviers
+6762;Q17046863;İrem Derici;pop;voix;claviers;;voix_plus;claviers
+6768;Q2144018;Spencer Davis;pop;voix;guitare|vents;guitare;voix_plus;guitare
+6784;Q277512;9th Wonder;hip-hop;voix;machines;;voix_plus;machines
+6789;Q96119730;Zoe Wees;pop;voix;claviers;claviers|guitare;voix_plus;guitare|claviers
+6795;Q6397201;Kevin Parker;pop;voix;guitare|basse|claviers|batterie;batterie|guitare;voix_plus;batterie|guitare
+6799;Q182576;Nana Kitade;pop;voix;guitare;;voix_plus;guitare
+6801;Q266852;Ai Kawashima;pop;voix;;claviers;voix_plus;claviers
+6803;Q730161;Chesney Hawkes;pop;voix;guitare;guitare;voix_plus;guitare
+6806;Q487683;Juniel;pop;voix;guitare;;voix_plus;guitare
+6816;Q7694067;Teddy Park;hip-hop;voix;claviers;;voix_seul;
+6824;Q11307132;Kavka Shishido;pop;voix;batterie;batterie;voix_plus;batterie
+6828;Q3092158;Mai Yamane;pop;voix;claviers;;voix_plus;claviers
+6829;Q933904;Jake Shimabukuro;pop;voix;guitare;guitare;voix_plus;guitare
+6830;Q17403471;Park Subin;pop;voix;;machines;voix_plus;machines
+6855;Q3276178;Yuko Hara;pop;voix;claviers;claviers;voix_plus;claviers
+6865;Q1350150;Peter Sarstedt;pop;voix;guitare;;voix_plus;guitare
+6886;Q714504;Gary Jules;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+6894;Q1931736;O.S.T.R.;hip-hop;voix;cordes;;voix_seul;
+6900;Q162045;Owen Pallett;pop;voix;claviers|guitare|cordes|machines;claviers;voix_plus;claviers
+6902;Q349703;Wes;électro;voix;guitare;;voix_seul;
+6914;Q19346451;Aminata Savadogo;R&B;voix;vents;;voix_seul;
+6921;Q2716238;P. Lion;pop;voix;;claviers;voix_plus;claviers
+6925;Q1347777;Kayahan;pop;voix;guitare;;voix_plus;guitare
+6937;Q145514;Wanessa;électro;voix;claviers;;voix_seul;
+6938;Q314130;Dmitri Koldoun;pop;voix;claviers|guitare;claviers|guitare;voix_plus;guitare|claviers
+6942;Q55436349;Agoney;pop;voix;claviers|vents;;voix_seul;
+6948;Q3113502;Yūzō Kayama;pop;voix;guitare;claviers|guitare;voix_plus;guitare|claviers
+6961;Q985899;Tsuyoshi Domoto;pop;voix;guitare;;voix_plus;guitare
+6987;Q2064926;Pavel Volia;pop;voix;;machines;voix_plus;machines
+6999;Q6313983;Junko Yagami;pop;voix;guitare|claviers;;voix_plus;guitare|claviers
+7014;Q1151427;Koichi Domoto;pop;voix;guitare;;voix_plus;guitare
+7018;Q1235717;Guus Meeuwis;pop;voix;;guitare;voix_plus;guitare
+7021;Q731076;David Broza;pop;voix;guitare;guitare;voix_plus;guitare
+7027;Q5071540;Chanel West Coast;hip-hop;voix;claviers;;voix_seul;
+7042;Q11410993;Daimaō Kosaka;pop;voix;;machines;voix_plus;machines
+7050;Q26776821;Luna;pop;voix;claviers;;voix_plus;claviers
+7051;Q2702027;Salaam Remi;hip-hop;voix;claviers;;voix_seul;
+7053;Q4477966;Lyoubov Ouspenskaïa;pop;voix;claviers;;voix_plus;claviers
+7057;Q740668;Daryl Stuermer;pop;voix;guitare;guitare;voix_plus;guitare
+7072;Q670277;Arthur Russell;funk;voix;cordes;;voix_seul;
+7078;Q2994084;Ivan Neville;funk;voix;claviers;;voix_plus;claviers
+7079;Q867591;Art Neville;R&B;voix;claviers;;voix_plus;claviers
+7103;Q536198;Lisa Fischer;R&B;voix;guitare;;voix_plus;guitare
+7108;Q618196;Tetsurō Oda;pop;voix;guitare;;voix_plus;guitare
+7117;Q460071;Hayko;pop;voix;claviers;;voix_plus;claviers
+7133;Q83643;Andrey Gubin;pop;voix;claviers|guitare|machines;;voix_seul;
+7148;Q3189902;Julos Beaucarne;chanson;voix;guitare;;voix_plus;guitare
+7168;Q4067997;Alyona Apina;pop;voix;claviers|vents;claviers;voix_plus;claviers
+7187;Q620723;Alexander Malinin;pop;voix;guitare;guitare;voix_plus;guitare
+7192;Q468367;Franka Batelić;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+7194;Q887941;Bob Gaudio;pop;voix;claviers;claviers|guitare;voix_plus;guitare|claviers
+7213;Q1103528;Hamza Namira;R&B;voix;claviers|cordes;;voix_plus;claviers
+7219;Q28034884;Nathan Trent;pop;voix;cordes;claviers;voix_plus;claviers
+7220;Q137527805;Tamara Živković;pop;voix;vents;;voix_seul;
+7221;Q4364916;Anna Pletnyova;pop;voix;guitare;guitare;voix_plus;guitare
+7229;Q809067;Barry Mann;pop;voix;claviers;claviers;voix_plus;claviers
+7256;Q1272729;Larry Williams;R&B;voix;claviers;;voix_plus;claviers
+7263;Q1375381;Ivo Linna;pop;voix;guitare;;voix_plus;guitare
+7268;Q2395982;Tõnis Mägi;pop;voix;claviers|guitare;guitare;voix_plus;guitare|claviers
+7280;Q454353;Michael Feinstein;pop;voix;claviers;claviers;voix_plus;claviers
+7291;Q525152;Salem Al Fakir;pop;voix;claviers|guitare|cordes;;voix_seul;
+7299;Q6065567;Mabel Matiz;pop;voix;guitare;;voix_plus;guitare
+7305;Q1094032;Claude Barzotti;pop;voix;guitare;;voix_plus;guitare
+7309;Q26220991;Jae Park;pop;voix;guitare;;voix_plus;guitare
+7316;Q248592;Sarah Dawn Finer;R&B;voix;guitare;;voix_plus;guitare
+7322;Q1731236;Alligatoah;hip-hop;voix;guitare;;voix_seul;
+7348;Q22231012;Raiven;pop;voix;cordes;;voix_seul;
+7360;Q468647;Tijana Dapčević;pop;voix;cordes;;voix_seul;
+7373;Q229743;Niamh Kavanagh;pop;voix;vents;;voix_seul;
+7380;Q47037259;Feduk;hip-hop;voix;claviers|guitare|vents;;voix_seul;
+7420;Q470307;Aylin Aslım;pop;voix;guitare;;voix_plus;guitare
+7421;Q41259564;Sennek;électro;voix;claviers;;voix_seul;
+7427;Q33124;Jimmy Van Heusen;pop;voix;claviers;claviers;voix_plus;claviers
+7429;Q16366466;Dihaj;pop;voix;claviers;;voix_plus;claviers
+7434;Q12410281;Idan Amedi;pop;voix;claviers|guitare|vents;;voix_seul;
+7451;Q56259179;Heejin;pop;voix;guitare;;voix_plus;guitare
+7462;Q276892;Jaak Joala;pop;voix;guitare|vents;;voix_seul;
+7463;Q106916412;Gustaph;électro;voix;claviers;;voix_seul;
+7470;Q1400297;James Shigeta;pop;voix;claviers;claviers;voix_plus;claviers
+7482;Q958489;Justin Guarini;pop;voix;claviers|guitare;claviers;voix_plus;guitare|claviers
+7511;Q271045;Jackie DeShannon;pop;voix;guitare;;voix_plus;guitare
+7517;Q660321;Mansour;pop;voix;guitare;;voix_plus;guitare
+7519;Q2741243;Melissa Horn;pop;voix;guitare;guitare;voix_plus;guitare
+7522;Q2429247;Igor Korneliouk;pop;voix;claviers;;voix_plus;claviers
+7524;Q458936;Fontella Bass;R&B;voix;claviers;;voix_plus;claviers
+7532;Q1342906;Teppei Koike;pop;voix;guitare;;voix_plus;guitare
+7536;Q939036;Martin Stenmarck;pop;voix;guitare;;voix_plus;guitare
+7545;Q715181;Michael Franti;hip-hop;voix;guitare;;voix_seul;
+7553;Q323641;Hamish Stuart;R&B;voix;guitare|basse;;voix_plus;guitare
+7555;Q5442163;Felix Cavaliere;R&B;voix;claviers;;voix_plus;claviers
+7560;Q3111323;Kōmi Hirose;pop;voix;claviers;claviers;voix_plus;claviers
+7574;Q1329748;Tomomi Kasai;pop;voix;guitare;;voix_plus;guitare
+7577;Q507999;Roshon Fegan;hip-hop;voix;claviers;;voix_seul;
+7582;Q12842317;Murat Dalkılıç;pop;voix;guitare;;voix_plus;guitare
+7595;Q273220;Gemma Hayes;pop;voix;guitare;;voix_plus;guitare
+7597;Q28573952;Manel Navarro;électro;voix;guitare;;voix_seul;
+7601;Q1320894;Don Ho;pop;voix;claviers;;voix_plus;claviers
+7623;Q10534493;Popek;hip-hop;voix;guitare;;voix_seul;
+7625;Q2656667;Ulf Ekberg;pop;voix;claviers;;voix_plus;claviers
+7626;Q981785;Jonas Berggren;électro;voix;guitare|machines;;voix_plus;machines
+7630;Q30031434;Danny Ocean;électro;voix;claviers|guitare;;voix_seul;
+7632;Q268678;Diana Vickers;pop;voix;vents;;voix_seul;
+7707;Q22101239;Young K;pop;voix;guitare;;voix_plus;guitare
+7712;Q18608743;Lea Sirk;pop;voix;guitare|vents;;voix_seul;
+7714;Q10481367;Elhaida Dani;R&B;voix;claviers;;voix_plus;claviers
+7731;Q7827686;Toshiki Kadomatsu;pop;voix;guitare;guitare;voix_plus;guitare
+7739;Q922830;Shock G;hip-hop;voix;batterie;;voix_seul;
+7755;Q1687890;Jerry Yester;pop;voix;;guitare;voix_plus;guitare
+7766;Q3959018;Shahram Shabpareh;pop;voix;claviers|guitare|batterie;batterie|guitare;voix_plus;batterie|guitare
+7768;Q605596;Antonio Vega;pop;voix;;guitare;voix_plus;guitare
+7777;Q29788794;Yseult;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+7784;Q840500;Aska;pop;voix;guitare;;voix_plus;guitare
+7801;Q6029842;Orup;pop;voix;guitare;;voix_plus;guitare
+7806;Q1189986;John Michael Montgomery;funk;voix;basse;;voix_seul;
+7852;Q23482845;Kasia Moś;pop;voix;claviers;claviers;voix_plus;claviers
+7877;Q490146;Shin Seung-hun;pop;voix;guitare;;voix_plus;guitare
+7888;Q1001491;Finn Kalvik;pop;voix;guitare;guitare;voix_plus;guitare
+7889;Q1995479;Clarence Öfwerman;pop;voix;claviers;;voix_plus;claviers
+7891;Q2895586;Ben Watt;pop;voix;;machines;voix_plus;machines
+7895;Q931723;Rod Temperton;R&B;voix;claviers;;voix_plus;claviers
+7924;Q1133713;Miho Komatsu;pop;voix;claviers;claviers;voix_plus;claviers
+7932;Q18710983;Nina Sublatti;pop;voix;claviers;;voix_plus;claviers
+7934;Q3273684;Kōzō Murashita;pop;voix;guitare;;voix_plus;guitare
+7935;Q2373269;Brenda Russell;pop;voix;claviers;claviers;voix_plus;claviers
+7939;Q18552293;Josef Salvat;pop;voix;claviers;;voix_plus;claviers
+7956;Q108304;Giovanni Zarrella;pop;voix;claviers;;voix_plus;claviers
+7964;Q2916110;Neil Hannon;pop;voix;claviers|guitare|vents|batterie|machines;;voix_seul;
+7969;Q10323878;Manu Gavassi;pop;voix;guitare;;voix_plus;guitare
+7995;Q1980399;Alexandre Tsekalo;pop;voix;claviers|guitare;guitare;voix_plus;guitare|claviers
+8000;Q2187957;Luis Aguilé;pop;voix;guitare;;voix_plus;guitare
+8002;Q4158899;Державин, Андрей Владимирович;pop;voix;claviers|guitare|machines;;voix_seul;
+8014;Q742763;Omar Naber;pop;voix;claviers;claviers|guitare;voix_plus;guitare|claviers
+8035;Q286501;Shellback;pop;voix;claviers;;voix_plus;claviers
+8051;Q3945668;Salmo;hip-hop;voix;batterie;;voix_seul;
+8058;Q450901;Rosana;pop;voix;guitare;;voix_plus;guitare
+8059;Q546014;Aşkın Nur Yengi;pop;voix;cordes;;voix_seul;
+8064;Q19587614;Gavin James;pop;voix;guitare;guitare;voix_plus;guitare
+8078;Q2704776;Peppino Gagliardi;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+8082;Q3261519;Louis Chedid;chanson;voix;guitare|batterie|basse|claviers;;voix_seul;
+8089;Q110655487;Monika Liu;pop;voix;claviers|cordes;;voix_seul;
+8091;Q2521510;Peter-John Vettese;pop;voix;claviers;;voix_plus;claviers
+8104;Q723445;Janne Schaffer;pop;voix;guitare;guitare;voix_plus;guitare
+8111;Q115802685;Albina Kelmendi;pop;voix;claviers|vents;;voix_seul;
+8114;Q546956;James Jamerson;R&B;voix;guitare|basse;;voix_plus;guitare
+8116;Q9614654;André Valadão;pop;voix;claviers;;voix_plus;claviers
+8130;Q273315;Karoline Krüger;pop;voix;claviers;claviers;voix_plus;claviers
+8151;Q1196965;Rie Fu;pop;voix;guitare;;voix_plus;guitare
+8155;Q276360;Ralf Mackenbach;pop;voix;vents;;voix_seul;
+8161;Q709454;Roger Troutman;R&B;voix;guitare|vents;;voix_plus;guitare
+8181;Q362168;Bradley Joseph;pop;voix;claviers;claviers;voix_plus;claviers
+8183;Q390321;Colin Petersen;pop;voix;claviers|guitare|batterie;batterie;voix_plus;batterie
+8195;Q553621;Paul Oscar;pop;voix;;machines;voix_plus;machines
+8201;Q4499486;Julia Holter;électro;voix;claviers|batterie;;voix_seul;
+8205;Q2311177;Devonté Hynes;pop;voix;guitare;guitare;voix_plus;guitare
+8210;Q4383494;Francisca Valenzuela;pop;voix;claviers|guitare;claviers|guitare;voix_plus;guitare|claviers
+8237;Q456328;Jeanne Cherhal;chanson;voix;claviers|basse;;voix_seul;
+8241;Q283203;Miroslav Kostadinov;pop;voix;vents;;voix_seul;
+8246;Q94050009;Upsahl;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+8254;Q27573883;Julia Jacklin;pop;voix;;guitare;voix_plus;guitare
+8266;Q724956;Jens Lekman;pop;voix;guitare;;voix_plus;guitare
+8294;Q17277429;Margherita Vicario;pop;voix;guitare|claviers;;voix_plus;guitare|claviers
+8302;Q272316;Hitomi Yaida;pop;voix;guitare;;voix_plus;guitare
+8317;Q943298;Buck 65;hip-hop;voix;machines;;voix_plus;machines
+8319;Q517584;Søren Rasted;pop;voix;claviers;;voix_plus;claviers
+8321;Q2960962;Charlotte Caffey;pop;voix;claviers|guitare;guitare;voix_plus;guitare|claviers
+8339;Q2240967;Gerard Cox;pop;voix;;guitare;voix_plus;guitare
+8351;Q259206;Betty Everett;R&B;voix;claviers;;voix_plus;claviers
+8353;Q1159082;Dan Hill;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+8356;Q679289;Daniel Jones;pop;voix;claviers;guitare;voix_plus;guitare|claviers
+8374;Q1144640;Dean Parks;R&B;voix;guitare;;voix_plus;guitare
+8390;Q533963;Mollie King;pop;voix;;guitare;voix_plus;guitare
+8413;Q808900;Barrett Strong;R&B;voix;claviers;;voix_plus;claviers
+8421;Q717340;Goran Karan;pop;voix;claviers;;voix_plus;claviers
+8422;Q6331507;Uku Suviste;funk;voix;claviers;;voix_plus;claviers
+8435;Q101025890;Griff;pop;voix;claviers;;voix_plus;claviers
+8437;Q6131372;Lô Borges;pop;voix;guitare;guitare;voix_plus;guitare
+8438;Q350341;Ovidiu Cernăuțeanu;pop;voix;claviers;claviers;voix_plus;claviers
+8447;Q483446;Kim Gun-mo;pop;voix;claviers;claviers;voix_plus;claviers
+8448;Q3557458;Déspina Olympíou;pop;voix;claviers;;voix_plus;claviers
+8450;Q48737;Myleene Klass;pop;voix;claviers;claviers;voix_plus;claviers
+8453;Q54318152;Zolita;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+8460;Q458018;Petr Elfimov;pop;voix;guitare|claviers;;voix_plus;guitare|claviers
+8461;Q5094088;Chet Faker;électro;voix;claviers;;voix_seul;
+8471;Q86383347;Chloe Moriondo;pop;voix;guitare;;voix_plus;guitare
+8477;Q1689414;Jimmy Osmond;pop;voix;vents;;voix_seul;
+8483;Q891522;Arthur H;chanson;voix;claviers;;voix_plus;claviers
+8491;Q1197058;Misaki Iwasa;pop;voix;guitare;;voix_plus;guitare
+8500;Q1176607;Ross Bagdasarian Sr.;pop;voix;claviers;claviers;voix_plus;claviers
+8502;Q5270087;Dia Frampton;pop;voix;guitare;;voix_plus;guitare
+8511;Q2424308;Steve Peregrin Took;pop;voix;guitare|basse;batterie|guitare;voix_plus;batterie|guitare
+8515;Q721684;Walter Afanasieff;R&B;voix;claviers;;voix_plus;claviers
+8519;Q91874932;Allie Sherlock;pop;voix;guitare;;voix_plus;guitare
+8524;Q77660;Mike Mareen;pop;voix;;batterie;voix_plus;batterie
+8528;Q261886;Urszula Kasprzak;pop;voix;guitare;;voix_plus;guitare
+8553;Q273913;Coralie Clément;chanson;voix;cordes;;voix_seul;
+8560;Q724016;Masato Nakamura;pop;voix;guitare|basse;;voix_seul;
+8562;Q4341382;Soso Pavliashvili;pop;voix;claviers|guitare|cordes;;voix_seul;
+8591;Q15906708;Dan Smith;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+8608;Q3924;Kevin Rudolf;hip-hop;voix;guitare|basse|claviers|batterie|machines;;voix_seul;
+8613;Q7819767;Tommy Page;pop;voix;claviers;claviers;voix_plus;claviers
+8616;Q29452260;Tommy Genesis;hip-hop;voix;claviers;;voix_seul;
+8629;Q242427;Jena Lee;R&B;voix;cordes;;voix_seul;
+8631;Q30896;Lalaine Vergara-Paras;pop;voix;guitare|basse;;voix_seul;
+8670;Q1187795;Kana Uemura;pop;voix;guitare;;voix_plus;guitare
+8673;Q12375361;Stig Rästa;pop;voix;guitare;guitare;voix_plus;guitare
+8685;Q205527;Big Jim Sullivan;pop;voix;guitare;guitare;voix_plus;guitare
+8693;Q102500517;Valentina;pop;voix;claviers;;voix_plus;claviers
+8694;Q1961597;Juan Pardo;pop;voix;guitare;;voix_plus;guitare
+8700;Q274033;Reni Jusis;pop;voix;claviers;;voix_plus;claviers
+8701;Q4463930;Sergei Trofimov;pop;voix;claviers|guitare|vents;claviers|guitare;voix_plus;guitare|claviers
+8702;Q841531;Masataka Matsutōya;pop;voix;claviers;;voix_plus;claviers
+8703;Q4397461;Eduard Romanyuta;R&B;voix;claviers|guitare|cordes;;voix_seul;
+8716;Q22082517;Molly Nilsson;pop;voix;claviers;;voix_plus;claviers
+8757;Q1188592;Mattybraps;hip-hop;voix;claviers;;voix_seul;
+8785;Q1380398;Peter Cincotti;pop;voix;claviers;claviers;voix_plus;claviers
+8786;Q685603;Brian Kennedy;R&B;voix;guitare;;voix_plus;guitare
+8802;Q1134039;Naoto Inti Raymi;pop;voix;claviers|guitare|batterie|basse;;voix_seul;
+8813;Q78281;Thees Uhlmann;pop;voix;;guitare;voix_plus;guitare
+8814;Q3514198;Takashi Matsumoto;pop;voix;batterie;batterie;voix_plus;batterie
+8835;Q20804322;Topic;pop;voix;;machines;voix_plus;machines
+8853;Q1252204;Sergej Ćetković;pop;voix;vents;;voix_seul;
+8860;Q2545776;Marcela Morelo;pop;voix;guitare|batterie;;voix_seul;
+8865;Q290550;Chrisette Michele;R&B;voix;claviers;;voix_plus;claviers
+8869;Q9302874;Rafał Brzozowski;pop;voix;claviers;;voix_plus;claviers
+8877;Q5200824;Cyril Neville;funk;voix;batterie;;voix_seul;
+8894;Q5358943;Juri Takahashi;pop;voix;batterie;;voix_seul;
+8899;Q388769;Nicolas Godin;électro;voix;guitare|batterie|machines|basse|claviers;;voix_seul;
+8918;Q16586771;Paola Iezzi;pop;voix;guitare|basse;;voix_seul;
+8943;Q15845167;Cris Cab;pop;voix;guitare;;voix_plus;guitare
+8952;Q270534;Rumer;pop;voix;;guitare;voix_plus;guitare
+8969;Q289555;Östen Warnerbring;chanson;voix;vents;;voix_seul;
+8974;Q375957;James Bourne;pop;voix;guitare;batterie|guitare;voix_plus;batterie|guitare
+8993;Q6551684;Linda Jo Rizzo;funk;voix;claviers;;voix_plus;claviers
+8997;Q3084936;Mayumi Itsuwa;pop;voix;claviers;;voix_plus;claviers
+9020;Q45550458;Ilia Proussikine;électro;voix;guitare;;voix_seul;
+9023;Q448366;Liberty DeVitto;pop;voix;batterie;;voix_seul;
+9040;Q18230780;Lee Seung-hyub;hip-hop;voix;claviers;;voix_seul;
+9041;Q2599065;Florent Mothe;pop;voix;;guitare;voix_plus;guitare
+9053;Q237397;Andrea Demirović;pop;voix;claviers;;voix_plus;claviers
+9060;Q20851586;Natalia Szroeder;pop;voix;claviers|cordes;claviers;voix_plus;claviers
+9063;Q246929;DJ Khalil;hip-hop;voix;machines;;voix_plus;machines
+9067;Q1322915;Jordy;pop;voix;guitare;;voix_plus;guitare
+9089;Q297734;Nerina Pallot;pop;voix;claviers|guitare;guitare;voix_plus;guitare|claviers
+9092;Q262975;Nina Åström;pop;voix;claviers;;voix_plus;claviers
+9094;Q96621463;Alfa;hip-hop;voix;claviers|guitare;;voix_seul;
+9100;Q291573;Greta Salóme;pop;voix;cordes;;voix_seul;
+9105;Q1070589;Shunsuke Kiyokiba;pop;voix;guitare;;voix_plus;guitare
+9120;Q3805729;Jackie Tohn;pop;voix;guitare;;voix_plus;guitare
+9125;Q1035807;Kenichi Maeyamada;pop;voix;claviers;;voix_plus;claviers
+9133;Q60617987;Eliot Vassamillet;pop;voix;claviers;;voix_plus;claviers
+9136;Q510093;Paul Harrington;pop;voix;claviers;;voix_plus;claviers
+9141;Q55785;Ryszard Rynkowski;pop;voix;claviers;claviers;voix_plus;claviers
+9143;Q1281741;Otis Blackwell;R&B;voix;claviers;;voix_plus;claviers
+9146;Q179593;Danja;hip-hop;voix;batterie;;voix_seul;
+9150;Q2011536;Pierre Rapsat;pop;voix;;guitare;voix_plus;guitare
+9151;Q326002;Tom Hooker;funk;voix;guitare;;voix_plus;guitare
+9159;Q44274417;Jordan Davis;pop;voix;guitare;guitare;voix_plus;guitare
+9166;Q5964348;Mehrdad Asemani;pop;voix;claviers|cordes;;voix_seul;
+9172;Q5925855;James Righton;électro;voix;guitare|basse|claviers;;voix_seul;
+9177;Q1053531;Harry Judd;pop;voix;batterie;batterie;voix_plus;batterie
+9185;Q58825704;Yves;pop;voix;guitare;;voix_plus;guitare
+9186;Q807398;Barbara Dickson;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+9194;Q443225;Gene Austin;pop;voix;claviers;;voix_plus;claviers
+9197;Q1354872;Marc Terenzi;pop;voix;vents;;voix_seul;
+9203;Q719957;Christer Sjögren;chanson;voix;claviers;;voix_plus;claviers
+9209;Q14042;Willy Moon;pop;voix;guitare;guitare;voix_plus;guitare
+9218;Q1923558;Brendan Croker;pop;voix;guitare;guitare;voix_plus;guitare
+9221;Q705025;Gregory Abbott;R&B;voix;claviers;;voix_plus;claviers
+9223;Q101028862;Salem Ilese;pop;voix;guitare;;voix_plus;guitare
+9230;Q110630787;Lauren Spencer Smith;pop;voix;guitare;;voix_plus;guitare
+9232;Q182948;Göksel;pop;voix;guitare;;voix_plus;guitare
+9238;Q4941458;Py Bäckman;pop;voix;claviers|vents;claviers;voix_plus;claviers
+9246;Q7520260;Simone Battle;R&B;voix;guitare;;voix_plus;guitare
+9258;Q43388492;Manal;hip-hop;voix;guitare;;voix_seul;
+9260;Q2476263;Jacno;électro;voix;guitare;;voix_seul;
+9307;Q7150165;Paul Davis;R&B;voix;claviers;;voix_plus;claviers
+9308;Q22928445;Nina Kraljić;pop;voix;claviers;;voix_plus;claviers
+9328;Q719489;Seweryn Krajewski;pop;voix;guitare;claviers|guitare;voix_plus;guitare|claviers
+9336;Q2453923;Emily Loizeau;chanson;voix;claviers;;voix_plus;claviers
+9337;Q920983;Glen Ballard;R&B;voix;guitare|claviers|machines;;voix_seul;
+9339;Q1241173;Donell Jones;R&B;voix;guitare;;voix_plus;guitare
+9354;Q1347182;Rupert Hine;pop;voix;claviers;;voix_plus;claviers
+9366;Q710466;Mirwais Stass;électro;voix;guitare|claviers;;voix_seul;
+9376;Q6130604;Pakho Chau;pop;voix;guitare;;voix_plus;guitare
+9391;Q1472441;Fuat Güner;pop;voix;guitare;;voix_plus;guitare
+9392;Q431466;Sandi Thom;pop;voix;guitare;;voix_plus;guitare
+9394;Q1361271;Ryan Leslie;R&B;voix;guitare;;voix_plus;guitare
+9411;Q1535874;John Otway;pop;voix;guitare;;voix_plus;guitare
+9432;Q7176071;Peter Nero;pop;voix;claviers;claviers;voix_plus;claviers
+9453;Q713937;Daniel Chan;pop;voix;guitare;;voix_plus;guitare
+9464;Q466518;Keren Peles;pop;voix;vents;claviers;voix_plus;claviers
+9466;Q9210012;Donatan;hip-hop;voix;claviers;;voix_seul;
+9468;Q779289;Tsuki Amano;pop;voix;guitare;guitare;voix_plus;guitare
+9504;Q16746002;Jeong Se-woon;pop;voix;claviers|guitare|vents|batterie;;voix_seul;
+9510;Q704635;Chris Corner;électro;voix;guitare;;voix_seul;
+9524;Q1236566;Robert Wells;pop;voix;claviers;claviers;voix_plus;claviers
+9542;Q984410;David Otero;pop;voix;guitare;guitare;voix_plus;guitare
+9551;Q621497;Alex Gaskarth;pop;voix;guitare;guitare;voix_plus;guitare
+9557;Q237677;Mia Rose;pop;voix;guitare;;voix_plus;guitare
+9569;Q2420362;Paul Turner;funk;voix;guitare|basse;;voix_plus;guitare
+9571;Q7329318;Richard Swift;pop;voix;claviers;;voix_plus;claviers
+9573;Q1385173;Tomáš Klus;pop;voix;guitare;guitare;voix_plus;guitare
+9581;Q556615;Blake Lewis;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+9585;Q202441;Jamie Lidell;électro;voix;guitare|batterie|claviers;;voix_seul;
+9587;Q710513;Cheer Chen;pop;voix;claviers|guitare;claviers;voix_plus;guitare|claviers
+9588;Q231530;Kara DioGuardi;pop;voix;claviers;;voix_plus;claviers
+9652;Q2283054;Petra Haden;pop;voix;cordes;;voix_seul;
+9655;Q4392731;Yuka Honda;électro;voix;claviers;;voix_seul;
+9666;Q140509;Zahara;R&B;voix;guitare;;voix_plus;guitare
+9671;Q2346186;Sylvia Robinson;funk;voix;guitare;;voix_plus;guitare
+9709;Q433167;Martina Topley-Bird;électro;voix;claviers|batterie;;voix_seul;
+9710;Q286767;K-os;hip-hop;voix;guitare|machines;;voix_plus;machines
+9711;Q536723;Lori Lieberman;pop;voix;guitare;claviers|guitare;voix_plus;guitare|claviers
+9712;Q2134234;Piet Veerman;pop;voix;guitare;guitare;voix_plus;guitare
+9714;Q19592786;Kjetil Mørland;pop;voix;guitare;claviers|guitare;voix_plus;guitare|claviers
+9734;Q1803720;Peter Asher;pop;voix;guitare;guitare;voix_plus;guitare
+9736;Q2911185;Yehuda Poliker;pop;voix;guitare;;voix_plus;guitare
+9742;Q4406037;Viktor Saltykov;pop;voix;guitare;guitare;voix_plus;guitare
+9743;Q67674869;Wonpil;pop;voix;claviers|machines;;voix_seul;
+9749;Q110897616;Nadir Rustamli;R&B;voix;claviers;;voix_plus;claviers
+9753;Q2232311;Emiko Shiratori;pop;voix;guitare;;voix_plus;guitare
+9756;Q20687640;Francesco Yates;pop;voix;guitare;;voix_plus;guitare
+9770;Q1346748;Joshua Kadison;pop;voix;claviers;claviers;voix_plus;claviers
+9793;Q1982138;Baxter Dury;pop;voix;guitare;guitare;voix_plus;guitare
+9797;Q434912;Funda Arar;pop;voix;cordes;;voix_seul;
+9799;Q4349538;Juha Tapio;pop;voix;;guitare;voix_plus;guitare
+9801;Q2140826;Reinhard Lakomy;pop;voix;claviers;claviers;voix_plus;claviers
+9807;Q4286484;Laura Mvula;R&B;voix;claviers;;voix_plus;claviers
+9818;Q99975999;Polnalyubvi;pop;voix;claviers|guitare|cordes;;voix_seul;
+9833;Q464465;Vânia Fernandes;pop;voix;claviers;;voix_plus;claviers
+9846;Q510855;Annette Peacock;électro;voix;claviers;;voix_seul;
+9850;Q953246;Sanseverino;chanson;voix;guitare;;voix_plus;guitare
+9855;Q6495231;Moran Mazor;pop;voix;claviers;;voix_plus;claviers
+9856;Q3342413;No I.D.;hip-hop;voix;machines;;voix_plus;machines
+9864;Q727151;Rodney Jerkins;pop;voix;claviers;;voix_plus;claviers
+9868;Q1200169;Dean Butterworth;funk;voix;batterie;;voix_seul;
+9895;Q14411034;Annika Norlin;pop;voix;guitare;;voix_plus;guitare
+9902;Q1382732;Nuno Resende;pop;voix;guitare;;voix_plus;guitare
+9918;Q4116060;Marwan Khoury;pop;voix;claviers;claviers;voix_plus;claviers
+9922;Q740976;Yalın;pop;voix;guitare;;voix_plus;guitare
+9926;Q4140477;Alexey Glyzin;pop;voix;claviers|guitare;claviers|guitare;voix_plus;guitare|claviers
+9933;Q951373;Dallas Austin;R&B;voix;guitare;;voix_plus;guitare
+9934;Q2364370;Jennifer Ayache;pop;voix;claviers|guitare|batterie;;voix_seul;
+9941;Q960935;Jazze Pha;hip-hop;voix;basse|claviers|batterie|machines;;voix_seul;
+9957;Q1294669;Edwin Hawkins;R&B;voix;claviers;;voix_plus;claviers
+9990;Q2891280;Wael Jassar;pop;voix;cordes;;voix_seul;
+10027;Q3046801;Nivek Ogre;électro;voix;guitare;;voix_seul;
+10035;Q4952639;Mariette Hansson;pop;voix;guitare;;voix_plus;guitare
+10055;Q4531635;Emika;électro;voix;claviers;;voix_seul;
+10059;Q298412;Ayano Tsuji;pop;voix;guitare;;voix_plus;guitare
+10060;Q11373200;Sonoko Inoue;pop;voix;;guitare;voix_plus;guitare
+10090;Q3075062;Kaj Chydenius;chanson;voix;claviers;;voix_plus;claviers
+10103;Q237839;Sandra Nurmsalu;pop;voix;cordes;;voix_seul;
+10105;Q3296881;Gota Yashiki;R&B;voix;guitare|basse|batterie;;voix_seul;
+10106;Q11546592;Satoshi Takebe;pop;voix;claviers;;voix_plus;claviers
+10137;Q4219173;Kris Kelmi;pop;voix;claviers|guitare|basse;claviers|guitare;voix_plus;guitare|claviers
+10140;Q11723267;Chiara Iezzi;pop;voix;vents;;voix_seul;
+10145;Q1365451;Sydney Youngblood;électro;voix;vents;;voix_seul;
+10148;Q3288207;Pee Wee;hip-hop;voix;guitare;;voix_seul;
+10151;Q15953173;Axel Hirsoux;pop;voix;vents;;voix_seul;
+10168;Q3992120;Toby Smith;pop;voix;claviers;;voix_plus;claviers
+10169;Q92714319;Emir Can İğrek;pop;voix;guitare;;voix_plus;guitare
+10199;Q114234;Philipp Poisel;pop;voix;guitare;claviers|guitare;voix_plus;guitare|claviers
+10207;Q382316;Gökhan Özen;pop;voix;guitare;;voix_plus;guitare
+10212;Q900873;DJ Ozma;pop;voix;;machines;voix_plus;machines
+10238;Q372570;Denniz Pop;pop;voix;;machines;voix_plus;machines
+10239;Q951839;Mayo Okamoto;pop;voix;claviers;;voix_plus;claviers
+10240;Q888675;Bobby Short;pop;voix;claviers;claviers;voix_plus;claviers
+10259;Q240759;Maarja Kivi;pop;voix;basse;;voix_seul;
+10273;Q3481634;Shawn Smith;hip-hop;voix;claviers;;voix_seul;
+10280;Q6124853;Jake Miller;hip-hop;voix;batterie;;voix_seul;
+10283;Q379608;Jon Carin;pop;voix;claviers;claviers|guitare;voix_plus;guitare|claviers
+10285;Q523837;Dan Black;électro;voix;guitare;;voix_seul;
+10297;Q1743954;VanVelzen;pop;voix;claviers;claviers;voix_plus;claviers
+10303;Q1682114;Tullio De Piscopo;pop;voix;batterie;batterie;voix_plus;batterie
+10307;Q258323;Tajči;pop;voix;claviers;;voix_plus;claviers
+10316;Q716906;Roger Williams;pop;voix;claviers;claviers;voix_plus;claviers
+10324;Q70790;Barbara Morgenstern;pop;voix;claviers;;voix_plus;claviers
+10329;Q22964793;ManuElla;pop;voix;claviers;;voix_plus;claviers
+10349;Q86777;Peter Horton;pop;voix;guitare;guitare;voix_plus;guitare
+10381;Q4305279;Buckwild;hip-hop;voix;claviers;;voix_seul;
+10389;Q2563186;Ami Onuki;pop;voix;claviers;batterie|claviers|guitare;voix_plus;batterie|guitare|claviers
+10390;Q1233241;Giusto Pio;pop;voix;cordes;;voix_seul;
+10398;Q261344;Isobel Campbell;pop;voix;cordes;;voix_seul;
+10402;Q9390111;Zenon Martyniuk;pop;voix;guitare;;voix_plus;guitare
+10405;Q106602773;Andrea Koevska;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+10413;Q435680;Dōji Morita;pop;voix;cordes;;voix_seul;
+10418;Q2151716;Ricky Shayne;chanson;voix;guitare;;voix_plus;guitare
+10425;Q3568284;Will Downing;R&B;voix;claviers;;voix_plus;claviers
+10426;Q683982;Luke Pritchard;pop;voix;guitare;guitare;voix_plus;guitare
+10446;Q3512331;Marie Rottrová;pop;voix;claviers;;voix_plus;claviers
+10450;Q441520;Diane Birch;R&B;voix;claviers|machines;;voix_plus;claviers|machines
+10455;Q1986723;Nathalie;pop;voix;vents;;voix_seul;
+10462;Q5961618;Mehdi Yarrahi;pop;voix;guitare;;voix_plus;guitare
+10467;Q21060878;Hwang Chi-yeul;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+10489;Q105490126;Masked Wolf;hip-hop;voix;claviers|guitare|batterie;;voix_seul;
+10495;Q109664461;Sara James;pop;voix;claviers;;voix_plus;claviers
+10497;Q434492;Billy Vera;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+10501;Q1345802;Al Jackson, Jr.;R&B;voix;batterie;;voix_seul;
+10507;Q50323978;Ari Ólafsson;pop;voix;guitare;;voix_plus;guitare
+10508;Q737455;Gianni Togni;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+10518;Q15701290;Sebalter;pop;voix;cordes;;voix_seul;
+10519;Q53765024;Minami;pop;voix;guitare;;voix_plus;guitare
+10524;Q3270144;Edmond Leung;pop;voix;claviers;;voix_plus;claviers
+10532;Q4597579;Gwen Guthrie;R&B;voix;claviers;;voix_plus;claviers
+10534;Q3014388;Daniel Lévi;pop;voix;claviers;claviers;voix_plus;claviers
+10535;Q2737572;Yumi Yoshimura;pop;voix;;guitare;voix_plus;guitare
+10545;Q107037238;Zhiar Ali;pop;voix;claviers;;voix_plus;claviers
+10551;Q525977;Anita Lipnicka;pop;voix;guitare;;voix_plus;guitare
+10555;Q2317703;Ginger Reyes;pop;voix;guitare|basse;guitare;voix_plus;guitare
+10591;Q15921532;Xuso Jones;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+10601;Q2395308;Stephin Merritt;pop;voix;guitare;;voix_plus;guitare
+10604;Q1388171;Andrius Pojavis;pop;voix;guitare|basse;;voix_seul;
+10611;Q3573157;Yukihide Takekawa;pop;voix;cordes;;voix_seul;
+10625;Q27492272;Hovig Demirjian;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+10650;Q1383923;Tor Endresen;pop;voix;;guitare;voix_plus;guitare
+10661;Q2584176;Shay Haley;hip-hop;voix;batterie;;voix_seul;
+10663;Q4149360;Oksana Grigorieva;pop;voix;claviers;claviers;voix_plus;claviers
+10674;Q722627;Juan García Esquivel;pop;voix;claviers;claviers;voix_plus;claviers
+10676;Q369470;Timmy Thomas;R&B;voix;claviers;;voix_plus;claviers
+10677;Q713068;Wu Tsing-Fong;pop;voix;claviers|vents;;voix_seul;
+10688;Q178943;Little Boots;pop;voix;claviers;claviers;voix_plus;claviers
+10712;Q979084;Jimmy Castor;R&B;voix;vents;;voix_seul;
+10719;Q2433840;Tim Burgess;pop;voix;batterie;;voix_seul;
+10739;Q102233671;Mary Gu;pop;voix;claviers;;voix_plus;claviers
+10754;Q25349761;Justina Valentine;R&B;voix;guitare;;voix_plus;guitare
+10757;Q2826292;Afshin;pop;voix;guitare;;voix_plus;guitare
+10770;Q4082848;Zhenya Belousov;funk;voix;guitare|basse;;voix_plus;guitare
+10795;Q474283;Amos Milburn;R&B;voix;claviers;;voix_plus;claviers
+10814;Q602031;Jimmie Nicol;pop;voix;batterie;batterie;voix_plus;batterie
+10815;Q15637422;Dawid Kwiatkowski;pop;voix;claviers;;voix_plus;claviers
+10860;Q1093318;Celeste Buckingham;pop;voix;claviers;;voix_plus;claviers
+10877;Q3195885;Aleksandre Novikov;pop;voix;guitare;guitare;voix_plus;guitare
+10891;Q16149516;Morissette;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+10905;Q450859;Katerine Avgoustakis;pop;voix;claviers;claviers;voix_plus;claviers
+10919;Q311181;Q311181;pop;voix;guitare;guitare;voix_plus;guitare
+10928;Q7800072;Tiago Iorc;pop;voix;guitare;;voix_plus;guitare
+10969;Q4458336;Bogdan Titomir;pop;voix;claviers|guitare|basse;machines;voix_plus;machines
+10970;Q10577548;Sanni;pop;voix;guitare|cordes|batterie;;voix_seul;
+10977;Q2749198;Keshia Chanté;R&B;voix;claviers;;voix_plus;claviers
+10994;Q741390;Phil Cunningham;pop;voix;guitare;guitare;voix_plus;guitare
+11015;Q225878;Harry Winter;pop;voix;vents;;voix_seul;
+11019;Q454067;Nazan Öncel;pop;voix;guitare;;voix_plus;guitare
+11028;Q957010;Frankie Beverly;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+11031;Q468201;Nuša Derenda;pop;voix;claviers;;voix_plus;claviers
+11038;Q8068133;Zdzisława Sośnicka;pop;voix;claviers;;voix_plus;claviers
+11039;Q28672611;Gromee;pop;voix;;machines;voix_plus;machines
+11041;Q7383773;RY X;électro;voix;guitare|claviers;;voix_seul;
+11055;Q16323830;Sam Kim;R&B;voix;guitare;;voix_plus;guitare
+11062;Q3660567;Carolina Márquez;pop;voix;;machines;voix_plus;machines
+11068;Q1999668;Jackie Lomax;pop;voix;guitare;guitare;voix_plus;guitare
+11091;Q4131734;Ebiet G. Ade;pop;voix;guitare;;voix_plus;guitare
+11100;Q3825360;Zahara;pop;voix;guitare;;voix_plus;guitare
+11106;Q718856;Hi-Tek;hip-hop;voix;claviers;;voix_seul;
+11114;Q6723963;Maciej Maleńczuk;pop;voix;guitare;vents;voix_plus;guitare|vents
+11122;Q539435;Annette Humpe;pop;voix;claviers;;voix_plus;claviers
+11123;Q123503941;Chiara Oliver;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+11131;Q4952077;Lindita Halimi;R&B;voix;claviers;;voix_plus;claviers
+11135;Q15695322;Vanja Radovanović;pop;voix;guitare;;voix_plus;guitare
+11141;Q1974203;Neffa;pop;voix;batterie;;voix_seul;
+11143;Q724773;Reg Presley;pop;voix;guitare|basse;;voix_seul;
+11149;Q85816703;Yeule;pop;voix;claviers|guitare|machines;;voix_seul;
+11150;Q918835;Ataru Nakamura;pop;voix;claviers;claviers;voix_plus;claviers
+11164;Q1375278;Raul Midón;électro;voix;guitare;;voix_seul;
+11165;Q944365;D'banj;hip-hop;voix;vents;;voix_seul;
+11187;Q1933525;Mike Smith;pop;voix;claviers;;voix_plus;claviers
+11210;Q6451957;Kyōji Yamamoto;pop;voix;guitare;guitare;voix_plus;guitare
+11214;Q1289535;David Sancious;pop;voix;claviers|guitare;guitare;voix_plus;guitare|claviers
+11221;Q1037787;Jun Shibata;pop;voix;claviers;;voix_plus;claviers
+11224;Q59313339;Gazzelle;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+11233;Q6148605;Jan Borysewicz;pop;voix;guitare;;voix_plus;guitare
+11243;Q437669;Mando;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+11249;Q1225595;Dillon;pop;voix;claviers;claviers;voix_plus;claviers
+11258;Q1985556;Bobby Day;R&B;voix;claviers;;voix_plus;claviers
+11274;Q6200521;Terry Sylvester;pop;voix;guitare;guitare;voix_plus;guitare
+11275;Q4934976;Bobby Elliott;pop;voix;batterie;;voix_seul;
+11277;Q11892778;Sebastian Rejman;pop;voix;;guitare;voix_plus;guitare
+11280;Q713351;Bobby Freeman;R&B;voix;claviers;;voix_plus;claviers
+11292;Q3241643;Lino;hip-hop;voix;vents;;voix_seul;
+11304;Q1100680;Jessica Origliasso;électro;voix;guitare;;voix_seul;
+11314;Q2316409;Jean-Benoît Dunckel;électro;voix;claviers|machines;;voix_plus;machines
+11320;Q3083168;Vincent Scotto;chanson;voix;guitare;;voix_plus;guitare
+11350;Q447928;Camille Jones;pop;voix;guitare;;voix_plus;guitare
+11375;Q4069147;Gianluca Bezzina;pop;voix;claviers;;voix_plus;claviers
+11376;Q1909192;Matt Goss;pop;voix;batterie;;voix_seul;
+11379;Q677717;Constantínos Christofórou;pop;voix;claviers;;voix_plus;claviers
+11408;Q1873734;Lucky Peterson;R&B;voix;claviers|guitare|vents;;voix_seul;
+11418;Q287966;Vaçe Zela;pop;voix;guitare;;voix_plus;guitare
+11424;Q3174590;Jean Schultheis;pop;voix;claviers;;voix_plus;claviers
+11425;Q7384395;Ryan O'Shaughnessy;pop;voix;guitare;claviers|guitare;voix_plus;guitare|claviers
+11440;Q369517;Hamilton Bohannon;funk;voix;batterie;;voix_seul;
+11443;Q962609;Ali-Ollie Woodson;R&B;voix;claviers;;voix_plus;claviers
+11446;Q2917376;Mohit Chauhan;pop;voix;guitare|vents;;voix_seul;
+11457;Q6968340;Nataly Dawn;pop;voix;claviers|guitare|basse|batterie;;voix_seul;
+11490;Q763920;Tom McRae;pop;voix;claviers|guitare;guitare;voix_plus;guitare|claviers
+11491;Q7344697;Robert Gawliński;pop;voix;guitare;;voix_plus;guitare
+11509;Q3011336;DJ Méndez;pop;voix;;machines;voix_plus;machines
+11522;Q16325797;Eddy Kim;pop;voix;guitare;;voix_plus;guitare
+11526;Q1820387;Leroy Hutson;R&B;voix;claviers;;voix_plus;claviers
+11527;Q1711513;Simon Fisher Turner;pop;voix;guitare;guitare;voix_plus;guitare
+11529;Q365118;Eiríkur Hauksson;pop;voix;batterie|machines;;voix_seul;
+11564;Q920082;François Rauber;chanson;voix;claviers;;voix_plus;claviers
+11568;Q12482642;Eva Celia;R&B;voix;guitare;;voix_plus;guitare
+11577;Q2967586;Chuck Brown;funk;voix;guitare;;voix_plus;guitare
+11588;Q6496167;Latimore;R&B;voix;claviers;;voix_plus;claviers
+11619;Q19872469;Conrad Sewell;R&B;voix;basse;;voix_seul;
+11628;Q162732;Robbie Nevil;pop;voix;;guitare;voix_plus;guitare
+11631;Q582740;Houston Person;hip-hop;voix;vents;;voix_seul;
+11632;Q5336031;Eddie Fisher;pop;voix;guitare|batterie;batterie;voix_plus;batterie
+11649;Q1536464;Michalis Rakintzis;pop;voix;guitare;;voix_plus;guitare
+11666;Q1142698;Florrie;pop;voix;guitare|batterie;batterie;voix_plus;batterie
+11675;Q63980664;Amir Eid;pop;voix;guitare;guitare;voix_plus;guitare
+11692;Q3561497;Michael Kocáb;pop;voix;claviers;;voix_plus;claviers
+11701;Q4408826;Igor Sarukhanov;pop;voix;guitare;;voix_plus;guitare
+11711;Q1498057;Geir Rönning;pop;voix;guitare;;voix_plus;guitare
+11719;Q112275924;P.V.R. Raja;pop;voix;;guitare;voix_plus;guitare
+11720;Q1619324;Emily Bear;R&B;voix;claviers;;voix_plus;claviers
+11725;Q3040442;Thomas G:son;pop;voix;guitare;;voix_plus;guitare
+11742;Q15774989;Malukah;pop;voix;guitare;;voix_plus;guitare
+11746;Q4393080;Рем Дігга;hip-hop;voix;claviers|guitare|machines;;voix_seul;
+11755;Q6514229;Lee Juck;pop;voix;claviers;claviers;voix_plus;claviers
+11761;Q131549291;Greczula;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+11772;Q11789992;Natalia Przybysz;R&B;voix;cordes;;voix_seul;
+11774;Q352518;Dane Bowers;pop;voix;;machines;voix_plus;machines
+11787;Q728310;Joseph Brooks;pop;voix;claviers;;voix_plus;claviers
+11808;Q4460316;Tommi Läntinen;pop;voix;guitare;guitare;voix_plus;guitare
+11811;Q740388;Blockhead;hip-hop;voix;machines;;voix_plus;machines
+11813;Q1082262;Kleerup;pop;voix;guitare;batterie;voix_plus;batterie|guitare
+11815;Q3431654;Ricky Ross;pop;voix;claviers|guitare;claviers|guitare;voix_plus;guitare|claviers
+11831;Q807545;Barbara Lynn;R&B;voix;guitare;;voix_plus;guitare
+11849;Q328564;Daniel Boone;pop;voix;claviers;;voix_plus;claviers
+11863;Q4762587;Angela Winbush;R&B;voix;claviers;;voix_plus;claviers
+11868;Q5584286;Gopi Sundar;électro;voix;batterie|claviers;;voix_seul;
+11877;Q2569126;Luis Resto;hip-hop;voix;claviers;;voix_seul;
+11879;Q123314404;Helena;pop;voix;claviers;;voix_plus;claviers
+11882;Q1608964;DJ Subroc;hip-hop;voix;machines;;voix_plus;machines
+11900;Q3546897;Tété;chanson;voix;guitare;;voix_plus;guitare
+11901;Q2363917;Kjartan Sveinsson;électro;voix;claviers|guitare;;voix_seul;
+11902;Q264114;Dionne Bromfield;R&B;voix;guitare;;voix_plus;guitare
+11907;Q4527444;Batyrkhan Shukenov;pop;voix;vents;vents;voix_plus;vents
+11914;Q4225546;يوليا كوفالتشيوك;chanson;voix;guitare;;voix_plus;guitare
+11916;Q4515701;Sergey Chigrakov;R&B;voix;guitare|vents|claviers|batterie;;voix_seul;
+11923;Q12127853;Iryna Fedyshyn;pop;voix;guitare;;voix_plus;guitare
+11938;Q66551093;Cuco;pop;voix;guitare|vents;;voix_seul;
+11944;Q456844;Ingrid Olava;pop;voix;claviers;claviers;voix_plus;claviers
+11950;Q130354657;Artem Kotenko;pop;voix;claviers;;voix_plus;claviers
+11953;Q205368;Jens Gad;pop;voix;guitare;guitare;voix_plus;guitare
+11954;Q106567;Toby Gad;pop;voix;claviers;;voix_plus;claviers
+11984;Q4425471;Tatiana Snejina;pop;voix;machines|vents;;voix_seul;
+11993;Q1074344;Hanako Oku;pop;voix;claviers;;voix_plus;claviers
+12000;Q19160305;Shura;électro;voix;guitare;;voix_seul;
+12003;Q276139;Charlotte Martin;pop;voix;claviers;claviers;voix_plus;claviers
+12048;Q1955179;Vlatko Lozanoski;pop;voix;guitare;;voix_plus;guitare
+12067;Q3768548;Gipo Farassino;pop;voix;guitare;;voix_plus;guitare
+12080;Q17198200;Alexander Ivanov;pop;voix;guitare;;voix_plus;guitare
+12100;Q457839;Lana Lane;metal;voix;claviers;;voix_seul;
+12102;Q3081554;Francis Lemarque;chanson;voix;guitare;;voix_plus;guitare
+12111;Q2404368;Ollie Halsall;pop;voix;guitare;claviers|guitare;voix_plus;guitare|claviers
+12145;Q16096971;Yoon Sang;électro;voix;claviers;;voix_seul;
+12173;Q598026;Chris Chaney;pop;voix;basse;;voix_seul;
+12194;Q1531129;Glenn Yarbrough;pop;voix;;guitare;voix_plus;guitare
+12198;Q1959324;Venya D'rkin;pop;voix;;guitare;voix_plus;guitare
+12204;Q183060;Anoushiravan Rohani;pop;voix;claviers;claviers;voix_plus;claviers
+12206;Q2097323;Tristan Prettyman;pop;voix;guitare;;voix_plus;guitare
+12212;Q16189316;Karl Hyde;électro;voix;guitare;;voix_seul;
+12230;Q2857741;Edda Magnason;pop;voix;claviers;claviers;voix_plus;claviers
+12247;Q1038579;Anri Kumaki;pop;voix;guitare;;voix_plus;guitare
+12248;Q965634;Mišo Kovač;pop;voix;vents;;voix_seul;
+12259;Q12588546;Kim Jung-mo;électro;voix;guitare|basse;;voix_seul;
+12263;Q235264;Maya Sar;pop;voix;claviers;;voix_plus;claviers
+12270;Q4284680;Igor Matvienko;pop;voix;claviers;;voix_plus;claviers
+12273;Q59312925;Big Baby Tape;hip-hop;voix;claviers|machines;;voix_plus;machines
+12277;Q1766082;Laura Jansen;pop;voix;claviers;claviers;voix_plus;claviers
+12279;Q773246;Jon McLaughlin;pop;voix;vents;claviers;voix_plus;claviers
+12283;Q4356729;Ola Magnell;pop;voix;guitare;guitare;voix_plus;guitare
+12299;Q625737;Kenzie;R&B;voix;claviers;;voix_plus;claviers
+12303;Q8353804;Dante Spinetta;hip-hop;voix;guitare;;voix_seul;
+12326;Q1319904;Claus Norreen;pop;voix;guitare|claviers;;voix_plus;guitare|claviers
+12328;Q2418625;Fredrik Kempe;pop;voix;claviers;;voix_plus;claviers
+12345;Q2591401;Lee Ki-seop;pop;voix;claviers;claviers;voix_plus;claviers
+12346;Q604940;James Ellis Ford;pop;voix;claviers;batterie;voix_plus;batterie|claviers
+12350;Q18605682;Lee Jin-ah;pop;voix;claviers;claviers;voix_plus;claviers
+12351;Q1280173;Peter Shukoff;hip-hop;voix;guitare;;voix_seul;
+12355;Q432689;Imani Coppola;pop;voix;cordes;;voix_seul;
+12356;Q626896;Kim Dong-ryul;pop;voix;claviers;claviers;voix_plus;claviers
+12367;Q5045362;Carolyn Franklin;R&B;voix;claviers;;voix_plus;claviers
+12372;Q2737054;Masaya Matsuura;pop;voix;machines;;voix_seul;
+12408;Q1710284;Junior Walker;R&B;voix;vents;;voix_seul;
+12419;Q166796;GoonRock;pop;voix;claviers;;voix_plus;claviers
+12426;Q451262;Princess Superstar;électro;voix;guitare;;voix_seul;
+12441;Q2598276;Xindl X;pop;voix;guitare;;voix_plus;guitare
+12450;Q711920;Crispian Mills;pop;voix;guitare;guitare;voix_plus;guitare
+12480;Q274117;Inara George;pop;voix;guitare;;voix_plus;guitare
+12498;Q3339429;Shila Amzah;pop;voix;claviers|guitare;claviers;voix_plus;guitare|claviers
+12508;Q20925336;Sarsa;pop;voix;guitare|vents;;voix_seul;
+12511;Q4351645;Elena Perova;pop;voix;guitare|vents;guitare;voix_plus;guitare
+12514;Q923194;Jean-Claude Vannier;pop;voix;claviers;claviers;voix_plus;claviers
+12515;Q448781;Wally Badarou;pop;voix;claviers;;voix_plus;claviers
+12521;Q11989370;Jeff Bhasker;pop;voix;claviers;;voix_plus;claviers
+12522;Q3187598;Juan Carlos Calderón;pop;voix;claviers;claviers;voix_plus;claviers
+12525;Q880405;Black Milk;hip-hop;voix;batterie;;voix_seul;
+12528;Q521518;Francesca Battistelli;pop;voix;claviers;claviers;voix_plus;claviers
+12532;Q939357;Serafín Zubiri;pop;voix;claviers;claviers;voix_plus;claviers
+12568;Q525253;Javier Colon;R&B;voix;guitare;;voix_plus;guitare
+12569;Q323846;Piero Esteriore;pop;voix;batterie;;voix_seul;
+12570;Q82262;Taras Chubay;pop;voix;guitare;guitare;voix_plus;guitare
+12583;Q7694132;Tede;hip-hop;voix;machines;;voix_plus;machines
+12595;Q61745447;Roko Blažević;pop;voix;claviers;;voix_plus;claviers
+12605;Q58959472;Vegedream;hip-hop;voix;batterie;;voix_seul;
+12615;Q503625;Blake McIver Ewing;pop;voix;claviers;;voix_plus;claviers
+12621;Q1176812;David Tavaré;pop;voix;;machines;voix_plus;machines
+12641;Q1370953;Kei Yasuda;pop;voix;claviers|vents;;voix_seul;
+12647;Q1143736;Ayumi Shibata;pop;voix;batterie;;voix_seul;
+12658;Q1688167;Jesse Johnson;funk;voix;guitare;;voix_plus;guitare
+12660;Q3138085;Ichirō Fujiyama;pop;voix;claviers;;voix_plus;claviers
+12666;Q453390;Vienna Teng;pop;voix;claviers|guitare|batterie;claviers|guitare;voix_plus;guitare|claviers
+12669;Q3271223;Teresa Carpio;pop;voix;claviers;claviers;voix_plus;claviers
+12676;Q379919;Krassimir Avramov;pop;voix;claviers;;voix_plus;claviers
+12678;Q741522;DJ Toomp;hip-hop;voix;claviers;;voix_seul;
+12679;Q6729344;Maestro Harrell;électro;voix;claviers|guitare|batterie;;voix_seul;
+12697;Q18921804;Mitch Grassi;pop;voix;claviers;;voix_plus;claviers
+12717;Q2842639;Amel Larrieux;R&B;voix;claviers;;voix_plus;claviers
+12725;Q94265;Vince DiCola;pop;voix;claviers;;voix_plus;claviers
+12745;Q22127992;Anly;pop;voix;guitare;;voix_plus;guitare
+12769;Q1344565;Morgan Fisher;pop;voix;claviers;;voix_plus;claviers
+12775;Q534141;Johnette Napolitano;pop;voix;guitare;;voix_plus;guitare
+12808;Q13360311;Zach Sobiech;pop;voix;guitare;;voix_plus;guitare
+12821;Q2097963;Teri Moïse;R&B;voix;basse;;voix_seul;
+12825;Q289070;Kenny Rankin;pop;voix;guitare;;voix_plus;guitare
+12838;Q328567;Richard Elliot;funk;voix;vents;;voix_seul;
+12856;Q4316800;Irene Nelson;funk;voix;claviers;;voix_plus;claviers
+12857;Q11538022;Megu Sakuragawa;pop;voix;batterie;;voix_seul;
+12867;Q235875;Marija Šestić;pop;voix;claviers;;voix_plus;claviers
+12872;Q86728;Thomas Spitzer;pop;voix;guitare;guitare;voix_plus;guitare
+12876;Q446548;Kasia Cerekwicka;pop;voix;vents;;voix_seul;
+12888;Q21524546;Buray;pop;voix;guitare;;voix_plus;guitare
+12892;Q445704;Julie Doiron;pop;voix;guitare;;voix_plus;guitare
+12899;Q1168056;Jonathan Butler;R&B;voix;guitare;;voix_plus;guitare
+12944;Q1074226;Shigeru Joshima;pop;voix;guitare;guitare;voix_plus;guitare
+12948;Q4291812;Kai Metov;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+12952;Q17403379;Rae Morris;électro;voix;claviers;;voix_seul;
+12966;Q466796;Pierdavide Carone;pop;voix;guitare;;voix_plus;guitare
+12967;Q1110571;Colonel Abrams;électro;voix;claviers|guitare;;voix_seul;
+12990;Q6456319;L.U.C;hip-hop;voix;guitare;;voix_seul;
+13006;Q903838;Mikel Herzog;pop;voix;batterie;;voix_seul;
+13018;Q271505;L'Aura;pop;voix;claviers;;voix_plus;claviers
+13047;Q6776086;Martin Luther McCoy;R&B;voix;guitare;;voix_plus;guitare
+13059;Q22006810;Sarah McTernan;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+13065;Q2639650;Albin de la Simone;pop;voix;claviers;;voix_plus;claviers
+13071;Q2502323;Valeria Kozlova;R&B;voix;batterie;batterie;voix_plus;batterie
+13083;Q271578;Şebnem Paker;pop;voix;guitare;;voix_plus;guitare
+13086;Q934737;Simon Climie;pop;voix;claviers;;voix_plus;claviers
+13100;Q3434303;Tommy DeVito;pop;voix;guitare;guitare;voix_plus;guitare
+13102;Q7358318;Roger Hawkins;R&B;voix;batterie;;voix_seul;
+13116;Q843539;Endy Chow;pop;voix;guitare;;voix_plus;guitare
+13125;Q21079382;Kristina Si;hip-hop;voix;claviers;;voix_seul;
+13142;Q2574562;Becca;pop;voix;guitare;guitare;voix_plus;guitare
+13144;Q19362932;Molly Sterling;pop;voix;claviers;claviers;voix_plus;claviers
+13155;Q259698;Aziza;pop;voix;claviers;;voix_plus;claviers
+13159;Q528467;Daniela Simmons;pop;voix;;claviers;voix_plus;claviers
+13164;Q123310101;Anton Lee;pop;voix;basse;;voix_seul;
+13166;Q3084304;François Corbier;chanson;voix;guitare;;voix_plus;guitare
+13167;Q5799592;Staffan Hellstrand;pop;voix;guitare;;voix_plus;guitare
+13176;Q220351;Zoot Money;R&B;voix;claviers;;voix_plus;claviers
+13180;Q21618845;Jack Garratt;électro;voix;claviers|guitare|vents|basse|batterie;;voix_seul;
+13186;Q1386948;Norman Whitfield;R&B;voix;claviers;;voix_plus;claviers
+13187;Q3290616;Margo Guryan;pop;voix;claviers;claviers;voix_plus;claviers
+13197;Q453596;Jaël Malli;pop;voix;guitare;;voix_plus;guitare
+13206;Q3544877;Yoshio Tabata;pop;voix;guitare;guitare;voix_plus;guitare
+13211;Q5226163;Daryl Dragon;pop;voix;claviers;claviers;voix_plus;claviers
+13227;Q931918;Norrie Paramor;pop;voix;claviers;;voix_plus;claviers
+13267;Q239234;Igor Cukrov;pop;voix;vents;;voix_seul;
+13273;Q3507763;Petr Spálený;pop;voix;vents;;voix_seul;
+13279;Q3234938;Mulan Jameela;R&B;voix;guitare;;voix_plus;guitare
+13288;Q2706204;Ed Wynne;funk;voix;guitare|vents;;voix_plus;guitare
+13295;Q7678153;Takeshi Terauchi;pop;voix;guitare;guitare;voix_plus;guitare
+13303;Q485275;Masao Koga;pop;voix;guitare;guitare;voix_plus;guitare
+13306;Q2102371;Richard Street;R&B;voix;claviers;;voix_plus;claviers
+13316;Q2330808;Eva Amaral;pop;voix;guitare;guitare;voix_plus;guitare
+13321;Q1739532;Tomas Andersson Wij;pop;voix;guitare;;voix_plus;guitare
+13346;Q4579229;Stefan Sundström;pop;voix;guitare;;voix_plus;guitare
+13377;Q4700861;Aki Sirkesalo;funk;voix;guitare;;voix_plus;guitare
+13378;Q4890054;Benny Sings;R&B;voix;claviers|guitare|basse|batterie|machines;;voix_seul;
+13379;Q822275;Lisa Origliasso;électro;voix;machines;;voix_plus;machines
+13410;Q455517;Pauline;pop;voix;claviers;;voix_plus;claviers
+13414;Q26883986;Maria Arnal;électro;voix;claviers|machines;;voix_plus;machines
+13416;Q460496;Lisa Mitchell;pop;voix;guitare;;voix_plus;guitare
+13436;Q181770;Wanting Qu;pop;voix;claviers;claviers;voix_plus;claviers
+13439;Q543235;Donna Ares;pop;voix;claviers;;voix_plus;claviers
+13443;Q16679640;Pierre Narcisse;pop;voix;vents;;voix_seul;
+13458;Q465105;Willie Mitchell;R&B;voix;vents;;voix_seul;
+13461;Q134396268;Wifiskeleton;hip-hop;voix;guitare;;voix_seul;
+13466;Q1322285;Brooke White;pop;voix;claviers|guitare;claviers|guitare;voix_plus;guitare|claviers
+13468;Q116105;Mia Aegerter;pop;voix;guitare;;voix_plus;guitare
+13471;Q3048765;Edwin Birdsong;funk;voix;claviers;;voix_plus;claviers
+13477;Q841199;Haruichi Shindō;pop;voix;guitare;guitare;voix_plus;guitare
+13522;Q5258339;Dennis Davis;pop;voix;batterie;batterie;voix_plus;batterie
+13546;Q726138;Swamp Dogg;R&B;voix;guitare;;voix_plus;guitare
+13555;Q118370056;Nizam DRedd;hip-hop;voix;claviers;;voix_seul;
+13617;Q3193690;Kashif;R&B;voix;claviers;;voix_plus;claviers
+13624;Q1109077;Emm Gryner;pop;voix;claviers|guitare|basse;claviers;voix_plus;claviers
+13625;Q1895448;Margriet Eshuijs;pop;voix;guitare;claviers|guitare;voix_plus;guitare|claviers
+13626;Q840144;Lyfe Jennings;R&B;voix;claviers|guitare|basse;;voix_seul;
+13651;Q1072639;Sayaka Nakaya;pop;voix;vents;;voix_seul;
+13662;Q7164377;Penny Ford;électro;voix;claviers|vents|basse|batterie|machines;;voix_seul;
+13681;Q1055198;Ichirō Itō;pop;voix;guitare;guitare;voix_plus;guitare
+13695;Q20477041;İlyas Yalçıntaş;pop;voix;guitare;;voix_plus;guitare
+13698;Q3775982;Grazia Di Michele;pop;voix;claviers;;voix_plus;claviers
+13704;Q2636166;Al McKay;funk;voix;guitare;;voix_plus;guitare
+13707;Q13583117;Larry Dunn;funk;voix;claviers;;voix_plus;claviers
+13720;Q2454658;Mikelangelo Loconte;pop;voix;claviers|guitare|batterie;claviers|guitare;voix_plus;guitare|claviers
+13726;Q3432148;Rina Suzuki;pop;voix;batterie;batterie;voix_plus;batterie
+13732;Q70437467;Aloïse Sauvage;hip-hop;voix;vents|batterie;;voix_seul;
+13748;Q54858;Savannah Outen;pop;voix;guitare;;voix_plus;guitare
+13751;Q327220;Shaun Baker;pop;voix;;machines;voix_plus;machines
+13757;Q1370870;Kazutoshi Sakurai;pop;voix;guitare;;voix_plus;guitare
+13764;Q983812;Gabe Saporta;pop;voix;basse;;voix_seul;
+13770;Q22955580;Rozes;pop;voix;claviers|guitare|vents|cordes;;voix_seul;
+13772;Q1406115;John Hall;pop;voix;;guitare;voix_plus;guitare
+13773;Q3441079;Romano Musumarra;pop;voix;claviers;;voix_plus;claviers
+13774;Q2592227;Vincent Cavanagh;électro;voix;guitare;;voix_seul;
+13778;Q1325230;Sachi Tainaka;pop;voix;claviers;;voix_plus;claviers
+13812;Q55006228;Kelly Lee Owens;électro;voix;basse;;voix_seul;
+13814;Q2392094;Connan Mockasin;pop;voix;guitare;;voix_plus;guitare
+13828;Q320452;Wilbert Harrison;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+13853;Q4700971;Akiko Kobayashi;pop;voix;claviers;;voix_plus;claviers
+13864;Q324537;Max Werner;pop;voix;batterie;batterie;voix_plus;batterie
+13866;Q3273168;Hiro Takahashi;pop;voix;guitare|vents|claviers;;voix_seul;
+13869;Q138337412;Bella Kay;pop;voix;guitare;;voix_plus;guitare
+13877;Q3141798;Pauline Croze;chanson;voix;guitare;;voix_plus;guitare
+13894;Q5090738;Chen Chusheng;pop;voix;guitare;guitare;voix_plus;guitare
+13900;Q2407789;Louis Johnson;funk;voix;guitare|basse;;voix_plus;guitare
+13914;Q3267043;Rose Elinor Dougall;pop;voix;claviers;;voix_plus;claviers
+13961;Q1816925;An Pierlé;pop;voix;claviers;claviers;voix_plus;claviers
+13962;Q7685542;Taras Petrynenko;pop;voix;guitare|claviers;;voix_plus;guitare|claviers
+13966;Q371348;Thom Bell;R&B;voix;claviers;;voix_plus;claviers
+13971;Q59180232;Phum Viphurit;R&B;voix;guitare|batterie;;voix_plus;guitare
+13995;Q28606988;Tauren Wells;pop;voix;claviers;;voix_plus;claviers
+13996;Q2559497;Russya;pop;voix;vents;;voix_seul;
+13998;Q11880415;Maarit Hurmerinta;R&B;voix;claviers;;voix_plus;claviers
+14003;Q234375;Nina Radojčić;pop;voix;claviers;claviers;voix_plus;claviers
+14023;Q224559;Katarína Knechtová;pop;voix;guitare;guitare;voix_plus;guitare
+14025;Q1338629;King Charles;pop;voix;cordes;guitare;voix_plus;guitare
+14032;Q3055538;Enzo Enzo;chanson;voix;claviers|vents;;voix_seul;
+14040;Q718420;Onno Tunç;pop;voix;guitare;;voix_plus;guitare
+14041;Q30231655;Smolasty;hip-hop;voix;guitare;;voix_seul;
+14067;Q6183524;Jerry Duplessis;R&B;voix;basse;;voix_seul;
+14113;Q6367;Ana Free;pop;voix;guitare;;voix_plus;guitare
+14124;Q5382456;Epic Mazur;hip-hop;voix;basse;;voix_seul;
+14145;Q6211645;Joe Osborn;pop;voix;guitare;;voix_plus;guitare
+14150;Q741679;Farhad Darya;pop;voix;claviers;;voix_plus;claviers
+14151;Q5394549;Ernie Isley;R&B;voix;guitare;;voix_plus;guitare
+14152;Q3058968;Esther Galil;pop;voix;guitare;;voix_plus;guitare
+14154;Q956870;Just Blaze;hip-hop;voix;batterie;;voix_seul;
+14179;Q1060996;Yasuharu Konishi;pop;voix;guitare|basse;machines;voix_plus;machines
+14203;Q976579;Jamie Woon;R&B;voix;guitare;;voix_plus;guitare
+14217;Q1054594;Nobuteru Maeda;pop;voix;guitare;;voix_plus;guitare
+14221;Q7340797;Robb Royer;pop;voix;guitare;guitare;voix_plus;guitare
+14233;Q13561990;Joyce Sims;R&B;voix;claviers;;voix_plus;claviers
+14251;Q3376885;Peter Skellern;pop;voix;claviers;claviers;voix_plus;claviers
+14290;Q437622;Laura Izibor;R&B;voix;claviers;;voix_plus;claviers
+14300;Q320309;Benny Greb;funk;voix;batterie;;voix_seul;
+14302;Q3675515;Dilba;R&B;voix;claviers;;voix_plus;claviers
+14303;Q3429588;Jakob Hellman;pop;voix;;guitare;voix_plus;guitare
+14306;Q2469669;Sanjaya Malakar;pop;voix;guitare;;voix_plus;guitare
+14321;Q2467456;Blackbyrd McKnight;funk;voix;guitare;;voix_plus;guitare
+14323;Q3429331;Michael Hampton;funk;voix;guitare;;voix_plus;guitare
+14324;Q2267893;Garry Shider;funk;voix;guitare;;voix_plus;guitare
+14331;Q3142015;Hubert Giraud;chanson;voix;guitare;;voix_plus;guitare
+14359;Q12605581;Anda;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+14367;Q2749084;Jason Castro;pop;voix;guitare;guitare;voix_plus;guitare
+14379;Q1711269;Ken Choi;pop;voix;guitare;machines;voix_plus;guitare|machines
+14393;Q512974;Julia Marcell;pop;voix;claviers|guitare;claviers;voix_plus;guitare|claviers
+14398;Q5492023;Jack Vidgen;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+14417;Q3013814;Daniel Bélanger;pop;voix;guitare;;voix_plus;guitare
+14439;Q3366973;Marvin Tarplin;R&B;voix;guitare;;voix_plus;guitare
+14472;Q1855369;Michael Zager;pop;voix;claviers;;voix_plus;claviers
+14488;Q563460;Georg Malmstén;chanson;voix;vents;;voix_seul;
+14489;Q1788071;Alexa Feser;pop;voix;claviers;machines|claviers;voix_plus;claviers|machines
+14496;Q3090342;Michal;pop;voix;claviers;;voix_plus;claviers
+14500;Q2915715;Uzi Hitman;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+14505;Q1764153;Sverre Kjelsberg;pop;voix;;guitare;voix_plus;guitare
+14510;Q15249858;Lenny;pop;voix;claviers;claviers;voix_plus;claviers
+14515;Q4526299;Шоуа, Александр Вячеславович;pop;voix;basse;;voix_seul;
+14541;Q2352983;Isaac Hanson;pop;voix;;guitare;voix_plus;guitare
+14554;Q433447;Kelli Ali;pop;voix;;guitare;voix_plus;guitare
+14567;Q1732055;Mike Ladd;hip-hop;voix;basse;;voix_seul;
+14577;Q3123752;Gérard Berliner;chanson;voix;guitare;;voix_plus;guitare
+14607;Q3501195;Assia Ahhatt;pop;voix;cordes;;voix_seul;
+14609;Q5702795;Helen Marnie;électro;voix;claviers;;voix_seul;
+14636;Q541377;Classified;hip-hop;voix;machines;;voix_plus;machines
+14642;Q3272503;Albert Au;pop;voix;guitare;;voix_plus;guitare
+14654;Q1354107;Jostein Hasselgård;pop;voix;claviers;claviers;voix_plus;claviers
+14694;Q3128175;Hassan Shamaizadeh;pop;voix;vents;;voix_seul;
+14722;Q13643169;Lenny Pickett;R&B;voix;vents;;voix_seul;
+14733;Q661527;Ketil Stokkan;pop;voix;;guitare;voix_plus;guitare
+14759;Q1362691;Fisz;hip-hop;voix;basse;;voix_seul;
+14769;Q457208;Twila Paris;pop;voix;claviers;;voix_plus;claviers
+14781;Q716053;J.R. Rotem;pop;voix;claviers;claviers;voix_plus;claviers
+14792;Q682673;Dave Dee;pop;voix;;guitare;voix_plus;guitare
+14803;Q14554744;Lilit Hovhannisyan;pop;voix;claviers;;voix_plus;claviers
+14808;Q1557757;Guðrið Hansdóttir;pop;voix;guitare;;voix_plus;guitare
+14809;Q1441156;Francesco Napoli;pop;voix;claviers|guitare;claviers|guitare;voix_plus;guitare|claviers
+14814;Q511507;Sharlene Taulé;pop;voix;claviers|vents;;voix_seul;
+14837;Q6080841;Sinan Özen;pop;voix;cordes;;voix_seul;
+14854;Q699516;Deserts Chang;pop;voix;guitare;;voix_plus;guitare
+14890;Q5107000;Chris Jasper;R&B;voix;claviers;;voix_plus;claviers
+14893;Q17811603;Yurika Endō;pop;voix;basse;;voix_seul;
+14894;Q2361403;Suat Suna;pop;voix;cordes;;voix_seul;
+14908;Q2277191;Sharif Dean;pop;voix;claviers|basse;;voix_seul;
+14915;Q2336894;Brandon Heath;R&B;voix;guitare;;voix_plus;guitare
+14926;Q538676;Lou Monte;pop;voix;guitare;guitare;voix_plus;guitare
+14929;Q1677281;Jackie Brenston;R&B;voix;vents;;voix_seul;
+14937;Q938713;DJ Green Lantern;hip-hop;voix;machines;;voix_plus;machines
+14983;Q106727810;Breskvica;hip-hop;voix;claviers|guitare;;voix_seul;
+15003;Q1324024;Willie Hutch;R&B;voix;guitare;;voix_plus;guitare
+15013;Q974888;Nicholas Bullen;électro;voix;basse;;voix_seul;
+15034;Q3431589;Rick Nowels;pop;voix;guitare;;voix_plus;guitare
+15037;Q1173998;David Christie;pop;voix;claviers|guitare|basse;;voix_seul;
+15049;Q4741297;Михей;hip-hop;voix;guitare|batterie|claviers;;voix_seul;
+15062;Q6583345;Nathan Goshen;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+15071;Q3131204;John Bettis;pop;voix;guitare;;voix_plus;guitare
+15075;Q2407365;Maxine Jones;R&B;voix;guitare;;voix_plus;guitare
+15078;Q16774610;Ilya Salmanzadeh;pop;voix;claviers|guitare;claviers;voix_plus;guitare|claviers
+15088;Q722100;Ozan Çolakoğlu;pop;voix;claviers;;voix_plus;claviers
+15092;Q533060;Jenny Owen Youngs;pop;voix;guitare;;voix_plus;guitare
+15114;Q4277625;Vyacheslav Malezhik;chanson;voix;claviers|guitare|vents;;voix_seul;
+15121;Q122017;Phil Carmen;funk;voix;guitare;;voix_plus;guitare
+15137;Q124379261;Cat Janice;électro;voix;claviers|cordes;;voix_seul;
+15157;Q3481851;Shelly Poole;pop;voix;guitare;guitare;voix_plus;guitare
+15163;Q6378460;Eduardo Cabra;hip-hop;voix;claviers|cordes|guitare|basse|machines;;voix_seul;
+15194;Q2038636;Marc Broussard;R&B;voix;guitare|vents;;voix_plus;guitare
+15196;Q445727;Lou Rhodes;pop;voix;guitare;guitare;voix_plus;guitare
+15197;Q454372;Michiya Haruhata;pop;voix;guitare;guitare;voix_plus;guitare
+15216;Q19750428;Shiena Nishizawa;pop;voix;guitare;;voix_plus;guitare
+15299;Q12032649;Ladislav Štaidl;pop;voix;;claviers|guitare;voix_plus;guitare|claviers
+15309;Q3752688;Freddie Perren;R&B;voix;claviers;;voix_plus;claviers
+15314;Q3306708;Merwan Rim;pop;voix;batterie;;voix_seul;
+15319;Q1277171;Kid Loco;électro;voix;guitare|machines;;voix_plus;machines
+15336;Q3189731;Juliette;chanson;voix;claviers;;voix_plus;claviers
+15337;Q2248210;Mai Hoshimura;pop;voix;claviers;claviers;voix_plus;claviers
+15382;Q629216;Murry Wilson;pop;voix;claviers;claviers;voix_plus;claviers
+15395;Q529828;Patrick Ouchène;pop;voix;guitare;;voix_plus;guitare
+15396;Q20950063;Marteen;pop;voix;cordes|guitare|vents;;voix_seul;
+15398;Q1077546;Chris Medina;pop;voix;claviers;claviers;voix_plus;claviers
+15422;Q3364302;Billy Bass Nelson;R&B;voix;guitare|basse;;voix_plus;guitare
+15430;Q556728;Gino Soccio;funk;voix;claviers;;voix_plus;claviers
+15440;Q498045;Takuro;pop;voix;claviers|guitare;claviers|guitare;voix_plus;guitare|claviers
+15441;Q5137024;Clyde Stubblefield;funk;voix;batterie;;voix_seul;
+15453;Q2603470;Mira Aroyo;électro;voix;guitare|claviers;;voix_seul;
+15465;Q944152;Andy Russell;pop;voix;;batterie;voix_plus;batterie
+15471;Q270353;Masumi Itō;pop;voix;claviers;;voix_plus;claviers
+15488;Q1853186;David Choi;pop;voix;claviers|guitare|basse;;voix_seul;
+15510;Q79269651;Kedr Livanskiy;pop;voix;machines;machines;voix_plus;machines
+15545;Q3364290;Cordell Mosson;funk;voix;guitare|basse;;voix_plus;guitare
+15546;Q3429342;Fuzzy Haskins;funk;voix;guitare;;voix_plus;guitare
+15547;Q3364316;Walter Morrison;R&B;voix;claviers;;voix_plus;claviers
+15551;Q2746295;Stuart Murdoch;pop;voix;guitare;;voix_plus;guitare
+15554;Q463870;Jon Lilygreen;pop;voix;guitare;;voix_plus;guitare
+15557;Q553417;Bob Babbitt;funk;voix;guitare|basse;;voix_plus;guitare
+15558;Q1189042;Dennis Coffey;R&B;voix;guitare;;voix_plus;guitare
+15568;Q24525154;Anca Pop;pop;voix;guitare;;voix_plus;guitare
+15574;Q350892;Gary Thomas;hip-hop;voix;vents;;voix_seul;
+15599;Q1688139;Jesse Belvin;R&B;voix;claviers;;voix_plus;claviers
+15635;Q2742628;Katie White;pop;voix;guitare|basse|claviers;guitare;voix_plus;guitare
+15646;Q3364612;Debi Nova;électro;voix;claviers|guitare;;voix_seul;
+15656;Q20742885;Petite Meller;pop;voix;claviers;;voix_plus;claviers
+15658;Q10320248;Lu Andrade;pop;voix;guitare;guitare;voix_plus;guitare
+15660;Q3110109;Nottz;hip-hop;voix;claviers;;voix_seul;
+15669;Q6307327;Julian Koster;pop;voix;guitare|claviers;guitare;voix_plus;guitare|claviers
+15680;Q1396681;Farid Zoland;pop;voix;claviers|guitare|batterie;;voix_seul;
+15711;Q1270228;Steve Arrington;pop;voix;;batterie;voix_plus;batterie
+15721;Q22807439;Tekno;hip-hop;voix;claviers;;voix_seul;
+15741;Q7926834;Victoria Legrand;pop;voix;claviers;;voix_plus;claviers
+15762;Q22002900;Ylona Garcia;pop;voix;guitare;;voix_plus;guitare
+15800;Q2836785;Alicia Warrington;pop;voix;batterie;batterie;voix_plus;batterie
+15807;Q107542046;Wellboy;pop;voix;guitare;;voix_plus;guitare
+15825;Q2340360;Andrew Vowles;pop;voix;;machines;voix_plus;machines
+15827;Q286797;Shep Pettibone;pop;voix;;machines;voix_plus;machines
+15847;Q1075118;Hachirō Kasuga;pop;voix;claviers;;voix_plus;claviers
+15849;Q372994;Adrian Gaxha;pop;voix;cordes;;voix_seul;
+15860;Q1452756;Sioen;pop;voix;vents;;voix_seul;
+15861;Q443697;Frederik Ndoci;pop;voix;guitare;;voix_plus;guitare
+15878;Q603830;Emile Haynie;hip-hop;voix;batterie;;voix_seul;
+15907;Q9013601;Daiko Nagato;pop;voix;guitare;batterie;voix_plus;batterie|guitare
+15915;Q5563101;Gingger Shankar;pop;voix;cordes;;voix_seul;
+15916;Q1304905;Marco Ferradini;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+15924;Q326522;Nick Massi;pop;voix;guitare|basse;guitare;voix_plus;guitare
+15925;Q1364358;Ronald Jenkees;hip-hop;voix;claviers|vents;;voix_seul;
+15929;Q540555;Mariella Nava;pop;voix;claviers;;voix_plus;claviers
+15935;Q16231624;Wiyaala;pop;voix;guitare;;voix_plus;guitare
+16001;Q4726868;Alireza Assar;pop;voix;claviers;claviers;voix_plus;claviers
+16037;Q1689479;Jimmy Young;pop;voix;;machines;voix_plus;machines
+16060;Q7476104;Yovie Widianto;pop;voix;claviers;;voix_plus;claviers
+16068;Q2656785;Yasushi Ishii;pop;voix;basse;;voix_seul;
+16072;Q3610737;Alex Winston;pop;voix;guitare;;voix_plus;guitare
+16078;Q3852502;Maurizio Arcieri;pop;voix;machines;;voix_seul;
+16083;Q95774;Toni Cottura;pop;voix;;machines;voix_plus;machines
+16085;Q641785;Martin Vučić;pop;voix;batterie;;voix_seul;
+16090;Q30201990;Pedro Fernando;hip-hop;voix;claviers;;voix_seul;
+16099;Q4308167;Mikhail Muromov;pop;voix;;guitare;voix_plus;guitare
+16106;Q879135;Willy Berking;pop;voix;batterie;claviers;voix_plus;claviers
+16113;Q117792391;Nuit Incolore;électro;voix;claviers|guitare|batterie;;voix_seul;
+16117;Q11326705;Hama Okamoto;funk;voix;basse;;voix_seul;
+16121;Q99691522;Hannah Reid;pop;voix;claviers;;voix_plus;claviers
+16127;Q3720970;El Pasador;funk;voix;claviers;;voix_plus;claviers
+16140;Q1382134;Knut Anders Sørum;pop;voix;claviers;;voix_plus;claviers
+16141;Q3433371;Charles Calello;pop;voix;basse;;voix_seul;
+16144;Q3290155;Marco Polo;hip-hop;voix;machines;;voix_plus;machines
+16171;Q709275;Yida Huang;pop;voix;guitare;;voix_plus;guitare
+16180;Q5543504;George Porter Jr.;funk;voix;guitare|basse;;voix_plus;guitare
+16211;Q4895645;Joan Miquel Oliver;pop;voix;guitare;guitare;voix_plus;guitare
+16213;Q2112396;Jean-Roch;pop;voix;;machines;voix_plus;machines
+16218;Q2529072;Vivian Green;R&B;voix;claviers;;voix_plus;claviers
+16232;Q20684403;Korede Bello;hip-hop;voix;guitare;;voix_seul;
+16234;Q1346915;Francis Rocco Prestia;funk;voix;guitare|basse;;voix_plus;guitare
+16284;Q1351202;Franky Gee;pop;voix;;machines;voix_plus;machines
+16288;Q678376;Armando Gama;pop;voix;;claviers;voix_plus;claviers
+16314;Q2395345;JD Samson;électro;voix;guitare;;voix_seul;
+16324;Q508161;Stevan Faddy;pop;voix;claviers;;voix_plus;claviers
+16326;Q1130763;Varvara;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+16335;Q20643250;Niykee Heaton;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+16342;Q12609869;Yoo Seung-woo;pop;voix;guitare;;voix_plus;guitare
+16384;Q1042219;Aira Mitsuki;pop;voix;claviers;;voix_plus;claviers
+16399;Q2176931;Russell Javors;pop;voix;guitare|vents;guitare;voix_plus;guitare
+16415;Q352225;Big Jay McNeely;R&B;voix;vents;;voix_seul;
+16427;Q9016328;Honorata Skarbek;pop;voix;claviers;;voix_plus;claviers
+16446;Q6760371;Margie Adam;pop;voix;claviers;claviers;voix_plus;claviers
+16448;Q379917;Kurt Calleja;électro;voix;guitare;;voix_seul;
+16458;Q3315860;Mirah;pop;voix;guitare;guitare;voix_plus;guitare
+16463;Q2026621;Sandy Vee;pop;voix;;machines;voix_plus;machines
+16499;Q153823;Anika Moa;pop;voix;guitare;;voix_plus;guitare
+16515;Q1170564;Klas Åhlund;pop;voix;guitare;guitare;voix_plus;guitare
+16521;Q1862701;Karise Eden;pop;voix;guitare;;voix_plus;guitare
+16522;Q4272905;Vladimir Lyovkin;pop;voix;;guitare;voix_plus;guitare
+16553;Q5418376;Evie Sands;pop;voix;guitare;;voix_plus;guitare
+16560;Q458364;Sarah Slean;pop;voix;claviers;claviers;voix_plus;claviers
+16567;Q98380;Suzanne Doucet;électro;voix;vents;;voix_seul;
+16585;Q23942;Johnny Ruffo;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+16599;Q3298815;Drumma Boy;hip-hop;voix;claviers|vents;;voix_seul;
+16600;Q748944;Marilia Andrés Casares;pop;voix;guitare;;voix_plus;guitare
+16605;Q4990565;Kasia Wilk;pop;voix;guitare;;voix_plus;guitare
+16615;Q18162005;Rhodes;pop;voix;guitare;;voix_plus;guitare
+16637;Q943975;Daz Sampson;pop;voix;;machines;voix_plus;machines
+16654;Q3314700;Mina Tindle;pop;voix;guitare;guitare;voix_plus;guitare
+16721;Q5200089;Cynthia Johnson;R&B;voix;vents;;voix_seul;
+16739;Q108532280;Holy Molly;pop;voix;guitare;;voix_plus;guitare
+16761;Q1893169;Marcel Pavel;pop;voix;basse;;voix_seul;
+16779;Q2910906;Zi Faámelu;pop;voix;;machines;voix_plus;machines
+16780;Q90890;Muhabbet;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+16800;Q125473704;Gyubin;pop;voix;guitare;;voix_plus;guitare
+16804;Q335409;Abu Talib;R&B;voix;guitare|vents;;voix_plus;guitare
+16928;Q1189996;James Fox;pop;voix;guitare;claviers|guitare;voix_plus;guitare|claviers
+16967;Q5959846;Naser Cheshmazar;pop;voix;claviers;claviers;voix_plus;claviers
+16980;Q179849;John Lees;pop;voix;guitare;guitare;voix_plus;guitare
+16998;Q3256651;Little Axe;R&B;voix;guitare;;voix_plus;guitare
+17004;Q6384522;Keith Howland;pop;voix;guitare;guitare;voix_plus;guitare
+17040;Q7002010;Tom Boxer;électro;voix;machines;;voix_plus;machines
+17041;Q381420;Sigvart Dagsland;pop;voix;claviers;claviers;voix_plus;claviers
+17045;Q1806034;Frida Öhrn;électro;voix;vents;;voix_seul;
+17049;Q123528897;元彬;pop;voix;guitare;;voix_plus;guitare
+17086;Q2149231;Marina Rei;pop;voix;;batterie;voix_plus;batterie
+17134;Q1087366;Nick Sheppard;R&B;voix;guitare;;voix_plus;guitare
+17166;Q5987057;Ida Kristine Nielsen;funk;voix;guitare|basse;;voix_plus;guitare
+17168;Q621521;Alex Lee;électro;voix;claviers|guitare|basse|vents;;voix_seul;
+17171;Q868247;Colette Carr;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+17185;Q481502;David Jost;pop;voix;;machines;voix_plus;machines
+17188;Q16667923;Olivier Dion;pop;voix;guitare|basse;;voix_seul;
+17254;Q100717799;Omer Fedi;hip-hop;voix;guitare;;voix_seul;
+17261;Q15546914;Jarren Benton;hip-hop;voix;claviers;;voix_seul;
+17287;Q7348282;Robert Parker;R&B;voix;vents;;voix_seul;
+17297;Q12713325;Alexandra Rotan;électro;voix;guitare;;voix_seul;
+17333;Q9153438;Andrzej Rybiński;pop;voix;guitare;;voix_plus;guitare
+17342;Q2608674;Girl Talk;pop;voix;;machines;voix_plus;machines
+17344;Q50505661;Stella Donnelly;pop;voix;;guitare;voix_plus;guitare
+17346;Q1277063;Earl Grant;pop;voix;claviers;claviers;voix_plus;claviers
+17370;Q11770935;Marysia Starosta;pop;voix;claviers;;voix_plus;claviers
+17426;Q220554;Zoran Predin;pop;voix;guitare;;voix_plus;guitare
+17428;Q43882;Maxi Arland;chanson;voix;vents;;voix_seul;
+17437;Q3201282;Kōichi Morita;pop;voix;claviers;;voix_plus;claviers
+17442;Q4405892;Maurice Starr;R&B;voix;claviers;;voix_plus;claviers
+17468;Q96740;Cosmo Klein;pop;voix;;guitare;voix_plus;guitare
+17477;Q64010220;Zlatan;hip-hop;voix;batterie;;voix_seul;
+17479;Q1350976;Ray Lynch;pop;voix;claviers;claviers;voix_plus;claviers
+17489;Q1047172;Yuri Nakamura;pop;voix;claviers;;voix_plus;claviers
+17491;Q327047;Roy Milton;R&B;voix;batterie;;voix_seul;
+17508;Q203187;Glen Vella;pop;voix;claviers;;voix_plus;claviers
+17543;Q1887085;John Hawken;R&B;voix;claviers;;voix_plus;claviers
+17585;Q3299805;Matthew Strachan;pop;voix;claviers;;voix_plus;claviers
+17600;Q88491;Leo Aberer;pop;voix;cordes;;voix_seul;
+17601;Q625372;Gill;hip-hop;voix;claviers;;voix_seul;
+17622;Q7860148;Tyler Shaw;pop;voix;guitare;;voix_plus;guitare
+17637;Q5480186;Rachael Sage;pop;voix;claviers;;voix_plus;claviers
+17646;Q1255746;Zlatko Pejaković;pop;voix;batterie;;voix_seul;
+17725;Q888609;Bobby Lewis;R&B;voix;claviers;;voix_plus;claviers
+17727;Q681690;Reuben Wilson;R&B;voix;claviers;;voix_plus;claviers
+17732;Q4919767;Saksit Vejsupaporn;pop;voix;claviers;;voix_plus;claviers
+17740;Q4958452;Trish Keenan;électro;voix;guitare;;voix_seul;
+17749;Q719172;Fernando Garibay;pop;voix;;machines;voix_plus;machines
+17753;Q3808025;Jerry Jemmott;R&B;voix;basse;;voix_seul;
+17781;Q7422425;Sarah Jaffe;hip-hop;voix;guitare;;voix_seul;
+17782;Q957834;Ron van den Beuken;pop;voix;;machines;voix_plus;machines
+17817;Q8057299;You Hee-yeol;pop;voix;claviers;claviers;voix_plus;claviers
+17819;Q2737439;Hugh Harris;pop;voix;guitare;guitare;voix_plus;guitare
+17825;Q4683020;Adiss Harmandian;pop;voix;claviers;;voix_plus;claviers
+17826;Q2276196;Shad;hip-hop;voix;guitare;;voix_seul;
+17873;Q3852588;Maurizio Fabrizio;pop;voix;;batterie;voix_plus;batterie
+17875;Q372871;Adrian Enescu;pop;voix;machines;;voix_seul;
+17915;Q492716;Kim Ji-Soo;pop;voix;guitare;;voix_plus;guitare
+17925;Q50788;Q50788;pop;voix;claviers;claviers;voix_plus;claviers
+17948;Q3941431;Rose Stone;R&B;voix;claviers;;voix_plus;claviers
+17949;Q4975108;Cynthia Robinson;R&B;voix;vents;;voix_seul;
+17995;Q969015;Daniel;pop;voix;basse;guitare;voix_plus;guitare
+18017;Q4396162;Zhanna Rozhdestvenskaya;chanson;voix;claviers;;voix_plus;claviers
+18076;Q330466;Mark Dinning;pop;voix;guitare;;voix_plus;guitare
+18081;Q23758166;Trent Harmon;pop;voix;claviers|guitare;claviers;voix_plus;guitare|claviers
+18120;Q1277583;Ibrica Jusić;chanson;voix;guitare;;voix_plus;guitare
+18121;Q18001561;Phyno;hip-hop;voix;claviers;;voix_seul;
+18122;Q1343182;Paul Tucker;pop;voix;claviers;;voix_plus;claviers
+18129;Q6200245;Jimmy Greenspoon;pop;voix;claviers;;voix_plus;claviers
+18153;Q1039759;Magnet;électro;voix;guitare;;voix_seul;
+18156;Q4014525;Virginio;pop;voix;claviers;;voix_plus;claviers
+18164;Q6712192;M.I Abaga;hip-hop;voix;claviers;;voix_seul;
+18190;Q967208;Don Partridge;pop;voix;guitare;;voix_plus;guitare
+18263;Q1778039;Elvira Nikolaisen;pop;voix;claviers;claviers;voix_plus;claviers
+18281;Q13583805;Del Marquis;funk;voix;guitare;;voix_plus;guitare
+18287;Q4976564;Hayley Sales;R&B;voix;guitare;;voix_plus;guitare
+18298;Q325617;Crispian St. Peters;pop;voix;guitare;;voix_plus;guitare
+18301;Q4223271;Lidia Klement;pop;voix;claviers;;voix_plus;claviers
+18323;Q7367186;Rosalie Cunningham;pop;voix;claviers;;voix_plus;claviers
+18337;Q577671;Q577671;pop;voix;claviers;claviers;voix_plus;claviers
+18340;Q733611;Floyd Dixon;R&B;voix;claviers;;voix_plus;claviers
+18373;Q2172789;Simone White;pop;voix;guitare;;voix_plus;guitare
+18391;Q1429558;Flori Mumajesi;pop;voix;;machines;voix_plus;machines
+18405;Q6313181;Junior Campbell;pop;voix;claviers|guitare;claviers|guitare;voix_plus;guitare|claviers
+18439;Q96242044;Axel Åhman;pop;voix;cordes|claviers;;voix_seul;
+18455;Q1642668;Håkon Kornstad;électro;voix;vents;;voix_seul;
+18459;Q4093816;Alexei Borisov;électro;voix;guitare|machines;;voix_plus;machines
+18478;Q6374513;Kasia Popowska;pop;voix;guitare;;voix_plus;guitare
+18489;Q3306699;Mervyn Warren;R&B;voix;claviers;;voix_plus;claviers
+18501;Q2636704;Alan Gorrie;R&B;voix;guitare|basse;;voix_plus;guitare
+18530;Q938756;Jasmin Stavros;pop;voix;batterie;;voix_seul;
+18547;Q3990271;Theresa Andersson;R&B;voix;guitare|cordes;;voix_plus;guitare
+18557;Q59280659;Claire Laffut;chanson;voix;claviers;;voix_plus;claviers
+18563;Q6558079;Lisa Heller;pop;voix;guitare;guitare;voix_plus;guitare
+18565;Q2520362;Jason Jones;hip-hop;voix;guitare;;voix_seul;
+18566;Q448841;Hanne Hukkelberg;pop;voix;claviers;claviers|guitare;voix_plus;guitare|claviers
+18568;Q12156564;Cherine Anderson;R&B;voix;guitare;;voix_plus;guitare
+18575;Q440817;Kate Walsh;pop;voix;guitare;guitare;voix_plus;guitare
+18586;Q16979994;Harloe;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+18592;Q1039943;Xabi San Martín;pop;voix;claviers;claviers;voix_plus;claviers
+18603;Q127697555;Angelo Iannelli;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+18629;Q3993289;Tony Moran;pop;voix;;machines;voix_plus;machines
+18648;Q6384708;Keith Martin;R&B;voix;basse|claviers|batterie;;voix_seul;
+18670;Q3007855;Curumin;pop;voix;batterie;;voix_seul;
+18676;Q16418622;Khumar Gadimova;pop;voix;;claviers;voix_plus;claviers
+18695;Q23916678;Gabriella Quevedo;pop;voix;guitare;;voix_plus;guitare
+18699;Q1183658;Shion Tsuji;pop;voix;guitare;;voix_plus;guitare
+18704;Q7160670;Peggy Hsu;pop;voix;claviers;;voix_plus;claviers
+18716;Q5211651;Dalto;pop;voix;guitare|cordes;;voix_seul;
+18729;Q16209585;Will Heard;R&B;voix;guitare|vents;;voix_plus;guitare
+18734;Q4979625;Jessica Poland;pop;voix;guitare;guitare;voix_plus;guitare
+18743;Q2067378;Rick Huxley;pop;voix;guitare|basse;guitare;voix_plus;guitare
+18770;Q3724731;Emmi;pop;voix;guitare;guitare;voix_plus;guitare
+18782;Q2642270;Saori Atsumi;pop;voix;guitare;;voix_plus;guitare
+18791;Q19012248;Martinus Gunnarsen;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+18799;Q2745915;Max Rafferty;pop;voix;basse;;voix_seul;
+18806;Q15730177;Ellen Benediktson;électro;voix;claviers;;voix_seul;
+18879;Q3978262;Susanna Parigi;pop;voix;claviers;claviers;voix_plus;claviers
+18892;Q3293046;Deakin;électro;voix;guitare;;voix_seul;
+18917;Q5134230;Clinton Sparks;pop;voix;;machines;voix_plus;machines
+18922;Q3355570;Tommy Tee;hip-hop;voix;machines;;voix_plus;machines
+18937;Q2908446;Makeba Riddick;pop;voix;claviers;;voix_plus;claviers
+18941;Q106352;DJane HouseKat;pop;voix;;machines;voix_plus;machines
+18943;Q90051;Elli Erl;pop;voix;guitare;;voix_plus;guitare
+19025;Q3311792;Stevie Jackson;pop;voix;guitare;guitare;voix_plus;guitare
+19058;Q454015;Amanda Mair;pop;voix;claviers;;voix_plus;claviers
+19062;Q10294022;Haruna Ono;pop;voix;;guitare;voix_plus;guitare
+19090;Q28745407;Lele;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+19136;Q38257;Q38257;pop;voix;claviers;claviers;voix_plus;claviers
+19175;Q5278484;Dino;pop;voix;claviers;machines;voix_plus;claviers|machines
+19186;Q1053239;Hitoshi Okamoto;pop;voix;guitare;guitare;voix_plus;guitare
+19225;Q182556;Rich Harrison;R&B;voix;batterie;;voix_seul;
+19241;Q1370989;Shunichi Miyamoto;pop;voix;claviers;claviers;voix_plus;claviers
+19247;Q3320055;Mona Lisa;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+19273;Q3025396;Janis Sahraoui;pop;voix;claviers;machines;voix_plus;claviers|machines
+19274;Q4413268;Emilio Castillo;R&B;voix;vents;;voix_seul;
+19295;Q1186617;Mai Matsumuro;pop;voix;claviers;claviers;voix_plus;claviers
+19299;Q50376581;Carmen Boza;pop;voix;guitare;;voix_plus;guitare
+19301;Q1262726;Richard Barnes;pop;voix;guitare|basse;;voix_seul;
+19309;Q440326;Maria Guinot;pop;voix;claviers;claviers;voix_plus;claviers
+19339;Q18694173;Richard McGuire;pop;voix;guitare|basse;;voix_seul;
+19346;Q5932635;Alex Lambert;pop;voix;claviers|guitare;claviers;voix_plus;guitare|claviers
+19374;Q1465680;Melanie Doane;pop;voix;guitare;;voix_plus;guitare
+19397;Q12698693;Najwa Latif;pop;voix;guitare;;voix_plus;guitare
+19414;Q898369;Brandur Enni;pop;voix;guitare;;voix_plus;guitare
+19432;Q4586663;Robert Schneider;pop;voix;guitare;guitare;voix_plus;guitare
+19471;Q6968331;Natalka Karpa;pop;voix;vents;;voix_seul;
+19475;Q718287;Q718287;pop;voix;claviers;guitare;voix_plus;guitare|claviers
+19492;Q3878464;Norman Harris;R&B;voix;guitare;;voix_plus;guitare
+19509;Q6183733;Jerry Hey;R&B;voix;vents;;voix_seul;
+19546;Q546892;Craig Ross;R&B;voix;guitare;;voix_plus;guitare
+19578;Q6775985;Martin Lee;pop;voix;guitare;guitare;voix_plus;guitare
+19583;Q7976524;Wayne Perkins;R&B;voix;guitare;;voix_plus;guitare
+19593;Q2737890;Clem Cattini;pop;voix;;batterie;voix_plus;batterie
+19608;Q3237326;Lex Luger;hip-hop;voix;claviers;;voix_seul;
+19610;Q110162485;Matteo Romano;pop;voix;claviers;;voix_plus;claviers
+19723;Q5931186;Jimmy Hughes;R&B;voix;guitare;;voix_plus;guitare
+19725;Q6111302;Klayton;électro;voix;guitare;;voix_seul;
+19798;Q6177694;Jenn Bostic;pop;voix;claviers;;voix_plus;claviers
+19800;Q15522510;Will Champlin;pop;voix;claviers;;voix_plus;claviers
+19888;Q864452;Ryūtarō Nakahara;pop;voix;;machines;voix_plus;machines
+19914;Q3311572;Michèle Bernard;chanson;voix;claviers;;voix_plus;claviers
+19923;Q3917813;Adam Anderson;pop;voix;guitare|claviers;guitare;voix_plus;guitare|claviers
+19946;Q5358949;Elen Levon;pop;voix;vents;;voix_seul;
+19987;Q435205;Unni Wilhelmsen;pop;voix;claviers|guitare;claviers|guitare;voix_plus;guitare|claviers
+19991;Q3306103;Ara Gevorgyan;pop;voix;claviers;;voix_plus;claviers
+19992;Q909786;Q909786;pop;voix;claviers;;voix_plus;claviers
+20008;Q29110060;Silvina Moreno;pop;voix;guitare;;voix_plus;guitare
+20009;Q4962439;Marie Lindberg;R&B;voix;guitare;;voix_plus;guitare
+20010;Q425912;Mickey Harte;pop;voix;guitare;;voix_plus;guitare
+20011;Q1018141;Butterscotch;R&B;voix;claviers|guitare|vents;;voix_seul;
+20022;Q3659289;Carlo Donida;pop;voix;claviers;claviers;voix_plus;claviers
+20029;Q466344;Lena Anderssen;pop;voix;guitare;;voix_plus;guitare
+20037;Q6028779;Infamous;hip-hop;voix;guitare;;voix_seul;
+20054;Q191499;Q191499;pop;voix;claviers|guitare|cordes;claviers;voix_plus;claviers
+20086;Q3288561;Richard Finch;funk;voix;guitare|basse;;voix_plus;guitare
+20105;Q17811849;Charlotte OC;pop;voix;guitare;;voix_plus;guitare
+20119;Q17146017;Ross Mintzer;électro;voix;guitare|vents;;voix_seul;
+20124;Q4912945;Billy Mann;pop;voix;guitare;;voix_plus;guitare
+20130;Q657735;Rosario Bourdon;chanson;voix;cordes;;voix_seul;
+20131;Q15513946;Simon Wilcox;funk;voix;vents|basse;;voix_seul;
+20140;Q337072;Heinz Winckler;pop;voix;guitare;;voix_plus;guitare
+20159;Q2063152;Paul Williams;R&B;voix;vents;;voix_seul;
+20191;Q5220070;Danny!;hip-hop;voix;claviers|machines;;voix_plus;machines
+20203;Q111565;Matthew Barber;pop;voix;guitare;;voix_plus;guitare
+20247;Q1145879;Mark Read;pop;voix;claviers;batterie|claviers;voix_plus;batterie|claviers
+20274;Q359485;Ally Kerr;pop;voix;;guitare;voix_plus;guitare
+20307;Q15515020;Max Merritt;R&B;voix;guitare;;voix_plus;guitare
+20309;Q13561701;DANiiVORY;pop;voix;guitare|cordes|basse;;voix_seul;
+20333;Q2367580;Fat Jon;hip-hop;voix;machines;;voix_plus;machines
+20356;Q5115502;Chuck Harmony;pop;voix;claviers;;voix_plus;claviers
+20413;Q4215948;Matt Giraud;R&B;voix;claviers|guitare|batterie;;voix_seul;
+20432;Q48775464;Marcus Gunnarsen;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+20458;Q11648459;Kisaburō Suzuki;pop;voix;guitare;guitare;voix_plus;guitare
+20461;Q3778043;Elsa Pinilla Osuna;pop;voix;guitare;;voix_plus;guitare
+20467;Q481885;AMES;pop;voix;claviers|guitare;claviers|guitare;voix_plus;guitare|claviers
+20490;Q664366;Bad News Brown;hip-hop;voix;vents;;voix_seul;
+20493;Q3300683;Andrew Sega;électro;voix;guitare;;voix_seul;
+20494;Q6743717;Malina Moye;R&B;voix;guitare;;voix_plus;guitare
+20519;Q9288038;Jim Jonsin;pop;voix;;machines;voix_plus;machines
+20520;Q175987;Harel Moyal;pop;voix;guitare|vents;;voix_seul;
+20532;Q7365802;Ronnie Bond;pop;voix;batterie;;voix_seul;
+20542;Q3437970;Rockin' Dopsie;R&B;voix;claviers;;voix_plus;claviers
+20619;Q19248606;Essaï Altounian;pop;voix;;claviers;voix_plus;claviers
+20628;Q440015;Huey « Piano » Smith;R&B;voix;claviers;;voix_plus;claviers
+20642;Q17385787;Corson;pop;voix;claviers;;voix_plus;claviers
+20648;Q16226580;Moses Stone;hip-hop;voix;guitare;;voix_seul;
+20659;Q3306417;Mercy Dee Walton;R&B;voix;claviers;;voix_plus;claviers
+20664;Q7819313;Tommy Cogbill;R&B;voix;guitare|basse;;voix_plus;guitare
+20690;Q1864228;Mbah Surip;pop;voix;guitare;;voix_plus;guitare
+20699;Q2101215;Denis Payton;pop;voix;vents;vents;voix_plus;vents
+20741;Q2939887;Carole Facal;pop;voix;guitare;guitare;voix_plus;guitare
+20747;Q240802;Q240802;pop;voix;claviers;claviers;voix_plus;claviers
+20750;Q1440323;Sedat Yüce;pop;voix;vents;;voix_seul;
+20751;Q3110949;Goree Carter;R&B;voix;guitare;;voix_plus;guitare
+20753;Q7596026;Stacy Francis;R&B;voix;claviers;;voix_plus;claviers
+20768;Q3286524;Ramiele Malubay;R&B;voix;claviers;;voix_plus;claviers
+20793;Q2173535;Rudolf Nováček;pop;voix;cordes;;voix_seul;
+20797;Q3302066;Max Crook;pop;voix;claviers|machines;;voix_seul;
+20852;Q4969128;Neisha;pop;voix;claviers;;voix_plus;claviers
+20882;Q28208099;Yzalú;hip-hop;voix;guitare;;voix_seul;
+20910;Q22810493;Ivette Nadal;pop;voix;guitare;;voix_plus;guitare
+20922;Q23640839;Avi Benedi;pop;voix;guitare;;voix_plus;guitare
+20943;Q878420;Armenchik;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+20958;Q5107865;Chris Richardson;pop;voix;guitare;;voix_plus;guitare
+20986;Q5207241;Dagrin;hip-hop;voix;claviers;;voix_seul;
+20994;Q571938;Q571938;pop;voix;claviers;;voix_plus;claviers
+21017;Q3240949;Lily Frost;R&B;voix;guitare;;voix_plus;guitare
+21063;Q4947167;Bosco Mann;R&B;voix;guitare;;voix_plus;guitare
+21084;Q2006765;Charles Pitts;funk;voix;guitare|claviers;;voix_plus;guitare|claviers
+21098;Q56253106;Aoxuan Lee;pop;voix;claviers;;voix_plus;claviers
+21106;Q83182;Q83182;pop;voix;claviers;claviers;voix_plus;claviers
+21107;Q863081;Billy « The Kid » Emerson;R&B;voix;claviers;;voix_plus;claviers
+21122;Q3808135;Jessica Brando;R&B;voix;claviers;;voix_plus;claviers
+21141;Q16559392;Ifi Ude;pop;voix;guitare;;voix_plus;guitare
+21144;Q3634639;Barbara Hetmańska;électro;voix;claviers;;voix_seul;
+21152;Q221289;Q221289;pop;voix;claviers|vents;;voix_seul;
+21159;Q239652;Q239652;pop;voix;guitare;guitare;voix_plus;guitare
+21204;Q701532;Q701532;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+21211;Q6033149;Ingrid Bjørnov;pop;voix;claviers;claviers;voix_plus;claviers
+21215;Q5209702;Daisy Coburn;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+21242;Q3014499;Daniel Nitt;pop;voix;claviers;;voix_plus;claviers
+21245;Q437056;Uriel Jones;funk;voix;batterie;;voix_seul;
+21256;Q952499;Q952499;pop;voix;claviers;claviers;voix_plus;claviers
+21281;Q17256326;Elias;chanson;voix;guitare;;voix_plus;guitare
+21385;Q3180087;Joe Houston;R&B;voix;vents;;voix_seul;
+21415;Q27671216;K-Bust;pop;voix;claviers|guitare|basse;;voix_seul;
+21423;Q23755;Kim J. Henriksen;R&B;voix;guitare|claviers;;voix_plus;guitare|claviers
+21426;Q960101;"Eli ""Paperboy"" Reed";funk;voix;guitare;;voix_plus;guitare
+21465;Q28465265;Яна Вева;électro;voix;claviers|guitare;;voix_seul;
+21485;Q37355;Q37355;pop;voix;guitare;guitare;voix_plus;guitare
+21495;Q238941;Q238941;pop;voix;claviers|cordes;guitare;voix_plus;guitare
+21520;Q4215897;Michael Sarver;R&B;voix;claviers|guitare;;voix_plus;guitare|claviers
+21541;Q700666;Dennis Mak;pop;voix;claviers;;voix_plus;claviers
+21564;Q381004;Aeone;pop;voix;claviers;;voix_plus;claviers
+21587;Q436759;Q436759;pop;voix;guitare;guitare;voix_plus;guitare
+21600;Q5972130;Per Magnusson;pop;voix;claviers;;voix_plus;claviers
+21605;Q1986848;Q1986848;pop;voix;claviers|guitare;claviers|guitare;voix_plus;guitare|claviers
+21626;Q6396645;Kevin Kadish;pop;voix;guitare;guitare;voix_plus;guitare
+21633;Q4960718;Brenda Lee Eager;R&B;voix;claviers;;voix_plus;claviers
+21648;Q494437;Andrea McEwan;pop;voix;guitare;;voix_plus;guitare
+21661;Q784875;Jimmy Preston;R&B;voix;vents;;voix_seul;
+21690;Q509887;Camille;pop;voix;cordes;;voix_seul;
+21694;Q1006904;Aleksander Denstad With;pop;voix;claviers;claviers;voix_plus;claviers
+21752;Q99673245;Laycon;hip-hop;voix;guitare;;voix_seul;
+21768;Q9048879;Nathan Williams;hip-hop;voix;guitare|claviers|batterie;;voix_seul;
+21770;Q3467514;Jens Marni Hansen;pop;voix;guitare;;voix_plus;guitare
+21775;Q559817;Dejan Lazarević;pop;voix;vents;;voix_seul;
+21776;Q28313465;Zine;pop;voix;guitare;guitare;voix_plus;guitare
+21783;Q11988493;Marte Wulff;pop;voix;guitare;claviers|guitare;voix_plus;guitare|claviers
+21789;Q712683;Q712683;pop;voix;claviers;claviers;voix_plus;claviers
+21793;Q1579192;Q1579192;pop;voix;guitare;guitare;voix_plus;guitare
+21807;Q709779;Q709779;pop;voix;guitare;;voix_plus;guitare
+21814;Q374206;Q374206;pop;voix;claviers;machines;voix_plus;claviers|machines
+21838;Q543427;Darren Allison;pop;voix;batterie;batterie;voix_plus;batterie
+21848;Q17409444;Margret Nikolova;pop;voix;claviers;;voix_plus;claviers
+21859;Q4726727;Alina Smith;pop;voix;claviers|guitare;claviers;voix_plus;guitare|claviers
+21879;Q314319;Q314319;pop;voix;guitare;guitare;voix_plus;guitare
+21901;Q19373546;Hanne Leland;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+21921;Q4977410;Bruce Driscoll;pop;voix;guitare;guitare;voix_plus;guitare
+21947;Q443509;Q443509;pop;voix;claviers|vents|batterie;claviers;voix_plus;claviers
+21952;Q299395;Q299395;pop;voix;claviers;claviers;voix_plus;claviers
+21960;Q1645182;Q1645182;pop;voix;claviers;claviers;voix_plus;claviers
+21970;Q5964774;Høgni Reistrup;électro;voix;guitare;;voix_seul;
+21994;Q231985;Q231985;pop;voix;claviers|guitare|cordes;;voix_seul;
+22025;Q708686;Q708686;pop;voix;claviers;;voix_plus;claviers
+22030;Q3017545;Q3017545;pop;voix;guitare;guitare;voix_plus;guitare
+22059;Q51157;Q51157;pop;voix;claviers;;voix_plus;claviers
+22066;Q561127;Q561127;pop;voix;;guitare;voix_plus;guitare
+22069;Q7182546;Q7182546;pop;voix;guitare;;voix_plus;guitare
+22073;Q4587338;Q4587338;pop;voix;claviers;claviers;voix_plus;claviers
+22076;Q1820469;Q1820469;pop;voix;claviers;claviers;voix_plus;claviers
+22081;Q3367805;Glenn Lyse;pop;voix;;guitare;voix_plus;guitare
+22084;Q356687;Q356687;chanson;voix;claviers;;voix_plus;claviers
+22095;Q262294;Q262294;pop;voix;guitare|vents;claviers|guitare;voix_plus;guitare|claviers
+22096;Q2865770;Q2865770;pop;voix;claviers;claviers;voix_plus;claviers
+22097;Q51169;Q51169;pop;voix;vents;;voix_seul;
+22104;Q713461;Q713461;pop;voix;guitare;;voix_plus;guitare
+22114;Q2000598;Q2000598;pop;voix;guitare;guitare;voix_plus;guitare
+22115;Q938810;Q938810;pop;voix;claviers;;voix_plus;claviers
+22118;Q2459284;Q2459284;pop;voix;;guitare;voix_plus;guitare
+22125;Q1991462;Q1991462;chanson;voix;claviers|guitare|machines;;voix_seul;
+22128;Q707921;Q707921;pop;voix;;guitare;voix_plus;guitare
+22132;Q956297;Q956297;pop;voix;cordes;;voix_seul;
+22133;Q21087;Q21087;pop;voix;;machines;voix_plus;machines
+22135;Q432302;Q432302;pop;voix;claviers|guitare|vents;claviers|guitare;voix_plus;guitare|claviers
+22146;Q541833;Q541833;chanson;voix;claviers;;voix_plus;claviers
+22150;Q1372387;Q1372387;pop;voix;guitare|machines;guitare;voix_plus;guitare
+22167;Q717075;Q717075;pop;voix;guitare;;voix_plus;guitare
+22169;Q582152;Q582152;pop;voix;;guitare;voix_plus;guitare
+22171;Q947301;Q947301;pop;voix;claviers;claviers;voix_plus;claviers
+22173;Q3311750;Q3311750;pop;voix;;guitare;voix_plus;guitare
+22177;Q944759;Q944759;pop;voix;guitare;guitare;voix_plus;guitare
+22179;Q25501424;Q25501424;pop;voix;claviers|batterie;;voix_seul;
+22181;Q322422;Q322422;pop;voix;claviers;;voix_plus;claviers
+22182;Q4459467;Q4459467;pop;voix;basse;;voix_seul;
+22183;Q674048;Q674048;chanson;voix;claviers;;voix_plus;claviers
+22184;Q284872;Q284872;pop;voix;guitare;guitare;voix_plus;guitare
+22186;Q978624;Q978624;pop;voix;;guitare;voix_plus;guitare
+22191;Q1706272;Q1706272;pop;voix;claviers;claviers|guitare;voix_plus;guitare|claviers
+22193;Q462879;Q462879;pop;voix;claviers;;voix_plus;claviers
+22199;Q2714506;Q2714506;pop;voix;claviers|guitare|machines;claviers|guitare;voix_plus;guitare|claviers
+22200;Q339892;Q339892;pop;voix;guitare;guitare;voix_plus;guitare
+22201;Q842194;Q842194;pop;voix;claviers|cordes;claviers;voix_plus;claviers
+22205;Q2734296;Q2734296;pop;voix;guitare;;voix_plus;guitare
+22210;Q1123779;Q1123779;pop;voix;claviers;claviers;voix_plus;claviers
+22215;Q3051570;Q3051570;pop;voix;guitare;;voix_plus;guitare
+22216;Q710481;Q710481;pop;voix;guitare;;voix_plus;guitare
+22219;Q750943;Q750943;pop;voix;;guitare;voix_plus;guitare
+22220;Q54348;Q54348;pop;voix;claviers;;voix_plus;claviers
+22221;Q2407212;Q2407212;pop;voix;claviers;;voix_plus;claviers
+22228;Q717861;Q717861;pop;voix;claviers|guitare|vents|batterie;;voix_seul;
+22229;Q591655;Q591655;pop;voix;claviers;;voix_plus;claviers
+22230;Q6118123;Q6118123;pop;voix;claviers|guitare;;voix_plus;guitare|claviers
+22238;Q469068;Q469068;pop;voix;claviers|guitare|vents;;voix_seul;
+22249;Q4994639;Q4994639;pop;voix;batterie;;voix_seul;
+22250;Q4951034;Q4951034;électro;voix;claviers|guitare;;voix_seul;
+22255;Q5814434;Q5814434;pop;voix;guitare;;voix_plus;guitare
+22258;Q24703704;Q24703704;pop;voix;claviers|guitare|basse|batterie;;voix_seul;
+22261;Q434162;Q434162;pop;voix;claviers;claviers;voix_plus;claviers
+22263;Q596593;Q596593;pop;voix;claviers;;voix_plus;claviers
+22266;Q560220;Q560220;pop;voix;claviers;claviers;voix_plus;claviers
+22267;Q425865;Q425865;pop;voix;guitare;;voix_plus;guitare
+22268;Q2571728;Q2571728;pop;voix;guitare;;voix_plus;guitare
+22276;Q560048;Q560048;pop;voix;guitare|vents;guitare;voix_plus;guitare
+22277;Q2891207;Q2891207;pop;voix;claviers;;voix_plus;claviers
+22278;Q1388198;Q1388198;pop;voix;claviers;claviers;voix_plus;claviers
+22286;Q208870;Q208870;pop;voix;guitare;;voix_plus;guitare
+22288;Q2263974;Q2263974;pop;voix;claviers;claviers;voix_plus;claviers
+22291;Q714501;Q714501;pop;voix;guitare;;voix_plus;guitare
+22294;Q17411149;Q17411149;électro;voix;guitare;;voix_seul;
+22295;Q1975247;Q1975247;pop;voix;;guitare;voix_plus;guitare
+22296;Q1029521;Q1029521;pop;voix;;guitare;voix_plus;guitare
+22308;Q3718842;Q3718842;pop;voix;guitare;guitare;voix_plus;guitare
+22310;Q66212;Q66212;pop;voix;guitare;guitare;voix_plus;guitare
+22322;Q1740194;Q1740194;pop;voix;claviers;claviers;voix_plus;claviers
+22325;Q1201026;Q1201026;pop;voix;claviers;claviers;voix_plus;claviers
+22331;Q6788997;Q6788997;pop;voix;guitare;;voix_plus;guitare
+22332;Q4417712;Q4417712;chanson;voix;claviers|vents;;voix_seul;
+22336;Q614867;Q614867;pop;voix;claviers|vents;;voix_seul;
+22343;Q745587;Q745587;pop;voix;;machines;voix_plus;machines
+22344;Q1961524;Q1961524;pop;voix;;guitare;voix_plus;guitare
+22346;Q6121743;Q6121743;pop;voix;claviers;claviers|guitare;voix_plus;guitare|claviers
+22351;Q2734152;Q2734152;pop;voix;batterie;batterie;voix_plus;batterie
+22361;Q115162024;Q115162024;pop;voix;;machines;voix_plus;machines
+22363;Q1458124;Q1458124;pop;voix;guitare;guitare;voix_plus;guitare
+22365;Q167399;Q167399;pop;voix;claviers;claviers;voix_plus;claviers
+22366;Q3281937;Q3281937;pop;voix;guitare;guitare;voix_plus;guitare
+22368;Q16731133;Q16731133;pop;voix;guitare;;voix_plus;guitare
+22372;Q701431;Q701431;pop;voix;claviers;;voix_plus;claviers
+22373;Q743229;Q743229;pop;voix;claviers;claviers;voix_plus;claviers
+22377;Q7197012;Q7197012;pop;voix;guitare;;voix_plus;guitare
+22378;Q1258044;Q1258044;pop;voix;guitare;;voix_plus;guitare
+22383;Q1644783;Q1644783;pop;voix;claviers;claviers;voix_plus;claviers
+22389;Q710257;Q710257;pop;voix;guitare;;voix_plus;guitare
+22391;Q6056051;Q6056051;pop;voix;guitare;;voix_plus;guitare
+22392;Q696711;Q696711;pop;voix;guitare;;voix_plus;guitare
+22393;Q179540;Q179540;pop;voix;guitare;;voix_plus;guitare
+22395;Q737833;Q737833;pop;voix;guitare;;voix_plus;guitare
+22396;Q15904544;Q15904544;pop;voix;claviers;claviers;voix_plus;claviers
+22405;Q532253;Q532253;pop;voix;claviers;;voix_plus;claviers
+22413;Q19850021;Q19850021;pop;voix;claviers;;voix_plus;claviers
+22422;Q5085378;Q5085378;pop;voix;claviers;claviers;voix_plus;claviers
+22428;Q4165142;Q4165142;pop;voix;guitare;;voix_plus;guitare
+22429;Q2130817;Q2130817;pop;voix;guitare;;voix_plus;guitare
+22432;Q702855;Q702855;pop;voix;guitare;;voix_plus;guitare
+22442;Q10336791;Q10336791;pop;voix;;guitare;voix_plus;guitare
+22446;Q2423645;Q2423645;pop;voix;guitare;;voix_plus;guitare
+22447;Q4945183;Q4945183;pop;voix;vents;;voix_seul;
+22452;Q1868188;Q1868188;pop;voix;cordes;;voix_seul;
+22487;Q935642;Q935642;pop;voix;claviers;;voix_plus;claviers
+22490;Q2421374;Q2421374;pop;voix;claviers;claviers;voix_plus;claviers
+22512;Q2026869;Q2026869;pop;voix;;guitare;voix_plus;guitare
+22517;Q722943;Q722943;pop;voix;;machines;voix_plus;machines
+22521;Q449112;Q449112;pop;voix;claviers|cordes;claviers;voix_plus;claviers
+22522;Q2064680;Q2064680;pop;voix;claviers;;voix_plus;claviers
+22523;Q2918931;Q2918931;pop;voix;claviers;claviers;voix_plus;claviers
+22525;Q3742731;Q3742731;pop;voix;guitare;;voix_plus;guitare
+22544;Q2261420;Q2261420;pop;voix;basse;;voix_seul;
+22549;Q9042341;Q9042341;pop;voix;claviers|guitare|batterie;;voix_seul;
+22551;Q4412230;Q4412230;pop;voix;guitare;guitare;voix_plus;guitare
+22558;Q4281952;Q4281952;chanson;voix;claviers|guitare;;voix_plus;guitare|claviers
+22559;Q1896720;Q1896720;pop;voix;guitare|claviers;guitare;voix_plus;guitare|claviers
+22564;Q4773177;Q4773177;pop;voix;claviers;;voix_plus;claviers
+22574;Q1597011;Q1597011;pop;voix;claviers;claviers;voix_plus;claviers
+22580;Q4221531;Q4221531;chanson;voix;claviers|guitare|cordes;;voix_seul;
+22581;Q3154607;Q3154607;pop;voix;claviers;claviers;voix_plus;claviers
+22589;Q957426;Q957426;pop;voix;;claviers;voix_plus;claviers
+22602;Q3059496;Q3059496;pop;voix;claviers;claviers;voix_plus;claviers
+22604;Q717907;Q717907;pop;voix;guitare;;voix_plus;guitare
+22606;Q440984;Q440984;pop;voix;claviers;;voix_plus;claviers
+22613;Q4023957;Q4023957;pop;voix;;guitare;voix_plus;guitare
+22618;Q1709075;Q1709075;pop;voix;guitare;guitare;voix_plus;guitare
+22621;Q4772506;Q4772506;pop;voix;vents|cordes|basse;batterie;voix_plus;batterie
+22630;Q3108025;Q3108025;pop;voix;claviers;;voix_plus;claviers
+22632;Q5395931;Q5395931;pop;voix;claviers;claviers;voix_plus;claviers
+22641;Q448701;Q448701;pop;voix;claviers;claviers;voix_plus;claviers
+22656;Q4446651;Q4446651;chanson;voix;claviers;;voix_plus;claviers
+22659;Q6939173;Q6939173;pop;voix;guitare;guitare;voix_plus;guitare
+22670;Q2960953;Q2960953;pop;voix;claviers;claviers;voix_plus;claviers
+22673;Q6173805;Q6173805;pop;voix;claviers;claviers;voix_plus;claviers
+22675;Q2906608;Q2906608;pop;voix;claviers;claviers;voix_plus;claviers
+22684;Q4295607;Q4295607;pop;voix;guitare;;voix_plus;guitare
+22687;Q2888348;Q2888348;pop;voix;guitare;guitare;voix_plus;guitare
+22690;Q6385799;Q6385799;pop;voix;claviers|guitare;claviers;voix_plus;guitare|claviers
+22694;Q4919143;Q4919143;pop;voix;;machines;voix_plus;machines
+22705;Q4466046;Q4466046;pop;voix;guitare;guitare;voix_plus;guitare

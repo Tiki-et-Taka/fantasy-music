@@ -422,15 +422,15 @@ def fetch_occupations(qids: list[str]) -> dict[str, list[str]]:
 
 
 def is_celebrity_leak(occupations: list[str], genre_qids: list[str], family: str) -> bool:
-    """Acteur / mannequin resté dans le vivier grâce à un album pop/rock.
+    """Célébrité sans métier musical fort — toutes familles.
 
-    On garde si la famille n'est pas un parapluie, ou s'il a un métier
-    musical fort (auteur, rappeur, guitariste…). Zendaya sort, Lady Gaga reste.
+    Métier fort = strong_music_occupations (y. c. chanteur / musicien pour
+    ne pas sortir Beyoncé/Cher). Les faux musiciens à discog faible (Seagal,
+    Coelho…) sont retirés ensuite par tools/purge_fake_musicians.py.
     """
+    del genre_qids, family  # signature stable ; filtre non limité aux parapluies
     celeb = set(CFG.get("celebrity_occupations") or [])
     if not any(o in celeb for o in occupations):
-        return False
-    if family not in CFG.get("umbrella_families", ("pop", "rock")):
         return False
     strong = set(CFG.get("strong_music_occupations") or [])
     if any(o in strong for o in occupations):
@@ -481,6 +481,13 @@ def main() -> int:
     prefetch_genre_parents(unique_genres)
     candidates = []
     excluded = set(CFG.get("artist_exclude") or [])
+    purged_path = OUT / "fake_musicians_purged.json"
+    if purged_path.exists():
+        try:
+            purged_doc = json.loads(purged_path.read_text(encoding="utf-8"))
+            excluded |= {row["qid"] for row in (purged_doc.get("purged") or []) if row.get("qid")}
+        except (json.JSONDecodeError, TypeError):
+            pass
     for rec in people.values():
         if rec["qid"] in excluded:
             rejected["veto editorial"] += 1
@@ -493,8 +500,7 @@ def main() -> int:
             rejected["genre exclu ou hors familles"] += 1
             continue
         candidates.append((rec, fam))
-    umbrellas = set(CFG.get("umbrella_families") or ("pop", "rock"))
-    occs = fetch_occupations([rec["qid"] for rec, fam in candidates if fam in umbrellas])
+    occs = fetch_occupations([rec["qid"] for rec, _fam in candidates])
     for rec, fam in candidates:
         if is_celebrity_leak(occs.get(rec["qid"], []), rec["genres"], fam):
             rejected["celebrite non musicien"] += 1

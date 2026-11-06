@@ -47,6 +47,18 @@ thématiques. On n'écrème pas le haut du classement au premier soir.
 Si une case est impossible à remplir (pas assez d'éligibles), on baisse le plancher et
 on trace l'écart. On ne gonfle pas avec des fiches vides.
 
+## Quotas instrument (Fantasy Game)
+
+En plus des planchers genre / région / époque, le draft applique des **cibles
+instrument** pour la formation fantasy (1 voix, 1 basse, 1 batterie, 2 mélodiques) :
+
+- planchers `basse` / `batterie` (~8 % chacun) et familles mélodiques ;
+- plafond `voix` (~45 %).
+
+Voir [`12-fantasy-game.md`](12-fantasy-game.md) et `fantasy_instrument_quotas` dans
+[`tools/census_config.json`](../tools/census_config.json). Un re-draft est nécessaire
+pour rééquilibrer le catalogue déjà publié.
+
 ## Planchers d'équilibre
 
 Tranchés le 20 octobre 2026. Ce sont des **minima**, pas des parts. Un artiste n'occupe

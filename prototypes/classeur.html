@@ -4,9 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Charts — Classeur</title>
+<link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Big+Shoulders+Display:wght@800&family=IBM+Plex+Mono:wght@400;500&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css?v=17">
+<script src="js/site-scale.js?v=8"></script>
 <style>
   :root {
     --bg: #0d0d0d;
@@ -60,12 +63,12 @@
   }
   .nav-main {
     justify-self: center;
-    display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 22px;
+    display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px 20px;
   }
   .nav-main a {
     position: relative;
     text-decoration: none;
-    font-size: 13px; font-weight: 600;
+    font-size: 12px; font-weight: 600;
     letter-spacing: .14em; text-transform: uppercase;
     color: var(--muted); padding: 6px 0 8px;
   }
@@ -76,24 +79,27 @@
     height: 2px; background: var(--accent);
   }
   .top-actions {
-    justify-self: end; display: flex; align-items: center; gap: 10px;
+    justify-self: end; display: flex; align-items: center; gap: 8px;
   }
   .chip {
-    display: inline-flex; align-items: center; gap: 8px;
+    display: inline-flex; align-items: center; gap: 7px;
     border: 1px solid var(--line); background: var(--panel);
-    padding: 8px 12px; font-size: 12px; font-weight: 600;
+    padding: 6px 10px; font-size: 11px; font-weight: 600;
     letter-spacing: .08em; text-transform: uppercase; color: var(--ink);
     white-space: nowrap;
   }
   .chip .coin {
-    width: 14px; height: 14px; border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, #f0c060, var(--accent) 55%, #8a4a10);
-    box-shadow: inset 0 0 0 1px rgba(0,0,0,.35);
+    width: 22px; height: 14px; border-radius: 0;
+    display: block; object-fit: contain;
+    box-shadow: none;
+    flex: 0 0 auto;
   }
   .chip.btn {
     appearance: none; font: inherit; cursor: pointer; color: inherit;
   }
-  .chip.btn .ico { width: 16px; height: 16px; }
+  .chip.btn:hover { border-color: var(--line-hi); background: #1c1c1c; }
+  .chip .ico,
+  .chip.btn .ico { width: 14px; height: 14px; opacity: .75; }
 
   .wrap {
     max-width: 1280px;
@@ -104,7 +110,7 @@
   .page-title {
     margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(36px, 6vw, 56px);
+    font-size: clamp(28px, 4.5vw, 42px);
     letter-spacing: .04em;
     text-transform: uppercase;
     line-height: .95;
@@ -194,8 +200,8 @@
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(154px, 1fr));
-    gap: 20px 14px;
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+    gap: 12px 8px;
   }
   @media (max-width: 720px) {
     .top { grid-template-columns: 1fr auto; }
@@ -204,16 +210,21 @@
   }
 
   .cell {
-    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    min-width: 0;
+    width: 100%;
   }
   .thumb {
     position: relative;
-    width: 148px; height: 207px;
-    filter: drop-shadow(0 10px 16px rgba(0,0,0,.45));
+    width: 100%;
+    aspect-ratio: 260 / 364;
+    height: auto;
+    filter: drop-shadow(0 6px 10px rgba(0,0,0,.45));
   }
   .thumb .card {
     position: absolute; top: 0; left: 0;
-    transform: scale(0.569); transform-origin: top left;
+    transform-origin: top left;
+    pointer-events: auto;
   }
   .cell.hole .thumb { filter: none; opacity: .72; }
   .cell.hole .card { cursor: default; }
@@ -226,18 +237,35 @@
   }
   .cell.is-new .thumb::after {
     content: "Nouveau";
-    position: absolute; top: 6px; left: 6px; z-index: 3;
+    position: absolute; top: 4px; left: 4px; z-index: 3;
     background: #f59e0b; color: #111;
-    font-family: var(--font-mono); font-size: 9px; font-weight: 500;
+    font-family: var(--font-mono); font-size: 8px; font-weight: 500;
     letter-spacing: .04em; text-transform: uppercase;
-    padding: 2px 6px;
+    padding: 2px 4px;
   }
   .dup {
-    position: absolute; top: 8px; right: 6px; z-index: 3;
+    position: absolute; top: 4px; left: 4px; z-index: 3;
     background: #111; color: #e8e8ea; border: 1px solid #2a2c32;
-    font-family: var(--font-mono); font-size: 10px; font-weight: 500;
-    letter-spacing: .04em; padding: 2px 6px;
+    font-family: var(--font-mono); font-size: 9px; font-weight: 500;
+    letter-spacing: .04em; padding: 1px 4px;
   }
+  .cell.is-new .dup { top: 28px; }
+  .fav-btn {
+    appearance: none; position: absolute; top: 4px; right: 4px; z-index: 4;
+    width: 20px; height: 20px; padding: 0; margin: 0;
+    border: 0; background: none; color: #6a7078;
+    font-family: system-ui, "Segoe UI", sans-serif;
+    font-size: 14px; line-height: 1; font-weight: 700;
+    cursor: pointer; display: grid; place-items: center;
+  }
+  .fav-btn::before {
+    content: "★";
+    display: block;
+    transform: translateY(-1px);
+  }
+  .fav-btn:hover { color: #d8b35c; }
+  .fav-btn.on { color: #d8b35c; }
+  .cell.hole .fav-btn { display: none; }
   /* carte (même DA que booster) */
   .card {
     position: relative; width: 260px; height: 364px;
@@ -355,8 +383,16 @@
   }
   .bk-band {
     position: absolute; left: 12px; right: 12px; bottom: 12px; height: 66px;
-    display: flex; align-items: center; justify-content: center;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 5px;
     background: #EDE4D4;
+  }
+  .bk-artist {
+    max-width: calc(100% - 20px);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    color: #77716d;
+    font-family: Oswald, sans-serif; font-size: 16px; font-weight: 600;
+    letter-spacing: .05em; text-transform: uppercase; text-align: center;
   }
   .bk-foot {
     font-size: 9px; font-weight: 600;
@@ -446,30 +482,46 @@
   }
   .zoom:not([hidden]) { display: grid; }
   .zoom-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
     filter: drop-shadow(0 18px 40px rgba(0,0,0,.55));
   }
   .zoom-card .card { cursor: default; }
+  .zoom-origin {
+    margin: 0;
+    max-width: 280px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #f4f1ea;
+  }
 </style>
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
 
 <header class="top">
-  <a class="brand" href="lobby.html">Charts</a>
+  <a class="brand" href="lobby.html"><img class="brand-logo" src="img/favicon.png" alt="" width="32" height="32">Charts</a>
   <nav class="nav-main" aria-label="Principal">
     <a href="lobby.html">Lobby</a>
     <a href="booster.html">Booster</a>
     <a class="on" href="classeur.html" aria-current="page">Classeur</a>
     <a href="booster.html#marche">Marché</a>
-    <a href="fantasy.html?v=15">Fantasy</a>
+    <a href="fantasy.html?v=16">Fantasy</a>
   </nav>
   <div class="top-actions">
+    <div id="notifMount"></div>
     <span class="chip" aria-label="Crédits">
-      <span class="coin" aria-hidden="true"></span>
+      <img class="coin" src="img/credit-ticket.png?v=1" alt="" width="22" height="14" aria-hidden="true">
       <span><b id="creditsBal">0</b> CR</span>
     </span>
-    <button type="button" class="chip btn" id="menuBtn" aria-label="Profil" aria-expanded="false" aria-controls="drawer" aria-haspopup="dialog">
-      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 19c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg>
+    <button type="button" class="chip btn no-avatar" id="menuBtn" aria-label="Profil" aria-expanded="false" aria-controls="drawer" aria-haspopup="dialog">
+      <span class="avatar-face sm empty" data-avatar-face aria-hidden="true"></span>
+      <svg class="ico" data-avatar-fallback viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 19c1.5-3.5 4-5 7-5s5.5 1.5 7 5"/></svg>
       <span id="playerName">Joueur A</span>
     </button>
   </div>
@@ -498,7 +550,6 @@
         <select id="sortBy">
           <option value="num">Numéro de série</option>
           <option value="name">Nom</option>
-          <option value="rare">Rareté</option>
         </select>
       </div>
     </div>
@@ -507,6 +558,8 @@
       <input class="filt-search" type="search" id="q" placeholder="Nom ou groupe" autocomplete="off">
       <button type="button" class="fchip" id="hideMissing" aria-pressed="false">Masquer manquantes</button>
       <button type="button" class="fchip" id="newOnly" aria-pressed="false">Nouvelles</button>
+      <button type="button" class="fchip" id="seeAllNew" hidden>Tout voir</button>
+      <button type="button" class="fchip" id="favOnly" aria-pressed="false">Favoris</button>
     </div>
   </section>
 
@@ -523,9 +576,10 @@
     <button type="button" id="next">Suivant</button>
   </div>
 
-  <footer class="foot">
-    <span>Charts archives · Série 1</span>
-    <a href="legal/index.html?v=2">Mentions légales</a>
+  <footer class="site-foot">
+    <nav class="legal-links" aria-label="Informations légales">
+      <a href="legal/index.html?v=2">Mentions légales</a>
+    </nav>
   </footer>
 </main>
 
@@ -534,6 +588,13 @@
   <div class="head">
     <h2 id="drawerTitle">Profil</h2>
     <button type="button" class="close" id="drawerClose" aria-label="Fermer">×</button>
+  </div>
+  <div class="avatar-block">
+    <label class="avatar-pick" title="Changer la photo">
+      <span class="avatar-face empty" data-avatar-face aria-hidden="true"></span>
+      <input type="file" id="avatarFile" accept="image/*" hidden>
+    </label>
+    <p class="avatar-status" id="avatarStatus"></p>
   </div>
   <label>Compte de test</label>
   <div class="user-switch" role="group" aria-label="Compte de test">
@@ -549,6 +610,9 @@
   <div class="zoom-card" id="zoomCard"></div>
 </div>
 
+<script src="js/profile-avatar.js"></script>
+<script src="js/notifications.js"></script>
+<script src="js/credits-shop.js?v=1"></script>
 <script>
 const EXEC = {
   commune:"A", argent:"B", or:"A", platine:"B", diamant:"B"
@@ -590,7 +654,7 @@ const CW = 260, CH = 364;
 const RARE_ORDER = ["commune","argent","or","platine","diamant"];
 const USERS = { u1:"Joueur A", u2:"Joueur B" };
 const ACTIVE_USER_KEY = "charts.s1.activeUser";
-const PAGE_SIZE = 18;
+const PAGE_SIZE = 30; /* 10 × 3 */
 
 let activeUserId = "u1";
 let catalog = [];
@@ -600,8 +664,10 @@ let filterGenre = "";
 let filterQ = "";
 let hideMissing = false;
 let newOnly = false;
+let favOnly = false;
 let sortBy = "num";
 let page = 1;
+const MARKET_KEY = "charts.s1.market";
 
 const $ = id => document.getElementById(id);
 
@@ -655,6 +721,7 @@ function cardsFromCatalog(doc){
       rarete,
       famille: familyKey(row.family),
       instrument: artist.instrument || plate.instrument,
+      instruments: artist.instruments || [artist.instrument || plate.instrument],
       group: g ? g.name : null,
       job: plateJob(plate, rarete),
       rank: Number(row.rank_in_series) || 0
@@ -662,12 +729,33 @@ function cardsFromCatalog(doc){
   }
   return out;
 }
+function normalizeGot(data){
+  let dirty = false;
+  for(const [id, got] of Object.entries(data.got || {})){
+    if(typeof got === "number"){
+      const n = Math.max(0, got | 0);
+      data.got[id] = {
+        n,
+        t: 0,
+        origins: Array.from({ length: n }, () => ({ k: "booster" }))
+      };
+      dirty = true;
+    } else if(got && typeof got === "object" && !Array.isArray(got.origins)){
+      const n = Math.max(0, got.n | 0);
+      got.n = n;
+      got.origins = Array.from({ length: n }, () => ({ k: "booster" }));
+      dirty = true;
+    }
+  }
+  return dirty;
+}
 function loadOwned(){
   try {
     const data = JSON.parse(localStorage.getItem(ownedKey()) || "");
     if(data && data.got && typeof data.got === "object"){
       if(!data.fresh || typeof data.fresh !== "object") data.fresh = {};
       if(!data.fav || typeof data.fav !== "object") data.fav = {};
+      if(normalizeGot(data)) saveOwned(data);
       return data;
     }
   } catch {}
@@ -689,6 +777,89 @@ function clearFresh(cardId){
   saveOwned(data);
   return true;
 }
+function isFavorite(cardId){
+  return !!(loadOwned().fav || {})[cardId];
+}
+function favCount(){
+  return Object.keys(loadOwned().fav || {}).length;
+}
+function loadMarket(){
+  try {
+    const data = JSON.parse(localStorage.getItem(MARKET_KEY) || "");
+    if(data && Array.isArray(data.listings)){
+      if(!Array.isArray(data.offers)) data.offers = [];
+      if(!Array.isArray(data.trades)) data.trades = [];
+      return data;
+    }
+  } catch {}
+  return { listings: [], offers: [], trades: [] };
+}
+function saveMarket(data){
+  localStorage.setItem(MARKET_KEY, JSON.stringify(data));
+}
+function setFavorite(cardId, on){
+  if(!cardId) return false;
+  const data = loadOwned();
+  if(!data.fav || typeof data.fav !== "object") data.fav = {};
+  if(on){
+    data.fav[cardId] = true;
+    saveOwned(data);
+    const m = loadMarket();
+    let dirty = false;
+    m.listings = (m.listings || []).filter(l => {
+      if(l.seller === activeUserId && l.cardId === cardId){
+        dirty = true;
+        return false;
+      }
+      return true;
+    });
+    for(const t of m.trades || []){
+      if(t.status === "pending" && t.fromUser === activeUserId && t.offerCardId === cardId){
+        t.status = "withdrawn";
+        dirty = true;
+      }
+    }
+    if(dirty) saveMarket(m);
+  } else {
+    delete data.fav[cardId];
+    saveOwned(data);
+  }
+  return !!on;
+}
+function toggleFavorite(cardId){
+  return setFavorite(cardId, !isFavorite(cardId));
+}
+function favToggleBtn(cardId, on){
+  return `<button type="button" class="fav-btn${on ? " on" : ""}" data-fav-toggle="${esc(cardId)}" aria-label="${on ? "Retirer des favoris" : "Ajouter aux favoris"}" title="${on ? "Retirer des favoris" : "Ajouter aux favoris"}" aria-pressed="${on ? "true" : "false"}"></button>`;
+}
+function freshCount(){
+  const data = loadOwned();
+  const fresh = data.fresh || {};
+  const got = data.got || {};
+  return Object.keys(fresh).filter(id => got[id]).length;
+}
+function clearAllFresh(){
+  const data = loadOwned();
+  if(!data.fresh || !Object.keys(data.fresh).length) return false;
+  data.fresh = {};
+  saveOwned(data);
+  return true;
+}
+function syncSeeAllNewBtn(){
+  const btn = $("seeAllNew");
+  if(!btn) return;
+  const hide = !newOnly || freshCount() < 1;
+  if(hide === !!btn.hidden) return;
+  if(hide){
+    btn.style.pointerEvents = "none";
+    setTimeout(() => {
+      btn.hidden = true;
+      btn.style.pointerEvents = "";
+    }, 0);
+  } else {
+    btn.hidden = false;
+  }
+}
 function formatCredits(n){ return Number(n || 0).toLocaleString("fr-FR"); }
 function refreshCredits(){
   let credits = 0;
@@ -703,6 +874,8 @@ function loadActiveUser(){
   activeUserId = saved === "u2" ? "u2" : "u1";
   syncUserUI();
   refreshCredits();
+  if(window.ChartsAvatar) ChartsAvatar.refresh(activeUserId);
+  if(window.ChartsNotif) ChartsNotif.refresh();
 }
 function syncUserUI(){
   document.querySelectorAll(".user-switch [data-user]").forEach(btn => {
@@ -717,6 +890,8 @@ function switchUser(nextId){
   localStorage.setItem(ACTIVE_USER_KEY, activeUserId);
   syncUserUI();
   refreshCredits();
+  if(window.ChartsAvatar) ChartsAvatar.refresh(activeUserId);
+  if(window.ChartsNotif) ChartsNotif.refresh();
   page = 1;
   render();
 }
@@ -758,6 +933,10 @@ function frameSvg(kind, rank, color){
   return `<svg class="frame" viewBox="0 0 ${CW} ${CH}" aria-hidden="true">${o}</svg>`;
 }
 
+function instrumentLabel(card){
+  const instruments = card.instruments?.length ? card.instruments : [card.instrument];
+  return instruments.filter(Boolean).map(x => INSTR[x] || x).join(" + ");
+}
 function renderCard(card, opts={}){
   const tier = TIERS[card.rarete];
   const fam = FAMILIES[familyKey(card.famille)] || FAMILIES.rock;
@@ -769,7 +948,7 @@ function renderCard(card, opts={}){
   const bandStyle = paper || diamant ? "" : `background:${fam.fond};`;
   const group = card.group || "Artiste solo";
   const cls = `card r${tier.rank}${paper ? " paper" : ""}${diamant ? " diamant" : ""}${opts.zoomable === false ? "" : " zoomable"}`;
-  const info = `${fam.label} · ${INSTR[card.instrument] || card.instrument} · ${group}`;
+  const info = `${fam.label} · ${instrumentLabel(card)} · ${group}`;
   return `<div class="${cls}" tabindex="${opts.zoomable === false ? "-1" : "0"}" data-id="${esc(card.id)}">
     <div class="art"><img src="../out/illustrations/${esc(card.job)}.png" alt="" loading="lazy"></div>
     ${diamant ? `<div class="title"><div class="myth-name" style="font-size:${mythName}px">${esc(card.name)}</div></div>` : ""}
@@ -777,7 +956,7 @@ function renderCard(card, opts={}){
       <div class="accent" style="background:${fam.a1}"></div>
       <div class="name" style="font-size:${nameSize}px">${esc(card.name)}</div>
       <div class="rarete" style="color:${tier.frame}">${tier.label}</div>
-      <div class="meta">${esc(fam.label)} · ${esc(INSTR[card.instrument] || card.instrument)}</div>
+      <div class="meta">${esc(fam.label)} · ${esc(instrumentLabel(card))}</div>
       <div class="group">${esc(group)}</div>
       ${diamant ? `<div class="line-rare">${tier.label}</div><div class="line-info">${esc(info)}</div>` : ""}
     </div>
@@ -786,44 +965,51 @@ function renderCard(card, opts={}){
   </div>`;
 }
 
-function cardBack(){
+function cardBack(card){
   return `<div class="card card-back">
     <div class="bk-field">
       <div class="bk-plate"></div>
       <div class="bk-mark"><div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
       <div class="bk-name">CHARTS</div>
     </div>
-    <div class="bk-band"><div class="bk-foot">Music collectibles</div></div>
+    <div class="bk-band">
+      <div class="bk-artist">${esc(card.name)}</div>
+      <div class="bk-foot">Music collectibles</div>
+    </div>
     ${frameSvg("double", 1, "#7A4A46")}
   </div>`;
 }
 
-function ownedCardHtml(card, n, neuve){
+function ownedCardHtml(card, n, neuve, fav){
   return `<div class="cell${neuve ? " is-new" : ""}" data-id="${esc(card.id)}">
-    <div class="thumb">${n > 1 ? `<span class="dup">×${n}</span>` : ""}${renderCard(card)}</div>
+    <div class="thumb">${favToggleBtn(card.id, !!fav)}${n > 1 ? `<span class="dup">×${n}</span>` : ""}${renderCard(card)}</div>
   </div>`;
 }
 
 function holeHtml(card){
   return `<div class="cell hole" data-id="${esc(card.id)}">
-    <div class="thumb">${cardBack()}</div>
+    <div class="thumb">${cardBack(card)}</div>
   </div>`;
 }
 
 function filteredList(){
-  const owned = loadOwned().got;
+  const data = loadOwned();
+  const owned = data.got;
+  const fresh = data.fresh || {};
+  const fav = data.fav || {};
   let list = catalog.slice();
   if(filterRare) list = list.filter(c => c.rarete === filterRare);
   if(filterInstr) list = list.filter(c => c.instrument === filterInstr);
   if(filterGenre) list = list.filter(c => c.famille === filterGenre);
   if(filterQ) list = list.filter(c => matchesSearch(`${c.name} ${c.group || ""}`, filterQ));
-  if(hideMissing) list = list.filter(c => owned[c.id]);
+  if(hideMissing || favOnly || newOnly) list = list.filter(c => owned[c.id]);
+  if(newOnly) list = list.filter(c => fresh[c.id]);
+  if(favOnly) list = list.filter(c => fav[c.id]);
   list.sort((a, b) => {
+    const fa = fav[a.id] ? 1 : 0;
+    const fb = fav[b.id] ? 1 : 0;
+    if(fa !== fb) return fb - fa;
     if(sortBy === "name") return a.name.localeCompare(b.name, "fr");
-    if(sortBy === "rare"){
-      const d = (TIERS[b.rarete]?.rank || 0) - (TIERS[a.rarete]?.rank || 0);
-      if(d) return d;
-    }
     return (a.rank || 0) - (b.rank || 0);
   });
   return list;
@@ -866,14 +1052,28 @@ function buildFilterChips(){
   ].join("");
 }
 
+function scaleBinderCards(){
+  document.querySelectorAll("#grid .thumb").forEach(thumb => {
+    const card = thumb.querySelector(".card");
+    if(!card) return;
+    const w = thumb.clientWidth;
+    if(w < 1) return;
+    card.style.transform = `scale(${w / 260})`;
+  });
+}
+
 function render(){
   buildFilterChips();
   const c = counts();
+  const nFav = favCount();
   $("pageMeta").textContent =
-    `${c.owned.toLocaleString("fr-FR")} / ${c.total.toLocaleString("fr-FR")} cartes collectées · taux de complétion ${c.pct} %`;
+    `${c.owned.toLocaleString("fr-FR")} / ${c.total.toLocaleString("fr-FR")} cartes collectées · taux de complétion ${c.pct} %` +
+    (nFav ? ` · ${nFav} favori${nFav > 1 ? "s" : ""}` : "");
 
   const list = filteredList();
-  const owned = loadOwned().got;
+  const data = loadOwned();
+  const owned = data.got;
+  const fav = data.fav || {};
   const pages = Math.max(1, Math.ceil(list.length / PAGE_SIZE));
   if(page > pages) page = pages;
   if(page < 1) page = 1;
@@ -884,31 +1084,75 @@ function render(){
   const grid = $("grid");
   if(!slice.length){
     grid.innerHTML = `<p class="empty">${
-      hideMissing && !c.owned
-        ? "Ouvre un booster pour commencer la collection."
-        : "Aucune carte pour ce filtre."
+      favOnly
+        ? "Aucun favori pour l’instant. Marque une carte avec ★."
+        : newOnly
+          ? "Aucune nouvelle carte."
+          : hideMissing && !c.owned
+            ? "Ouvre un booster pour commencer la collection."
+            : "Aucune carte pour ce filtre."
     }</p>`;
   } else {
     grid.innerHTML = slice.map(card => {
       const got = owned[card.id];
-      return got ? ownedCardHtml(card, got.n || 1) : holeHtml(card);
+      return got
+        ? ownedCardHtml(card, got.n || 1, isFresh(card.id), !!fav[card.id])
+        : holeHtml(card);
     }).join("");
     grid.querySelectorAll(".art img").forEach(imgFallback);
+    scaleBinderCards();
   }
 
   $("pager").hidden = pages <= 1;
   $("pageLbl").textContent = `Page ${page} / ${pages}`;
   $("prev").disabled = page <= 1;
   $("next").disabled = page >= pages;
+  syncSeeAllNewBtn();
+}
+
+let zoomCardId = null;
+let zoomClearedFresh = false;
+
+function originLabel(got){
+  if(typeof got === "number") return "Ouvert dans un booster";
+  const list = Array.isArray(got && got.origins) ? got.origins : [];
+  const o = list.length ? list[list.length - 1] : { k: "booster" };
+  if(o.k === "buy"){
+    const cr = Math.max(0, Math.round(Number(o.cr) || 0));
+    return `Acheté pour ${cr} CR`;
+  }
+  if(o.k === "trade"){
+    return `Échangé contre ${o.for ? String(o.for) : "une carte"}`;
+  }
+  return "Ouvert dans un booster";
 }
 
 function openZoom(cardId){
   const card = catalog.find(c => c.id === cardId);
   const got = loadOwned().got[cardId];
   if(!card || !got) return;
-  $("zoomCard").innerHTML = renderCard(card, { zoomable: false });
+  zoomCardId = cardId;
+  zoomClearedFresh = false;
+  const cell = document.querySelector(`.cell[data-id="${CSS.escape(cardId)}"]`);
+  if(cell && cell.classList.contains("is-new") && clearFresh(cardId)){
+    cell.classList.remove("is-new");
+    zoomClearedFresh = true;
+    syncSeeAllNewBtn();
+  }
+  $("zoomCard").innerHTML = renderCard(card, { zoomable: false })
+    + `<p class="zoom-origin">${esc(originLabel(got))}</p>`;
   $("zoomCard").querySelectorAll(".art img").forEach(imgFallback);
   $("zoom").hidden = false;
+}
+
+function closeZoom(){
+  if($("zoom").hidden) return;
+  $("zoom").hidden = true;
+  const id = zoomCardId;
+  const cleared = zoomClearedFresh;
+  zoomCardId = null;
+  zoomClearedFresh = false;
+  if(cleared && newOnly && id) render();
 }
 
 /* events */
@@ -934,7 +1178,7 @@ $("genreChips").addEventListener("click", ev => {
   render();
 });
 $("sortBy").addEventListener("change", () => {
-  sortBy = $("sortBy").value;
+  sortBy = $("sortBy").value === "name" ? "name" : "num";
   page = 1;
   render();
 });
@@ -954,12 +1198,70 @@ $("hideMissing").addEventListener("click", () => {
   page = 1;
   render();
 });
+$("newOnly").addEventListener("click", () => {
+  newOnly = !newOnly;
+  $("newOnly").classList.toggle("on", newOnly);
+  $("newOnly").setAttribute("aria-pressed", newOnly ? "true" : "false");
+  if(newOnly){
+    hideMissing = true;
+    $("hideMissing").classList.add("on");
+    $("hideMissing").setAttribute("aria-pressed", "true");
+  }
+  page = 1;
+  render();
+});
+$("seeAllNew").addEventListener("click", ev => {
+  ev.preventDefault();
+  ev.stopPropagation();
+  clearAllFresh();
+  newOnly = false;
+  $("newOnly").classList.remove("on");
+  $("newOnly").setAttribute("aria-pressed", "false");
+  syncSeeAllNewBtn();
+  page = 1;
+  render();
+});
+$("favOnly").addEventListener("click", () => {
+  favOnly = !favOnly;
+  $("favOnly").classList.toggle("on", favOnly);
+  $("favOnly").setAttribute("aria-pressed", favOnly ? "true" : "false");
+  if(favOnly){
+    hideMissing = true;
+    $("hideMissing").classList.add("on");
+    $("hideMissing").setAttribute("aria-pressed", "true");
+  }
+  page = 1;
+  render();
+});
 $("prev").addEventListener("click", () => { page--; render(); });
 $("next").addEventListener("click", () => { page++; render(); });
+window.addEventListener("resize", scaleBinderCards);
 $("grid").addEventListener("click", ev => {
+  const favBtn = ev.target.closest("[data-fav-toggle]");
+  if(favBtn){
+    ev.preventDefault();
+    ev.stopPropagation();
+    const id = favBtn.dataset.favToggle;
+    const on = toggleFavorite(id);
+    if(favOnly && !on){
+      render();
+      return;
+    }
+    favBtn.classList.toggle("on", on);
+    favBtn.setAttribute("aria-pressed", on ? "true" : "false");
+    favBtn.setAttribute("aria-label", on ? "Retirer des favoris" : "Ajouter aux favoris");
+    favBtn.title = on ? "Retirer des favoris" : "Ajouter aux favoris";
+    const nFav = favCount();
+    const c = counts();
+    $("pageMeta").textContent =
+      `${c.owned.toLocaleString("fr-FR")} / ${c.total.toLocaleString("fr-FR")} cartes collectées · taux de complétion ${c.pct} %` +
+      (nFav ? ` · ${nFav} favori${nFav > 1 ? "s" : ""}` : "");
+    return;
+  }
   if(ev.target.closest(".cell.hole")) return;
   const cell = ev.target.closest(".cell:not(.hole)");
-  if(cell) openZoom(cell.dataset.id);
+  if(!cell) return;
+  openZoom(cell.dataset.id);
 });
 $("grid").addEventListener("keydown", ev => {
   if(ev.key !== "Enter" && ev.key !== " ") return;
@@ -968,7 +1270,7 @@ $("grid").addEventListener("keydown", ev => {
   ev.preventDefault();
   openZoom(card.dataset.id);
 });
-$("zoom").addEventListener("click", () => { $("zoom").hidden = true; });
+$("zoom").addEventListener("click", () => { closeZoom(); });
 
 const menuBtn = $("menuBtn");
 const drawer = $("drawer");
@@ -985,7 +1287,7 @@ veil.addEventListener("click", () => setMenuOpen(false));
 document.addEventListener("keydown", ev => {
   if(ev.key === "Escape"){
     setMenuOpen(false);
-    $("zoom").hidden = true;
+    closeZoom();
   }
 });
 document.querySelector(".user-switch").addEventListener("click", ev => {
@@ -994,6 +1296,12 @@ document.querySelector(".user-switch").addEventListener("click", ev => {
 });
 
 async function boot(){
+  if(window.ChartsAvatar){
+    ChartsAvatar.bind({ getUserId: () => activeUserId });
+  }
+  if(window.ChartsNotif){
+    ChartsNotif.bind({ getUserId: () => activeUserId });
+  }
   loadActiveUser();
   try {
     const res = await fetch("../data/census/catalog_s1.json", { cache: "no-store" });
@@ -1006,6 +1314,7 @@ async function boot(){
   }
 }
 boot();
+document.addEventListener("charts:credits-changed", () => refreshCredits());
 </script>
 </body>
 </html>
